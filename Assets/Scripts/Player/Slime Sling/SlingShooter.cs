@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class SlingShooter : MonoBehaviour
 {
@@ -46,6 +48,7 @@ public class SlingShooter : MonoBehaviour
 
     [HideInInspector] public Vector2 GrapplePoint;
     [HideInInspector] public Vector2 GrappleDistanceVector;
+    private bool _pulling;
 
     private void Awake()
     {
@@ -59,47 +62,44 @@ public class SlingShooter : MonoBehaviour
     {
         SlimeSling.Instance.enabled = false;
         _springJoint.enabled = false;
-
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            SetGrapplePoint();
-        }
-        else if (Input.GetKey(KeyCode.Mouse0))
-        {
-            if (SlimeSling.Instance.enabled)
-            {
-                RotateGun(GrapplePoint, false);
-            }
-            else
-            {
-                Vector2 mousePos = _camera.ScreenToWorldPoint(Input.mousePosition);
-                RotateGun(mousePos, true);
-            }
+        HandleSlingPull();
+    }
 
-            if (_launchToPoint && SlimeSling.Instance.isGrappling)
-            {
-                if (_launchType == LaunchType.Transform_Launch)
-                {
-                    Vector2 firePointDistnace = OriginPoint.position - _player.localPosition;
-                    Vector2 targetPos = GrapplePoint - firePointDistnace;
-                    _player.position = Vector2.Lerp(_player.position, targetPos, Time.deltaTime * _launchSpeed);
-                }
-            }
-        }
-        else if (Input.GetKeyUp(KeyCode.Mouse0))
+    internal void CancelPull()
+    {
+        SlimeSling.Instance.enabled = false;
+        _springJoint.enabled = false;
+        _rigidbody.gravityScale = 1;
+    }
+
+    public void HandleSlingPull()
+    {
+        if (_pulling == false)
         {
-            SlimeSling.Instance.enabled = false;
-            _springJoint.enabled = false;
-            _rigidbody.gravityScale = 1;
+            return;
+        }
+        if (SlimeSling.Instance.enabled)
+        {
+            RotateGun(GrapplePoint, false);
         }
         else
         {
-            Vector2 mousePos = _camera.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 mousePos = _camera.ScreenToViewportPoint(Mouse.current.position.ReadValue());
             RotateGun(mousePos, true);
+        }
+
+        if (_launchToPoint && SlimeSling.Instance.IsGrappling)
+        {
+            if (_launchType == LaunchType.Transform_Launch)
+            {
+                Vector2 firePointDistnace = OriginPoint.position - _player.localPosition;
+                Vector2 targetPos = GrapplePoint - firePointDistnace;
+                _player.position = Vector2.Lerp(_player.position, targetPos, Time.deltaTime * _launchSpeed);
+            }
         }
     }
 
@@ -118,9 +118,11 @@ public class SlingShooter : MonoBehaviour
         }
     }
 
-    void SetGrapplePoint()
+    internal void SetGrapplePoint()
     {
-        Vector2 distanceVector = _camera.ScreenToWorldPoint(Input.mousePosition) - _slingShooter.position;
+        Vector3 mousePos = _camera.ScreenToViewportPoint(Mouse.current.position.ReadValue());
+        Vector2 distanceVector = mousePos - _slingShooter.position;
+
         if (Physics2D.Raycast(OriginPoint.position, distanceVector.normalized))
         {
             RaycastHit2D _hit = Physics2D.Raycast(OriginPoint.position, distanceVector.normalized);
@@ -134,6 +136,11 @@ public class SlingShooter : MonoBehaviour
                 }
             }
         }
+    }
+
+    internal void StartPull()
+    {
+        _pulling = true;
     }
 
     public void Grapple()

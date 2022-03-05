@@ -78,7 +78,21 @@ public class PlayerController : MonoBehaviour
     {
         if (context.started)
         {
-
+            SlingShooter.Instance.SetGrapplePoint();
+            return;
         }
+
+        if (context.performed == false)
+        {
+            return;
+        }
+
+        if (context.canceled)
+        {
+            SlingShooter.Instance.CancelPull();
+            return;
+        }
+
+        SlingShooter.Instance.StartPull();
     }
 }
