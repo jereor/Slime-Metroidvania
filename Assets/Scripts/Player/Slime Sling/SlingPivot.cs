@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SlingPivot : MonoBehaviour
+public class SlingShooter : MonoBehaviour
 {
     [Header("Scripts Ref:")]
     public SlimeSling slimeSling;
