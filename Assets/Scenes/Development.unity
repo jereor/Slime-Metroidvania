@@ -850,7 +850,7 @@ GameObject:
   - component: {fileID: 1681231653}
   - component: {fileID: 1681231654}
   m_Layer: 0
-  m_Name: Sling Pivot
+  m_Name: Sling Shooter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
