@@ -2,8 +2,7 @@ using UnityEngine;
 
 public class SlingShooter : MonoBehaviour
 {
-    [Header("Scripts Ref:")]
-    [SerializeField] private SlimeSling _slimeSling;
+    public static SlingShooter Instance;
 
     [Header("Layers Settings:")]
     [SerializeField] private bool _grappleToAll = false;
@@ -48,9 +47,17 @@ public class SlingShooter : MonoBehaviour
     [HideInInspector] public Vector2 GrapplePoint;
     [HideInInspector] public Vector2 GrappleDistanceVector;
 
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+    }
+
     private void Start()
     {
-        _slimeSling.enabled = false;
+        SlimeSling.Instance.enabled = false;
         _springJoint.enabled = false;
 
     }
@@ -63,7 +70,7 @@ public class SlingShooter : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.Mouse0))
         {
-            if (_slimeSling.enabled)
+            if (SlimeSling.Instance.enabled)
             {
                 RotateGun(GrapplePoint, false);
             }
@@ -73,7 +80,7 @@ public class SlingShooter : MonoBehaviour
                 RotateGun(mousePos, true);
             }
 
-            if (_launchToPoint && _slimeSling.isGrappling)
+            if (_launchToPoint && SlimeSling.Instance.isGrappling)
             {
                 if (_launchType == LaunchType.Transform_Launch)
                 {
@@ -85,7 +92,7 @@ public class SlingShooter : MonoBehaviour
         }
         else if (Input.GetKeyUp(KeyCode.Mouse0))
         {
-            _slimeSling.enabled = false;
+            SlimeSling.Instance.enabled = false;
             _springJoint.enabled = false;
             _rigidbody.gravityScale = 1;
         }
@@ -123,7 +130,7 @@ public class SlingShooter : MonoBehaviour
                 {
                     GrapplePoint = _hit.point;
                     GrappleDistanceVector = GrapplePoint - (Vector2)_slingShooter.position;
-                    _slimeSling.enabled = true;
+                    SlimeSling.Instance.enabled = true;
                 }
             }
         }
