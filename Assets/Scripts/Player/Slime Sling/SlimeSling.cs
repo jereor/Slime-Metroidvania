@@ -9,7 +9,7 @@ public class SlimeSling : MonoBehaviour
     public LineRenderer lineRenderer;
 
     [Header("General Settings:")]
-    [SerializeField] private int percision = 40;
+    [SerializeField] private int precision = 40;
     [Range(0, 20)] [SerializeField] private float straightenLineSpeed = 5;
 
     [Header("Rope Animation Settings:")]
@@ -30,7 +30,7 @@ public class SlimeSling : MonoBehaviour
     private void OnEnable()
     {
         moveTime = 0;
-        lineRenderer.positionCount = percision;
+        lineRenderer.positionCount = precision;
         waveSize = StartWaveSize;
         strightLine = false;
 
@@ -47,7 +47,7 @@ public class SlimeSling : MonoBehaviour
 
     private void LinePointsToFirePoint()
     {
-        for (int i = 0; i < percision; i++)
+        for (int i = 0; i < precision; i++)
         {
             lineRenderer.SetPosition(i, slingPivot.firePoint.position);
         }
@@ -63,7 +63,7 @@ public class SlimeSling : MonoBehaviour
     {
         if (!strightLine)
         {
-            if (lineRenderer.GetPosition(percision - 1).x == slingPivot.grapplePoint.x)
+            if (lineRenderer.GetPosition(precision - 1).x == slingPivot.grapplePoint.x)
             {
                 strightLine = true;
             }
@@ -97,9 +97,9 @@ public class SlimeSling : MonoBehaviour
 
     void DrawRopeWaves()
     {
-        for (int i = 0; i < percision; i++)
+        for (int i = 0; i < precision; i++)
         {
-            float delta = (float)i / ((float)percision - 1f);
+            float delta = (float)i / ((float)precision - 1f);
             Vector2 offset = Vector2.Perpendicular(slingPivot.grappleDistanceVector).normalized * ropeAnimationCurve.Evaluate(delta) * waveSize;
             Vector2 targetPosition = Vector2.Lerp(slingPivot.firePoint.position, slingPivot.grapplePoint, delta) + offset;
             Vector2 currentPosition = Vector2.Lerp(slingPivot.firePoint.position, targetPosition, ropeProgressionCurve.Evaluate(moveTime) * ropeProgressionSpeed);
