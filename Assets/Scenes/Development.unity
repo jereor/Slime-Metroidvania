@@ -267,22 +267,103 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slingPivot: {fileID: 1681231654}
   lineRenderer: {fileID: 518264693}
-  percision: 40
-  straightenLineSpeed: 5
+  precision: 40
+  straightenLineSpeed: 10
   ropeAnimationCurve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.15155745
+      value: -0.4765475
+      inSlope: -0.005940866
+      outSlope: -0.005940866
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 1
+    - serializedVersion: 3
+      time: 0.3002149
+      value: 0.02059871
+      inSlope: 2.3852131
+      outSlope: 2.3852131
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5012858
+      value: -1.0058278
+      inSlope: 0.008379492
+      outSlope: 0.008379492
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.28101057
+      outWeight: 0.40775105
+    - serializedVersion: 3
+      time: 0.78872436
+      value: 0.004227251
+      inSlope: -11.425273
+      outSlope: -11.425273
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.23609039
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
   StartWaveSize: 2
   ropeProgressionCurve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.47329363
+      outSlope: 0.47329363
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5002122
+      value: 0.23674725
+      inSlope: 0.648422
+      outSlope: 0.648422
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.13032496
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0.5431205
+      outSlope: 0.5431205
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.112846226
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  ropeProgressionSpeed: 1
+  ropeProgressionSpeed: 6.7
   isGrappling: 1
 --- !u!1 &519420028
 GameObject:
