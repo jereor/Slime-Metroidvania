@@ -15,7 +15,7 @@ public class SlingShooter : MonoBehaviour
     [Header("Transform Ref:")]
     [SerializeField] private Transform _player;
     [SerializeField] private Transform _slingShooter;
-    [SerializeField] private Transform _originPoint;
+    public Transform OriginPoint;
 
     [Header("Physics Ref:")]
     [SerializeField] private SpringJoint2D _springJoint;
@@ -77,7 +77,7 @@ public class SlingShooter : MonoBehaviour
             {
                 if (_launchType == LaunchType.Transform_Launch)
                 {
-                    Vector2 firePointDistnace = _originPoint.position - _player.localPosition;
+                    Vector2 firePointDistnace = OriginPoint.position - _player.localPosition;
                     Vector2 targetPos = GrapplePoint - firePointDistnace;
                     _player.position = Vector2.Lerp(_player.position, targetPos, Time.deltaTime * _launchSpeed);
                 }
@@ -114,12 +114,12 @@ public class SlingShooter : MonoBehaviour
     void SetGrapplePoint()
     {
         Vector2 distanceVector = _camera.ScreenToWorldPoint(Input.mousePosition) - _slingShooter.position;
-        if (Physics2D.Raycast(_originPoint.position, distanceVector.normalized))
+        if (Physics2D.Raycast(OriginPoint.position, distanceVector.normalized))
         {
-            RaycastHit2D _hit = Physics2D.Raycast(_originPoint.position, distanceVector.normalized);
+            RaycastHit2D _hit = Physics2D.Raycast(OriginPoint.position, distanceVector.normalized);
             if (_hit.transform.gameObject.layer == _grappableLayerNumber || _grappleToAll)
             {
-                if (Vector2.Distance(_hit.point, _originPoint.position) <= _maxDistance || !_hasMaxDistance)
+                if (Vector2.Distance(_hit.point, OriginPoint.position) <= _maxDistance || !_hasMaxDistance)
                 {
                     GrapplePoint = _hit.point;
                     GrappleDistanceVector = GrapplePoint - (Vector2)_slingShooter.position;
@@ -155,7 +155,7 @@ public class SlingShooter : MonoBehaviour
                 case LaunchType.Physics_Launch:
                     _springJoint.connectedAnchor = GrapplePoint;
 
-                    Vector2 distanceVector = _originPoint.position - _player.position;
+                    Vector2 distanceVector = OriginPoint.position - _player.position;
 
                     _springJoint.distance = distanceVector.magnitude;
                     _springJoint.frequency = _launchSpeed;
@@ -171,10 +171,10 @@ public class SlingShooter : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        if (_originPoint != null && _hasMaxDistance)
+        if (OriginPoint != null && _hasMaxDistance)
         {
             Gizmos.color = Color.green;
-            Gizmos.DrawWireSphere(_originPoint.position, _maxDistance);
+            Gizmos.DrawWireSphere(OriginPoint.position, _maxDistance);
         }
     }
 
