@@ -265,7 +265,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70b82290bcb9c9646af5fd52390b29f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slingShooter: {fileID: 1681231654}
   lineRenderer: {fileID: 518264693}
   precision: 40
   straightenLineSpeed: 10
@@ -883,7 +882,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8fd1aa7d82e7794f8435c829f936e22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _slimeSling: {fileID: 518264694}
   _grappleToAll: 0
   _grappableLayerNumber: 9
   _camera: {fileID: 519420031}
@@ -1340,6 +1338,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 3a5d9666-456f-49f4-8fa9-d72c73b904f9
     m_ActionName: Gameplay/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1912269943}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: ShootSling
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: f5bccbb2-c891-45ff-87ad-769d839cbf60
+    m_ActionName: Gameplay/Shoot Sling[/Mouse/leftButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay

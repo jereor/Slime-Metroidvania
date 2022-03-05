@@ -73,4 +73,12 @@ public class PlayerController : MonoBehaviour
         _animator.SetBool(AnimatorConstants.IS_JUMPING, true);
         PlayerMovement.Instance.Jump();
     }
+
+    public void ShootSling(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+
+        }
+    }
 }
