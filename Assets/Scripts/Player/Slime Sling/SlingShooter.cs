@@ -3,31 +3,31 @@ using UnityEngine;
 public class SlingShooter : MonoBehaviour
 {
     [Header("Scripts Ref:")]
-    public SlimeSling slimeSling;
+    [SerializeField] private SlimeSling _slimeSling;
 
     [Header("Layers Settings:")]
-    [SerializeField] private bool grappleToAll = false;
-    [SerializeField] private int grappableLayerNumber = 9;
+    [SerializeField] private bool _grappleToAll = false;
+    [SerializeField] private int _grappableLayerNumber = 9;
 
     [Header("Main Camera:")]
-    public Camera m_camera;
+    [SerializeField] private Camera _camera;
 
     [Header("Transform Ref:")]
-    public Transform gunHolder;
-    public Transform gunPivot;
-    public Transform firePoint;
+    [SerializeField] private Transform _player;
+    [SerializeField] private Transform _slingShooter;
+    [SerializeField] private Transform _originPoint;
 
     [Header("Physics Ref:")]
-    public SpringJoint2D m_springJoint2D;
-    public Rigidbody2D m_rigidbody;
+    [SerializeField] private SpringJoint2D _springJoint;
+    [SerializeField] private Rigidbody2D _rigidbody;
 
     [Header("Rotation:")]
-    [SerializeField] private bool rotateOverTime = true;
-    [Range(0, 60)] [SerializeField] private float rotationSpeed = 4;
+    [SerializeField] private bool _rotateOverTime = true;
+    [SerializeField, Range(0, 60)] private float _rotationSpeed = 4;
 
     [Header("Distance:")]
-    [SerializeField] private bool hasMaxDistance = false;
-    [SerializeField] private float maxDistnace = 20;
+    [SerializeField] private bool _hasMaxDistance = false;
+    [SerializeField] private float _maxDistance = 20;
 
     private enum LaunchType
     {
@@ -36,22 +36,22 @@ public class SlingShooter : MonoBehaviour
     }
 
     [Header("Launching:")]
-    [SerializeField] private bool launchToPoint = true;
-    [SerializeField] private LaunchType launchType = LaunchType.Physics_Launch;
-    [SerializeField] private float launchSpeed = 1;
+    [SerializeField] private bool _launchToPoint = true;
+    [SerializeField] private LaunchType _launchType = LaunchType.Physics_Launch;
+    [SerializeField] private float _launchSpeed = 1;
 
     [Header("No Launch To Point")]
-    [SerializeField] private bool autoConfigureDistance = false;
-    [SerializeField] private float targetDistance = 3;
-    [SerializeField] private float targetFrequncy = 1;
+    [SerializeField] private bool _autoConfigureDistance = false;
+    [SerializeField] private float _targetDistance = 3;
+    [SerializeField] private float _targetFrequncy = 1;
 
-    [HideInInspector] public Vector2 grapplePoint;
-    [HideInInspector] public Vector2 grappleDistanceVector;
+    [HideInInspector] public Vector2 GrapplePoint;
+    [HideInInspector] public Vector2 GrappleDistanceVector;
 
     private void Start()
     {
-        slimeSling.enabled = false;
-        m_springJoint2D.enabled = false;
+        _slimeSling.enabled = false;
+        _springJoint.enabled = false;
 
     }
 
@@ -63,67 +63,67 @@ public class SlingShooter : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.Mouse0))
         {
-            if (slimeSling.enabled)
+            if (_slimeSling.enabled)
             {
-                RotateGun(grapplePoint, false);
+                RotateGun(GrapplePoint, false);
             }
             else
             {
-                Vector2 mousePos = m_camera.ScreenToWorldPoint(Input.mousePosition);
+                Vector2 mousePos = _camera.ScreenToWorldPoint(Input.mousePosition);
                 RotateGun(mousePos, true);
             }
 
-            if (launchToPoint && slimeSling.isGrappling)
+            if (_launchToPoint && _slimeSling.isGrappling)
             {
-                if (launchType == LaunchType.Transform_Launch)
+                if (_launchType == LaunchType.Transform_Launch)
                 {
-                    Vector2 firePointDistnace = firePoint.position - gunHolder.localPosition;
-                    Vector2 targetPos = grapplePoint - firePointDistnace;
-                    gunHolder.position = Vector2.Lerp(gunHolder.position, targetPos, Time.deltaTime * launchSpeed);
+                    Vector2 firePointDistnace = _originPoint.position - _player.localPosition;
+                    Vector2 targetPos = GrapplePoint - firePointDistnace;
+                    _player.position = Vector2.Lerp(_player.position, targetPos, Time.deltaTime * _launchSpeed);
                 }
             }
         }
         else if (Input.GetKeyUp(KeyCode.Mouse0))
         {
-            slimeSling.enabled = false;
-            m_springJoint2D.enabled = false;
-            m_rigidbody.gravityScale = 1;
+            _slimeSling.enabled = false;
+            _springJoint.enabled = false;
+            _rigidbody.gravityScale = 1;
         }
         else
         {
-            Vector2 mousePos = m_camera.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 mousePos = _camera.ScreenToWorldPoint(Input.mousePosition);
             RotateGun(mousePos, true);
         }
     }
 
     void RotateGun(Vector3 lookPoint, bool allowRotationOverTime)
     {
-        Vector3 distanceVector = lookPoint - gunPivot.position;
+        Vector3 distanceVector = lookPoint - _slingShooter.position;
 
         float angle = Mathf.Atan2(distanceVector.y, distanceVector.x) * Mathf.Rad2Deg;
-        if (rotateOverTime && allowRotationOverTime)
+        if (_rotateOverTime && allowRotationOverTime)
         {
-            gunPivot.rotation = Quaternion.Lerp(gunPivot.rotation, Quaternion.AngleAxis(angle, Vector3.forward), Time.deltaTime * rotationSpeed);
+            _slingShooter.rotation = Quaternion.Lerp(_slingShooter.rotation, Quaternion.AngleAxis(angle, Vector3.forward), Time.deltaTime * _rotationSpeed);
         }
         else
         {
-            gunPivot.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            _slingShooter.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
     }
 
     void SetGrapplePoint()
     {
-        Vector2 distanceVector = m_camera.ScreenToWorldPoint(Input.mousePosition) - gunPivot.position;
-        if (Physics2D.Raycast(firePoint.position, distanceVector.normalized))
+        Vector2 distanceVector = _camera.ScreenToWorldPoint(Input.mousePosition) - _slingShooter.position;
+        if (Physics2D.Raycast(_originPoint.position, distanceVector.normalized))
         {
-            RaycastHit2D _hit = Physics2D.Raycast(firePoint.position, distanceVector.normalized);
-            if (_hit.transform.gameObject.layer == grappableLayerNumber || grappleToAll)
+            RaycastHit2D _hit = Physics2D.Raycast(_originPoint.position, distanceVector.normalized);
+            if (_hit.transform.gameObject.layer == _grappableLayerNumber || _grappleToAll)
             {
-                if (Vector2.Distance(_hit.point, firePoint.position) <= maxDistnace || !hasMaxDistance)
+                if (Vector2.Distance(_hit.point, _originPoint.position) <= _maxDistance || !_hasMaxDistance)
                 {
-                    grapplePoint = _hit.point;
-                    grappleDistanceVector = grapplePoint - (Vector2)gunPivot.position;
-                    slimeSling.enabled = true;
+                    GrapplePoint = _hit.point;
+                    GrappleDistanceVector = GrapplePoint - (Vector2)_slingShooter.position;
+                    _slimeSling.enabled = true;
                 }
             }
         }
@@ -131,39 +131,39 @@ public class SlingShooter : MonoBehaviour
 
     public void Grapple()
     {
-        m_springJoint2D.autoConfigureDistance = false;
-        if (!launchToPoint && !autoConfigureDistance)
+        _springJoint.autoConfigureDistance = false;
+        if (!_launchToPoint && !_autoConfigureDistance)
         {
-            m_springJoint2D.distance = targetDistance;
-            m_springJoint2D.frequency = targetFrequncy;
+            _springJoint.distance = _targetDistance;
+            _springJoint.frequency = _targetFrequncy;
         }
-        if (!launchToPoint)
+        if (!_launchToPoint)
         {
-            if (autoConfigureDistance)
+            if (_autoConfigureDistance)
             {
-                m_springJoint2D.autoConfigureDistance = true;
-                m_springJoint2D.frequency = 0;
+                _springJoint.autoConfigureDistance = true;
+                _springJoint.frequency = 0;
             }
 
-            m_springJoint2D.connectedAnchor = grapplePoint;
-            m_springJoint2D.enabled = true;
+            _springJoint.connectedAnchor = GrapplePoint;
+            _springJoint.enabled = true;
         }
         else
         {
-            switch (launchType)
+            switch (_launchType)
             {
                 case LaunchType.Physics_Launch:
-                    m_springJoint2D.connectedAnchor = grapplePoint;
+                    _springJoint.connectedAnchor = GrapplePoint;
 
-                    Vector2 distanceVector = firePoint.position - gunHolder.position;
+                    Vector2 distanceVector = _originPoint.position - _player.position;
 
-                    m_springJoint2D.distance = distanceVector.magnitude;
-                    m_springJoint2D.frequency = launchSpeed;
-                    m_springJoint2D.enabled = true;
+                    _springJoint.distance = distanceVector.magnitude;
+                    _springJoint.frequency = _launchSpeed;
+                    _springJoint.enabled = true;
                     break;
                 case LaunchType.Transform_Launch:
-                    m_rigidbody.gravityScale = 0;
-                    m_rigidbody.velocity = Vector2.zero;
+                    _rigidbody.gravityScale = 0;
+                    _rigidbody.velocity = Vector2.zero;
                     break;
             }
         }
@@ -171,10 +171,10 @@ public class SlingShooter : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        if (firePoint != null && hasMaxDistance)
+        if (_originPoint != null && _hasMaxDistance)
         {
             Gizmos.color = Color.green;
-            Gizmos.DrawWireSphere(firePoint.position, maxDistnace);
+            Gizmos.DrawWireSphere(_originPoint.position, _maxDistance);
         }
     }
 
