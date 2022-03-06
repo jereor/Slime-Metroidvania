@@ -84,12 +84,12 @@ public class SlingShooter : MonoBehaviour
         
         if (SlimeSling.Instance.enabled)
         {
-            RotateGun(GrapplePoint, false);
+            RotateShooterTo(GrapplePoint);
         }
         else
         {
             Vector3 mousePos = _camera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-            RotateGun(mousePos, true);
+            RotateShooterTo(mousePos);
         }
 
         if (_launchToPoint && SlimeSling.Instance.IsGrappling)
@@ -103,12 +103,12 @@ public class SlingShooter : MonoBehaviour
         }
     }
 
-    void RotateGun(Vector3 lookPoint, bool allowRotationOverTime)
+    void RotateShooterTo(Vector3 lookPoint)
     {
         Vector3 distanceVector = lookPoint - _slingShooter.position;
 
         float angle = Mathf.Atan2(distanceVector.y, distanceVector.x) * Mathf.Rad2Deg;
-        if (_rotateOverTime && allowRotationOverTime)
+        if (_rotateOverTime)
         {
             _slingShooter.rotation = Quaternion.Lerp(_slingShooter.rotation, Quaternion.AngleAxis(angle, Vector3.forward), Time.deltaTime * _rotationSpeed);
         }
