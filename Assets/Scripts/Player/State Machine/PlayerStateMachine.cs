@@ -23,13 +23,9 @@ public class PlayerStateMachine : MonoBehaviour
     private float? _lastGroundedTime;
 
     private bool _isFacingRight = true;
-    private bool _isjumpPressed;
+    private bool _isJumpPressed;
 
-    int _isWalkingHash;
-    int _isRunningHash;
-    int _isJumpingHash;
-
-    private bool HasMoveDirectionChanged
+    private bool _hasMoveDirectionChanged
     {
         get
         {
@@ -52,6 +48,7 @@ public class PlayerStateMachine : MonoBehaviour
     PlayerBaseState _currentState;
     PlayerStateFactory _states;
 
+    // GETTERS AND SETTERS
     public PlayerBaseState CurrentState
     {
         get
@@ -63,13 +60,19 @@ public class PlayerStateMachine : MonoBehaviour
             _currentState = value;
         }
     }
-    public bool IsJumpPressed
-    {
-        get
-        {
-            return _isjumpPressed;
-        }
-    }
+    public float MoveSpeed { get { return _moveSpeed; } }
+    public float JumpForce { get { return _jumpForce; } }
+    public float CoyoteTime { get { return _coyoteTime; } }
+    public Rigidbody2D RigidBody { get { return _rigidbody2D; } set { _rigidbody2D = value; } }
+    public Transform GroundCheck { get { return _groundCheck; } }
+    public Animator Animator { get { return _animator; } }
+    public LayerMask GroundLayer { get { return GROUND_LAYER; } }
+    public float GroundCheckRadius { get { return GROUND_CHECK_RADIUS; } }
+    public float? JumpButtonPressedTime { get { return _jumpButtonPressedTime; } set { _jumpButtonPressedTime = value; } }
+    public float? LastGroundedTime { get { return _lastGroundedTime; } }
+    public bool IsFacingRight { get { return _isFacingRight; } }
+    public bool IsJumpPressed { get { return _isJumpPressed; } }
+    public bool HasMoveDirectionChanged { get { return _hasMoveDirectionChanged; } }
 
     private void Awake()
     {
@@ -108,7 +111,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void HandleDirectionChange()
     {
-        if (HasMoveDirectionChanged)
+        if (_hasMoveDirectionChanged)
         {
             FlipSprite();
         }
@@ -155,7 +158,7 @@ public class PlayerStateMachine : MonoBehaviour
 
     void OnJumpInput(InputAction.CallbackContext context)
     {
-        _isjumpPressed = context.ReadValueAsButton();
+        _isJumpPressed = context.ReadValueAsButton();
 
         if (context.canceled)
         {

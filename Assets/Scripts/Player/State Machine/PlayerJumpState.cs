@@ -11,6 +11,7 @@ public class PlayerJumpState : PlayerBaseState
     public override void EnterState()
     {
         Debug.Log("JUMP");
+        HandleJump();
     }
 
     public override void ExitState()
@@ -31,5 +32,18 @@ public class PlayerJumpState : PlayerBaseState
     public override void CheckSwitchStates()
     {
         throw new System.NotImplementedException();
+    }
+
+    void HandleJump()
+    {
+        _context.JumpButtonPressedTime = Time.time;
+
+        bool isCoyoteTime = Time.time - _context.LastGroundedTime <= _context.CoyoteTime;
+        bool isJumpBuffered = Time.time - _context.JumpButtonPressedTime <= _context.CoyoteTime;
+
+        if (isCoyoteTime && isJumpBuffered)
+        {
+            _context.RigidBody.velocity = new Vector2(_context.RigidBody.velocity.x, _context.JumpForce);
+        }
     }
 }
