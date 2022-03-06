@@ -76,20 +76,21 @@ public class PlayerController : MonoBehaviour
 
     public void ShootSling(InputAction.CallbackContext context)
     {
+        if (context.canceled)
+        {
+            Debug.Log("Sling: Canceled!");
+            SlingShooter.Instance.CancelPull();
+            return;
+        }
+
         if (context.started)
         {
+            Debug.Log("Sling: Started!");
             SlingShooter.Instance.SetGrapplePoint();
-            return;
         }
 
         if (context.performed == false)
         {
-            return;
-        }
-
-        if (context.canceled)
-        {
-            SlingShooter.Instance.CancelPull();
             return;
         }
 

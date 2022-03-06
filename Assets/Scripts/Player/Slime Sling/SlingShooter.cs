@@ -82,13 +82,14 @@ public class SlingShooter : MonoBehaviour
         {
             return;
         }
+        
         if (SlimeSling.Instance.enabled)
         {
             RotateGun(GrapplePoint, false);
         }
         else
         {
-            Vector3 mousePos = _camera.ScreenToViewportPoint(Mouse.current.position.ReadValue());
+            Vector3 mousePos = _camera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
             RotateGun(mousePos, true);
         }
 
@@ -120,7 +121,7 @@ public class SlingShooter : MonoBehaviour
 
     internal void SetGrapplePoint()
     {
-        Vector3 mousePos = _camera.ScreenToViewportPoint(Mouse.current.position.ReadValue());
+        Vector3 mousePos = _camera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
         Vector2 distanceVector = mousePos - _slingShooter.position;
 
         if (Physics2D.Raycast(OriginPoint.position, distanceVector.normalized))
