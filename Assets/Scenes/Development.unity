@@ -864,7 +864,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8fd1aa7d82e7794f8435c829f936e22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _grappleToAll: 0
+  _grappleToAll: 1
   _grappableLayerNumber: 3
   _camera: {fileID: 519420031}
   _player: {fileID: 1912269936}
@@ -1348,7 +1348,7 @@ SpringJoint2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1912269935}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   m_EnableCollision: 1
   m_ConnectedRigidBody: {fileID: 0}

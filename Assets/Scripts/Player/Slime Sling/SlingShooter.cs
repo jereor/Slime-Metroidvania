@@ -72,7 +72,7 @@ public class SlingShooter : MonoBehaviour
     {
         SlimeSling.Instance.enabled = false;
         _springJoint.enabled = false;
-        _rigidbody.gravityScale = 1;
+        _rigidbody.gravityScale = PhysicsConstants.DEFAULT_GRAVITY_SCALE;
     }
 
     public void HandleSlingPull()
