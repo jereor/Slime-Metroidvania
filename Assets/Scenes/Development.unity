@@ -872,12 +872,12 @@ MonoBehaviour:
   OriginPoint: {fileID: 1423076767}
   _springJoint: {fileID: 1912269945}
   _rigidbody: {fileID: 1912269939}
-  _rotateOverTime: 1
+  _rotateOverTime: 0
   _rotationSpeed: 4
-  _hasMaxDistance: 0
-  _maxDistance: 20
+  _hasMaxDistance: 1
+  _maxDistance: 10
   _launchToPoint: 1
-  _launchType: 0
+  _launchType: 1
   _launchSpeed: 1
   _autoConfigureDistance: 0
   _targetDistance: 3
@@ -1348,7 +1348,7 @@ SpringJoint2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1912269935}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_EnableCollision: 1
   m_ConnectedRigidBody: {fileID: 0}
