@@ -100,6 +100,10 @@ public class PlayerMovement : MonoBehaviour
         Vector3 localScale = transform.localScale;
         localScale.x *= -1f;
         transform.localScale = localScale;
+
+        Vector3 slingShooterLocalScale = SlingShooter.Instance.transform.localScale;
+        slingShooterLocalScale.x *= -1f;
+        SlingShooter.Instance.transform.localScale = slingShooterLocalScale;
     }
 
     internal void Jump()
