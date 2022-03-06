@@ -194,7 +194,7 @@ LineRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 1
   m_Positions:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 1}
@@ -703,7 +703,7 @@ Transform:
   m_GameObject: {fileID: 1292240070}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.0268, y: -0.0623, z: 0}
-  m_LocalScale: {x: 19.821812, y: 13.518093, z: 13.518093}
+  m_LocalScale: {x: 19.821812, y: 13.518093, z: 1}
   m_Children: []
   m_Father: {fileID: 1903578458}
   m_RootOrder: 0
