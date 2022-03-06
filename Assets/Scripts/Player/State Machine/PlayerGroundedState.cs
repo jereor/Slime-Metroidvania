@@ -1,18 +1,40 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerGroundedState : MonoBehaviour
+public class PlayerGroundedState : PlayerBaseState
 {
-    // Start is called before the first frame update
-    void Start()
+    public PlayerGroundedState(PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory)
+        : base (currentContext, playerStateFactory){}
+
+    public PlayerStateMachine Context { get; }
+    public PlayerStateFactory PlayerStateFactory { get; }
+
+    public override void EnterState()
     {
-        
+        Debug.Log("GROUNDED");
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void ExitState()
     {
-        
+        throw new System.NotImplementedException();
+    }
+
+    public override void UpdateState()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void InitializeSubState()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void CheckSwitchStates()
+    {
+        if (_context.IsJumpPressed)
+        {
+            SwitchState(_factory.Jump());
+        }
+
+        throw new System.NotImplementedException();
     }
 }

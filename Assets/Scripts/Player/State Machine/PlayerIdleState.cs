@@ -1,18 +1,35 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerIdleState : MonoBehaviour
+public class PlayerIdleState : PlayerBaseState
 {
-    // Start is called before the first frame update
-    void Start()
+    public PlayerIdleState(PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory)
+        : base(currentContext, playerStateFactory) { }
+
+    public PlayerStateMachine Context { get; }
+    public PlayerStateFactory PlayerStateFactory { get; }
+
+    public override void EnterState()
     {
-        
+        Debug.Log("IDLE");
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void ExitState()
     {
-        
+        throw new System.NotImplementedException();
+    }
+
+    public override void UpdateState()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void InitializeSubState()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void CheckSwitchStates()
+    {
+        throw new System.NotImplementedException();
     }
 }
