@@ -5,7 +5,6 @@ public class PlayerIdleState : PlayerBaseState
     public PlayerIdleState(PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory)
         : base(currentContext, playerStateFactory) { }
 
-    public PlayerStateMachine Context { get; }
     public PlayerStateFactory PlayerStateFactory { get; }
 
     public override void EnterState()
@@ -15,7 +14,6 @@ public class PlayerIdleState : PlayerBaseState
 
     public override void ExitState()
     {
-        throw new System.NotImplementedException();
     }
 
     public override void UpdateState()
@@ -30,6 +28,9 @@ public class PlayerIdleState : PlayerBaseState
 
     public override void CheckSwitchStates()
     {
-        throw new System.NotImplementedException();
+        if (Context.IsMovementPressed)
+        {
+            SwitchState(Factory.Move());
+        }
     }
 }

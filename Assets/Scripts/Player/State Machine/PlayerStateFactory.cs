@@ -1,3 +1,5 @@
+using System;
+
 public class PlayerStateFactory
 {
     PlayerStateMachine _context;
@@ -11,13 +13,9 @@ public class PlayerStateFactory
     {
         return new PlayerIdleState(_context, this);
     }
-    public PlayerBaseState Walk()
+    internal PlayerBaseState Move()
     {
-        return new PlayerWalkState(_context, this);
-    }
-    public PlayerBaseState Run()
-    {
-        return new PlayerRunState(_context, this);
+        return new PlayerMoveState(_context, this);
     }
     public PlayerBaseState Jump()
     {

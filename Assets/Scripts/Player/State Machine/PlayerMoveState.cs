@@ -1,34 +1,36 @@
 using UnityEngine;
 
-public class PlayerRunState : PlayerBaseState
+public class PlayerMoveState : PlayerBaseState
 {
-    public PlayerRunState(PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory)
+    public PlayerMoveState(PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory)
         : base(currentContext, playerStateFactory) { }
 
-    public PlayerStateMachine Context { get; }
     public PlayerStateFactory PlayerStateFactory { get; }
 
     public override void EnterState()
     {
-        Debug.Log("RUN");
+        Debug.Log("MOVE");
     }
 
     public override void ExitState()
     {
-        throw new System.NotImplementedException();
     }
 
     public override void UpdateState()
     {
         CheckSwitchStates();
     }
+    
     public override void InitializeSubState()
     {
         throw new System.NotImplementedException();
     }
-
+    
     public override void CheckSwitchStates()
     {
-        throw new System.NotImplementedException();
+        if (Context.IsMovementPressed == false)
+        {
+            SwitchState(Factory.Idle());
+        }
     }
 }

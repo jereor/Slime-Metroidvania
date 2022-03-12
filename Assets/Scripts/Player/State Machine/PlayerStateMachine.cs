@@ -15,8 +15,6 @@ public class PlayerStateMachine : MonoBehaviour
     [SerializeField] private Animator _animator;
     [SerializeField] private LayerMask GROUND_LAYER;
 
-    public static float HorizontalInput;
-
     private PlayerControls _playerControls;
 
     private const float GROUND_CHECK_RADIUS = 0.3f;
@@ -26,7 +24,9 @@ public class PlayerStateMachine : MonoBehaviour
 
     private bool _isFacingRight = true;
     private bool _isJumpPressed;
+    private bool _isMovementPressed;
 
+    private float _currentMovementInput;
     private bool _hasMoveDirectionChanged
     {
         get
@@ -76,6 +76,8 @@ public class PlayerStateMachine : MonoBehaviour
     public bool IsJumpPressed { get { return _isJumpPressed; } }
     public bool HasMoveDirectionChanged { get { return _hasMoveDirectionChanged; } }
 
+    public bool IsMovementPressed { get { return _isMovementPressed; } }
+
     private void Awake()
     {
         _states = new PlayerStateFactory(this);
@@ -92,21 +94,17 @@ public class PlayerStateMachine : MonoBehaviour
 
     private void Update()
     {
+        _currentState.UpdateStates();
         HandleMovement();
-        HandleDirectionChange();
-        GroundCheckUpdate();
     }
 
     private void HandleMovement()
     {
-        if (PlayerController.HorizontalInput == 0)
+        if (_currentMovementInput != 0)
         {
-            Stop();
-            return;
+            _rigidbody2D.velocity =
+                new Vector2(x: _currentMovementInput * _moveSpeed, y: _rigidbody2D.velocity.y);
         }
-
-        _rigidbody2D.velocity =
-            new Vector2(x: PlayerController.HorizontalInput * _moveSpeed, y: _rigidbody2D.velocity.y);
     }
 
     private void Stop()
@@ -134,55 +132,15 @@ public class PlayerStateMachine : MonoBehaviour
         SlingShooter.Instance.transform.localScale = slingShooterLocalScale;
     }
 
-    private void GroundCheckUpdate()
-    {
-        if (IsGrounded)
-        {
-            _lastGroundedTime = Time.time;
-        }
-    }
-
     void OnMovementInput(InputAction.CallbackContext context)
     {
-        HorizontalInput = context.ReadValue<float>();
-
-        if (HorizontalInput == 0)
-        {
-            // TODO: Fix playerStateInstance reference if needed
-            //_playerStateInstance.SetToIdle();
-            _animator.SetBool(AnimatorConstants.IS_MOVING, false);
-            _animator.SetBool(AnimatorConstants.IS_IDLE, true);
-            return;
-        }
-
-        // TODO: Fix playerStateInstance reference if needed
-        //_playerStateInstance.SetToMoving();
-        _animator.SetBool(AnimatorConstants.IS_IDLE, false);
-        _animator.SetBool(AnimatorConstants.IS_MOVING, true);
+        _currentMovementInput = context.ReadValue<float>();
+        _isMovementPressed = _currentMovementInput != 0;
     }
 
     void OnJumpInput(InputAction.CallbackContext context)
     {
         _isJumpPressed = context.ReadValueAsButton();
-
-        if (context.canceled)
-        {
-            PlayerMovement.Instance.JumpRelease();
-            return;
-        }
-
-        if (context.performed == false)
-        { 
-            return;
-        }
-
-        if (_animator.GetBool(AnimatorConstants.IS_JUMPING))
-        {
-            return;
-        }
-
-        _animator.SetBool(AnimatorConstants.IS_JUMPING, true);
-        PlayerMovement.Instance.Jump();
     }
 
     void OnShootSlingInput(InputAction.CallbackContext context)
@@ -211,6 +169,11 @@ public class PlayerStateMachine : MonoBehaviour
 
     void OnEnable()
     {
-        _playerInput.currentActionMap.Enable();
+        _playerControls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        _playerControls.Disable();
     }
 }
