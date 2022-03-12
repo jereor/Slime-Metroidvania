@@ -31,8 +31,8 @@ public class PlayerStateMachine : MonoBehaviour
     {
         get
         {
-            bool facingRightButNowMovingLeft = _isFacingRight && PlayerController.HorizontalInput < 0f;
-            bool facingLeftButNowMovingRight = !_isFacingRight && PlayerController.HorizontalInput > 0f;
+            bool facingRightButNowMovingLeft = _isFacingRight && _currentMovementInput < 0f;
+            bool facingLeftButNowMovingRight = !_isFacingRight && _currentMovementInput > 0f;
 
             return facingRightButNowMovingLeft
                 || facingLeftButNowMovingRight;
@@ -117,6 +117,7 @@ public class PlayerStateMachine : MonoBehaviour
         _rigidbody2D.velocity = new Vector2(x: 0, y: _rigidbody2D.velocity.y);
     }
 
+    // TODO: Move to separate file
     private void HandleDirectionChange()
     {
         if (_hasMoveDirectionChanged)
