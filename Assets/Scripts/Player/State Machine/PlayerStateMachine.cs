@@ -17,6 +17,8 @@ public class PlayerStateMachine : MonoBehaviour
 
     public static float HorizontalInput;
 
+    private PlayerControls _playerControls;
+
     private const float GROUND_CHECK_RADIUS = 0.3f;
 
     private float? _jumpButtonPressedTime;
@@ -80,9 +82,12 @@ public class PlayerStateMachine : MonoBehaviour
         _currentState = _states.Grounded();
         _currentState.EnterState();
 
-        _isWalkingHash = Animator.StringToHash("isWalking");
-        _isRunningHash = Animator.StringToHash("isRunning");
-        _isJumpingHash = Animator.StringToHash("isJumping");
+        _playerControls = new PlayerControls();
+        _playerControls.Surface.Move.started += OnMovementInput;
+        _playerControls.Surface.Move.canceled += OnMovementInput;
+        _playerControls.Surface.Move.performed += OnMovementInput;
+        _playerControls.Surface.Jump.started += OnJumpInput;
+        _playerControls.Surface.Jump.canceled += OnJumpInput;
     }
 
     private void Update()
@@ -207,10 +212,5 @@ public class PlayerStateMachine : MonoBehaviour
     void OnEnable()
     {
         _playerInput.currentActionMap.Enable();
-    }
-
-    void OnDisable()
-    {
-        _playerInput.currentActionMap.Disable();
     }
 }

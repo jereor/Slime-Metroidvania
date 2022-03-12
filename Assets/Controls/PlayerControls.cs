@@ -6,10 +6,10 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-public class @Controls : IInputActionCollection, IDisposable
+public class PlayerControls : IInputActionCollection, IDisposable
 {
     public InputActionAsset asset { get; }
-    public @Controls()
+    public PlayerControls()
     {
         asset = InputActionAsset.FromJson(@"{
     ""name"": ""Controls"",
@@ -196,8 +196,8 @@ public class @Controls : IInputActionCollection, IDisposable
     private readonly InputAction m_Gameplay_ShootSling;
     public struct GameplayActions
     {
-        private @Controls m_Wrapper;
-        public GameplayActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        private PlayerControls m_Wrapper;
+        public GameplayActions(PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Gameplay_Move;
         public InputAction @Jump => m_Wrapper.m_Gameplay_Jump;
         public InputAction @ShootSling => m_Wrapper.m_Gameplay_ShootSling;
@@ -235,7 +235,7 @@ public class @Controls : IInputActionCollection, IDisposable
             }
         }
     }
-    public GameplayActions @Gameplay => new GameplayActions(this);
+    public GameplayActions Surface => new GameplayActions(this);
     public interface IGameplayActions
     {
         void OnMove(InputAction.CallbackContext context);
