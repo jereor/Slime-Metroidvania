@@ -20,7 +20,7 @@ public class PlayerIdleState : PlayerBaseState
 
     public override void UpdateState()
     {
-        throw new System.NotImplementedException();
+        CheckSwitchStates();
     }
 
     public override void InitializeSubState()

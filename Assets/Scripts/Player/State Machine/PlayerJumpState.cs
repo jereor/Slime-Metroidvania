@@ -21,7 +21,7 @@ public class PlayerJumpState : PlayerBaseState
 
     public override void UpdateState()
     {
-        throw new System.NotImplementedException();
+        CheckSwitchStates();
     }
 
     public override void InitializeSubState()

@@ -20,7 +20,7 @@ public class PlayerGroundedState : PlayerBaseState
 
     public override void UpdateState()
     {
-        throw new System.NotImplementedException();
+        CheckSwitchStates();
     }
 
     public override void InitializeSubState()
