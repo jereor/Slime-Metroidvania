@@ -1300,7 +1300,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77f1e5954bc667948bf4190e60cbf30a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 4
+  _moveSpeed: 6
   _jumpForce: 8
   _coyoteTime: 0.2
   _rigidbody2D: {fileID: 1912269939}

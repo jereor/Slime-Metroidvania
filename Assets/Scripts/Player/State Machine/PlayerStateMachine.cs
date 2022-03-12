@@ -96,15 +96,20 @@ public class PlayerStateMachine : MonoBehaviour
     {
         _currentState.UpdateStates();
         HandleMovement();
+        HandleDirectionChange();
     }
 
+    // TODO: Move to separate file
     private void HandleMovement()
     {
-        if (_currentMovementInput != 0)
+        if (_currentMovementInput == 0)
         {
-            _rigidbody2D.velocity =
-                new Vector2(x: _currentMovementInput * _moveSpeed, y: _rigidbody2D.velocity.y);
+            Stop();
+            return;
         }
+
+        _rigidbody2D.velocity =
+                new Vector2(x: _currentMovementInput * _moveSpeed, y: _rigidbody2D.velocity.y);
     }
 
     private void Stop()
