@@ -72,7 +72,7 @@ public class PlayerStateMachine : MonoBehaviour
     public LayerMask GroundLayer { get { return GROUND_LAYER; } }
     public float GroundCheckRadius { get { return GROUND_CHECK_RADIUS; } }
     public float? JumpButtonPressedTime { get { return _jumpButtonPressedTime; } set { _jumpButtonPressedTime = value; } }
-    public float? LastGroundedTime { get { return _lastGroundedTime; } }
+    public float? LastGroundedTime { get { return _lastGroundedTime; } set { _lastGroundedTime = value; } }
     public bool IsGrounded { get { return _isGrounded; } }
     public bool IsFacingRight { get { return _isFacingRight; } }
     public bool IsJumpPressed { get { return _isJumpPressed; } }
@@ -153,6 +153,12 @@ public class PlayerStateMachine : MonoBehaviour
     void OnJumpInput(InputAction.CallbackContext context)
     {
         _isJumpPressed = context.ReadValueAsButton();
+
+        if (context.canceled)
+        {
+            _isJumpPressed = false;
+            return;
+        }
     }
 
     void OnShootSlingInput(InputAction.CallbackContext context)

@@ -17,6 +17,7 @@ public class PlayerGroundedState : PlayerBaseState
 
     public override void ExitState()
     {
+        Context.LastGroundedTime = Time.time;
     }
 
     public override void UpdateState()
