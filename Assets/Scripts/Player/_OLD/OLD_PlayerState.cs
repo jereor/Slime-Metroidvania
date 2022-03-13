@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class PlayerState : MonoBehaviour
+public class OLD_PlayerState : MonoBehaviour
 {
-    public static PlayerState Instance;
+    public static OLD_PlayerState Instance;
 
     public enum State
     {

@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class OLD_PlayerMovement : MonoBehaviour
 {
-    public static PlayerMovement Instance;
+    public static OLD_PlayerMovement Instance;
 
     [Header("Movement variables")]
     [SerializeField] private float _moveSpeed;
@@ -25,8 +25,8 @@ public class PlayerMovement : MonoBehaviour
     {
         get
         {
-            bool facingRightButNowMovingLeft = _isFacingRight && PlayerController.HorizontalInput < 0f;
-            bool facingLeftButNowMovingRight = !_isFacingRight && PlayerController.HorizontalInput > 0f;
+            bool facingRightButNowMovingLeft = _isFacingRight && OLD_PlayerController.HorizontalInput < 0f;
+            bool facingLeftButNowMovingRight = !_isFacingRight && OLD_PlayerController.HorizontalInput > 0f;
 
             return facingRightButNowMovingLeft
                 || facingLeftButNowMovingRight;
@@ -71,14 +71,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleMovement()
     {
-        if (PlayerController.HorizontalInput == 0)
+        if (OLD_PlayerController.HorizontalInput == 0)
         {
             Stop();
             return;
         }
 
         _rigidbody2D.velocity = 
-            new Vector2(x: PlayerController.HorizontalInput * _moveSpeed, y: _rigidbody2D.velocity.y);
+            new Vector2(x: OLD_PlayerController.HorizontalInput * _moveSpeed, y: _rigidbody2D.velocity.y);
     }
 
     private void Stop()

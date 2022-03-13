@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class OLD_PlayerController : MonoBehaviour
 {
-    public static PlayerController Instance;
+    public static OLD_PlayerController Instance;
 
     public static float HorizontalInput;
     public PlayerInput PlayerInput => _playerInput;
@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerInput _playerInput;
     [SerializeField] private Animator _animator;
 
-    private static PlayerState _playerStateInstance;
+    private static OLD_PlayerState _playerStateInstance;
 
     private void Awake()
     {
@@ -24,12 +24,12 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        _playerStateInstance = PlayerState.Instance;
+        _playerStateInstance = OLD_PlayerState.Instance;
     }
 
     private void FixedUpdate()
     {
-        if (PlayerMovement.Instance.IsGrounded)
+        if (OLD_PlayerMovement.Instance.IsGrounded)
         {
             _animator.SetBool(AnimatorConstants.IS_JUMPING, false);
         }
@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour
     {
         if (context.canceled)
         {
-            PlayerMovement.Instance.JumpRelease();
+            OLD_PlayerMovement.Instance.JumpRelease();
             return;
         }
 
@@ -71,7 +71,7 @@ public class PlayerController : MonoBehaviour
         }
 
         _animator.SetBool(AnimatorConstants.IS_JUMPING, true);
-        PlayerMovement.Instance.Jump();
+        OLD_PlayerMovement.Instance.Jump();
     }
 
     public void ShootSling(InputAction.CallbackContext context)
