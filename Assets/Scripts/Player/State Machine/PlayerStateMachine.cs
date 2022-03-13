@@ -17,16 +17,25 @@ public class PlayerStateMachine : MonoBehaviour
 
     private PlayerControls _playerControls;
 
+    // Grounded
     private const float GROUND_CHECK_RADIUS = 0.3f;
-
-    private float? _jumpButtonPressedTime;
     private float? _lastGroundedTime;
+    public bool IsGrounded
+    {
+        get
+        {
+            return Physics2D.OverlapCircle(_groundCheck.position, GROUND_CHECK_RADIUS, GROUND_LAYER);
+        }
+    }
 
-    private bool _isFacingRight = true;
+    // Jump
+    private float? _jumpButtonPressedTime;
     private bool _isJumpPressed;
-    private bool _isMovementPressed;
 
+    // Movement
+    private bool _isMovementPressed;
     private float _currentMovementInput;
+    private bool _isFacingRight = true;
     private bool _hasMoveDirectionChanged
     {
         get
@@ -36,14 +45,6 @@ public class PlayerStateMachine : MonoBehaviour
 
             return facingRightButNowMovingLeft
                 || facingLeftButNowMovingRight;
-        }
-    }
-
-    public bool IsGrounded
-    {
-        get
-        {
-            return Physics2D.OverlapCircle(_groundCheck.position, GROUND_CHECK_RADIUS, GROUND_LAYER);
         }
     }
 
