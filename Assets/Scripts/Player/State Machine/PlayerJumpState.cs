@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerJumpState : PlayerBaseState
@@ -36,12 +37,20 @@ public class PlayerJumpState : PlayerBaseState
     // EXIT STATE
     public override void ExitState()
     {
-        JumpRelease();
     }
 
-    internal void JumpRelease()
+
+    // UPDATE STATE
+    public override void UpdateState()
     {
-        if (Context.RigidBody.velocity.y > 0f)
+        CheckSwitchStates();
+        CheckJumpEnd();
+    }
+
+    private void CheckJumpEnd()
+    {
+        if (Context.RigidBody.velocity.y > 0f
+            && Context.IsJumpPressed == false)
         {
             StartFalling();
         }
@@ -53,13 +62,6 @@ public class PlayerJumpState : PlayerBaseState
         Context.RigidBody.velocity = new Vector2(Context.RigidBody.velocity.x, Context.RigidBody.velocity.y * 0.5f);
         Context.JumpButtonPressedTime = null;
         Context.LastGroundedTime = null;
-    }
-
-
-    // UPDATE STATE
-    public override void UpdateState()
-    {
-        CheckSwitchStates();
     }
 
 
