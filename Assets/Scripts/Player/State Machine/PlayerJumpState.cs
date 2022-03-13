@@ -20,15 +20,11 @@ public class PlayerJumpState : PlayerBaseState
     {
         Context.JumpButtonPressedTime = Time.time;
 
-        Debug.Log("LastGroundedTime " + Context.LastGroundedTime);
         bool isCoyoteTime = Time.time - Context.LastGroundedTime <= Context.CoyoteTime;
         bool isJumpBuffered = Time.time - Context.JumpButtonPressedTime <= Context.CoyoteTime;
 
-        //Debug.Log("isCoyoteTime " + isCoyoteTime + ", isJumpBuffered " + isJumpBuffered);
-
         if (isCoyoteTime && isJumpBuffered)
         {
-            Debug.Log("Jump started!");
             Context.RigidBody.velocity = new Vector2(Context.RigidBody.velocity.x, Context.JumpForce);
         }
     }
