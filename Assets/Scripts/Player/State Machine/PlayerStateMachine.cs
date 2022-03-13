@@ -20,7 +20,7 @@ public class PlayerStateMachine : MonoBehaviour
     // Grounded
     private const float GROUND_CHECK_RADIUS = 0.3f;
     private float? _lastGroundedTime;
-    public bool IsGrounded
+    private bool _isGrounded
     {
         get
         {
@@ -73,6 +73,7 @@ public class PlayerStateMachine : MonoBehaviour
     public float GroundCheckRadius { get { return GROUND_CHECK_RADIUS; } }
     public float? JumpButtonPressedTime { get { return _jumpButtonPressedTime; } set { _jumpButtonPressedTime = value; } }
     public float? LastGroundedTime { get { return _lastGroundedTime; } }
+    public bool IsGrounded { get { return _isGrounded; } }
     public bool IsFacingRight { get { return _isFacingRight; } }
     public bool IsJumpPressed { get { return _isJumpPressed; } }
     public bool HasMoveDirectionChanged { get { return _hasMoveDirectionChanged; } }
