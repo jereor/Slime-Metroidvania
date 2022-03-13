@@ -48,6 +48,7 @@ public class PlayerStateMachine : MonoBehaviour
         }
     }
 
+    // States
     PlayerBaseState _currentState;
     PlayerStateFactory _states;
 
@@ -77,7 +78,6 @@ public class PlayerStateMachine : MonoBehaviour
     public bool IsFacingRight { get { return _isFacingRight; } }
     public bool IsJumpPressed { get { return _isJumpPressed; } }
     public bool HasMoveDirectionChanged { get { return _hasMoveDirectionChanged; } }
-
     public bool IsMovementPressed { get { return _isMovementPressed; } }
 
     private void Awake()

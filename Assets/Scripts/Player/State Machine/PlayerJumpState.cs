@@ -4,7 +4,10 @@ using UnityEngine;
 public class PlayerJumpState : PlayerBaseState
 {
     public PlayerJumpState(PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory)
-        : base(currentContext, playerStateFactory) { }
+        : base(currentContext, playerStateFactory) {
+        IsRootState = true;
+        InitializeSubState();
+    }
 
     public PlayerStateFactory PlayerStateFactory { get; }
 
@@ -54,7 +57,6 @@ public class PlayerJumpState : PlayerBaseState
 
     private void StartFalling()
     {
-        Debug.Log("Start falling!");
         Context.RigidBody.velocity = new Vector2(Context.RigidBody.velocity.x, Context.RigidBody.velocity.y * 0.5f);
         Context.JumpButtonPressedTime = null;
         Context.LastGroundedTime = null;
@@ -64,15 +66,13 @@ public class PlayerJumpState : PlayerBaseState
     // INITIALIZE SUB STATE
     public override void InitializeSubState()
     {
-        throw new System.NotImplementedException();
     }
     
 
     // CHECK SWITCH STATES
     public override void CheckSwitchStates()
     {
-        if (Context.IsGrounded 
-            && Context.IsJumpPressed == false)
+        if (Context.IsJumpPressed == false)
         {
             SwitchState(Factory.Grounded());
         }

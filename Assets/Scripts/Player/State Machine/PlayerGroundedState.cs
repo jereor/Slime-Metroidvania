@@ -10,6 +10,7 @@ public class PlayerGroundedState : PlayerBaseState
 
     public PlayerStateFactory PlayerStateFactory { get; }
 
+    // TODO: Figure out why EnterState is called every frame after the first jump
     public override void EnterState()
     {
         Debug.Log("GROUNDED");
