@@ -3,8 +3,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerStateMachine : MonoBehaviour
 {
-    [Header("Movement variables")]
-    [SerializeField] private float _moveSpeed;
+    [Header("Jump variables")]
     [SerializeField] private float _jumpForce;
     [SerializeField] private float _coyoteTime;
 
@@ -64,7 +63,6 @@ public class PlayerStateMachine : MonoBehaviour
             _currentState = value;
         }
     }
-    public float MoveSpeed { get { return _moveSpeed; } }
     public float JumpForce { get { return _jumpForce; } }
     public float CoyoteTime { get { return _coyoteTime; } }
     public Rigidbody2D RigidBody { get { return _rigidbody2D; } set { _rigidbody2D = value; } }
@@ -79,6 +77,7 @@ public class PlayerStateMachine : MonoBehaviour
     public bool IsJumpPressed { get { return _isJumpPressed; } }
     public bool HasMoveDirectionChanged { get { return _hasMoveDirectionChanged; } }
     public bool IsMovementPressed { get { return _isMovementPressed; } }
+    public float CurrentMovementInput { get { return _currentMovementInput; } }
 
     private void Awake()
     {
@@ -97,26 +96,8 @@ public class PlayerStateMachine : MonoBehaviour
     private void Update()
     {
         _currentState.UpdateStates();
-        HandleMovement();
+        PlayerMovement.Instance.HandleMovement(this);
         HandleDirectionChange();
-    }
-
-    // TODO: Move to separate file
-    private void HandleMovement()
-    {
-        if (_currentMovementInput == 0)
-        {
-            Stop();
-            return;
-        }
-
-        _rigidbody2D.velocity =
-                new Vector2(x: _currentMovementInput * _moveSpeed, y: _rigidbody2D.velocity.y);
-    }
-
-    private void Stop()
-    {
-        _rigidbody2D.velocity = new Vector2(x: 0, y: _rigidbody2D.velocity.y);
     }
 
     // TODO: Move to separate file
