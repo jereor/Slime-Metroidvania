@@ -153,12 +153,6 @@ public class PlayerStateMachine : MonoBehaviour
     void OnJumpInput(InputAction.CallbackContext context)
     {
         _isJumpPressed = context.ReadValueAsButton();
-
-        if (context.canceled)
-        {
-            _isJumpPressed = false;
-            return;
-        }
     }
 
     void OnShootSlingInput(InputAction.CallbackContext context)
