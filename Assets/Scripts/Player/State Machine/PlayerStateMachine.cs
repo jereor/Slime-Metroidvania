@@ -73,7 +73,7 @@ public class PlayerStateMachine : MonoBehaviour
     public float? JumpButtonPressedTime { get { return _jumpButtonPressedTime; } set { _jumpButtonPressedTime = value; } }
     public float? LastGroundedTime { get { return _lastGroundedTime; } set { _lastGroundedTime = value; } }
     public bool IsGrounded { get { return _isGrounded; } }
-    public bool IsFacingRight { get { return _isFacingRight; } }
+    public bool IsFacingRight { get { return _isFacingRight; } set { _isFacingRight = value; } }
     public bool IsJumpPressed { get { return _isJumpPressed; } }
     public bool HasMoveDirectionChanged { get { return _hasMoveDirectionChanged; } }
     public bool IsMovementPressed { get { return _isMovementPressed; } }
@@ -97,32 +97,7 @@ public class PlayerStateMachine : MonoBehaviour
     {
         _currentState.UpdateStates();
         PlayerMovement.Instance.HandleMovement(this);
-        HandleDirectionChange();
-    }
-
-    // TODO: Move to separate file
-    private void HandleDirectionChange()
-    {
-        if (_hasMoveDirectionChanged)
-        {
-            FlipSprite();
-            FlipSlingShooter();
-        }
-    }
-
-    private void FlipSprite()
-    {
-        _isFacingRight = !_isFacingRight;
-        Vector3 localScale = transform.localScale;
-        localScale.x *= -1f;
-        transform.localScale = localScale;
-    }
-
-    private static void FlipSlingShooter()
-    {
-        Vector3 slingShooterLocalScale = SlingShooter.Instance.transform.localScale;
-        slingShooterLocalScale.x *= -1f;
-        SlingShooter.Instance.transform.localScale = slingShooterLocalScale;
+        PlayerFlipper.Instance.HandleDirectionChange(this);
     }
 
     void OnMovementInput(InputAction.CallbackContext context)
