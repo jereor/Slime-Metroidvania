@@ -123,6 +123,7 @@ public class PlayerStateMachine : MonoBehaviour
         if (_hasMoveDirectionChanged)
         {
             FlipSprite();
+            FlipSlingShooter();
         }
     }
 
@@ -132,7 +133,10 @@ public class PlayerStateMachine : MonoBehaviour
         Vector3 localScale = transform.localScale;
         localScale.x *= -1f;
         transform.localScale = localScale;
+    }
 
+    private static void FlipSlingShooter()
+    {
         Vector3 slingShooterLocalScale = SlingShooter.Instance.transform.localScale;
         slingShooterLocalScale.x *= -1f;
         SlingShooter.Instance.transform.localScale = slingShooterLocalScale;
