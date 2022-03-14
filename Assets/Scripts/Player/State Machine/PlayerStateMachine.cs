@@ -96,14 +96,13 @@ public class PlayerStateMachine : MonoBehaviour
     private void Update()
     {
         _currentState.UpdateStates();
-        PlayerMovement.Instance.HandleMovement(this);
-        PlayerFlipper.Instance.HandleDirectionChange(this);
     }
 
     void OnMovementInput(InputAction.CallbackContext context)
     {
         _currentMovementInput = context.ReadValue<float>();
         _isMovementPressed = _currentMovementInput != 0;
+        PlayerFlipper.Instance.HandleDirectionChange(this);
     }
 
     void OnJumpInput(InputAction.CallbackContext context)

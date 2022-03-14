@@ -19,6 +19,7 @@ public class PlayerMoveState : PlayerBaseState
     public override void UpdateState()
     {
         CheckSwitchStates();
+        PlayerMovement.Instance.HandleMovement(Context);
     }
     
     public override void InitializeSubState()
