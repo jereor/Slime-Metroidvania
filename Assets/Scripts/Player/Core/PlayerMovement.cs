@@ -21,20 +21,22 @@ public class PlayerMovement : MonoBehaviour
     public void HandleMovement(PlayerStateMachine currentContext)
     {
         _context = currentContext;
+        _currentVelocity = _context.RigidBody.velocity;
 
-        if (_context.CurrentMovementInput == 0)
+        if (_context.IsMovementPressed == false)
         {
-            Stop();
+            Debug.Log("Input 0");
+            StopMovement();
             return;
         }
 
         _context.RigidBody.velocity = 
             new Vector2(x: _context.CurrentMovementInput * _moveSpeed, 
-                        y: _context.RigidBody.velocity.y);
+                        y: _currentVelocity.y);
     }
 
-    private void Stop()
+    private void StopMovement()
     {
-        _currentVelocity = new Vector2(x: 0, y: _currentVelocity.y);
+        _context.RigidBody.velocity = new Vector2(x: 0, y: _currentVelocity.y);
     }
 }
