@@ -9,12 +9,12 @@ public class PlayerMoveState : PlayerBaseState
 
     public override void EnterState()
     {
-        Debug.Log("MOVE");
         Context.Animator.SetBool(Context.IsMovingHash, true);
     }
 
     public override void ExitState()
     {
+        Context.Animator.SetBool(Context.IsMovingHash, false);
     }
 
     public override void UpdateState()

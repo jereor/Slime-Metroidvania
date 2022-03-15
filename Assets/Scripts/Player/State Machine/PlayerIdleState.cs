@@ -9,8 +9,6 @@ public class PlayerIdleState : PlayerBaseState
 
     public override void EnterState()
     {
-        Debug.Log("IDLE");
-        Context.Animator.SetBool(Context.IsMovingHash, false);
     }
 
     public override void ExitState()

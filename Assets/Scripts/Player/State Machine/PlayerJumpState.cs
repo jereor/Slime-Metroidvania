@@ -15,7 +15,6 @@ public class PlayerJumpState : PlayerBaseState
     // ENTER STATE
     public override void EnterState()
     {
-        Debug.Log("JUMP");
         Context.Animator.SetBool(Context.IsAirborneHash, true);
         JumpStart();
     }
@@ -37,6 +36,7 @@ public class PlayerJumpState : PlayerBaseState
     // EXIT STATE
     public override void ExitState()
     {
+        Context.Animator.SetBool(Context.IsAirborneHash, false);
     }
 
 
