@@ -72,6 +72,8 @@ public class PlayerStateMachine : MonoBehaviour
     public Rigidbody2D RigidBody { get { return _rigidbody2D; } set { _rigidbody2D = value; } }
     public Transform GroundCheck { get { return _groundCheck; } }
     public Animator Animator { get { return _animator; } }
+    public int IsMovingHash { get { return _isMovingHash; } }
+    public int IsAirborneHash { get { return _isAirborneHash; } }
     public LayerMask GroundLayer { get { return GROUND_LAYER; } }
     public float GroundCheckRadius { get { return GROUND_CHECK_RADIUS; } }
     public float? JumpButtonPressedTime { get { return _jumpButtonPressedTime; } set { _jumpButtonPressedTime = value; } }
@@ -90,7 +92,7 @@ public class PlayerStateMachine : MonoBehaviour
         _currentState.EnterState();
 
         _isMovingHash = Animator.StringToHash("isMoving");
-        _isMovingHash = Animator.StringToHash("isAirborne");
+        _isAirborneHash = Animator.StringToHash("isAirborne");
 
         _playerControls = new PlayerControls();
         _playerControls.Surface.Move.started += OnMovementInput;
