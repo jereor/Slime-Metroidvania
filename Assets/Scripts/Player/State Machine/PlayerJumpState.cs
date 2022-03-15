@@ -16,6 +16,7 @@ public class PlayerJumpState : PlayerBaseState
     public override void EnterState()
     {
         Debug.Log("JUMP");
+        Context.Animator.SetBool(Context.IsAirborneHash, true);
         JumpStart();
     }
 

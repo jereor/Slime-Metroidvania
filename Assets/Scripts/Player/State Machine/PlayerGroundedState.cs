@@ -13,6 +13,7 @@ public class PlayerGroundedState : PlayerBaseState
     public override void EnterState()
     {
         Debug.Log("GROUNDED");
+        Context.Animator.SetBool(Context.IsAirborneHash, false);
     }
 
     public override void ExitState()
