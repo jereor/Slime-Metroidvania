@@ -21,6 +21,11 @@ public class PlayerJumpState : PlayerBaseState
 
     void JumpStart()
     {
+        if (Context.IsGrounded == false)
+        {
+            return;
+        }
+
         Context.JumpButtonPressedTime = Time.time;
 
         bool isCoyoteTime = Time.time - Context.LastGroundedTime <= Context.CoyoteTime;
