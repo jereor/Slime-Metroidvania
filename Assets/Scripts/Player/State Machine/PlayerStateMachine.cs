@@ -47,6 +47,10 @@ public class PlayerStateMachine : MonoBehaviour
         }
     }
 
+    // Animator hashes
+    int _isMovingHash;
+    int _isAirborneHash;
+
     // States
     PlayerBaseState _currentState;
     PlayerStateFactory _states;
@@ -84,6 +88,9 @@ public class PlayerStateMachine : MonoBehaviour
         _states = new PlayerStateFactory(this);
         _currentState = _states.Grounded();
         _currentState.EnterState();
+
+        _isMovingHash = Animator.StringToHash("isMoving");
+        _isMovingHash = Animator.StringToHash("isAirborne");
 
         _playerControls = new PlayerControls();
         _playerControls.Surface.Move.started += OnMovementInput;
