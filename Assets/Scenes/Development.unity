@@ -1058,7 +1058,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.99999905, y: 1.0000002, z: -10}
+  m_LocalPosition: {x: 1.000001, y: 1.0000002, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1591353737}
@@ -1120,10 +1120,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -26, y: 8}
-      - {x: -26, y: -5}
-      - {x: 26, y: -5}
-      - {x: 26, y: 8}
+    - - {x: -50, y: 8}
+      - {x: -50, y: -5}
+      - {x: 50, y: -5}
+      - {x: 50, y: 8}
 --- !u!1 &549805910
 GameObject:
   m_ObjectHideFlags: 0
@@ -1151,7 +1151,7 @@ Transform:
   m_GameObject: {fileID: 549805910}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.0254, y: -4.59, z: 0}
-  m_LocalScale: {x: 50.9967, y: 1, z: 1}
+  m_LocalScale: {x: 100, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1903578458}
   m_RootOrder: 1
@@ -1440,11 +1440,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 769004005}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c6bae952957cbc4bb1e8e17b9a9db3e, type: 3}
+  m_Script: {fileID: 11500000, guid: 7878376908970a9438531d7d90024156, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _camera: {fileID: 519420028}
-  _parallaxModifier: 0.7
+  _parallaxMultiplier: 0.5
+  _isHorizontalOnly: 0
+  _canCalculateInfiniteHorizontalPosition: 1
+  _canCalculateInfiniteVerticalPosition: 0
+  _isInfinite: 1
 --- !u!1 &799610499
 GameObject:
   m_ObjectHideFlags: 0
@@ -1903,11 +1906,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1118653779}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c6bae952957cbc4bb1e8e17b9a9db3e, type: 3}
+  m_Script: {fileID: 11500000, guid: 7878376908970a9438531d7d90024156, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _camera: {fileID: 519420028}
-  _parallaxModifier: 0.5
+  _parallaxMultiplier: 0.4
+  _isHorizontalOnly: 0
+  _canCalculateInfiniteHorizontalPosition: 1
+  _canCalculateInfiniteVerticalPosition: 0
+  _isInfinite: 1
 --- !u!1 &1243428156
 GameObject:
   m_ObjectHideFlags: 0
@@ -1920,7 +1926,7 @@ GameObject:
   - component: {fileID: 1243428158}
   - component: {fileID: 1243428159}
   m_Layer: 0
-  m_Name: Ground
+  m_Name: Background Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2002,11 +2008,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1243428156}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c6bae952957cbc4bb1e8e17b9a9db3e, type: 3}
+  m_Script: {fileID: 11500000, guid: 7878376908970a9438531d7d90024156, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _camera: {fileID: 519420028}
-  _parallaxModifier: 0
+  _parallaxMultiplier: 0.2
+  _isHorizontalOnly: 0
+  _canCalculateInfiniteHorizontalPosition: 1
+  _canCalculateInfiniteVerticalPosition: 0
+  _isInfinite: 1
 --- !u!1 &1244579799
 GameObject:
   m_ObjectHideFlags: 0
@@ -2183,11 +2192,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1336413414}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c6bae952957cbc4bb1e8e17b9a9db3e, type: 3}
+  m_Script: {fileID: 11500000, guid: 7878376908970a9438531d7d90024156, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _camera: {fileID: 519420028}
-  _parallaxModifier: 0.3
+  _parallaxMultiplier: 0.3
+  _isHorizontalOnly: 0
+  _canCalculateInfiniteHorizontalPosition: 1
+  _canCalculateInfiniteVerticalPosition: 0
+  _isInfinite: 1
 --- !u!1 &1406842646
 GameObject:
   m_ObjectHideFlags: 0
@@ -2395,11 +2407,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1524774491}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c6bae952957cbc4bb1e8e17b9a9db3e, type: 3}
+  m_Script: {fileID: 11500000, guid: 7878376908970a9438531d7d90024156, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _camera: {fileID: 519420028}
-  _parallaxModifier: 0.5
+  _parallaxMultiplier: 0.4
+  _isHorizontalOnly: 0
+  _canCalculateInfiniteHorizontalPosition: 1
+  _canCalculateInfiniteVerticalPosition: 0
+  _isInfinite: 1
 --- !u!1 &1591353736
 GameObject:
   m_ObjectHideFlags: 0
@@ -2621,11 +2636,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1812636939}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c6bae952957cbc4bb1e8e17b9a9db3e, type: 3}
+  m_Script: {fileID: 11500000, guid: 7878376908970a9438531d7d90024156, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _camera: {fileID: 519420028}
-  _parallaxModifier: 0.3
+  _parallaxMultiplier: 0.3
+  _isHorizontalOnly: 0
+  _canCalculateInfiniteHorizontalPosition: 1
+  _canCalculateInfiniteVerticalPosition: 0
+  _isInfinite: 1
 --- !u!1 &1903578457
 GameObject:
   m_ObjectHideFlags: 0

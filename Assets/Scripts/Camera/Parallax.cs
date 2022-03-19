@@ -2,33 +2,77 @@ using UnityEngine;
 
 public class Parallax : MonoBehaviour
 {
-    [SerializeField] private GameObject _camera;
-    [SerializeField] private float _parallaxModifier;
+    [Header("Parameters")]
+    [SerializeField] private float _parallaxMultiplier;
+    [SerializeField] private bool _isHorizontalOnly;
+    [SerializeField] private bool _canCalculateInfiniteHorizontalPosition;
+    [SerializeField] private bool _canCalculateInfiniteVerticalPosition;
+    [SerializeField] private bool _isInfinite;
 
+    private GameObject _camera;
+    private Vector3 _startPosition;
+    private Vector3 _startCameraPosition;
     private float _length;
-    private float _startPosition;
-
+     
     private void Start()
     {
-        _startPosition = transform.position.x;
-        _length = GetComponent<SpriteRenderer>().bounds.size.x;
+        _camera = Camera.main.gameObject;
+
+        _startPosition = transform.position;
+        _startCameraPosition = _camera.transform.position;
+
+        if (_isInfinite)
+        {
+            _length = GetComponent<SpriteRenderer>().bounds.size.x;
+        }
+
+        CalculateStartPosition();
     }
 
-    private void FixedUpdate()
+    private void CalculateStartPosition()
     {
-        float distanceRelativeToCamera = _camera.transform.position.x * (1 - _parallaxModifier);
-        float distance = _camera.transform.position.x * _parallaxModifier;
+        float parallaxEffectX = (_camera.transform.position.x - transform.position.x) *_parallaxMultiplier;
+        float parallaxEffectY = (_camera.transform.position.y - transform.position.y) * _parallaxMultiplier;
+        Vector3 newStartPosition = new Vector3(_startPosition.x, _startPosition.y);
 
-        transform.position = 
-            new Vector3(_startPosition + distance, transform.position.y, transform.position.z);
-    
-        if (distanceRelativeToCamera > _startPosition + _length)
+        if (_canCalculateInfiniteHorizontalPosition)
         {
-            _startPosition += _length;
+            newStartPosition.x = transform.position.x + parallaxEffectX;
         }
-        else if (distanceRelativeToCamera < _startPosition - _length)
+        if (_canCalculateInfiniteVerticalPosition)
         {
-            _startPosition -= _length;
+            newStartPosition.y = transform.position.y + parallaxEffectY;
+        }
+
+        _startPosition = newStartPosition;
+    }
+
+    private void Update()
+    {
+        Vector3 position = _startPosition;
+
+        if (_isHorizontalOnly)
+        {
+            position.x += _parallaxMultiplier * (_camera.transform.position.x - _startCameraPosition.x);
+        }
+        else
+        {
+            position += _parallaxMultiplier * (_camera.transform.position - _startCameraPosition);
+        }
+
+        transform.position = position;
+    
+        if (_isInfinite)
+        {
+            float distanceRelativeToCamera = _camera.transform.position.x * (1 - _parallaxMultiplier);
+            if (distanceRelativeToCamera > _startPosition.x + _length)
+            {
+                _startPosition.x += _length;
+            }
+            else if (distanceRelativeToCamera < _startPosition.x - _length)
+            {
+                _startPosition.x -= _length;
+            }
         }
     }
 }
