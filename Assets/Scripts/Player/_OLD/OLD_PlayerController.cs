@@ -1,3 +1,4 @@
+using Player.Core.Slime_Sling;
 using UnityEngine;
 using UnityEngine.InputSystem;
 

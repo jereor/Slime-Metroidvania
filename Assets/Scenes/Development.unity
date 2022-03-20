@@ -865,87 +865,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70b82290bcb9c9646af5fd52390b29f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LineRenderer: {fileID: 518264693}
-  precision: 40
-  straightenLineSpeed: 10
-  RopeAnimationCurve:
+  _lineRenderer: {fileID: 518264693}
+  _precision: 40
+  _straightenLineSpeed: 5
+  _ropeAnimationCurve:
     serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.19116072
-      value: 0.40763426
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.4731936
-      value: -0.3122868
-      inSlope: -0.0017564103
-      outSlope: -0.0017564103
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.16988106
-    - serializedVersion: 3
-      time: 0.70994854
-      value: 0.18399632
-      inSlope: -0.042907402
-      outSlope: -0.042907402
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.3194421
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
+    m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  StartWaveSize: 2
-  RopeProgressionCurve:
+  _startWaveSize: 2
+  _ropeProgressionCurve:
     serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
+    m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  ropeProgressionSpeed: 6.7
-  IsGrappling: 1
+  _ropeProgressionSpeed: 1
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -2493,25 +2429,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _grappleToAll: 0
-  _grappableLayerNumber: 3
+  _grappleableLayerNumber: 9
   _camera: {fileID: 519420031}
   _player: {fileID: 1912269936}
   _slingShooter: {fileID: 1681231653}
-  OriginPoint: {fileID: 1423076767}
+  _originPoint: {fileID: 1423076767}
   _springJoint: {fileID: 1912269945}
   _rigidbody: {fileID: 1912269939}
   _rotateOverTime: 0
   _rotationSpeed: 4
   _hasMaxDistance: 1
   _maxDistance: 10
-  _launchToPoint: 1
+  _isLaunchedToPoint: 1
   _launchType: 1
   _launchSpeed: 1
   _autoConfigureDistance: 0
   _targetDistance: 3
-  _targetFrequncy: 1
-  GrapplePoint: {x: 0, y: 0}
-  GrappleDistanceVector: {x: 0, y: 0}
+  _targetFrequency: 1
 --- !u!1 &1682844935
 GameObject:
   m_ObjectHideFlags: 0
@@ -2827,7 +2761,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5c4930e1bcbf674d825dbc8c4f009b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 6
+  moveSpeed: 4
 --- !u!95 &1912269941
 Animator:
   serializedVersion: 3

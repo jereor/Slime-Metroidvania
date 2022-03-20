@@ -1,3 +1,4 @@
+using Player.Core;
 using UnityEngine;
 
 public class PlayerMoveState : PlayerBaseState

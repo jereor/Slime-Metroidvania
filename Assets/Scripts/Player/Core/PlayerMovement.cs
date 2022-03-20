@@ -1,41 +1,44 @@
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+namespace Player.Core
 {
-    [Header("Movement variables")]
-    [SerializeField] private float _moveSpeed;
-
-    private PlayerStateMachine _context;
-    private Vector2 _currentVelocity;
-
-    public static PlayerMovement Instance;
-
-    private void Awake()
+    public class PlayerMovement : MonoBehaviour
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-    }
+        [Header("Movement variables")]
+        [SerializeField] private float moveSpeed;
 
-    public void HandleMovement(PlayerStateMachine currentContext)
-    {
-        _context = currentContext;
-        _currentVelocity = _context.RigidBody.velocity;
+        private PlayerStateMachine _context;
+        private Vector2 _currentVelocity;
 
-        if (_context.IsMovementPressed == false)
+        public static PlayerMovement Instance;
+
+        private void Awake()
         {
-            StopMovement();
-            return;
+            if (Instance == null)
+            {
+                Instance = this;
+            }
         }
 
-        _context.RigidBody.velocity = 
-            new Vector2(x: _context.CurrentMovementInput * _moveSpeed, 
-                        y: _currentVelocity.y);
-    }
+        public void HandleMovement(PlayerStateMachine currentContext)
+        {
+            _context = currentContext;
+            _currentVelocity = _context.RigidBody.velocity;
 
-    private void StopMovement()
-    {
-        _context.RigidBody.velocity = new Vector2(x: 0, y: _currentVelocity.y);
+            if (_context.IsMovementPressed == false)
+            {
+                StopMovement();
+                return;
+            }
+
+            _context.RigidBody.velocity = 
+                new Vector2(x: _context.CurrentMovementInput * moveSpeed, 
+                    y: _currentVelocity.y);
+        }
+
+        private void StopMovement()
+        {
+            _context.RigidBody.velocity = new Vector2(x: 0, y: _currentVelocity.y);
+        }
     }
 }

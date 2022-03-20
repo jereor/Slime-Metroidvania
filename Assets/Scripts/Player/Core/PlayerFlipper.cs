@@ -1,42 +1,48 @@
+using Player.Core.Slime_Sling;
 using UnityEngine;
 
-public class PlayerFlipper : MonoBehaviour
+namespace Player.Core
 {
-    private PlayerStateMachine _context;
-
-    public static PlayerFlipper Instance;
-
-    private void Awake()
+    public class PlayerFlipper : MonoBehaviour
     {
-        if (Instance == null)
+        private PlayerStateMachine _context;
+
+        public static PlayerFlipper Instance;
+
+        private void Awake()
         {
-            Instance = this;
+            if (Instance == null)
+            {
+                Instance = this;
+            }
         }
-    }
 
-    public void HandleDirectionChange(PlayerStateMachine currentContext)
-    {
-        _context = currentContext;
-
-        if (_context.HasMoveDirectionChanged)
+        public void HandleDirectionChange(PlayerStateMachine currentContext)
         {
+            _context = currentContext;
+
+            if (_context.HasMoveDirectionChanged == false)
+            {
+                return;
+            }
+            
             FlipSprite();
             FlipSlingShooter();
         }
-    }
 
-    private void FlipSprite()
-    {
-        _context.IsFacingRight = !_context.IsFacingRight;
-        Vector3 localScale = transform.localScale;
-        localScale.x *= -1f;
-        transform.localScale = localScale;
-    }
+        private void FlipSprite()
+        {
+            _context.IsFacingRight = !_context.IsFacingRight;
+            Vector3 localScale = transform.localScale;
+            localScale.x *= -1f;
+            transform.localScale = localScale;
+        }
 
-    private static void FlipSlingShooter()
-    {
-        Vector3 slingShooterLocalScale = SlingShooter.Instance.transform.localScale;
-        slingShooterLocalScale.x *= -1f;
-        SlingShooter.Instance.transform.localScale = slingShooterLocalScale;
+        private static void FlipSlingShooter()
+        {
+            Vector3 slingShooterLocalScale = SlingShooter.Instance.transform.localScale;
+            slingShooterLocalScale.x *= -1f;
+            SlingShooter.Instance.transform.localScale = slingShooterLocalScale;
+        }
     }
 }
