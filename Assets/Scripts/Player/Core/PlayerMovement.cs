@@ -25,7 +25,6 @@ public class PlayerMovement : MonoBehaviour
 
         if (_context.IsMovementPressed == false)
         {
-            Debug.Log("Input 0");
             StopMovement();
             return;
         }
