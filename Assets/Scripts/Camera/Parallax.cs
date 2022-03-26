@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Camera
@@ -18,7 +19,7 @@ namespace Camera
      
         private void Start()
         {
-            _camera = UnityEngine.Camera.main.gameObject;
+            _camera = UnityEngine.Camera.main!.gameObject;
 
             _startPosition = transform.position;
             _startCameraPosition = _camera.transform.position;
