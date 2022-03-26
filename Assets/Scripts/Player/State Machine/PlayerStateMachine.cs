@@ -109,19 +109,19 @@ public class PlayerStateMachine : MonoBehaviour
         _currentState.UpdateStates();
     }
 
-    void OnMovementInput(InputAction.CallbackContext context)
+    private void OnMovementInput(InputAction.CallbackContext context)
     {
         _currentMovementInput = context.ReadValue<float>();
         _isMovementPressed = _currentMovementInput != 0;
         PlayerFlipper.Instance.HandleDirectionChange(this);
     }
 
-    void OnJumpInput(InputAction.CallbackContext context)
+    private void OnJumpInput(InputAction.CallbackContext context)
     {
         _isJumpPressed = context.ReadValueAsButton();
     }
 
-    void OnShootSlingInput(InputAction.CallbackContext context)
+    private void OnShootSlingInput(InputAction.CallbackContext context)
     {
         if (context.canceled)
         {
@@ -145,7 +145,7 @@ public class PlayerStateMachine : MonoBehaviour
     }
 
 
-    void OnEnable()
+    private void OnEnable()
     {
         _playerControls.Enable();
     }
