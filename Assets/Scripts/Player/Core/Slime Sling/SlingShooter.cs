@@ -21,7 +21,7 @@ namespace Player.Core.Slime_Sling
         [SerializeField] private int _grappleableLayerNumber = 9;
 
         [Header("Main Camera:")]
-        [SerializeField] private Camera _camera;
+        [SerializeField] private UnityEngine.Camera _camera;
 
         [Header("Transform Ref:")]
         [SerializeField] private Transform _player;
