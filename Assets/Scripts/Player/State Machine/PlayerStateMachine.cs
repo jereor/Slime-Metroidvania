@@ -96,12 +96,19 @@ public class PlayerStateMachine : MonoBehaviour
         _isMovingHash = Animator.StringToHash("isMoving");
         _isAirborneHash = Animator.StringToHash("isAirborne");
 
+        SubscribePlayerInputs();
+    }
+
+    private void SubscribePlayerInputs()
+    {
         _playerControls = new PlayerControls();
         _playerControls.Surface.Move.started += OnMovementInput;
         _playerControls.Surface.Move.canceled += OnMovementInput;
         _playerControls.Surface.Move.performed += OnMovementInput;
         _playerControls.Surface.Jump.started += OnJumpInput;
         _playerControls.Surface.Jump.canceled += OnJumpInput;
+        _playerControls.Surface.ShootSling.started += OnShootSlingInput;
+        _playerControls.Surface.ShootSling.canceled += OnShootSlingInput;
     }
 
     private void Update()
