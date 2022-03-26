@@ -22,7 +22,7 @@ public class PlayerJumpState : PlayerBaseState
 
     void JumpStart()
     {
-        if (Context.IsGrounded == false)
+        if (Context.IsGrounded() == false)
         {
             return;
         }

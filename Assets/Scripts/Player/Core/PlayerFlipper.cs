@@ -22,7 +22,7 @@ namespace Player.Core
         {
             _context = currentContext;
 
-            if (_context.HasMoveDirectionChanged == false)
+            if (_context.HasMoveDirectionChanged() == false)
             {
                 return;
             }

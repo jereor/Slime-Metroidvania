@@ -75,44 +75,62 @@ namespace Player.Core.Slime_Sling
         {
             if (!_isStraightLine)
             {
-                if (_lineRenderer.GetPosition(_precision - 1).x == SlingShooter.Instance.GrapplePoint.x)
-                {
-                    _isStraightLine = true;
-                }
-                else
-                {
-                    DrawRopeWaves();
-                }
+                HandleRopeShootAnimation();
             }
             else
             {
-                if (!IsGrappling)
-                {
-                    SlingShooter.Instance.Grapple();
-                    IsGrappling = true;
-                }
-                if (_waveSize > 0)
-                {
-                    _waveSize -= Time.deltaTime * _straightenLineSpeed;
-                    DrawRopeWaves();
-                }
-                else
-                {
-                    _waveSize = 0;
-
-                    if (_lineRenderer.positionCount != 2) { _lineRenderer.positionCount = 2; }
-
-                    DrawRopeNoWaves();
-                }
+                HandleGrapplePull();
             }
         }
+
+        private void HandleGrapplePull()
+        {
+            if (!IsGrappling)
+            {
+                SlingShooter.Instance.Grapple();
+                IsGrappling = true;
+            }
+
+            if (_waveSize > 0)
+            {
+                _waveSize -= Time.deltaTime * _straightenLineSpeed;
+                DrawRopeWaves();
+            }
+            else
+            {
+                _waveSize = 0;
+
+                if (_lineRenderer.positionCount != 2)
+                {
+                    _lineRenderer.positionCount = 2;
+                }
+
+                DrawRopeNoWaves();
+            }
+        }
+
+        private void HandleRopeShootAnimation()
+        {
+            bool ropeHasReachedGrapplePoint =
+                Math.Abs(_lineRenderer.GetPosition(_precision - 1).x - SlingShooter.Instance.GrapplePoint.x) < TOLERANCE;
+            if (ropeHasReachedGrapplePoint)
+            {
+                _isStraightLine = true;
+            }
+            else
+            {
+                DrawRopeWaves();
+            }
+        }
+
+        private const double TOLERANCE = .1;
 
         private void DrawRopeWaves()
         {
             for (int i = 0; i < _precision; i++)
             {
                 float delta = i / (_precision - 1f);
-                Vector2 offset = Vector2.Perpendicular(SlingShooter.Instance.GrappleDistanceVector).normalized * _ropeAnimationCurve.Evaluate(delta) * _waveSize;
+                Vector2 offset = Vector2.Perpendicular(SlingShooter.Instance.GrappleDistanceVector).normalized * (_ropeAnimationCurve.Evaluate(delta) * _waveSize);
                 Vector3 originPointPosition = SlingShooter.Instance.OriginPoint.position;
                 
                 Vector2 targetPosition = Vector2.Lerp(originPointPosition, SlingShooter.Instance.GrapplePoint, delta) + offset;
