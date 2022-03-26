@@ -152,6 +152,7 @@ namespace Player.Core.Slime_Sling
 
         internal void StartPull()
         {
+            Debug.Log("Pull started!");
             _pulling = true;
         }
 

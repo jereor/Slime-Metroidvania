@@ -128,24 +128,18 @@ public class PlayerStateMachine : MonoBehaviour
         _isJumpPressed = context.ReadValueAsButton();
     }
 
-    private void OnShootSlingInput(InputAction.CallbackContext context)
+    private static void OnShootSlingInput(InputAction.CallbackContext context)
     {
         if (context.canceled)
         {
-            Debug.Log("Sling: Canceled!");
+            Debug.Log("Pull canceled!");
             SlingShooter.Instance.CancelPull();
             return;
         }
 
         if (context.started)
         {
-            Debug.Log("Sling: Started!");
             SlingShooter.Instance.SetGrapplePoint();
-        }
-
-        if (context.performed == false)
-        {
-            return;
         }
 
         SlingShooter.Instance.StartPull();
