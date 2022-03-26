@@ -34,8 +34,11 @@ namespace Camera
 
         private void CalculateStartPosition()
         {
-            float parallaxEffectX = (_camera.transform.position.x - transform.position.x) *_parallaxMultiplier;
-            float parallaxEffectY = (_camera.transform.position.y - transform.position.y) * _parallaxMultiplier;
+            Vector3 mainCameraPosition = _camera.transform.position;
+            Vector3 myPosition = transform.position;
+            
+            float parallaxEffectX = (mainCameraPosition.x - myPosition.x) *_parallaxMultiplier;
+            float parallaxEffectY = (mainCameraPosition.y - myPosition.y) * _parallaxMultiplier;
             Vector3 newStartPosition = new Vector3(_startPosition.x, _startPosition.y);
 
             if (_canCalculateInfiniteHorizontalPosition)
@@ -52,6 +55,16 @@ namespace Camera
 
         private void Update()
         {
+            UpdateParallaxEffect();
+
+            if (_isInfinite)
+            {
+                UpdateInfiniteEffect();
+            }
+        }
+
+        private void UpdateParallaxEffect()
+        {
             Vector3 position = _startPosition;
 
             if (_isHorizontalOnly)
@@ -64,18 +77,18 @@ namespace Camera
             }
 
             transform.position = position;
-    
-            if (_isInfinite)
+        }
+
+        private void UpdateInfiniteEffect()
+        {
+            float distanceRelativeToCamera = _camera.transform.position.x * (1 - _parallaxMultiplier);
+            if (distanceRelativeToCamera > _startPosition.x + _length)
             {
-                float distanceRelativeToCamera = _camera.transform.position.x * (1 - _parallaxMultiplier);
-                if (distanceRelativeToCamera > _startPosition.x + _length)
-                {
-                    _startPosition.x += _length;
-                }
-                else if (distanceRelativeToCamera < _startPosition.x - _length)
-                {
-                    _startPosition.x -= _length;
-                }
+                _startPosition.x += _length;
+            }
+            else if (distanceRelativeToCamera < _startPosition.x - _length)
+            {
+                _startPosition.x -= _length;
             }
         }
     }
