@@ -27,6 +27,7 @@ namespace Player.Core.Slime_Sling
 
         private float _timer;
         private bool _isStraightLine = true;
+        private const double TOLERANCE = 0.1;
 
         private void OnEnable()
         {
@@ -122,8 +123,6 @@ namespace Player.Core.Slime_Sling
                 DrawRopeWaves();
             }
         }
-
-        private const double TOLERANCE = .1;
 
         private void DrawRopeWaves()
         {
