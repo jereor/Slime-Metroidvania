@@ -1195,7 +1195,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _lineRenderer: {fileID: 518264693}
   _lineVertexCount: 40
-  _straightenLineSpeed: 5
+  _straightenLineSpeed: 10
   _ropeAnimationCurve:
     serializedVersion: 2
     m_Curve:
@@ -1290,7 +1290,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _ropeProgressionSpeed: 1
+  _ropeProgressionSpeed: 6.7
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
