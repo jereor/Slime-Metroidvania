@@ -120,7 +120,6 @@ namespace Player.State_Machine
         {
             if (context.canceled)
             {
-                Debug.Log("Pull canceled!");
                 SlingShooter.Instance.CancelPull();
                 return;
             }

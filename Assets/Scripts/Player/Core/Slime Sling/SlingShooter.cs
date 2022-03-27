@@ -79,6 +79,7 @@ namespace Player.Core.Slime_Sling
 
         internal void CancelPull()
         {
+            Debug.Log("Pull canceled!");
             SlimeSling.Instance.enabled = false;
             _springJoint.enabled = false;
             _rigidbody.gravityScale = PhysicsConstants.DEFAULT_GRAVITY_SCALE;
