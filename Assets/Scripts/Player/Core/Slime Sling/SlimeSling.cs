@@ -25,12 +25,12 @@ namespace Player.Core.Slime_Sling
         [SerializeField] private AnimationCurve _ropeProgressionCurve;
         [SerializeField, Range(1, 50)] private float _ropeProgressionSpeed = 1;
 
-        private float _moveTime;
+        private float _timer;
         private bool _isStraightLine = true;
 
         private void OnEnable()
         {
-            _moveTime = 0;
+            _timer = 0;
             _lineRenderer.positionCount = _precision;
             _waveSize = _startWaveSize;
             _isStraightLine = false;
@@ -67,7 +67,7 @@ namespace Player.Core.Slime_Sling
 
         private void Update()
         {
-            _moveTime += Time.deltaTime;
+            _timer += Time.deltaTime;
             DrawRope();
         }
 
@@ -134,7 +134,7 @@ namespace Player.Core.Slime_Sling
                 Vector3 originPointPosition = SlingShooter.Instance.OriginPoint.position;
                 
                 Vector2 targetPosition = Vector2.Lerp(originPointPosition, SlingShooter.Instance.GrapplePoint, delta) + offset;
-                Vector2 currentPosition = Vector2.Lerp(originPointPosition, targetPosition, _ropeProgressionCurve.Evaluate(_moveTime) * _ropeProgressionSpeed);
+                Vector2 currentPosition = Vector2.Lerp(originPointPosition, targetPosition, _ropeProgressionCurve.Evaluate(_timer) * _ropeProgressionSpeed);
 
                 _lineRenderer.SetPosition(i, currentPosition);
             }
