@@ -3767,7 +3767,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _grappleToAll: 0
-  _grappleableLayerNumber: 9
+  _groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
   _camera: {fileID: 519420031}
   _player: {fileID: 1912269936}
   _slingShooter: {fileID: 1681231653}

@@ -18,7 +18,7 @@ namespace Player.Core.Slime_Sling
 
         [Header("Layers Settings:")]
         [SerializeField] private bool _grappleToAll;
-        [SerializeField] private int _grappleableLayerNumber = 9;
+        [SerializeField] private LayerMask _groundLayer;
 
         [Header("Main Camera:")]
         [SerializeField] private UnityEngine.Camera _camera;
@@ -139,7 +139,7 @@ namespace Player.Core.Slime_Sling
             
             // TODO: See if this if statement can be made more readable
             RaycastHit2D hit = Physics2D.Raycast(_originPoint.position, distanceVector.normalized);
-            if (hit.transform.gameObject.layer != _grappleableLayerNumber && !_grappleToAll ||
+            if (hit.transform.gameObject.layer != _groundLayer.value && !_grappleToAll ||
                 !(Vector2.Distance(hit.point, _originPoint.position) <= _maxDistance) && _hasMaxDistance)
             {
                 return;
