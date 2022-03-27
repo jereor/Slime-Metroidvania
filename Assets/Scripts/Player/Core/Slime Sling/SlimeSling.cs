@@ -13,7 +13,7 @@ namespace Player.Core.Slime_Sling
         [SerializeField] private LineRenderer _lineRenderer;
 
         [Header("General Settings:")]
-        [SerializeField] private int _linePrecision = 40;
+        [SerializeField] private int _lineVertexCount = 40;
         [SerializeField, Range(0, 20)] private float _straightenLineSpeed = 5;
 
         [Header("Rope Animation Settings:")]
@@ -32,7 +32,7 @@ namespace Player.Core.Slime_Sling
         private void OnEnable()
         {
             _timer = 0;
-            _lineRenderer.positionCount = _linePrecision;
+            _lineRenderer.positionCount = _lineVertexCount;
             _waveSize = _startWaveSize;
             _isStraightLine = false;
 
@@ -46,7 +46,7 @@ namespace Player.Core.Slime_Sling
         
         private void LinePointsToFirePoint()
         {
-            for (int i = 0; i < _linePrecision; i++)
+            for (int i = 0; i < _lineVertexCount; i++)
             {
                 _lineRenderer.SetPosition(i, SlingShooter.Instance.OriginPoint.position);
             }
@@ -113,7 +113,7 @@ namespace Player.Core.Slime_Sling
         private void HandleRopeShootAnimation()
         {
             bool ropeHasReachedGrapplePoint =
-                Math.Abs(_lineRenderer.GetPosition(_linePrecision - 1).x - SlingShooter.Instance.GrapplePoint.x) < TOLERANCE;
+                Math.Abs(_lineRenderer.GetPosition(_lineVertexCount - 1).x - SlingShooter.Instance.GrapplePoint.x) < TOLERANCE;
             if (ropeHasReachedGrapplePoint)
             {
                 _isStraightLine = true;
@@ -126,9 +126,9 @@ namespace Player.Core.Slime_Sling
 
         private void DrawRopeWaves()
         {
-            for (int i = 0; i < _linePrecision; i++)
+            for (int i = 0; i < _lineVertexCount; i++)
             {
-                float delta = i / (_linePrecision - 1f);
+                float delta = i / (_lineVertexCount - 1f);
                 Vector2 offset = Vector2.Perpendicular(SlingShooter.Instance.GrappleDistanceVector).normalized * (_ropeAnimationCurve.Evaluate(delta) * _waveSize);
                 Vector3 originPointPosition = SlingShooter.Instance.OriginPoint.position;
                 
