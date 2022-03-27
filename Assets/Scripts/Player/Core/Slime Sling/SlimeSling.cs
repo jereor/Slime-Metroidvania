@@ -99,13 +99,6 @@ namespace Player.Core.Slime_Sling
             }
             else
             {
-                _waveSize = 0;
-
-                if (_lineRenderer.positionCount != 2)
-                {
-                    _lineRenderer.positionCount = 2;
-                }
-
                 DrawRopeNoWaves();
             }
         }
@@ -120,7 +113,18 @@ namespace Player.Core.Slime_Sling
             }
             else
             {
+                RemoveWaves();
                 DrawRopeWaves();
+            }
+        }
+
+        private void RemoveWaves()
+        {
+            _waveSize = 0;
+
+            if (_lineRenderer.positionCount != 2)
+            {
+                _lineRenderer.positionCount = 2;
             }
         }
 
