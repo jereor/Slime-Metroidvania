@@ -99,6 +99,7 @@ namespace Player.Core.Slime_Sling
             }
             else
             {
+                RemoveWaves();
                 DrawRopeNoWaves();
             }
         }
@@ -113,7 +114,6 @@ namespace Player.Core.Slime_Sling
             }
             else
             {
-                RemoveWaves();
                 DrawRopeWaves();
             }
         }
