@@ -42,19 +42,19 @@ namespace Player.Core.Slime_Sling
 
             _lineRenderer.enabled = true;
         }
-
-        private void OnDisable()
-        {
-            _lineRenderer.enabled = false;
-            IsGrappling = false;
-        }
-
+        
         private void LinePointsToFirePoint()
         {
             for (int i = 0; i < _linePrecision; i++)
             {
                 _lineRenderer.SetPosition(i, SlingShooter.Instance.OriginPoint.position);
             }
+        }
+
+        private void OnDisable()
+        {
+            _lineRenderer.enabled = false;
+            IsGrappling = false;
         }
 
         private void Awake()
