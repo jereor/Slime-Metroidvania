@@ -128,13 +128,18 @@ namespace Player.Core.Slime_Sling
         {
             for (int i = 0; i < _lineVertexCount; i++)
             {
-                float delta = i / (_lineVertexCount - 1f);
-                Vector2 offset = Vector2.Perpendicular(SlingShooter.Instance.GrappleDistanceVector).normalized * (_ropeAnimationCurve.Evaluate(delta) * _waveSize);
-                Vector3 originPointPosition = SlingShooter.Instance.OriginPoint.position;
-                
-                Vector2 targetPosition = Vector2.Lerp(originPointPosition, SlingShooter.Instance.GrapplePoint, delta) + offset;
-                Vector2 currentPosition = Vector2.Lerp(originPointPosition, targetPosition, _ropeProgressionCurve.Evaluate(_timer) * _ropeProgressionSpeed);
+                float distanceFromFirePoint = i / (_lineVertexCount - 1f);
+                float vertexHeightInCurve = _ropeAnimationCurve.Evaluate(distanceFromFirePoint);
 
+                Vector2 perpendicularDirection = Vector2.Perpendicular(SlingShooter.Instance.GrappleDistanceVector).normalized;
+                Vector3 originPointPosition = SlingShooter.Instance.OriginPoint.position;
+
+                Vector2 offset = vertexHeightInCurve * perpendicularDirection * _waveSize;
+                Vector2 targetPosition = Vector2.Lerp(originPointPosition, SlingShooter.Instance.GrapplePoint,
+                    distanceFromFirePoint) + offset;
+
+                Vector2 currentPosition = Vector2.Lerp(originPointPosition, targetPosition,
+                    _ropeProgressionCurve.Evaluate(_timer) * _ropeProgressionSpeed);
                 _lineRenderer.SetPosition(i, currentPosition);
             }
         }
