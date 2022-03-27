@@ -7,14 +7,12 @@ namespace Player.State_Machine
 {
     public class PlayerStateMachine : MonoBehaviour
     {
-        [Header("Jump variables")] [SerializeField]
-        private float _jumpForce;
-
+        [Header("Jump variables")]
+        [SerializeField] private float _jumpForce;
         [SerializeField] private float _coyoteTime;
 
-        [Header("References")] [SerializeField]
-        private Rigidbody2D _rigidbody2D;
-
+        [Header("References")] 
+        [SerializeField] private Rigidbody2D _rigidbody2D;
         [SerializeField] private Transform _groundCheck;
         [SerializeField] private Animator _animator;
         [SerializeField] private LayerMask _groundLayer;
