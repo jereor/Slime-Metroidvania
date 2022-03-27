@@ -79,7 +79,6 @@ namespace Player.Core.Slime_Sling
 
         internal void CancelPull()
         {
-            Debug.Log("Pull canceled!");
             SlimeSling.Instance.enabled = false;
             _springJoint.enabled = false;
             _rigidbody.gravityScale = PhysicsConstants.DEFAULT_GRAVITY_SCALE;
@@ -94,6 +93,7 @@ namespace Player.Core.Slime_Sling
         
             if (SlimeSling.Instance.enabled)
             {
+                Debug.Log("Slime Sling instance enabled!");
                 RotateShooterTo(GrapplePoint);
             }
             else
@@ -130,6 +130,7 @@ namespace Player.Core.Slime_Sling
 
         internal void SetGrapplePoint()
         {
+            Debug.Log("Setting up grapple point...");
             Vector3 mousePos = _camera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
             Vector2 distanceVector = mousePos - _slingShooter.position;
 
@@ -140,9 +141,16 @@ namespace Player.Core.Slime_Sling
             
             // TODO: See if this if statement can be made more readable
             RaycastHit2D hit = Physics2D.Raycast(_originPoint.position, distanceVector.normalized);
-            if (hit.transform.gameObject.layer != _groundLayer.value && !_grappleToAll ||
-                !(Vector2.Distance(hit.point, _originPoint.position) <= _maxDistance) && _hasMaxDistance)
+            
+            if (hit.transform.gameObject.layer != _groundLayer.value && !_grappleToAll)
             {
+                Debug.Log("Did not hit any ground.");
+                return;
+            }
+            
+            if (!(Vector2.Distance(hit.point, _originPoint.position) <= _maxDistance) && _hasMaxDistance)
+            {
+                Debug.Log("Distance too great.");
                 return;
             }
                 
@@ -153,7 +161,6 @@ namespace Player.Core.Slime_Sling
 
         internal void StartPull()
         {
-            Debug.Log("Pull started!");
             _pulling = true;
         }
 
