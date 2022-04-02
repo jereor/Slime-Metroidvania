@@ -57,7 +57,7 @@ namespace Worm
 
         private void FixedUpdate()
         {
-            if (TargetInDistance() && _followEnabled)
+            if (_followEnabled && TargetInDistance())
             {
                 PathFollow();
             }
@@ -67,11 +67,13 @@ namespace Worm
         {
             if (_path == null)
             {
+                Debug.Log("Path null!");
                 return;
             }
 
             if (_currentWaypoint >= _path.vectorPath.Count)
             {
+                Debug.Log("End of path reached!");
                 return;
             }
 
@@ -83,20 +85,13 @@ namespace Worm
                 HandleJumping(movementDirection.y);
             }
             
-            HandleMovement(forceDirection);
+            _rb.AddForce(forceDirection);
             CalculateNextWaypoint();
             
             if (_directionLookEnabled && HasMoveDirectionChanged(movementDirection))
             {
                 FlipSprite();
             }
-        }
-        
-        private void HandleMovement(Vector2 force)
-        {
-            Vector2 velocity = _rb.velocity;
-            Vector2 currentVelocity = velocity;
-            _rb.velocity = Vector2.SmoothDamp(velocity, force, ref currentVelocity, 0.5f);
         }
         
         private void CalculateNextWaypoint()
@@ -135,7 +130,7 @@ namespace Worm
         
         private bool TargetInDistance()
         {
-            return Vector2.Distance(transform.position, _target.transform.position) > _activateDistance;
+            return Vector2.Distance(transform.position, _target.transform.position) < _activateDistance;
         }
         
         private bool HasMoveDirectionChanged(Vector2 movementDirection)
