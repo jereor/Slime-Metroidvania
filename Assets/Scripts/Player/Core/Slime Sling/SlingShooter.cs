@@ -107,10 +107,15 @@ namespace Player.Core.Slime_Sling
                 && _isLaunchedToPoint
                 && SlimeSling.Instance.IsGrappling)
             {
-                Vector2 firePointDistance = _originPoint.position - _player.localPosition;
-                Vector2 targetPos = GrapplePoint - firePointDistance;
-                _player.position = Vector2.Lerp(_player.position, targetPos, Time.deltaTime * _launchSpeed);
+                PullPlayer();
             }
+        }
+
+        private void PullPlayer()
+        {
+            Vector2 firePointDistance = _originPoint.position - _player.localPosition;
+            Vector2 targetPos = GrapplePoint - firePointDistance;
+            _player.position = Vector2.Lerp(_player.position, targetPos, Time.deltaTime * _launchSpeed);
         }
 
         private void RotateShooterTo(Vector3 lookPoint)
