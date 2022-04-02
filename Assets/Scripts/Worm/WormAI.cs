@@ -1,6 +1,9 @@
 using UnityEngine;
 
-public class WormAI : MonoBehaviour
+namespace Worm
 {
+    public class WormAI : MonoBehaviour
+    {
     
+    }
 }
