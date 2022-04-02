@@ -138,7 +138,7 @@ namespace Player.Core.Slime_Sling
                 Vector2 perpendicularDirection = Vector2.Perpendicular(SlingShooter.Instance.GrappleDistanceVector).normalized;
                 Vector3 originPointPosition = SlingShooter.Instance.OriginPoint.position;
 
-                Vector2 offset = vertexHeightInCurve * perpendicularDirection * _waveSize;
+                Vector2 offset = perpendicularDirection * (vertexHeightInCurve * _waveSize);
                 Vector2 targetPosition = Vector2.Lerp(originPointPosition, SlingShooter.Instance.GrapplePoint,
                     distanceFromFirePoint) + offset;
 
