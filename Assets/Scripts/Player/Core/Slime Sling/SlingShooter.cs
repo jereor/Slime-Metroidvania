@@ -102,17 +102,15 @@ namespace Player.Core.Slime_Sling
                 RotateShooterTo(mousePos);
             }
 
-            // TODO: See if this if statement can be made more readable
-            if (!_isLaunchedToPoint
-                || !SlimeSling.Instance.IsGrappling
-                || _launchType != LaunchType.TransformLaunch)
+            // ReSharper disable once InvertIf
+            if (_launchType == LaunchType.TransformLaunch
+                && _isLaunchedToPoint
+                && SlimeSling.Instance.IsGrappling)
             {
-                return;
+                Vector2 firePointDistance = _originPoint.position - _player.localPosition;
+                Vector2 targetPos = GrapplePoint - firePointDistance;
+                _player.position = Vector2.Lerp(_player.position, targetPos, Time.deltaTime * _launchSpeed);
             }
-            
-            Vector2 firePointDistance = _originPoint.position - _player.localPosition;
-            Vector2 targetPos = GrapplePoint - firePointDistance;
-            _player.position = Vector2.Lerp(_player.position, targetPos, Time.deltaTime * _launchSpeed);
         }
 
         private void RotateShooterTo(Vector3 lookPoint)
