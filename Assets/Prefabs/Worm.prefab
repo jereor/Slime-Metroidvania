@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8027880798065282584}
+  - component: {fileID: 9041137040048761676}
   m_Layer: 0
   m_Name: Worm
   m_TagString: Untagged
@@ -31,6 +32,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9041137040048761676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8027880798065282585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92fa2c3a8b77e0b42b38ae537cc839fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8027880798246931884
 GameObject:
   m_ObjectHideFlags: 0
