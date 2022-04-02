@@ -17,28 +17,25 @@ namespace Player.Core.Slime_Sling
         [NonSerialized] public Vector2 GrapplePoint;
         [NonSerialized] public Vector2 GrappleDistanceVector;
 
-        [Header("Main Camera:")] [SerializeField]
-        private UnityEngine.Camera _camera;
+        [Header("Main Camera:")] 
+        [SerializeField] private UnityEngine.Camera _camera;
 
-        [Header("Transform Ref:")] [SerializeField]
-        private Transform _player;
+        [Header("Transform Ref:")] 
+        [SerializeField] private Transform _player;
 
         [SerializeField] private Transform _slingShooter;
         [SerializeField] private Transform _originPoint;
 
-        [Header("Physics Ref:")] [SerializeField]
-        private SpringJoint2D _springJoint;
-
+        [Header("Physics Ref:")] 
+        [SerializeField] private SpringJoint2D _springJoint;
         [SerializeField] private Rigidbody2D _rigidbody;
 
-        [Header("Launching:")] [SerializeField]
-        private bool _isLaunchedToPoint = true;
-
+        [Header("Launching:")] 
+        [SerializeField] private bool _isLaunchedToPoint = true;
         [SerializeField] private float _launchSpeed = 1;
 
-        [Header("No Launch To Point")] [SerializeField]
-        private bool _autoConfigureDistance;
-
+        [Header("No Launch To Point")] 
+        [SerializeField] private bool _autoConfigureDistance;
         [SerializeField] private float _targetDistance = 3;
         [SerializeField] private float _targetFrequency = 1;
 
@@ -68,6 +65,23 @@ namespace Player.Core.Slime_Sling
             HandleSlingPull();
             HandleSlingRotation();
         }
+        
+        private void HandleSlingPull()
+        {
+            // ReSharper disable once InvertIf
+            if (_isLaunchedToPoint
+                && SlimeSling.Instance.IsGrappling)
+            {
+                PullPlayer();
+            }
+        }
+        
+        private void PullPlayer()
+        {
+            Vector2 firePointDistance = _originPoint.position - _player.localPosition;
+            Vector2 targetPos = GrapplePoint - firePointDistance;
+            _player.position = Vector2.Lerp(_player.position, targetPos, Time.deltaTime * _launchSpeed);
+        }
 
         private void HandleSlingRotation()
         {
@@ -81,36 +95,25 @@ namespace Player.Core.Slime_Sling
                 RotateShooterTo(mousePos);
             }
         }
-
-        internal void CancelPull()
-        {
-            SlimeSling.Instance.enabled = false;
-            _springJoint.enabled = false;
-            _rigidbody.gravityScale = PhysicsConstants.DEFAULT_GRAVITY_SCALE;
-        }
-
-        private void HandleSlingPull()
-        {
-            // ReSharper disable once InvertIf
-            if (_isLaunchedToPoint
-                && SlimeSling.Instance.IsGrappling)
-            {
-                PullPlayer();
-            }
-        }
-
-        private void PullPlayer()
-        {
-            Vector2 firePointDistance = _originPoint.position - _player.localPosition;
-            Vector2 targetPos = GrapplePoint - firePointDistance;
-            _player.position = Vector2.Lerp(_player.position, targetPos, Time.deltaTime * _launchSpeed);
-        }
-
+        
         private void RotateShooterTo(Vector3 lookPoint)
         {
             Vector3 distanceVector = lookPoint - _slingShooter.position;
             float angle = Mathf.Atan2(distanceVector.y, distanceVector.x) * Mathf.Rad2Deg;
             _slingShooter.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        }
+
+        // --------- INTERFACE -----------
+        internal void StartPull()
+        {
+            _pulling = true;
+        }
+        
+        internal void CancelPull()
+        {
+            SlimeSling.Instance.enabled = false;
+            _springJoint.enabled = false;
+            _rigidbody.gravityScale = PhysicsConstants.DEFAULT_GRAVITY_SCALE;
         }
 
         internal void SetGrapplePoint()
@@ -135,12 +138,7 @@ namespace Player.Core.Slime_Sling
             SlimeSling.Instance.enabled = true;
         }
 
-        internal void StartPull()
-        {
-            _pulling = true;
-        }
-
-        public void Grapple()
+        internal void Grapple()
         {
             _springJoint.autoConfigureDistance = false;
             if (!_isLaunchedToPoint && !_autoConfigureDistance)
