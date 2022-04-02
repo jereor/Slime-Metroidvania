@@ -1,6 +1,9 @@
 using UnityEngine;
 
-public class WormMovement : MonoBehaviour
+namespace Worm
 {
+    public class WormMovement : MonoBehaviour
+    {
     
+    }
 }
