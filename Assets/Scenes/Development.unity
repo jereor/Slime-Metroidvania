@@ -3766,23 +3766,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8fd1aa7d82e7794f8435c829f936e22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _grappleToAll: 0
-  _groundLayer:
-    serializedVersion: 2
-    m_Bits: 8
   _camera: {fileID: 519420031}
   _player: {fileID: 1912269936}
   _slingShooter: {fileID: 1681231653}
   _originPoint: {fileID: 1423076767}
   _springJoint: {fileID: 1912269945}
   _rigidbody: {fileID: 1912269939}
-  _rotateOverTime: 0
-  _rotationSpeed: 4
-  _hasMaxDistance: 1
-  _maxDistance: 10
+  _groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
   _isLaunchedToPoint: 1
-  _launchType: 1
-  _launchSpeed: 1
+  _launchType: 0
+  _launchSpeed: 5
   _autoConfigureDistance: 0
   _targetDistance: 3
   _targetFrequency: 1
