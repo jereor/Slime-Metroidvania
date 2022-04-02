@@ -28,17 +28,9 @@ namespace Player.Core.Slime_Sling
         [Header("Physics Ref:")]
         [SerializeField] private SpringJoint2D _springJoint;
         [SerializeField] private Rigidbody2D _rigidbody;
-        [SerializeField] private LayerMask _groundLayer;
-
-        private enum LaunchType
-        {
-            TransformLaunch,
-            PhysicsLaunch
-        }
 
         [Header("Launching:")]
         [SerializeField] private bool _isLaunchedToPoint = true;
-        [SerializeField] private LaunchType _launchType = LaunchType.PhysicsLaunch;
         [SerializeField] private float _launchSpeed = 1;
 
         [Header("No Launch To Point")]
@@ -96,8 +88,7 @@ namespace Player.Core.Slime_Sling
         private void HandleSlingPull()
         {
             // ReSharper disable once InvertIf
-            if (_launchType == LaunchType.TransformLaunch
-                && _isLaunchedToPoint
+            if (_isLaunchedToPoint
                 && SlimeSling.Instance.IsGrappling)
             {
                 PullPlayer();
