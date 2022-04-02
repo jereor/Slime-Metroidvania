@@ -8,36 +8,40 @@ namespace Player.Core.Slime_Sling
     public class SlingShooter : MonoBehaviour
     {
         public static SlingShooter Instance;
-        
+
         public Transform OriginPoint
         {
             get { return _originPoint; }
         }
-        
+
         [NonSerialized] public Vector2 GrapplePoint;
         [NonSerialized] public Vector2 GrappleDistanceVector;
 
-        [Header("Main Camera:")]
-        [SerializeField] private UnityEngine.Camera _camera;
+        [Header("Main Camera:")] [SerializeField]
+        private UnityEngine.Camera _camera;
 
-        [Header("Transform Ref:")]
-        [SerializeField] private Transform _player;
+        [Header("Transform Ref:")] [SerializeField]
+        private Transform _player;
+
         [SerializeField] private Transform _slingShooter;
         [SerializeField] private Transform _originPoint;
 
-        [Header("Physics Ref:")]
-        [SerializeField] private SpringJoint2D _springJoint;
+        [Header("Physics Ref:")] [SerializeField]
+        private SpringJoint2D _springJoint;
+
         [SerializeField] private Rigidbody2D _rigidbody;
 
-        [Header("Launching:")]
-        [SerializeField] private bool _isLaunchedToPoint = true;
+        [Header("Launching:")] [SerializeField]
+        private bool _isLaunchedToPoint = true;
+
         [SerializeField] private float _launchSpeed = 1;
 
-        [Header("No Launch To Point")]
-        [SerializeField] private bool _autoConfigureDistance;
+        [Header("No Launch To Point")] [SerializeField]
+        private bool _autoConfigureDistance;
+
         [SerializeField] private float _targetDistance = 3;
         [SerializeField] private float _targetFrequency = 1;
-        
+
         private bool _pulling;
 
         private void Awake()
@@ -60,7 +64,7 @@ namespace Player.Core.Slime_Sling
             {
                 return;
             }
-            
+
             HandleSlingPull();
             HandleSlingRotation();
         }
@@ -114,21 +118,20 @@ namespace Player.Core.Slime_Sling
             Vector3 mousePos = _camera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
             Vector3 slingShooterPosition = _slingShooter.position;
             Vector2 distanceVector = mousePos - slingShooterPosition;
-            
+
             if (!Physics2D.Raycast(_originPoint.position, distanceVector.normalized))
             {
                 return;
             }
-            
+
             RaycastHit2D hit = Physics2D.Raycast(_originPoint.position, distanceVector.normalized);
             if (hit.transform.gameObject.layer != PhysicsConstants.GROUND_LAYER_NUMBER)
             {
-                Debug.Log($"{hit.collider.gameObject.name} hit. \nDid not hit any ground.");
                 return;
             }
 
             GrapplePoint = hit.point;
-            GrappleDistanceVector = GrapplePoint - (Vector2)slingShooterPosition;
+            GrappleDistanceVector = GrapplePoint - (Vector2) slingShooterPosition;
             SlimeSling.Instance.enabled = true;
         }
 
@@ -145,6 +148,7 @@ namespace Player.Core.Slime_Sling
                 _springJoint.distance = _targetDistance;
                 _springJoint.frequency = _targetFrequency;
             }
+
             if (!_isLaunchedToPoint)
             {
                 if (_autoConfigureDistance)
