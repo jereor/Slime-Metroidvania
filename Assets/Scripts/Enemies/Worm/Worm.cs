@@ -122,6 +122,7 @@ namespace Enemies.Worm
         // --------- BOOLS ---------
         private bool IsGrounded()
         {
+            // TODO: Move getcomponent use to somewhere else, as this method is frequently called
             Vector3 startOffset = transform.position -
                                   new Vector3(0f, GetComponent<Collider2D>().bounds.extents.y + _jumpCheckOffset);
             
