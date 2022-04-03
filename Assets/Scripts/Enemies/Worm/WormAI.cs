@@ -1,9 +1,9 @@
 using Pathfinding;
 using UnityEngine;
 
-namespace Worm
+namespace Enemies.Worm
 {
-    public class WormAI : MonoBehaviour
+    public class WormAI : Entity
     {
         [Header("Pathfinding")] 
         [SerializeField] private Transform _target;
