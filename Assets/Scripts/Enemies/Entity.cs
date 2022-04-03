@@ -43,14 +43,16 @@ namespace Enemies
             Rb.velocity = _velocityWorkspace;
         }
 
-        public virtual void CheckWall()
+        public virtual bool CheckWall()
         {
-            
+            return Physics2D.Raycast(_wallChecker.position, transform.right, EntityData._wallCheckDistance,
+                EntityData._groundLayer.value);
         }
 
-        public virtual void CheckLedge()
+        public virtual bool CheckLedge()
         {
-            
+            return Physics2D.Raycast(_ledgeChecker.position, Vector2.down, EntityData._ledgeCheckDistance,
+                EntityData._groundLayer.value);
         }
     }
 }

@@ -5,6 +5,9 @@ namespace Enemies.States
     public class MoveState : State
     {
         protected D_MoveState StateData;
+
+        protected bool IsDetectingWall;
+        protected bool IsDetectingLedge;
         
         public MoveState(Entity entity, FiniteStateMachine stateMachine, string animatorBoolName, D_MoveState stateData) 
             : base(entity, stateMachine, animatorBoolName)
@@ -15,7 +18,18 @@ namespace Enemies.States
         public override void Enter()
         {
             base.Enter();
+            
             Entity.SetVelocity(StateData._movementSpeed);
+            IsDetectingLedge = Entity.CheckLedge();
+            IsDetectingWall = Entity.CheckWall();
+        }
+
+        public override void PhysicsUpdate()
+        {
+            base.PhysicsUpdate();
+            
+            IsDetectingLedge = Entity.CheckLedge();
+            IsDetectingWall = Entity.CheckWall();
         }
     }
 }
