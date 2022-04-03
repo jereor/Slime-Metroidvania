@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Enemies.Worm
 {
-    public class WormAI : Entity
+    public class Worm : Entity
     {
         [Header("Pathfinding")] 
         [SerializeField] private Transform _target;
