@@ -78,7 +78,7 @@ namespace Worm
             }
 
             Vector2 movementDirection = ((Vector2) _path.vectorPath[_currentWaypoint] - _rb.position).normalized;
-            Vector2 forceDirection = movementDirection * _speed * Time.deltaTime;
+            Vector2 forceDirection = movementDirection * (_speed * Time.deltaTime);
 
             if (_jumpEnabled && IsGrounded())
             {
@@ -106,16 +106,18 @@ namespace Worm
         private void FlipSprite()
         {
             _isFacingRight = !_isFacingRight;
-            Vector3 localScale = transform.localScale;
+            Transform currentTransform = transform;
+            Vector3 localScale = currentTransform.localScale;
+            
             localScale.x *= -1f;
-            transform.localScale = localScale;
+            currentTransform.localScale = localScale;
         }
 
         private void HandleJumping(float movementOnYAxis)
         {
             if (movementOnYAxis > _jumpNodeHeightRequirement)
             {
-                _rb.AddForce(Vector2.up * _speed * _jumpModifier);
+                _rb.AddForce(Vector2.up * (_speed * _jumpModifier));
             }
         }
         
