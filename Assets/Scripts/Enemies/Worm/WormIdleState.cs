@@ -11,5 +11,15 @@ namespace Enemies.Worm
         {
             _worm = worm;
         }
+
+        public override void LogicUpdate()
+        {
+            base.LogicUpdate();
+
+            if (IsIdleTimeOver)
+            {
+                StateMachine.ChangeState(_worm.MoveState);
+            }
+        }
     }
 }
