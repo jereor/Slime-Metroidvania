@@ -10,6 +10,9 @@ namespace Enemies
         public Rigidbody2D Rb { get; private set; }
         public Animator Animator { get; private set; }
 
+        [SerializeField] private Transform _wallChecker;
+        [SerializeField] private Transform _ledgeChecker;
+
         private Vector2 _velocityWorkspace;
 
         public virtual void Start()
@@ -34,6 +37,16 @@ namespace Enemies
         {
             _velocityWorkspace.Set(FacingDirection * velocity, Rb.velocity.y);
             Rb.velocity = _velocityWorkspace;
+        }
+
+        public virtual void CheckWall()
+        {
+            
+        }
+
+        public virtual void CheckLedge()
+        {
+            
         }
     }
 }
