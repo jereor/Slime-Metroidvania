@@ -1,4 +1,3 @@
-using Enemies.States;
 using Enemies.States.Data;
 using Pathfinding;
 using UnityEngine;
@@ -7,6 +6,12 @@ namespace Enemies.Worm
 {
     public class Worm : Entity
     {
+        public WormIdleState IdleState { get; private set; }
+        public WormMoveState MoveState { get; private set; }
+
+        [SerializeField] private D_IdleState _idleStateData;
+        [SerializeField] private D_MoveState _moveStateData;
+        
         [Header("Pathfinding")] 
         [SerializeField] private Transform _target;
         [SerializeField] private float _activateDistance = 50f;
@@ -24,12 +29,6 @@ namespace Enemies.Worm
         [SerializeField] private bool _jumpEnabled = true;
         [SerializeField] private bool _directionLookEnabled = true;
 
-        public WormIdleState IdleState { get; private set; }
-        public WormMoveState MoveState { get; private set; }
-
-        [SerializeField] private D_IdleState _idleStateData;
-        [SerializeField] private D_MoveState _moveStateData;
-        
         private Path _path;
         private int _currentWaypoint;
         private Seeker _seeker;
