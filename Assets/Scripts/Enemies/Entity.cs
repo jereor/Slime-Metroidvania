@@ -1,4 +1,3 @@
-using System;
 using Enemies.States.Data;
 using UnityEngine;
 
@@ -45,7 +44,7 @@ namespace Enemies
         
         public virtual void SetVelocity(float velocity)
         {
-            int facingDirection = IsFacingRight ? 1 : -1; 
+            int facingDirection = IsFacingRight ? 1 : -1;
             _velocityWorkspace.Set(facingDirection * velocity, Rb.velocity.y);
             Rb.velocity = _velocityWorkspace;
         }
@@ -72,7 +71,18 @@ namespace Enemies
             localScale.x *= -1f;
             currentTransform.localScale = localScale;
         }
-        
+
+        public virtual void OnDrawGizmos()
+        {
+            int facingDirection = IsFacingRight ? 1 : -1;
+            
+            Vector3 wallCheckerPosition = _wallChecker.position;
+            Gizmos.DrawLine(wallCheckerPosition, wallCheckerPosition + (Vector3)(Vector2.right * facingDirection * _entityData._wallCheckDistance));
+            
+            Vector3 ledgeCheckerPosition = _ledgeChecker.position;
+            Gizmos.DrawLine(ledgeCheckerPosition, ledgeCheckerPosition + (Vector3)(Vector2.down * _entityData._ledgeCheckDistance));
+        }
+
         // --------- BOOLS ---------
         private bool HasMoveDirectionChanged()
         {

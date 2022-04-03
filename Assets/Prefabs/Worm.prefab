@@ -71,6 +71,8 @@ GameObject:
   - component: {fileID: 8027880798065282584}
   - component: {fileID: 5368510681977149582}
   - component: {fileID: 1500662862}
+  - component: {fileID: 5537378771929114168}
+  - component: {fileID: 1500662863}
   m_Layer: 0
   m_Name: Worm
   m_TagString: Untagged
@@ -107,22 +109,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 255d2013be64f1643862701ea2a9107f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EntityData: {fileID: 0}
-  _wallChecker: {fileID: 0}
-  _ledgeChecker: {fileID: 0}
-  _idleStateData: {fileID: 0}
-  _moveStateData: {fileID: 0}
+  _wallChecker: {fileID: 6137903470253505920}
+  _ledgeChecker: {fileID: 4637033044323698556}
+  _entityData: {fileID: 11400000, guid: 9026cc7bb42965c4abe2dea80d496ae2, type: 2}
+  _idleStateData: {fileID: 11400000, guid: 33901d1971d3c174192ad8a39a4adaf5, type: 2}
+  _moveStateData: {fileID: 11400000, guid: 5e769dc451342244bac31d3e94cbad59, type: 2}
   _target: {fileID: 0}
-  _activateDistance: 50
+  _activateDistance: 100
   _pathUpdateSeconds: 0.5
-  _speed: 200
-  _nextWaypointDistance: 3
+  _speed: 500
+  _nextWaypointDistance: 1
   _jumpNodeHeightRequirement: 0.8
   _jumpModifier: 0.3
   _jumpCheckOffset: 0.1
   _followEnabled: 1
   _jumpEnabled: 1
-  _directionLookEnabled: 1
 --- !u!114 &1500662862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,6 +152,43 @@ MonoBehaviour:
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
     value: -1
+--- !u!50 &5537378771929114168
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8027880798065282585}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 4
+--- !u!58 &1500662863
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8027880798065282585}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!1 &8027880798246931884
 GameObject:
   m_ObjectHideFlags: 0
@@ -161,8 +199,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8027880798246931887}
   - component: {fileID: 8027880798246931886}
+  - component: {fileID: 1378543626}
   m_Layer: 0
-  m_Name: Worm_Idle
+  m_Name: Graphics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -176,7 +215,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8027880798246931884}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.59, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8027880798065282584}
@@ -233,3 +272,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1378543626
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8027880798246931884}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
