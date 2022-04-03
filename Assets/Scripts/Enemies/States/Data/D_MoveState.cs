@@ -1,18 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class D_MoveState : MonoBehaviour
+namespace Enemies.States.Data
 {
-    // Start is called before the first frame update
-    void Start()
+    public class D_MoveState : ScriptableObject
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+    
     }
 }
