@@ -63,7 +63,6 @@ namespace Enemies
 
         protected virtual void FlipSprite()
         {
-            Debug.Log("FLIP!");
             IsFacingRight = !IsFacingRight;
             Transform currentTransform = transform;
             Vector3 localScale = currentTransform.localScale;
@@ -86,7 +85,7 @@ namespace Enemies
         // --------- BOOLS ---------
         private bool HasMoveDirectionChanged()
         {
-            Debug.Log($"Facing right: {IsFacingRight} \nVelocity X: {_velocityWorkspace.x}");
+            //Debug.Log($"Facing right: {IsFacingRight} \nVelocity X: {_velocityWorkspace.x}");
             bool facingRightButNowMovingLeft = IsFacingRight && _velocityWorkspace.x < 0f;
             bool facingLeftButNowMovingRight = !IsFacingRight && _velocityWorkspace.x > 0f;
 

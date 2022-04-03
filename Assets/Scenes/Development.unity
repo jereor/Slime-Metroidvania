@@ -483,10 +483,11 @@ MonoBehaviour:
   version: 1
   data:
     dataString: UEsDBBQAAAgIAAAQIexDVDJcZwIAACAFAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFlVMlyozAQ/RWXzpMUOI6Xuc0Qx5mDE1ecqVy4yKgxKguJ0uIlKf/7tAQY7OGCeL29ft3im3BpKsis0gvN2VIxID8HxJ/Jj0FnfIEj3Sq55l/Q+nxyZgvvRIPPO7VcIR77MKNKsJpnv+RWeOcIQSd5rnQ5Z1tIlLEG4ZwKA2jSyvpoidD3gBzxdTfzISc8DSf+9IWnWTQ44zEDaUH3XKP7aIZPPB42IfH9YxNSRziZCVpWwDz9LjAeT9oaD8FPYmeNSxRSZEoIbhpixJ6q0HhCK+OwLXRgnGKjgY3vuwC+LaxP2A9+y3MDtlFB09MT16hXnZX8VrWIJTW7mtqeCufrTAOnOuXyP+tdHMy5VuVLWzWOfAVb8Gz3Tk8ZNbancR9+uqbt5IGKHd0I+CxAvqqFVk4yNFrtfKgzMHzqPi+NJQVkuw6vqd6AruoEb0faDtT3cA69HxPBy03QfVQDa6GC2mEPQONk/iDhsCWmSYGoZ/HXwAfd9tepMTxzbSyami6lp7dRTntXMg+a+W6cTZSWEOCGdAWSCntaYRp7O8AbW6/sjeWZ+ovTFG9s7X24CQlw5x9FN6aVOlyGZQp1WIIp3pwVXEJH2hteUadESVnvV1+TNmztdE6zXtjWcXa9WmQ6ZfFsBNOYPsBs/BjdjSYzFo/jyXAzHg1H45iE3eMS+6RiVRNt5MGp9TWRuGjtD2Ww0LQKy840PSz4V6l6mnOZq3WmAeTbdQoDGqvgtWRzxlGhNVjLZRg4+U6JUNkOWHpJlIZW50eradplSUnF98p6JCVJ+IOkxMOXZV5p2HM4+OJtsjM5/wNQSwMEFAAACAgAABAh7NFhXNZtAAAAeAAAAAkAJABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQGrVipLLSrOzM9TslIw0TPSMzTXUVBKL0osyCgGihiCOKWZKSB2tJKFRYqhpUmqhWGicaqlmamBrom5ZYqhmaG5UZKZiZGJmaFSLFB9SWVBql9ibipET0BiSUZaZl5KZl66nntRZoo7yGil2FoAUEsBAi0AFAAACAgAABAh7ENUMlxnAgAAIAUAAAsAJAAAAAAAAAAAAAAAAAAAAGdyYXBoMC5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsBAi0AFAAACAgAABAh7NFhXNZtAAAAeAAAAAkAJAAAAAAAAAAAAAAAtAIAAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLBQYAAAAAAgACALgAAABsAwAAAAA=
-    upgradeData: 
+    upgradeData: []
     file_cachedStartup: {fileID: 0}
-    data_cachedStartup: 
+    data_cachedStartup: []
     cacheStartup: 0
+    graphStructureLocked: []
   showNavGraphs: 1
   showUnwalkableNodes: 1
   debugMode: 0
@@ -502,14 +503,41 @@ MonoBehaviour:
   prioritizeGraphs: 0
   prioritizeGraphsLimit: 1
   colorSettings:
-    _SolidColor: {r: 0.11764706, g: 0.4, b: 0.7882353, a: 0.9}
-    _UnwalkableNode: {r: 1, g: 0, b: 0, a: 0.5}
-    _BoundsHandles: {r: 0.29, g: 0.454, b: 0.741, a: 0.9}
-    _ConnectionLowLerp: {r: 0, g: 1, b: 0, a: 0.5}
-    _ConnectionHighLerp: {r: 1, g: 0, b: 0, a: 0.5}
-    _MeshEdgeColor: {r: 0, g: 0, b: 0, a: 0.5}
+    _SolidColor:
+      r: 0.11764706
+      g: 0.4
+      b: 0.7882353
+      a: 0.9
+    _UnwalkableNode:
+      r: 1
+      g: 0
+      b: 0
+      a: 0.5
+    _BoundsHandles:
+      r: 0.29
+      g: 0.454
+      b: 0.741
+      a: 0.9
+    _ConnectionLowLerp:
+      r: 0
+      g: 1
+      b: 0
+      a: 0.5
+    _ConnectionHighLerp:
+      r: 1
+      g: 0
+      b: 0
+      a: 0.5
+    _MeshEdgeColor:
+      r: 0
+      g: 0
+      b: 0
+      a: 0.5
     _AreaColors:
-    - {r: 0, g: 0, b: 0, a: 0}
+    - r: 0
+      g: 0
+      b: 0
+      a: 0
   tagNames: []
   heuristic: 2
   heuristicScale: 1
@@ -517,12 +545,18 @@ MonoBehaviour:
   maxFrameTime: 10
   batchGraphUpdates: 0
   graphUpdateBatchingInterval: 0.2
+  <lastScanTime>k__BackingField: 0
+  inGameDebugPath: 
+  graphUpdateRoutineRunning: 0
+  graphUpdatesWorkItemAdded: 0
+  lastGraphUpdate: -9999
   euclideanEmbedding:
     mode: 0
     seed: 0
     pivotPointRoot: {fileID: 0}
     spreadOutCount: 1
   showGraphs: 1
+  nextFreePathID: 1
 --- !u!4 &183714391
 Transform:
   m_ObjectHideFlags: 0
@@ -4713,5 +4747,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Worm
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1500662862, guid: e32cd7f6c4e981c488cae4ad71c35c56, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e32cd7f6c4e981c488cae4ad71c35c56, type: 3}
