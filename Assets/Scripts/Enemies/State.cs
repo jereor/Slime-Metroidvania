@@ -1,7 +1,6 @@
-using UnityEditor.MemoryProfiler;
 using UnityEngine;
 
-namespace Enemy
+namespace Enemies
 {
     public class State
     {
@@ -10,9 +9,9 @@ namespace Enemy
         protected readonly string AnimatorBoolName;
         
         protected float StartTime;
-        
 
-        public State(Entity entity, FiniteStateMachine stateMachine, string animatorBoolName)
+
+        protected State(Entity entity, FiniteStateMachine stateMachine, string animatorBoolName)
         {
             Entity = entity;
             StateMachine = stateMachine;

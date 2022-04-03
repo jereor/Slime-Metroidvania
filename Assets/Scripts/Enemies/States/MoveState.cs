@@ -1,5 +1,4 @@
 using Enemies.States.Data;
-using Enemy;
 
 namespace Enemies.States
 {
