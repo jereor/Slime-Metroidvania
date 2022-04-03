@@ -7,23 +7,27 @@ namespace Enemy
     {
         protected readonly FiniteStateMachine StateMachine;
         protected readonly Entity Entity;
-
+        protected readonly string AnimatorBoolName;
+        
         protected float StartTime;
+        
 
-        public State(Entity entity, FiniteStateMachine stateMachine)
+        public State(Entity entity, FiniteStateMachine stateMachine, string animatorBoolName)
         {
-            this.Entity = entity;
-            this.StateMachine = stateMachine;
+            Entity = entity;
+            StateMachine = stateMachine;
+            AnimatorBoolName = animatorBoolName;
         }
 
         public virtual void Enter()
         {
             StartTime = Time.time;
+            Entity.Animator.SetBool(AnimatorBoolName, true);
         }
 
         public virtual void Exit()
         {
-            
+            Entity.Animator.SetBool(AnimatorBoolName, false);
         }
 
         public virtual void LogicUpdate()
