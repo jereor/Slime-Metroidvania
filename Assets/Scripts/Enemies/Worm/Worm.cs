@@ -1,3 +1,4 @@
+using Enemies.States;
 using Enemies.States.Data;
 using Pathfinding;
 using UnityEngine;
@@ -27,13 +28,11 @@ namespace Enemies.Worm
         [Header("Custom Behavior")] 
         [SerializeField] private bool _followEnabled = true;
         [SerializeField] private bool _jumpEnabled = true;
-        [SerializeField] private bool _directionLookEnabled = true;
 
         private Path _path;
         private int _currentWaypoint;
         private Seeker _seeker;
         private Rigidbody2D _rb;
-        private bool _isFacingRight;
 
         public override void Start()
         {
@@ -41,6 +40,8 @@ namespace Enemies.Worm
 
             // TODO: Make magic string a const
             MoveState = new WormMoveState(this, StateMachine, "move", _moveStateData, this);
+            IdleState = new WormIdleState(this, StateMachine, "idle", _idleStateData, this);
+            StateMachine.Initialize(MoveState);
             
             _seeker = GetComponent<Seeker>();
             _rb = GetComponent<Rigidbody2D>();
@@ -67,7 +68,7 @@ namespace Enemies.Worm
             _currentWaypoint = 0;
         }
 
-        private void FixedUpdate()
+        public override void FixedUpdate()
         {
             if (_followEnabled && TargetInDistance())
             {
@@ -99,11 +100,6 @@ namespace Enemies.Worm
             
             _rb.AddForce(forceDirection);
             CalculateNextWaypoint();
-            
-            if (_directionLookEnabled && HasMoveDirectionChanged(movementDirection))
-            {
-                FlipSprite();
-            }
         }
         
         private void CalculateNextWaypoint()
@@ -113,16 +109,6 @@ namespace Enemies.Worm
             {
                 _currentWaypoint++;
             }
-        }
-
-        private void FlipSprite()
-        {
-            _isFacingRight = !_isFacingRight;
-            Transform currentTransform = transform;
-            Vector3 localScale = currentTransform.localScale;
-            
-            localScale.x *= -1f;
-            currentTransform.localScale = localScale;
         }
 
         private void HandleJumping(float movementOnYAxis)
@@ -145,15 +131,6 @@ namespace Enemies.Worm
         private bool TargetInDistance()
         {
             return Vector2.Distance(transform.position, _target.transform.position) < _activateDistance;
-        }
-        
-        private bool HasMoveDirectionChanged(Vector2 movementDirection)
-        {
-            bool facingRightButNowMovingLeft = _isFacingRight && movementDirection.x < 0f;
-            bool facingLeftButNowMovingRight = !_isFacingRight && movementDirection.x > 0f;
-
-            return facingRightButNowMovingLeft
-                   || facingLeftButNowMovingRight;
         }
     }
 }

@@ -6,7 +6,6 @@ namespace Enemies.States
     public class IdleState : State
     {
         protected D_IdleState StateData;
-        protected bool FlipsAfterIdle;
         protected bool IsIdleTimeOver;
         
         protected float IdleTime;
@@ -28,11 +27,6 @@ namespace Enemies.States
         public override void Exit()
         {
             base.Exit();
-
-            if (FlipsAfterIdle)
-            {
-                Entity.FlipSprite();
-            }
         }
 
         public override void LogicUpdate()
@@ -43,11 +37,6 @@ namespace Enemies.States
             {
                 IsIdleTimeOver = true;
             }
-        }
-
-        public void SetFlipsAfterIdle(bool flipOrNot)
-        {
-            FlipsAfterIdle = flipOrNot;
         }
 
         private void SetRandomIdleTime()

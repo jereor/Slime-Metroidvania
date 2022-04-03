@@ -3320,6 +3320,30 @@ Transform:
   m_Father: {fileID: 1903578458}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1378543623 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8027880798246931884, guid: e32cd7f6c4e981c488cae4ad71c35c56, type: 3}
+  m_PrefabInstance: {fileID: 8027880797374382677}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1378543626
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1378543623}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1406842646
 GameObject:
   m_ObjectHideFlags: 0
@@ -4786,6 +4810,10 @@ PrefabInstance:
     - target: {fileID: 8027880798065282585, guid: e32cd7f6c4e981c488cae4ad71c35c56, type: 3}
       propertyPath: m_Name
       value: Worm
+      objectReference: {fileID: 0}
+    - target: {fileID: 8027880798246931884, guid: e32cd7f6c4e981c488cae4ad71c35c56, type: 3}
+      propertyPath: m_Name
+      value: Graphics
       objectReference: {fileID: 0}
     - target: {fileID: 8027880798246931887, guid: e32cd7f6c4e981c488cae4ad71c35c56, type: 3}
       propertyPath: m_LocalPosition.y

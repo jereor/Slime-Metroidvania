@@ -7,7 +7,7 @@ namespace Enemies
     public class Entity : MonoBehaviour
     {
         public FiniteStateMachine StateMachine;
-        public int FacingDirection { get; private set; }
+        public bool IsFacingRight { get; private set; }
         public Rigidbody2D Rb { get; private set; }
         public Animator Animator { get; private set; }
         
@@ -23,7 +23,7 @@ namespace Enemies
         public virtual void Start()
         {
             Rb = GetComponent<Rigidbody2D>();
-            Animator = GetComponent<Animator>();
+            Animator = GetComponentInChildren<Animator>();
 
             StateMachine = new FiniteStateMachine();
         }
@@ -31,6 +31,11 @@ namespace Enemies
         public virtual void Update()
         {
             StateMachine.CurrentState.LogicUpdate();
+
+            if (HasMoveDirectionChanged())
+            {
+                FlipSprite();
+            }
         }
 
         public virtual void FixedUpdate()
@@ -40,7 +45,8 @@ namespace Enemies
         
         public virtual void SetVelocity(float velocity)
         {
-            _velocityWorkspace.Set(FacingDirection * velocity, Rb.velocity.y);
+            int facingDirection = IsFacingRight ? 1 : -1; 
+            _velocityWorkspace.Set(facingDirection * velocity, Rb.velocity.y);
             Rb.velocity = _velocityWorkspace;
         }
 
@@ -55,14 +61,27 @@ namespace Enemies
             return Physics2D.Raycast(_ledgeChecker.position, Vector2.down, _entityData._ledgeCheckDistance,
                 _entityData._groundLayer.value);
         }
-        
-        public virtual void FlipSprite()
+
+        protected virtual void FlipSprite()
         {
+            Debug.Log("FLIP!");
+            IsFacingRight = !IsFacingRight;
             Transform currentTransform = transform;
             Vector3 localScale = currentTransform.localScale;
             
             localScale.x *= -1f;
             currentTransform.localScale = localScale;
+        }
+        
+        // --------- BOOLS ---------
+        private bool HasMoveDirectionChanged()
+        {
+            Debug.Log($"Facing right: {IsFacingRight} \nVelocity X: {_velocityWorkspace.x}");
+            bool facingRightButNowMovingLeft = IsFacingRight && _velocityWorkspace.x < 0f;
+            bool facingLeftButNowMovingRight = !IsFacingRight && _velocityWorkspace.x > 0f;
+
+            return facingRightButNowMovingLeft
+                   || facingLeftButNowMovingRight;
         }
     }
 }

@@ -19,7 +19,6 @@ namespace Enemies.Worm
             // ReSharper disable once InvertIf
             if (IsDetectingWall || !IsDetectingLedge)
             {
-                _worm.IdleState.SetFlipsAfterIdle(true);
                 StateMachine.ChangeState(_worm.IdleState);
             }
         }
