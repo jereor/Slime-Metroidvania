@@ -54,5 +54,14 @@ namespace Enemies
             return Physics2D.Raycast(_ledgeChecker.position, Vector2.down, EntityData._ledgeCheckDistance,
                 EntityData._groundLayer.value);
         }
+        
+        public virtual void FlipSprite()
+        {
+            Transform currentTransform = transform;
+            Vector3 localScale = currentTransform.localScale;
+            
+            localScale.x *= -1f;
+            currentTransform.localScale = localScale;
+        }
     }
 }
