@@ -1,3 +1,5 @@
+using Enemies.States;
+using Enemies.States.Data;
 using Pathfinding;
 using UnityEngine;
 
@@ -22,14 +24,25 @@ namespace Enemies.Worm
         [SerializeField] private bool _jumpEnabled = true;
         [SerializeField] private bool _directionLookEnabled = true;
 
+        public WormIdleState IdleState { get; private set; }
+        public WormMoveState MoveState { get; private set; }
+
+        [SerializeField] private D_IdleState _idleStateData;
+        [SerializeField] private D_MoveState _moveStateData;
+        
         private Path _path;
         private int _currentWaypoint;
         private Seeker _seeker;
         private Rigidbody2D _rb;
         private bool _isFacingRight;
 
-        private void Start()
+        public override void Start()
         {
+            base.Start();
+
+            // TODO: Make magic string a const
+            MoveState = new WormMoveState(this, StateMachine, "move", _moveStateData, this);
+            
             _seeker = GetComponent<Seeker>();
             _rb = GetComponent<Rigidbody2D>();
             
