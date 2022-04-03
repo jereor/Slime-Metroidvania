@@ -7,15 +7,16 @@ namespace Enemies
     public class Entity : MonoBehaviour
     {
         public FiniteStateMachine StateMachine;
-
-        public D_Entity EntityData; 
-            
         public int FacingDirection { get; private set; }
         public Rigidbody2D Rb { get; private set; }
         public Animator Animator { get; private set; }
-
+        
+        [Header("Child References")]
         [SerializeField] private Transform _wallChecker;
         [SerializeField] private Transform _ledgeChecker;
+
+        [Header("Enemy Data")]
+        [SerializeField] private D_Entity _entityData;
 
         private Vector2 _velocityWorkspace;
 
@@ -45,14 +46,14 @@ namespace Enemies
 
         public virtual bool CheckWall()
         {
-            return Physics2D.Raycast(_wallChecker.position, transform.right, EntityData._wallCheckDistance,
-                EntityData._groundLayer.value);
+            return Physics2D.Raycast(_wallChecker.position, transform.right, _entityData._wallCheckDistance,
+                _entityData._groundLayer.value);
         }
 
         public virtual bool CheckLedge()
         {
-            return Physics2D.Raycast(_ledgeChecker.position, Vector2.down, EntityData._ledgeCheckDistance,
-                EntityData._groundLayer.value);
+            return Physics2D.Raycast(_ledgeChecker.position, Vector2.down, _entityData._ledgeCheckDistance,
+                _entityData._groundLayer.value);
         }
         
         public virtual void FlipSprite()

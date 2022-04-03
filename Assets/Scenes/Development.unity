@@ -4708,6 +4708,30 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1912269936}
     - target: {fileID: 5368510681977149582, guid: e32cd7f6c4e981c488cae4ad71c35c56, type: 3}
+      propertyPath: EntityData
+      value: 
+      objectReference: {fileID: 11400000, guid: 9026cc7bb42965c4abe2dea80d496ae2, type: 2}
+    - target: {fileID: 5368510681977149582, guid: e32cd7f6c4e981c488cae4ad71c35c56, type: 3}
+      propertyPath: _entityData
+      value: 
+      objectReference: {fileID: 11400000, guid: 9026cc7bb42965c4abe2dea80d496ae2, type: 2}
+    - target: {fileID: 5368510681977149582, guid: e32cd7f6c4e981c488cae4ad71c35c56, type: 3}
+      propertyPath: _wallChecker
+      value: 
+      objectReference: {fileID: 8027880797374382678}
+    - target: {fileID: 5368510681977149582, guid: e32cd7f6c4e981c488cae4ad71c35c56, type: 3}
+      propertyPath: _ledgeChecker
+      value: 
+      objectReference: {fileID: 8027880797374382679}
+    - target: {fileID: 5368510681977149582, guid: e32cd7f6c4e981c488cae4ad71c35c56, type: 3}
+      propertyPath: _idleStateData
+      value: 
+      objectReference: {fileID: 11400000, guid: 33901d1971d3c174192ad8a39a4adaf5, type: 2}
+    - target: {fileID: 5368510681977149582, guid: e32cd7f6c4e981c488cae4ad71c35c56, type: 3}
+      propertyPath: _moveStateData
+      value: 
+      objectReference: {fileID: 11400000, guid: 5e769dc451342244bac31d3e94cbad59, type: 2}
+    - target: {fileID: 5368510681977149582, guid: e32cd7f6c4e981c488cae4ad71c35c56, type: 3}
       propertyPath: _activateDistance
       value: 100
       objectReference: {fileID: 0}
@@ -4769,3 +4793,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e32cd7f6c4e981c488cae4ad71c35c56, type: 3}
+--- !u!4 &8027880797374382678 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6137903470253505920, guid: e32cd7f6c4e981c488cae4ad71c35c56, type: 3}
+  m_PrefabInstance: {fileID: 8027880797374382677}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8027880797374382679 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4637033044323698556, guid: e32cd7f6c4e981c488cae4ad71c35c56, type: 3}
+  m_PrefabInstance: {fileID: 8027880797374382677}
+  m_PrefabAsset: {fileID: 0}

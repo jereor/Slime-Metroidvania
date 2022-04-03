@@ -8,10 +8,10 @@ namespace Enemies.Worm
     {
         public WormIdleState IdleState { get; private set; }
         public WormMoveState MoveState { get; private set; }
-
+        
         [SerializeField] private D_IdleState _idleStateData;
         [SerializeField] private D_MoveState _moveStateData;
-        
+
         [Header("Pathfinding")] 
         [SerializeField] private Transform _target;
         [SerializeField] private float _activateDistance = 50f;
