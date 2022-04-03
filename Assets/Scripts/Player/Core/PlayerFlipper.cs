@@ -43,9 +43,11 @@ namespace Player.Core
 
         private static void FlipSlingShooter()
         {
-            Vector3 slingShooterLocalScale = SlingShooter.Instance.transform.localScale;
+            Transform slingShooterTransform = SlingShooter.Instance.transform;
+            Vector3 slingShooterLocalScale = slingShooterTransform.localScale;
+            
             slingShooterLocalScale.x *= -1f;
-            SlingShooter.Instance.transform.localScale = slingShooterLocalScale;
+            slingShooterTransform.localScale = slingShooterLocalScale;
         }
     }
 }
