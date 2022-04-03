@@ -5,8 +5,11 @@ namespace Enemies.Worm
 {
     public class WormIdleState : IdleState
     {
-        protected WormIdleState(Entity entity, FiniteStateMachine stateMachine, string animatorBoolName, D_IdleState stateData) : base(entity, stateMachine, animatorBoolName, stateData)
+        private Worm _worm;
+        
+        protected WormIdleState(Entity entity, FiniteStateMachine stateMachine, string animatorBoolName, D_IdleState stateData, Worm worm) : base(entity, stateMachine, animatorBoolName, stateData)
         {
+            _worm = worm;
         }
     }
 }
