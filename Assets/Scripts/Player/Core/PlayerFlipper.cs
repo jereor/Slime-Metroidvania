@@ -34,9 +34,11 @@ namespace Player.Core
         private void FlipSprite()
         {
             _context.IsFacingRight = !_context.IsFacingRight;
-            Vector3 localScale = transform.localScale;
+            Transform currentTransform = transform;
+            Vector3 localScale = currentTransform.localScale;
+            
             localScale.x *= -1f;
-            transform.localScale = localScale;
+            currentTransform.localScale = localScale;
         }
 
         private static void FlipSlingShooter()
