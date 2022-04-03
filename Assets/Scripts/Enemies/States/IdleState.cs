@@ -5,6 +5,8 @@ namespace Enemies.States
 {
     public class IdleState : State
     {
+        public bool FlipsAfterIdle { get; set; }
+        
         protected D_IdleState StateData;
         protected bool IsIdleTimeOver;
         
@@ -23,11 +25,6 @@ namespace Enemies.States
             IsIdleTimeOver = false;
             SetRandomIdleTime();
         }
-        
-        public override void Exit()
-        {
-            base.Exit();
-        }
 
         public override void LogicUpdate()
         {
@@ -37,6 +34,11 @@ namespace Enemies.States
             {
                 IsIdleTimeOver = true;
             }
+        }
+
+        public void SetFlipAfterIdle(bool flipOrNot)
+        {
+            FlipsAfterIdle = flipOrNot;
         }
 
         private void SetRandomIdleTime()
