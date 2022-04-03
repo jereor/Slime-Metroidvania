@@ -24,6 +24,16 @@ namespace Enemies.States
             IsIdleTimeOver = false;
             SetRandomIdleTime();
         }
+        
+        public override void Exit()
+        {
+            base.Exit();
+
+            if (FlipsAfterIdle)
+            {
+                Entity.FlipSprite();
+            }
+        }
 
         public override void LogicUpdate()
         {
