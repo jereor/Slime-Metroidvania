@@ -11,7 +11,11 @@ namespace Enemies.States
         {
             StateData = stateData;
         }
-        
-        
+
+        public override void Enter()
+        {
+            base.Enter();
+            Entity.SetVelocity(StateData._movementSpeed);
+        }
     }
 }
