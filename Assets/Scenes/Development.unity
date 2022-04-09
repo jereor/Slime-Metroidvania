@@ -480,83 +480,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78396926cbbfc4ac3b48fc5fc34a87d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  version: 1
-  data:
-    dataString: UEsDBBQAAAgIAAAQIexDVDJcZwIAACAFAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFlVMlyozAQ/RWXzpMUOI6Xuc0Qx5mDE1ecqVy4yKgxKguJ0uIlKf/7tAQY7OGCeL29ft3im3BpKsis0gvN2VIxID8HxJ/Jj0FnfIEj3Sq55l/Q+nxyZgvvRIPPO7VcIR77MKNKsJpnv+RWeOcIQSd5rnQ5Z1tIlLEG4ZwKA2jSyvpoidD3gBzxdTfzISc8DSf+9IWnWTQ44zEDaUH3XKP7aIZPPB42IfH9YxNSRziZCVpWwDz9LjAeT9oaD8FPYmeNSxRSZEoIbhpixJ6q0HhCK+OwLXRgnGKjgY3vuwC+LaxP2A9+y3MDtlFB09MT16hXnZX8VrWIJTW7mtqeCufrTAOnOuXyP+tdHMy5VuVLWzWOfAVb8Gz3Tk8ZNbancR9+uqbt5IGKHd0I+CxAvqqFVk4yNFrtfKgzMHzqPi+NJQVkuw6vqd6AruoEb0faDtT3cA69HxPBy03QfVQDa6GC2mEPQONk/iDhsCWmSYGoZ/HXwAfd9tepMTxzbSyami6lp7dRTntXMg+a+W6cTZSWEOCGdAWSCntaYRp7O8AbW6/sjeWZ+ovTFG9s7X24CQlw5x9FN6aVOlyGZQp1WIIp3pwVXEJH2hteUadESVnvV1+TNmztdE6zXtjWcXa9WmQ6ZfFsBNOYPsBs/BjdjSYzFo/jyXAzHg1H45iE3eMS+6RiVRNt5MGp9TWRuGjtD2Ww0LQKy840PSz4V6l6mnOZq3WmAeTbdQoDGqvgtWRzxlGhNVjLZRg4+U6JUNkOWHpJlIZW50eradplSUnF98p6JCVJ+IOkxMOXZV5p2HM4+OJtsjM5/wNQSwMEFAAACAgAABAh7NFhXNZtAAAAeAAAAAkAJABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQGrVipLLSrOzM9TslIw0TPSMzTXUVBKL0osyCgGihiCOKWZKSB2tJKFRYqhpUmqhWGicaqlmamBrom5ZYqhmaG5UZKZiZGJmaFSLFB9SWVBql9ibipET0BiSUZaZl5KZl66nntRZoo7yGil2FoAUEsBAi0AFAAACAgAABAh7ENUMlxnAgAAIAUAAAsAJAAAAAAAAAAAAAAAAAAAAGdyYXBoMC5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsBAi0AFAAACAgAABAh7NFhXNZtAAAAeAAAAAkAJAAAAAAAAAAAAAAAtAIAAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLBQYAAAAAAgACALgAAABsAwAAAAA=
-    upgradeData: []
-    file_cachedStartup: {fileID: 0}
-    data_cachedStartup: []
-    cacheStartup: 0
-    graphStructureLocked: []
-  showNavGraphs: 1
-  showUnwalkableNodes: 1
-  debugMode: 0
-  debugFloor: 0
-  debugRoof: 1
-  manualDebugFloorRoof: 0
-  showSearchTree: 0
-  unwalkableNodeDebugSize: 0.3
-  logPathResults: 0
-  maxNearestNodeDistance: 100
-  scanOnStartup: 1
-  fullGetNearestSearch: 0
-  prioritizeGraphs: 0
-  prioritizeGraphsLimit: 1
-  colorSettings:
-    _SolidColor:
-      r: 0.11764706
-      g: 0.4
-      b: 0.7882353
-      a: 0.9
-    _UnwalkableNode:
-      r: 1
-      g: 0
-      b: 0
-      a: 0.5
-    _BoundsHandles:
-      r: 0.29
-      g: 0.454
-      b: 0.741
-      a: 0.9
-    _ConnectionLowLerp:
-      r: 0
-      g: 1
-      b: 0
-      a: 0.5
-    _ConnectionHighLerp:
-      r: 1
-      g: 0
-      b: 0
-      a: 0.5
-    _MeshEdgeColor:
-      r: 0
-      g: 0
-      b: 0
-      a: 0.5
-    _AreaColors:
-    - r: 0
-      g: 0
-      b: 0
-      a: 0
-  tagNames: []
-  heuristic: 2
-  heuristicScale: 1
-  threadCount: 1
-  maxFrameTime: 10
-  batchGraphUpdates: 0
-  graphUpdateBatchingInterval: 0.2
-  <lastScanTime>k__BackingField: 0
-  inGameDebugPath: 
-  graphUpdateRoutineRunning: 0
-  graphUpdatesWorkItemAdded: 0
-  lastGraphUpdate: -9999
-  euclideanEmbedding:
-    mode: 0
-    seed: 0
-    pivotPointRoot: {fileID: 0}
-    spreadOutCount: 1
-  showGraphs: 1
-  nextFreePathID: 1
 --- !u!4 &183714391
 Transform:
   m_ObjectHideFlags: 0
@@ -3882,6 +3805,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1603262152 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8027880798065282585, guid: e32cd7f6c4e981c488cae4ad71c35c56, type: 3}
+  m_PrefabInstance: {fileID: 8027880797374382677}
+  m_PrefabAsset: {fileID: 0}
+--- !u!61 &1603262153
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1603262152}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.03576088, y: 0.011066675}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.0495148, y: 0.6244979}
+  m_EdgeRadius: 0
 --- !u!1 &1681231652
 GameObject:
   m_ObjectHideFlags: 0
@@ -4725,7 +4679,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8027880798065282584, guid: e32cd7f6c4e981c488cae4ad71c35c56, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.81
+      value: 9.36
       objectReference: {fileID: 0}
     - target: {fileID: 8027880798065282584, guid: e32cd7f6c4e981c488cae4ad71c35c56, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4769,4 +4723,5 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1500662862, guid: e32cd7f6c4e981c488cae4ad71c35c56, type: 3}
+    - {fileID: 1500662863, guid: e32cd7f6c4e981c488cae4ad71c35c56, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e32cd7f6c4e981c488cae4ad71c35c56, type: 3}

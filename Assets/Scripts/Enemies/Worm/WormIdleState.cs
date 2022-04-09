@@ -1,5 +1,6 @@
 using Enemies.States;
 using Enemies.States.Data;
+using UnityEngine;
 
 namespace Enemies.Worm
 {
@@ -19,6 +20,7 @@ namespace Enemies.Worm
             if (IsIdleTimeOver)
             {
                 StateMachine.ChangeState(_worm.MoveState);
+                
             }
         }
     }

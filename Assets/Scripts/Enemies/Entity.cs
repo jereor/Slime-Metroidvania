@@ -33,6 +33,7 @@ namespace Enemies
 
             if (HasMoveDirectionChanged())
             {
+                Debug.Log("FLIP!");
                 FlipSprite();
             }
         }
@@ -61,7 +62,7 @@ namespace Enemies
                 _entityData._groundLayer.value);
         }
 
-        protected virtual void FlipSprite()
+        public virtual void FlipSprite()
         {
             IsFacingRight = !IsFacingRight;
             Transform currentTransform = transform;
