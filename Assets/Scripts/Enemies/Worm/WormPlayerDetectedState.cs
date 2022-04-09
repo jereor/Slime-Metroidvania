@@ -26,10 +26,9 @@ namespace Enemies.Worm
         {
             base.LogicUpdate();
 
-            if (IsPlayerInMinAggroRange == false)
+            if (WillPerformLongRangeAction)
             {
-                _worm.IdleState.SetFlipAfterIdle(false);
-                StateMachine.ChangeState(_worm.IdleState);
+                StateMachine.ChangeState(_worm.ChargeState);
             }
         }
 
