@@ -1,3 +1,4 @@
+using System;
 using Enemies.States.Data;
 using UnityEngine;
 
@@ -13,6 +14,7 @@ namespace Enemies
         [Header("Child References")]
         [SerializeField] private Transform _wallChecker;
         [SerializeField] private Transform _ledgeChecker;
+        [SerializeField] private Transform _playerChecker;
 
         [Header("Enemy Data")]
         [SerializeField] private D_Entity _entityData;
@@ -53,6 +55,18 @@ namespace Enemies
         {
             return Physics2D.Raycast(_ledgeChecker.position, Vector2.down, _entityData._ledgeCheckDistance,
                 _entityData._groundLayer.value);
+        }
+
+        public virtual bool CheckPlayerInMinAggroRange()
+        {
+            return Physics2D.Raycast(_playerChecker.position, transform.right, _entityData._minAggroDistance,
+                _entityData._playerLayer.value);
+        }
+
+        public virtual bool CheckPlayerInMaxAggroRange()
+        {
+            return Physics2D.Raycast(_playerChecker.position, transform.right, _entityData._maxAggroDistance,
+                _entityData._playerLayer.value);
         }
 
         public virtual void FlipSprite()
