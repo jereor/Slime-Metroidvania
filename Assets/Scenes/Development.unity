@@ -4605,6 +4605,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: -0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 5368510681977149582, guid: e32cd7f6c4e981c488cae4ad71c35c56, type: 3}
+      propertyPath: _playerChecker
+      value: 
+      objectReference: {fileID: 1039834108}
+    - target: {fileID: 5368510681977149582, guid: e32cd7f6c4e981c488cae4ad71c35c56, type: 3}
+      propertyPath: _playerDetectedStateData
+      value: 
+      objectReference: {fileID: 11400000, guid: 608c1e71afe53d848a9e53aa29105ce1, type: 2}
     - target: {fileID: 6137903470253505920, guid: e32cd7f6c4e981c488cae4ad71c35c56, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.5
