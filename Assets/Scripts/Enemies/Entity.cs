@@ -26,6 +26,8 @@ namespace Enemies
             Rb = GetComponent<Rigidbody2D>();
             Animator = GetComponentInChildren<Animator>();
             StateMachine = new FiniteStateMachine();
+
+            IsFacingRight = true;
         }
 
         public virtual void Update()
