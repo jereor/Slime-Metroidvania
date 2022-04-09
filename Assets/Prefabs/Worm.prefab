@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3248777575331397881}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.47, y: -0.03, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8027880798065282584}
@@ -54,7 +54,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4306971913298826364}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.49, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8027880798065282584}
@@ -70,9 +70,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8027880798065282584}
   - component: {fileID: 5368510681977149582}
-  - component: {fileID: 1500662862}
   - component: {fileID: 5537378771929114168}
-  - component: {fileID: 1500662863}
+  - component: {fileID: 1603262153}
   m_Layer: 0
   m_Name: Worm
   m_TagString: Untagged
@@ -114,44 +113,6 @@ MonoBehaviour:
   _entityData: {fileID: 11400000, guid: 9026cc7bb42965c4abe2dea80d496ae2, type: 2}
   _idleStateData: {fileID: 11400000, guid: 33901d1971d3c174192ad8a39a4adaf5, type: 2}
   _moveStateData: {fileID: 11400000, guid: 5e769dc451342244bac31d3e94cbad59, type: 2}
-  _target: {fileID: 0}
-  _activateDistance: 100
-  _pathUpdateSeconds: 0.5
-  _speed: 500
-  _nextWaypointDistance: 1
-  _jumpNodeHeightRequirement: 0.8
-  _jumpModifier: 0.3
-  _jumpCheckOffset: 0.1
-  _followEnabled: 1
-  _jumpEnabled: 1
---- !u!114 &1500662862
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8027880798065282585}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 1
-  drawGizmos: 1
-  detailedGizmos: 0
-  startEndModifier:
-    addPoints: 0
-    exactStartPoint: 3
-    exactEndPoint: 3
-    useRaycasting: 0
-    mask:
-      serializedVersion: 2
-      m_Bits: 4294967295
-    useGraphRaycasting: 0
-  traversableTags: -1
-  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-  graphMask:
-    value: -1
 --- !u!50 &5537378771929114168
 Rigidbody2D:
   serializedVersion: 4
@@ -168,13 +129,13 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 958188f7d0bf80d4e9ce2e1d777d3389, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!58 &1500662863
-CircleCollider2D:
+--- !u!61 &1603262153
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -186,9 +147,19 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.03576088, y: 0.011066675}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Size: {x: 1.0495148, y: 0.6244979}
+  m_EdgeRadius: 0
 --- !u!1 &8027880798246931884
 GameObject:
   m_ObjectHideFlags: 0
@@ -282,7 +253,7 @@ Animator:
   m_GameObject: {fileID: 8027880798246931884}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a62c6167fc8f3c04aa51b14c668b212a, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

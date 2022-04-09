@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bf668ffd475e4543baff95c4e27dc69, type: 3}
   m_Name: WormMoveStateData
   m_EditorClassIdentifier: 
-  _movementSpeed: 3
+  _movementSpeed: 2.5

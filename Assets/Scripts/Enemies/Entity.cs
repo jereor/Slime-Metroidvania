@@ -23,19 +23,12 @@ namespace Enemies
         {
             Rb = GetComponent<Rigidbody2D>();
             Animator = GetComponentInChildren<Animator>();
-
             StateMachine = new FiniteStateMachine();
         }
 
         public virtual void Update()
         {
             StateMachine.CurrentState.LogicUpdate();
-
-            if (HasMoveDirectionChanged())
-            {
-                Debug.Log("FLIP!");
-                FlipSprite();
-            }
         }
 
         public virtual void FixedUpdate()
