@@ -22,6 +22,7 @@ namespace Enemies
         {
             StartTime = Time.time;
             Entity.Animator.SetBool(AnimatorBoolName, true);
+            HandleChecks();
         }
 
         public virtual void Exit()
@@ -35,6 +36,11 @@ namespace Enemies
         }
 
         public virtual void PhysicsUpdate()
+        {
+            HandleChecks();
+        }
+
+        public virtual void HandleChecks()
         {
             
         }

@@ -24,7 +24,6 @@ namespace Enemies.States
             
             Entity.SetVelocity(0f);
             IsIdleTimeOver = false;
-            IsPlayerInMinAggroRange = Entity.CheckPlayerInMinAggroRange();
             SetRandomIdleTime();
         }
 
@@ -51,6 +50,11 @@ namespace Enemies.States
         public override void PhysicsUpdate()
         {
             base.PhysicsUpdate();
+        }
+
+        public override void HandleChecks()
+        {
+            base.HandleChecks();
             
             IsPlayerInMinAggroRange = Entity.CheckPlayerInMinAggroRange();
         }

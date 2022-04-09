@@ -1,5 +1,4 @@
 using Enemies.States.Data;
-using UnityEngine;
 
 namespace Enemies.States
 {
@@ -22,14 +21,26 @@ namespace Enemies.States
             base.Enter();
             
             Entity.SetVelocity(StateData._movementSpeed);
-            IsDetectingLedge = Entity.CheckLedge();
-            IsDetectingWall = Entity.CheckWall();
-            IsPlayerInMinAggroRange = Entity.CheckPlayerInMinAggroRange();
+        }
+
+        public override void Exit()
+        {
+            base.Exit();
+        }
+
+        public override void LogicUpdate()
+        {
+            base.LogicUpdate();
         }
 
         public override void PhysicsUpdate()
         {
             base.PhysicsUpdate();
+        }
+
+        public override void HandleChecks()
+        {
+            base.HandleChecks();
             
             IsDetectingLedge = Entity.CheckLedge();
             IsDetectingWall = Entity.CheckWall();

@@ -19,9 +19,6 @@ namespace Enemies.States
             base.Enter();
             
             Entity.SetVelocity(0f);
-
-            IsPlayerInMinAggroRange = Entity.CheckPlayerInMinAggroRange();
-            IsPlayerInMaxAggroRange = Entity.CheckPlayerInMaxAggroRange();
         }
 
         public override void Exit()
@@ -37,6 +34,14 @@ namespace Enemies.States
         public override void PhysicsUpdate()
         {
             base.PhysicsUpdate();
+        }
+
+        public override void HandleChecks()
+        {
+            base.HandleChecks();
+            
+            IsPlayerInMinAggroRange = Entity.CheckPlayerInMinAggroRange();
+            IsPlayerInMaxAggroRange = Entity.CheckPlayerInMaxAggroRange();
         }
     }
 }
