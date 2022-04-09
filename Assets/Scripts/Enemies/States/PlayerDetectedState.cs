@@ -17,6 +17,8 @@ namespace Enemies.States
         public override void Enter()
         {
             base.Enter();
+            
+            Entity.SetVelocity(0f);
 
             IsPlayerInMinAggroRange = Entity.CheckPlayerInMinAggroRange();
             IsPlayerInMaxAggroRange = Entity.CheckPlayerInMaxAggroRange();
