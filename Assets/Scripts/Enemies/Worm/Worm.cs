@@ -7,9 +7,11 @@ namespace Enemies.Worm
     {
         public WormIdleState IdleState { get; private set; }
         public WormMoveState MoveState { get; private set; }
+        public WormPlayerDetectedState PlayerDetectedState { get; private set; }
         
         [SerializeField] private D_IdleState _idleStateData;
         [SerializeField] private D_MoveState _moveStateData;
+        [SerializeField] private D_PlayerDetectedState _playerDetectedStateData;
 
         public override void Start()
         {
@@ -18,6 +20,9 @@ namespace Enemies.Worm
             // TODO: Make magic string a const
             MoveState = new WormMoveState(this, StateMachine, "move", _moveStateData, this);
             IdleState = new WormIdleState(this, StateMachine, "idle", _idleStateData, this);
+            PlayerDetectedState =
+                new WormPlayerDetectedState(this, StateMachine, "playerDetected", _playerDetectedStateData, this);
+            
             StateMachine.Initialize(MoveState);
         }
     }

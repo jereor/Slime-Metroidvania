@@ -6,6 +6,8 @@ namespace Enemies.States
     public class PlayerDetectedState : State
     {
         protected D_PlayerDetectedState StateData;
+        protected bool IsPlayerInMinAggroRange;
+        protected bool IsPlayerInMaxAggroRange;
         
         protected PlayerDetectedState(Entity entity, FiniteStateMachine stateMachine, string animatorBoolName, D_PlayerDetectedState stateData) : base(entity, stateMachine, animatorBoolName)
         {
@@ -15,6 +17,9 @@ namespace Enemies.States
         public override void Enter()
         {
             base.Enter();
+
+            IsPlayerInMinAggroRange = Entity.CheckPlayerInMinAggroRange();
+            IsPlayerInMaxAggroRange = Entity.CheckPlayerInMaxAggroRange();
         }
 
         public override void Exit()
