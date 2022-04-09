@@ -27,7 +27,11 @@ namespace Enemies.Worm
         {
             base.LogicUpdate();
 
-            if (IsChargeTimeOver)
+            if (!IsDetectingLedge || IsDetectingWall)
+            {
+                // TODO: Connect to look for player state
+            }
+            else if (IsChargeTimeOver)
             {
                 if (IsPlayerInMinAggroRange)
                 {

@@ -4691,6 +4691,10 @@ PrefabInstance:
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5368510681977149582, guid: e32cd7f6c4e981c488cae4ad71c35c56, type: 3}
+      propertyPath: _chargeStateData
+      value: 
+      objectReference: {fileID: 11400000, guid: 233c268a210ceb046a70a83b794a7f52, type: 2}
+    - target: {fileID: 5368510681977149582, guid: e32cd7f6c4e981c488cae4ad71c35c56, type: 3}
       propertyPath: _graphicsTransform
       value: 
       objectReference: {fileID: 1228196430}
@@ -4708,7 +4712,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8027880798065282584, guid: e32cd7f6c4e981c488cae4ad71c35c56, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.87
+      value: -3.68
       objectReference: {fileID: 0}
     - target: {fileID: 8027880798065282584, guid: e32cd7f6c4e981c488cae4ad71c35c56, type: 3}
       propertyPath: m_LocalPosition.z
