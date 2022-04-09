@@ -1,8 +1,11 @@
 using UnityEngine;
 
-public class WormPlayerDetectedState : MonoBehaviour
+namespace Enemies.Worm
 {
+    public class WormPlayerDetectedState : MonoBehaviour
+    {
     
     
     
+    }
 }

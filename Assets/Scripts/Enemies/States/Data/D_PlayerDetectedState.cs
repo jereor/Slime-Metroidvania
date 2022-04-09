@@ -1,8 +1,11 @@
 using UnityEngine;
 
-public class D_PlayerDetectedState : MonoBehaviour
+namespace Enemies.States.Data
 {
+    public class D_PlayerDetectedState : MonoBehaviour
+    {
     
     
     
+    }
 }
