@@ -9,6 +9,7 @@ namespace Enemies.States
 
         protected bool IsDetectingWall;
         protected bool IsDetectingLedge;
+        protected bool IsPlayerInMinAggroRange;
         
         public MoveState(Entity entity, FiniteStateMachine stateMachine, string animatorBoolName, D_MoveState stateData) 
             : base(entity, stateMachine, animatorBoolName)
@@ -23,6 +24,7 @@ namespace Enemies.States
             Entity.SetVelocity(StateData._movementSpeed);
             IsDetectingLedge = Entity.CheckLedge();
             IsDetectingWall = Entity.CheckWall();
+            IsPlayerInMinAggroRange = Entity.CheckPlayerInMinAggroRange();
         }
 
         public override void PhysicsUpdate()
@@ -31,6 +33,7 @@ namespace Enemies.States
             
             IsDetectingLedge = Entity.CheckLedge();
             IsDetectingWall = Entity.CheckWall();
+            IsPlayerInMinAggroRange = Entity.CheckPlayerInMinAggroRange();
         }
     }
 }

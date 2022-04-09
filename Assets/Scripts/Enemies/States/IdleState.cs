@@ -9,7 +9,8 @@ namespace Enemies.States
         
         protected D_IdleState StateData;
         protected bool IsIdleTimeOver;
-        
+        protected bool IsPlayerInMinAggroRange;
+
         protected float IdleTime;
         
         protected IdleState(Entity entity, FiniteStateMachine stateMachine, string animatorBoolName, D_IdleState stateData) : base(entity, stateMachine, animatorBoolName)
@@ -23,6 +24,7 @@ namespace Enemies.States
             
             Entity.SetVelocity(0f);
             IsIdleTimeOver = false;
+            IsPlayerInMinAggroRange = Entity.CheckPlayerInMinAggroRange();
             SetRandomIdleTime();
         }
 
@@ -44,6 +46,13 @@ namespace Enemies.States
             {
                 IsIdleTimeOver = true;
             }
+        }
+
+        public override void PhysicsUpdate()
+        {
+            base.PhysicsUpdate();
+            
+            IsPlayerInMinAggroRange = Entity.CheckPlayerInMinAggroRange();
         }
 
         public void SetFlipAfterIdle(bool flipOrNot)
