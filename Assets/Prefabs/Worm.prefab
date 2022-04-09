@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1039834107
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1039834108}
+  m_Layer: 0
+  m_Name: Player Checker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1039834108
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1039834107}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8027880798065282584}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3248777575331397881
 GameObject:
   m_ObjectHideFlags: 0
@@ -24,7 +54,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3248777575331397881}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.47, y: -0.03, z: 0}
+  m_LocalPosition: {x: -0.5, y: -0.03, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8027880798065282584}
@@ -54,7 +84,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4306971913298826364}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.49, y: 0, z: 0}
+  m_LocalPosition: {x: -0.5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8027880798065282584}
@@ -72,7 +102,7 @@ GameObject:
   - component: {fileID: 5368510681977149582}
   - component: {fileID: 5537378771929114168}
   - component: {fileID: 1603262153}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Worm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,6 +123,7 @@ Transform:
   - {fileID: 8027880798246931887}
   - {fileID: 4637033044323698556}
   - {fileID: 6137903470253505920}
+  - {fileID: 1039834108}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -110,9 +141,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _wallChecker: {fileID: 6137903470253505920}
   _ledgeChecker: {fileID: 4637033044323698556}
+  _playerChecker: {fileID: 1039834108}
   _entityData: {fileID: 11400000, guid: 9026cc7bb42965c4abe2dea80d496ae2, type: 2}
   _idleStateData: {fileID: 11400000, guid: 33901d1971d3c174192ad8a39a4adaf5, type: 2}
   _moveStateData: {fileID: 11400000, guid: 5e769dc451342244bac31d3e94cbad59, type: 2}
+  _playerDetectedStateData: {fileID: 11400000, guid: 608c1e71afe53d848a9e53aa29105ce1, type: 2}
 --- !u!50 &5537378771929114168
 Rigidbody2D:
   serializedVersion: 4
@@ -232,12 +265,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e9df943581bdff6489b4862d43ca1121, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 38967785f4537d540bd89a69ddec6528, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.22, y: 0.16}
+  m_Size: {x: 0.3, y: 0.3}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
