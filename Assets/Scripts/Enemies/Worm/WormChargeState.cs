@@ -1,8 +1,49 @@
+using Enemies.States;
+using Enemies.States.Data;
 using UnityEngine;
 
-public class WormChargeState : MonoBehaviour
+namespace Enemies.Worm
 {
-    
-    
-    
+    public class WormChargeState : ChargeState
+    {
+        private Worm _worm;
+        
+        protected WormChargeState(Entity entity, FiniteStateMachine stateMachine, string animatorBoolName, D_ChargeState stateData, Worm worm) : base(entity, stateMachine, animatorBoolName, stateData)
+        {
+            _worm = worm;
+        }
+
+        public override void Enter()
+        {
+            base.Enter();
+        }
+
+        public override void Exit()
+        {
+            base.Exit();
+        }
+
+        public override void LogicUpdate()
+        {
+            base.LogicUpdate();
+
+            if (IsChargeTimeOver)
+            {
+                if (IsPlayerInMinAggroRange)
+                {
+                    StateMachine.ChangeState(_worm.PlayerDetectedState);
+                }
+            }
+        }
+
+        public override void PhysicsUpdate()
+        {
+            base.PhysicsUpdate();
+        }
+
+        public override void HandleChecks()
+        {
+            base.HandleChecks();
+        }
+    }
 }
