@@ -17,8 +17,12 @@ namespace Enemies.Worm
         {
             base.LogicUpdate();
 
+            if (IsPlayerInMinAggroRange)
+            {
+                StateMachine.ChangeState(_worm.PlayerDetectedState);
+            }
             // ReSharper disable once InvertIf
-            if (IsDetectingWall || !IsDetectingLedge)
+            else if (IsDetectingWall || !IsDetectingLedge)
             {
                 _worm.IdleState.SetFlipAfterIdle(true);
                 StateMachine.ChangeState(_worm.IdleState);

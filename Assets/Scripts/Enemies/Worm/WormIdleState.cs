@@ -17,7 +17,11 @@ namespace Enemies.Worm
         {
             base.LogicUpdate();
 
-            if (IsIdleTimeOver)
+            if (IsPlayerInMinAggroRange)
+            {
+                StateMachine.ChangeState(_worm.PlayerDetectedState);
+            }
+            else if (IsIdleTimeOver)
             {
                 StateMachine.ChangeState(_worm.MoveState);
                 

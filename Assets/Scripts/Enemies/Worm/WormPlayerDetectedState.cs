@@ -25,6 +25,12 @@ namespace Enemies.Worm
         public override void LogicUpdate()
         {
             base.LogicUpdate();
+
+            if (IsPlayerInMinAggroRange == false)
+            {
+                _worm.IdleState.SetFlipAfterIdle(false);
+                StateMachine.ChangeState(_worm.IdleState);
+            }
         }
 
         public override void PhysicsUpdate()
