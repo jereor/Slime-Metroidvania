@@ -10,11 +10,13 @@ namespace Enemies.Worm
         public WormMoveState MoveState { get; private set; }
         public WormPlayerDetectedState PlayerDetectedState { get; private set; }
         public ChargeState ChargeState { get; private set; }
+        public LookForPlayerState LookForPlayerState { get; private set; }
 
         [SerializeField] private D_IdleState _idleStateData;
         [SerializeField] private D_MoveState _moveStateData;
         [SerializeField] private D_PlayerDetectedState _playerDetectedStateData;
         [SerializeField] private D_ChargeState _chargeStateData;
+        [SerializeField] private D_LookForPlayerState _lookForPlayerStateData;
 
         public override void Start()
         {
@@ -26,6 +28,8 @@ namespace Enemies.Worm
             PlayerDetectedState =
                 new WormPlayerDetectedState(this, StateMachine, "playerDetected", _playerDetectedStateData, this);
             ChargeState = new WormChargeState(this, StateMachine, "charge", _chargeStateData, this);
+            LookForPlayerState =
+                new WormLookForPlayerState(this, StateMachine, "lookForPlayer", _lookForPlayerStateData, this);
             
             StateMachine.Initialize(MoveState);
         }

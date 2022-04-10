@@ -30,6 +30,10 @@ namespace Enemies.Worm
             {
                 StateMachine.ChangeState(_worm.ChargeState);
             }
+            else if (IsPlayerInMaxAggroRange == false)
+            {
+                StateMachine.ChangeState(_worm.LookForPlayerState);
+            }
         }
 
         public override void PhysicsUpdate()

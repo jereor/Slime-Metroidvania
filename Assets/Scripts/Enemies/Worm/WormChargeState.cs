@@ -29,7 +29,7 @@ namespace Enemies.Worm
 
             if (!IsDetectingLedge || IsDetectingWall)
             {
-                // TODO: Connect to look for player state
+                StateMachine.ChangeState(_worm.LookForPlayerState);
             }
             else if (IsChargeTimeOver)
             {
