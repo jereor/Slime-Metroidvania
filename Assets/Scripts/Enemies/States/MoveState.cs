@@ -4,7 +4,7 @@ namespace Enemies.States
 {
     public class MoveState : State
     {
-        protected D_MoveState StateData;
+        protected readonly D_MoveState StateData;
 
         protected bool IsDetectingWall;
         protected bool IsDetectingLedge;

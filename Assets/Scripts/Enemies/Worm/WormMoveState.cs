@@ -1,12 +1,11 @@
 using Enemies.States;
 using Enemies.States.Data;
-using UnityEngine;
 
 namespace Enemies.Worm
 {
     public class WormMoveState : MoveState
     {
-        private Worm _worm; 
+        private readonly Worm _worm; 
             
         public WormMoveState(Entity entity, FiniteStateMachine stateMachine, string animatorBoolName, D_MoveState stateData, Worm worm) : base(entity, stateMachine, animatorBoolName, stateData)
         {

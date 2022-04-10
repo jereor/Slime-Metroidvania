@@ -5,7 +5,7 @@ namespace Enemies.States
 {
     public class PlayerDetectedState : State
     {
-        protected D_PlayerDetectedState StateData;
+        protected readonly D_PlayerDetectedState StateData;
         
         protected bool IsPlayerInMinAggroRange;
         protected bool IsPlayerInMaxAggroRange;

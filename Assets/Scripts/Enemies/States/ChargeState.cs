@@ -5,7 +5,8 @@ namespace Enemies.States
 {
     public class ChargeState : State
     {
-        protected D_ChargeState StateData;
+        protected readonly D_ChargeState StateData;
+        
         protected bool IsPlayerInMinAggroRange;
         protected bool IsDetectingLedge;
         protected bool IsDetectingWall;

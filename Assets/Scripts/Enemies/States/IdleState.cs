@@ -7,7 +7,7 @@ namespace Enemies.States
     {
         public bool FlipsAfterIdle { get; set; }
         
-        protected D_IdleState StateData;
+        protected readonly D_IdleState StateData;
         protected bool IsIdleTimeOver;
         protected bool IsPlayerInMinAggroRange;
 
@@ -66,7 +66,7 @@ namespace Enemies.States
 
         private void SetRandomIdleTime()
         {
-            IdleTime = Random.Range(StateData.minIdleTime, StateData.maxIdleTime);
+            IdleTime = Random.Range(StateData._minIdleTime, StateData._maxIdleTime);
         }
     }
 }

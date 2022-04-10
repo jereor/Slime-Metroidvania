@@ -1,12 +1,11 @@
 using Enemies.States;
 using Enemies.States.Data;
-using UnityEngine;
 
 namespace Enemies.Worm
 {
     public class WormChargeState : ChargeState
     {
-        private Worm _worm;
+        private readonly Worm _worm;
         
         public WormChargeState(Entity entity, FiniteStateMachine stateMachine, string animatorBoolName, D_ChargeState stateData, Worm worm) : base(entity, stateMachine, animatorBoolName, stateData)
         {

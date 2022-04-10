@@ -1,4 +1,3 @@
-using System;
 using Enemies.States.Data;
 using UnityEngine;
 
@@ -6,7 +5,7 @@ namespace Enemies
 {
     public class Entity : MonoBehaviour
     {
-        public FiniteStateMachine StateMachine;
+        protected FiniteStateMachine StateMachine;
         public int FacingDirection { get; private set; }
         public Rigidbody2D Rb { get; private set; }
         public Animator Animator { get; private set; }

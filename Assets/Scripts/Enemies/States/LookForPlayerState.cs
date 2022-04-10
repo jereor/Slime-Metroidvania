@@ -5,7 +5,7 @@ namespace Enemies.States
 {
     public class LookForPlayerState : State
     {
-        protected D_LookForPlayerState StateData;
+        protected readonly D_LookForPlayerState StateData;
 
         protected bool TurnsImmediately;
         protected bool IsPlayerInMinAggroRange;
@@ -43,7 +43,6 @@ namespace Enemies.States
         {
             base.LogicUpdate();
 
-            // TODO: Test that this check is in the right place. Might need to be made a field property
             bool isOverTurnWaitTime = Time.time >= LastTurnTime + StateData._timeBetweenTurns;
             
             if (TurnsImmediately)
