@@ -4092,7 +4092,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1828182202}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.78, y: 0, z: 0}
+  m_LocalPosition: {x: 0.75, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1500662861}
@@ -4948,6 +4948,14 @@ PrefabInstance:
       propertyPath: _graphicsTransform
       value: 
       objectReference: {fileID: 1228196430}
+    - target: {fileID: 5368510681977149582, guid: e32cd7f6c4e981c488cae4ad71c35c56, type: 3}
+      propertyPath: _meleeAttackPosition
+      value: 
+      objectReference: {fileID: 1828182203}
+    - target: {fileID: 5368510681977149582, guid: e32cd7f6c4e981c488cae4ad71c35c56, type: 3}
+      propertyPath: _meleeAttackStateData
+      value: 
+      objectReference: {fileID: 11400000, guid: 6d9c47cb1da062544acbcbce24280965, type: 2}
     - target: {fileID: 5368510681977149582, guid: e32cd7f6c4e981c488cae4ad71c35c56, type: 3}
       propertyPath: _lookForPlayerStateData
       value: 
