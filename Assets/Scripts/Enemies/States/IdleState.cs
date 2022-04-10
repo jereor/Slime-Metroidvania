@@ -5,9 +5,10 @@ namespace Enemies.States
 {
     public class IdleState : State
     {
-        public bool FlipsAfterIdle { get; set; }
+        public bool CanFlipAfterIdle { get; set; }
         
         protected readonly D_IdleState StateData;
+        
         protected bool IsIdleTimeOver;
         protected bool IsPlayerInMinAggroRange;
 
@@ -31,7 +32,7 @@ namespace Enemies.States
         {
             base.Exit();
 
-            if (FlipsAfterIdle)
+            if (CanFlipAfterIdle)
             {
                 Entity.FlipSprite();
             }
@@ -61,12 +62,14 @@ namespace Enemies.States
 
         public void SetFlipAfterIdle(bool flipOrNot)
         {
-            FlipsAfterIdle = flipOrNot;
+            CanFlipAfterIdle = flipOrNot;
         }
 
         private void SetRandomIdleTime()
         {
-            IdleTime = Random.Range(StateData._minIdleTime, StateData._maxIdleTime);
+            IdleTime = Random.Range(
+                StateData._minIdleTime, 
+                StateData._maxIdleTime);
         }
     }
 }

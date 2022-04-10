@@ -7,7 +7,7 @@ namespace Enemies.States
     {
         protected readonly D_LookForPlayerState StateData;
 
-        protected bool TurnsImmediately;
+        protected bool CanTurnImmediately;
         protected bool IsPlayerInMinAggroRange;
         protected bool IsAllTurnsDone;
         protected bool IsAllTurnsTimeDone;
@@ -45,10 +45,10 @@ namespace Enemies.States
 
             bool isOverTurnWaitTime = Time.time >= LastTurnTime + StateData._timeBetweenTurns;
             
-            if (TurnsImmediately)
+            if (CanTurnImmediately)
             {
                 TurnAround();
-                TurnsImmediately = false;
+                CanTurnImmediately = false;
             }
             else if (isOverTurnWaitTime 
                      && IsAllTurnsDone == false)
@@ -89,7 +89,7 @@ namespace Enemies.States
 
         public void SetTurnsImmediately(bool turns)
         {
-            TurnsImmediately = turns;
+            CanTurnImmediately = turns;
         }
     }
 }

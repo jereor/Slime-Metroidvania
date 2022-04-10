@@ -9,7 +9,7 @@ namespace Enemies.States
         
         protected bool IsPlayerInMinAggroRange;
         protected bool IsPlayerInMaxAggroRange;
-        protected bool WillPerformLongRangeAction;
+        protected bool CanPerformLongRangeAction;
         
         protected PlayerDetectedState(Entity entity, FiniteStateMachine stateMachine, string animatorBoolName, D_PlayerDetectedState stateData) : base(entity, stateMachine, animatorBoolName)
         {
@@ -34,7 +34,7 @@ namespace Enemies.States
 
             if (Time.time >= StartTime + StateData._longRangeActionTime)
             {
-                WillPerformLongRangeAction = true;
+                CanPerformLongRangeAction = true;
             }
         }
 
