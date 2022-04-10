@@ -11,6 +11,7 @@ namespace Enemies.States
         protected bool IsDetectingLedge;
         protected bool IsDetectingWall;
         protected bool IsChargeTimeOver;
+        protected bool CanPerformCloseRangeAction;
         
         protected ChargeState(Entity entity, FiniteStateMachine stateMachine, string animatorBoolName, D_ChargeState stateData) : base(entity, stateMachine, animatorBoolName)
         {
@@ -54,6 +55,8 @@ namespace Enemies.States
             IsPlayerInMinAggroRange = Entity.CheckPlayerInMinAggroRange();
             IsDetectingLedge = Entity.CheckLedge();
             IsDetectingWall = Entity.CheckWall();
+
+            CanPerformCloseRangeAction = Entity.CheckPlayerInCloseRangeAction();
         }
     }
 }
