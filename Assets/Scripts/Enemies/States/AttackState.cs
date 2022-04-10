@@ -5,6 +5,8 @@ namespace Enemies.States
     public class AttackState : State
     {
         protected readonly Transform AttackPosition;
+
+        protected bool IsAnimationFinished;
         
         protected AttackState(Entity entity, FiniteStateMachine stateMachine, string animatorBoolName, Transform attackPosition) : base(entity, stateMachine, animatorBoolName)
         {
@@ -14,6 +16,8 @@ namespace Enemies.States
         public override void Enter()
         {
             base.Enter();
+
+            IsAnimationFinished = false;
         }
 
         public override void Exit()
@@ -34,6 +38,16 @@ namespace Enemies.States
         public override void HandleChecks()
         {
             base.HandleChecks();
+        }
+
+        public virtual void TriggerAttack()
+        {
+               
+        }
+
+        public virtual void FinishAttack()
+        {
+            IsAnimationFinished = true;
         }
     }
 }
