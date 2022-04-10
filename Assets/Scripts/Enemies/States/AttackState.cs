@@ -7,6 +7,7 @@ namespace Enemies.States
         protected readonly Transform AttackPosition;
 
         protected bool IsAnimationFinished;
+        protected bool IsPlayerInMinAggroRange;
         
         protected AttackState(Entity entity, FiniteStateMachine stateMachine, string animatorBoolName, Transform attackPosition) : base(entity, stateMachine, animatorBoolName)
         {
@@ -40,6 +41,8 @@ namespace Enemies.States
         public override void HandleChecks()
         {
             base.HandleChecks();
+
+            IsPlayerInMinAggroRange = Entity.CheckPlayerInMinAggroRange();
         }
 
         public virtual void TriggerAttack()
