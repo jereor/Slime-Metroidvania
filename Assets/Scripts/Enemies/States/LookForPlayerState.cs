@@ -24,6 +24,14 @@ namespace Enemies.States
         public override void Enter()
         {
             base.Enter();
+
+            IsAllTurnsDone = false;
+            IsAllTurnsTimeDone = false;
+
+            LastTurnTime = StartTime;
+            AmountOfTurnsDone = 0;
+            
+            Entity.SetVelocity(0f);
         }
 
         public override void Exit()
