@@ -10,6 +10,7 @@ namespace Enemies.States
         protected bool IsPlayerInMinAggroRange;
         protected bool IsPlayerInMaxAggroRange;
         protected bool CanPerformLongRangeAction;
+        protected bool CanPerformCloseRangeAction;
         
         protected PlayerDetectedState(Entity entity, FiniteStateMachine stateMachine, string animatorBoolName, D_PlayerDetectedState stateData) : base(entity, stateMachine, animatorBoolName)
         {
@@ -49,6 +50,8 @@ namespace Enemies.States
             
             IsPlayerInMinAggroRange = Entity.CheckPlayerInMinAggroRange();
             IsPlayerInMaxAggroRange = Entity.CheckPlayerInMaxAggroRange();
+
+            CanPerformCloseRangeAction = Entity.CheckPlayerInCloseRangeAction();
         }
     }
 }
