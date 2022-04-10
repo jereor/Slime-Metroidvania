@@ -11,7 +11,7 @@ namespace Enemies
         public Animator Animator { get; private set; }
         public AnimationToStateMachine AnimationToStateMachine { get; private set; }
 
-        public int FacingDirection { get; private set; }
+        private int _facingDirection = 1;
         
         [Header("Child References")] 
         [SerializeField] private Transform _wallChecker;
@@ -30,7 +30,7 @@ namespace Enemies
             Animator = GetComponentInChildren<Animator>();
             AnimationToStateMachine = GetComponentInChildren<AnimationToStateMachine>();
 
-            FacingDirection = 1;
+            _facingDirection = 1;
         }
 
         public virtual void Update()
@@ -46,7 +46,7 @@ namespace Enemies
         public virtual void SetVelocity(float velocity)
         {
             _velocityWorkspace.Set(
-                FacingDirection * velocity, 
+                _facingDirection * velocity, 
                 Rb.velocity.y);
             Rb.velocity = _velocityWorkspace;
         }
@@ -55,7 +55,7 @@ namespace Enemies
         {
             return Physics2D.Raycast(
                 _wallChecker.position, 
-                transform.right * FacingDirection,
+                transform.right * _facingDirection,
                 _entityData._wallCheckDistance,
                 _entityData._groundLayer.value);
         }
@@ -73,7 +73,7 @@ namespace Enemies
         {
             return Physics2D.Raycast(
                 _playerChecker.position, 
-                transform.right * FacingDirection,
+                transform.right * _facingDirection,
                 _entityData._minAggroDistance,
                 _entityData._playerLayer.value);
         }
@@ -82,7 +82,7 @@ namespace Enemies
         {
             return Physics2D.Raycast(
                 _playerChecker.position, 
-                transform.right * FacingDirection,
+                transform.right * _facingDirection,
                 _entityData._maxAggroDistance,
                 _entityData._playerLayer.value);
         }
@@ -91,14 +91,14 @@ namespace Enemies
         {
             return Physics2D.Raycast(
                 _playerChecker.position, 
-                transform.right, 
+                transform.right * _facingDirection, 
                 _entityData._closeRangeActionDistance,
-                _entityData._playerLayer);
+                _entityData._playerLayer.value);
         }
 
         public virtual void FlipSprite()
         {
-            FacingDirection *= -1;
+            _facingDirection *= -1;
             Transform currentTransform = transform;
             Vector3 localScale = currentTransform.localScale;
             
@@ -110,15 +110,19 @@ namespace Enemies
         {
             Vector3 wallCheckerPosition = _wallChecker.position;
             Gizmos.DrawLine(wallCheckerPosition,
-                wallCheckerPosition + (Vector3) (Vector2.right * FacingDirection * _entityData._wallCheckDistance));
+                wallCheckerPosition + (Vector3) (Vector2.right * _facingDirection * _entityData._wallCheckDistance));
 
             Vector3 ledgeCheckerPosition = _ledgeChecker.position;
             Gizmos.DrawLine(ledgeCheckerPosition,
                 ledgeCheckerPosition + (Vector3) (Vector2.down * _entityData._ledgeCheckDistance));
 
             Vector3 playerCheckerPosition = _playerChecker.position;
-            Gizmos.DrawLine(playerCheckerPosition,
-                playerCheckerPosition + (Vector3) (Vector2.right * FacingDirection * _entityData._minAggroDistance));
+            Vector2 checkDirection = Vector2.right * _facingDirection;
+            Gizmos.DrawWireSphere(playerCheckerPosition + (Vector3)(checkDirection * _entityData._minAggroDistance), 0.2f);
+            
+            Gizmos.DrawWireSphere(playerCheckerPosition + (Vector3)(checkDirection * _entityData._maxAggroDistance), 0.2f);
+            
+            Gizmos.DrawWireSphere(playerCheckerPosition + (Vector3)(checkDirection * _entityData._closeRangeActionDistance), 0.2f);
         }
     }
 }

@@ -26,20 +26,24 @@ namespace Enemies.Worm
         {
             base.LogicUpdate();
 
-            if (IsDetectingLedge == false 
+            if (CanPerformCloseRangeAction)
+            {
+                StateMachine.ChangeState(_worm.MeleeAttackState);    
+            }
+            else if (IsDetectingLedge == false 
                 || IsDetectingWall)
             {
                 StateMachine.ChangeState(_worm.LookForPlayerState);
             }
             else if (IsChargeTimeOver)
             {
-                if (CanPerformCloseRangeAction)
-                {
-                    StateMachine.ChangeState(_worm.MeleeAttackState);    
-                }
-                else if (IsPlayerInMinAggroRange)
+                if (IsPlayerInMinAggroRange)
                 {
                     StateMachine.ChangeState(_worm.PlayerDetectedState);
+                }
+                else
+                {
+                    StateMachine.ChangeState(_worm.LookForPlayerState);
                 }
             }
         }
