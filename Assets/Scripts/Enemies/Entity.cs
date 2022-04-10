@@ -41,31 +41,45 @@ namespace Enemies
         
         public virtual void SetVelocity(float velocity)
         {
-            _velocityWorkspace.Set(FacingDirection * velocity, Rb.velocity.y);
+            _velocityWorkspace.Set(
+                FacingDirection * velocity, 
+                Rb.velocity.y);
             Rb.velocity = _velocityWorkspace;
         }
 
         public virtual bool CheckWall()
         {
-            return Physics2D.Raycast(_wallChecker.position, transform.right * FacingDirection, _entityData._wallCheckDistance,
+            return Physics2D.Raycast(
+                _wallChecker.position, 
+                transform.right * FacingDirection,
+                _entityData._wallCheckDistance,
                 _entityData._groundLayer.value);
         }
 
         public virtual bool CheckLedge()
         {
-            return Physics2D.Raycast(_ledgeChecker.position, Vector2.down, _entityData._ledgeCheckDistance,
+            return Physics2D.Raycast(
+                _ledgeChecker.position, 
+                Vector2.down, 
+                _entityData._ledgeCheckDistance,
                 _entityData._groundLayer.value);
         }
 
         public virtual bool CheckPlayerInMinAggroRange()
         {
-            return Physics2D.Raycast(_playerChecker.position, transform.right * FacingDirection, _entityData._minAggroDistance,
+            return Physics2D.Raycast(
+                _playerChecker.position, 
+                transform.right * FacingDirection,
+                _entityData._minAggroDistance,
                 _entityData._playerLayer.value);
         }
 
         public virtual bool CheckPlayerInMaxAggroRange()
         {
-            return Physics2D.Raycast(_playerChecker.position, transform.right * FacingDirection, _entityData._maxAggroDistance,
+            return Physics2D.Raycast(
+                _playerChecker.position, 
+                transform.right * FacingDirection,
+                _entityData._maxAggroDistance,
                 _entityData._playerLayer.value);
         }
 
@@ -82,13 +96,16 @@ namespace Enemies
         public virtual void OnDrawGizmos()
         {
             Vector3 wallCheckerPosition = _wallChecker.position;
-            Gizmos.DrawLine(wallCheckerPosition, wallCheckerPosition + (Vector3)(Vector2.right * FacingDirection * _entityData._wallCheckDistance));
-            
+            Gizmos.DrawLine(wallCheckerPosition,
+                wallCheckerPosition + (Vector3) (Vector2.right * FacingDirection * _entityData._wallCheckDistance));
+
             Vector3 ledgeCheckerPosition = _ledgeChecker.position;
-            Gizmos.DrawLine(ledgeCheckerPosition, ledgeCheckerPosition + (Vector3)(Vector2.down * _entityData._ledgeCheckDistance));
-            
+            Gizmos.DrawLine(ledgeCheckerPosition,
+                ledgeCheckerPosition + (Vector3) (Vector2.down * _entityData._ledgeCheckDistance));
+
             Vector3 playerCheckerPosition = _playerChecker.position;
-            Gizmos.DrawLine(playerCheckerPosition, playerCheckerPosition + (Vector3)(Vector2.right * FacingDirection * _entityData._minAggroDistance));
+            Gizmos.DrawLine(playerCheckerPosition,
+                playerCheckerPosition + (Vector3) (Vector2.right * FacingDirection * _entityData._minAggroDistance));
         }
     }
 }
