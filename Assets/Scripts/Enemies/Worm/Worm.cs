@@ -48,5 +48,12 @@ namespace Enemies.Worm
             
             StateMachine.Initialize(MoveState);
         }
+
+        public override void OnDrawGizmos()
+        {
+            base.OnDrawGizmos();
+            
+            Gizmos.DrawWireSphere(_meleeAttackPosition.position, _meleeAttackStateData._attackRadius);
+        }
     }
 }
