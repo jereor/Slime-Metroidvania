@@ -6,10 +6,12 @@ namespace Enemies
     public class Entity : MonoBehaviour
     {
         protected FiniteStateMachine StateMachine;
-        public int FacingDirection { get; private set; }
         public Rigidbody2D Rb { get; private set; }
         public Animator Animator { get; private set; }
+        public AnimationToStateMachine AnimationToStateMachine { get; private set; }
 
+        public int FacingDirection { get; private set; }
+        
         [Header("Child References")] 
         [SerializeField] private Transform _wallChecker;
         [SerializeField] private Transform _ledgeChecker;
@@ -22,9 +24,10 @@ namespace Enemies
 
         public virtual void Start()
         {
+            StateMachine = new FiniteStateMachine();
             Rb = GetComponent<Rigidbody2D>();
             Animator = GetComponentInChildren<Animator>();
-            StateMachine = new FiniteStateMachine();
+            AnimationToStateMachine = GetComponentInChildren<AnimationToStateMachine>();
 
             FacingDirection = 1;
         }

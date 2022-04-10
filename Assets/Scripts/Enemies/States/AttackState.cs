@@ -17,7 +17,9 @@ namespace Enemies.States
         {
             base.Enter();
 
+            Entity.AnimationToStateMachine.AttackState = this;
             IsAnimationFinished = false;
+            Entity.SetVelocity(0f);
         }
 
         public override void Exit()
