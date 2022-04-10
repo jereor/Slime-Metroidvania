@@ -6,8 +6,11 @@ namespace Enemies.Worm
 {
     public class WormLookForPlayerState : LookForPlayerState
     {
-        protected WormLookForPlayerState(Entity entity, FiniteStateMachine stateMachine, string animatorBoolName, D_LookForPlayerState stateData) : base(entity, stateMachine, animatorBoolName, stateData)
+        private readonly Worm _worm;
+        
+        protected WormLookForPlayerState(Entity entity, FiniteStateMachine stateMachine, string animatorBoolName, D_LookForPlayerState stateData, Worm worm) : base(entity, stateMachine, animatorBoolName, stateData)
         {
+            _worm = worm;
         }
 
         public override void Enter()
@@ -23,6 +26,15 @@ namespace Enemies.Worm
         public override void LogicUpdate()
         {
             base.LogicUpdate();
+
+            if (IsPlayerInMinAggroRange)
+            {
+                StateMachine.ChangeState(_worm.PlayerDetectedState);
+            }
+            else if (IsAllTurnsTimeDone)
+            {
+                StateMachine.ChangeState(_worm.MoveState);
+            }
         }
 
         public override void PhysicsUpdate()
