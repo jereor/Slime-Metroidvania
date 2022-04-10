@@ -26,7 +26,8 @@ namespace Enemies.Worm
         {
             base.LogicUpdate();
 
-            if (!IsDetectingLedge || IsDetectingWall)
+            if (IsDetectingLedge == false 
+                || IsDetectingWall)
             {
                 StateMachine.ChangeState(_worm.LookForPlayerState);
             }
