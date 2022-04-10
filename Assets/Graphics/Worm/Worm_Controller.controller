@@ -9,10 +9,10 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: charge
+    m_ConditionEvent: IsCharging
     m_EventTreshold: 0
   - m_ConditionMode: 1
-    m_ConditionEvent: lookForPlayer
+    m_ConditionEvent: IsLookingForPlayer
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -3136533423995853342}
@@ -37,10 +37,10 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: playerDetected
+    m_ConditionEvent: IsPlayerDetected
     m_EventTreshold: 0
   - m_ConditionMode: 1
-    m_ConditionEvent: charge
+    m_ConditionEvent: IsCharging
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -5170995162123237874}
@@ -99,10 +99,10 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: idle
+    m_ConditionEvent: IsIdle
     m_EventTreshold: 0
   - m_ConditionMode: 1
-    m_ConditionEvent: move
+    m_ConditionEvent: IsMoving
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1028018181733509413}
@@ -155,10 +155,10 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: lookForPlayer
+    m_ConditionEvent: IsLookingForPlayer
     m_EventTreshold: 0
   - m_ConditionMode: 1
-    m_ConditionEvent: move
+    m_ConditionEvent: IsMoving
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1028018181733509413}
@@ -183,10 +183,10 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: charge
+    m_ConditionEvent: IsCharging
     m_EventTreshold: 0
   - m_ConditionMode: 1
-    m_ConditionEvent: playerDetected
+    m_ConditionEvent: IsPlayerDetected
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 153823815188442295}
@@ -211,10 +211,10 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: playerDetected
+    m_ConditionEvent: IsPlayerDetected
     m_EventTreshold: 0
   - m_ConditionMode: 1
-    m_ConditionEvent: idle
+    m_ConditionEvent: IsIdle
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -832887730715517979}
@@ -267,10 +267,10 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: playerDetected
+    m_ConditionEvent: IsPlayerDetected
     m_EventTreshold: 0
   - m_ConditionMode: 1
-    m_ConditionEvent: move
+    m_ConditionEvent: IsMoving
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1028018181733509413}
@@ -323,31 +323,31 @@ AnimatorController:
   m_Name: Worm_Controller
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: idle
+  - m_Name: IsIdle
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: move
+  - m_Name: IsMoving
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: playerDetected
+  - m_Name: IsPlayerDetected
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: charge
+  - m_Name: IsCharging
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: lookForPlayer
+  - m_Name: IsLookingForPlayer
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -433,10 +433,10 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: lookForPlayer
+    m_ConditionEvent: IsLookingForPlayer
     m_EventTreshold: 0
   - m_ConditionMode: 1
-    m_ConditionEvent: playerDetected
+    m_ConditionEvent: IsPlayerDetected
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 153823815188442295}
@@ -461,10 +461,10 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: move
+    m_ConditionEvent: IsMoving
     m_EventTreshold: 0
   - m_ConditionMode: 1
-    m_ConditionEvent: idle
+    m_ConditionEvent: IsIdle
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -832887730715517979}
@@ -489,10 +489,10 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: move
+    m_ConditionEvent: IsMoving
     m_EventTreshold: 0
   - m_ConditionMode: 1
-    m_ConditionEvent: playerDetected
+    m_ConditionEvent: IsPlayerDetected
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 153823815188442295}
@@ -517,10 +517,10 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: idle
+    m_ConditionEvent: IsIdle
     m_EventTreshold: 0
   - m_ConditionMode: 1
-    m_ConditionEvent: playerDetected
+    m_ConditionEvent: IsPlayerDetected
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 153823815188442295}
@@ -545,10 +545,10 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: playerDetected
+    m_ConditionEvent: IsPlayerDetected
     m_EventTreshold: 0
   - m_ConditionMode: 1
-    m_ConditionEvent: lookForPlayer
+    m_ConditionEvent: IsLookingForPlayer
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -3136533423995853342}

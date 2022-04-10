@@ -1,6 +1,7 @@
 using Enemies.States;
 using Enemies.States.Data;
 using UnityEngine;
+using Utility;
 
 namespace Enemies.Worm
 {
@@ -22,14 +23,13 @@ namespace Enemies.Worm
         {
             base.Start();
 
-            // TODO: Make magic string a const
-            MoveState = new WormMoveState(this, StateMachine, "move", _moveStateData, this);
-            IdleState = new WormIdleState(this, StateMachine, "idle", _idleStateData, this);
+            IdleState = new WormIdleState(this, StateMachine, AnimatorConstants.IS_IDLE, _idleStateData, this);
+            MoveState = new WormMoveState(this, StateMachine, AnimatorConstants.IS_MOVING, _moveStateData, this);
             PlayerDetectedState =
-                new WormPlayerDetectedState(this, StateMachine, "playerDetected", _playerDetectedStateData, this);
-            ChargeState = new WormChargeState(this, StateMachine, "charge", _chargeStateData, this);
+                new WormPlayerDetectedState(this, StateMachine, AnimatorConstants.IS_PLAYER_DETECTED, _playerDetectedStateData, this);
+            ChargeState = new WormChargeState(this, StateMachine, AnimatorConstants.IS_CHARGING, _chargeStateData, this);
             LookForPlayerState =
-                new WormLookForPlayerState(this, StateMachine, "lookForPlayer", _lookForPlayerStateData, this);
+                new WormLookForPlayerState(this, StateMachine, AnimatorConstants.IS_LOOKING_FOR_PLAYER, _lookForPlayerStateData, this);
             
             StateMachine.Initialize(MoveState);
         }

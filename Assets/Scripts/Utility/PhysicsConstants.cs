@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace Utility
+﻿namespace Utility
 {
     public static class PhysicsConstants
     {
