@@ -87,9 +87,9 @@ namespace Enemies.States
             IsPlayerInMinAggroRange = Entity.CheckPlayerInMinAggroRange();
         }
 
-        public void SetTurnsImmediately(bool turns)
+        public void SetTurnsImmediately(bool canTurn)
         {
-            CanTurnImmediately = turns;
+            CanTurnImmediately = canTurn;
         }
     }
 }

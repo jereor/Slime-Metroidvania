@@ -60,9 +60,9 @@ namespace Enemies.States
             IsPlayerInMinAggroRange = Entity.CheckPlayerInMinAggroRange();
         }
 
-        public void SetFlipAfterIdle(bool flipOrNot)
+        public void SetFlipAfterIdle(bool canFlip)
         {
-            CanFlipAfterIdle = flipOrNot;
+            CanFlipAfterIdle = canFlip;
         }
 
         private void SetRandomIdleTime()
