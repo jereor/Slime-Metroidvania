@@ -26,7 +26,11 @@ namespace Enemies.Worm
         {
             base.LogicUpdate();
 
-            if (CanPerformLongRangeAction)
+            if (CanPerformCloseRangeAction)
+            {
+                StateMachine.ChangeState(_worm.MeleeAttackState);
+            }
+            else if (CanPerformLongRangeAction)
             {
                 StateMachine.ChangeState(_worm.ChargeState);
             }

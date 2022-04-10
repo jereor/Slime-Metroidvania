@@ -33,7 +33,11 @@ namespace Enemies.Worm
             }
             else if (IsChargeTimeOver)
             {
-                if (IsPlayerInMinAggroRange)
+                if (CanPerformCloseRangeAction)
+                {
+                    StateMachine.ChangeState(_worm.MeleeAttackState);    
+                }
+                else if (IsPlayerInMinAggroRange)
                 {
                     StateMachine.ChangeState(_worm.PlayerDetectedState);
                 }

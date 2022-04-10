@@ -8,6 +8,6 @@ namespace Utility
         public const string IS_PLAYER_DETECTED = "IsPlayerDetected";
         public const string IS_CHARGING = "IsCharging";
         public const string IS_LOOKING_FOR_PLAYER = "IsLookingForPlayer";
-        
+        public const string IS_MELEE_ATTACKING = "IsMeleeAttacking";
     }
 }
