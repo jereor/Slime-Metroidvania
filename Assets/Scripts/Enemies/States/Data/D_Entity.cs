@@ -8,9 +8,12 @@ namespace Enemies.States.Data
     {
         public float _wallCheckDistance = 0.2f;
         public float _ledgeCheckDistance = 0.4f;
+        
         public float _minAggroDistance = 3f;
         public float _maxAggroDistance = 4f;
 
+        public float _closeRangeActionDistance = 1f;
+        
         public LayerMask _groundLayer = PhysicsConstants.GROUND_LAYER_NUMBER;
         public LayerMask _playerLayer = PhysicsConstants.PLAYER_LAYER_NUMBER;
     }

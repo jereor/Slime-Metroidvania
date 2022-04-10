@@ -83,6 +83,15 @@ namespace Enemies
                 _entityData._playerLayer.value);
         }
 
+        public virtual bool CheckPlayerInCloseRangeAction()
+        {
+            return Physics2D.Raycast(
+                _playerChecker.position, 
+                transform.right, 
+                _entityData._closeRangeActionDistance,
+                _entityData._playerLayer);
+        }
+
         public virtual void FlipSprite()
         {
             FacingDirection *= -1;
