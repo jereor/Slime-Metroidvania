@@ -7,7 +7,7 @@ namespace Enemies.Worm
     {
         private readonly Worm _worm;
         
-        public WormPlayerDetectedState(Entity entity, FiniteStateMachine stateMachine, string animatorBoolName, D_PlayerDetectedState stateData, Worm worm) : base(entity, stateMachine, animatorBoolName, stateData)
+        public WormPlayerDetectedState(Worm worm, FiniteStateMachine stateMachine, string animatorBoolName, D_PlayerDetectedState stateData) : base(worm, stateMachine, animatorBoolName, stateData)
         {
             _worm = worm;
         }

@@ -29,27 +29,27 @@ namespace Enemies.Worm
 
             IdleState = 
                 new WormIdleState(this, StateMachine, AnimatorConstants.IS_IDLE, 
-                    _idleStateData, this);
+                    _idleStateData);
 
             MoveState = 
                 new WormMoveState(this, StateMachine, AnimatorConstants.IS_MOVING, 
-                    _moveStateData, this);
+                    _moveStateData);
 
             PlayerDetectedState =
                 new WormPlayerDetectedState(this, StateMachine, AnimatorConstants.IS_PLAYER_DETECTED,
-                    _playerDetectedStateData, this);
+                    _playerDetectedStateData);
 
             ChargeState =
                 new WormChargeState(this, StateMachine, AnimatorConstants.IS_CHARGING, 
-                    _chargeStateData, this);
+                    _chargeStateData);
 
             LookForPlayerState = 
                 new WormLookForPlayerState(this, StateMachine, AnimatorConstants.IS_LOOKING_FOR_PLAYER,
-                _lookForPlayerStateData, this);
+                _lookForPlayerStateData);
 
             MeleeAttackState = 
                 new WormMeleeAttackState(this, StateMachine, AnimatorConstants.IS_MELEE_ATTACKING,
-                _meleeAttackPosition, _meleeAttackStateData, this);
+                _meleeAttackPosition, _meleeAttackStateData);
 
             StateMachine.Initialize(MoveState);
         }
