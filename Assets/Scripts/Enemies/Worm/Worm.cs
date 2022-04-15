@@ -27,25 +27,30 @@ namespace Enemies.Worm
         {
             base.Start();
 
-            IdleState = new WormIdleState(this, StateMachine, AnimatorConstants.IS_IDLE, _idleStateData, this);
-            
-            MoveState = new WormMoveState(this, StateMachine, AnimatorConstants.IS_MOVING, _moveStateData, this);
-            
+            IdleState = 
+                new WormIdleState(this, StateMachine, AnimatorConstants.IS_IDLE, 
+                    _idleStateData, this);
+
+            MoveState = 
+                new WormMoveState(this, StateMachine, AnimatorConstants.IS_MOVING, 
+                    _moveStateData, this);
+
             PlayerDetectedState =
                 new WormPlayerDetectedState(this, StateMachine, AnimatorConstants.IS_PLAYER_DETECTED,
                     _playerDetectedStateData, this);
-            
+
             ChargeState =
-                new WormChargeState(this, StateMachine, AnimatorConstants.IS_CHARGING, _chargeStateData, this);
-            
-            LookForPlayerState =
+                new WormChargeState(this, StateMachine, AnimatorConstants.IS_CHARGING, 
+                    _chargeStateData, this);
+
+            LookForPlayerState = 
                 new WormLookForPlayerState(this, StateMachine, AnimatorConstants.IS_LOOKING_FOR_PLAYER,
-                    _lookForPlayerStateData, this);
-            
-            MeleeAttackState = new WormMeleeAttackState(this, StateMachine, AnimatorConstants.IS_MELEE_ATTACKING,
-                _meleeAttackPosition,
-                _meleeAttackStateData, this);
-            
+                _lookForPlayerStateData, this);
+
+            MeleeAttackState = 
+                new WormMeleeAttackState(this, StateMachine, AnimatorConstants.IS_MELEE_ATTACKING,
+                _meleeAttackPosition, _meleeAttackStateData, this);
+
             StateMachine.Initialize(MoveState);
         }
 
