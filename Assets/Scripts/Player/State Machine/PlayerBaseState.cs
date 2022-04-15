@@ -1,62 +1,63 @@
-using Player.State_Machine;
-
-public abstract class PlayerBaseState
+namespace Player.State_Machine
 {
-    private bool _isRootState = false;
-    private PlayerStateMachine _context;
-    private PlayerStateFactory _factory;
-    private PlayerBaseState _currentSubState;
-    private PlayerBaseState _currentSuperState;
-
-    protected bool IsRootState { set { _isRootState = value; } }
-    protected PlayerStateMachine Context { get { return _context; } }
-    protected PlayerStateFactory Factory { get { return _factory; } }
-
-    public PlayerBaseState(PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory)
+    public abstract class PlayerBaseState
     {
-        _context = currentContext;
-        _factory = playerStateFactory;
-    }
+        private bool _isRootState = false;
+        private PlayerStateMachine _context;
+        private PlayerStateFactory _factory;
+        private PlayerBaseState _currentSubState;
+        private PlayerBaseState _currentSuperState;
 
-    public abstract void EnterState();
-    public abstract void UpdateState();
-    public abstract void ExitState();
-    public abstract void CheckSwitchStates();
-    public abstract void InitializeSubState();
+        protected bool IsRootState { set { _isRootState = value; } }
+        protected PlayerStateMachine Context { get { return _context; } }
+        protected PlayerStateFactory Factory { get { return _factory; } }
 
-    public void UpdateStates()
-    {
-        UpdateState();
-        if (_currentSubState != null)
+        public PlayerBaseState(PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory)
         {
-            _currentSubState.UpdateState();
+            _context = currentContext;
+            _factory = playerStateFactory;
         }
-    }
 
-    protected void SwitchState(PlayerBaseState newState)
-    {
-        ExitState();
+        public abstract void EnterState();
+        public abstract void UpdateState();
+        public abstract void ExitState();
+        public abstract void CheckSwitchStates();
+        public abstract void InitializeSubState();
 
-        newState.EnterState();
-
-        if (_isRootState)
+        public void UpdateStates()
         {
-            _context.CurrentState = newState;
+            UpdateState();
+            if (_currentSubState != null)
+            {
+                _currentSubState.UpdateState();
+            }
         }
-        else if (_currentSuperState != null)
-        {
-            _currentSuperState.SetSubState(newState);
-        }
-    }
 
-    protected void SetSuperState(PlayerBaseState newSuperState)
-    {
-        _currentSuperState = newSuperState;
-    }
+        protected void SwitchState(PlayerBaseState newState)
+        {
+            ExitState();
+
+            newState.EnterState();
+
+            if (_isRootState)
+            {
+                _context.CurrentState = newState;
+            }
+            else if (_currentSuperState != null)
+            {
+                _currentSuperState.SetSubState(newState);
+            }
+        }
+
+        protected void SetSuperState(PlayerBaseState newSuperState)
+        {
+            _currentSuperState = newSuperState;
+        }
     
-    protected void SetSubState(PlayerBaseState newSubState)
-    {
-        _currentSubState = newSubState;
-        newSubState.SetSuperState(this);
+        protected void SetSubState(PlayerBaseState newSubState)
+        {
+            _currentSubState = newSubState;
+            newSubState.SetSuperState(this);
+        }
     }
 }

@@ -1,36 +1,36 @@
-using Player.State_Machine;
-using UnityEngine;
-
-public class PlayerIdleState : PlayerBaseState
+namespace Player.State_Machine
 {
-    public PlayerIdleState(PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory)
-        : base(currentContext, playerStateFactory) { }
-
-    public PlayerStateFactory PlayerStateFactory { get; }
-
-    public override void EnterState()
+    public class PlayerIdleState : PlayerBaseState
     {
-    }
+        public PlayerIdleState(PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory)
+            : base(currentContext, playerStateFactory) { }
 
-    public override void ExitState()
-    {
-    }
+        public PlayerStateFactory PlayerStateFactory { get; }
 
-    public override void UpdateState()
-    {
-        CheckSwitchStates();
-    }
-
-    public override void InitializeSubState()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void CheckSwitchStates()
-    {
-        if (Context.IsMovementPressed)
+        public override void EnterState()
         {
-            SwitchState(Factory.Move());
+        }
+
+        public override void ExitState()
+        {
+        }
+
+        public override void UpdateState()
+        {
+            CheckSwitchStates();
+        }
+
+        public override void InitializeSubState()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void CheckSwitchStates()
+        {
+            if (Context.IsMovementPressed)
+            {
+                SwitchState(Factory.Move());
+            }
         }
     }
 }

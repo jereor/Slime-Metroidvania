@@ -1,40 +1,41 @@
 using Player.Core;
-using Player.State_Machine;
-using UnityEngine;
 
-public class PlayerMoveState : PlayerBaseState
+namespace Player.State_Machine
 {
-    public PlayerMoveState(PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory)
-        : base(currentContext, playerStateFactory) { }
+    public class PlayerMoveState : PlayerBaseState
+    {
+        public PlayerMoveState(PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory)
+            : base(currentContext, playerStateFactory) { }
 
-    public PlayerStateFactory PlayerStateFactory { get; }
+        public PlayerStateFactory PlayerStateFactory { get; }
 
-    public override void EnterState()
-    {
-        Context.Animator.SetBool(Context.IsMovingHash, true);
-    }
-
-    public override void ExitState()
-    {
-        Context.Animator.SetBool(Context.IsMovingHash, false);
-    }
-
-    public override void UpdateState()
-    {
-        CheckSwitchStates();
-        PlayerMovement.Instance.HandleMovement(Context);
-    }
-    
-    public override void InitializeSubState()
-    {
-        throw new System.NotImplementedException();
-    }
-    
-    public override void CheckSwitchStates()
-    {
-        if (Context.IsMovementPressed == false)
+        public override void EnterState()
         {
-            SwitchState(Factory.Idle());
+            Context.Animator.SetBool(Context.IsMovingHash, true);
+        }
+
+        public override void ExitState()
+        {
+            Context.Animator.SetBool(Context.IsMovingHash, false);
+        }
+
+        public override void UpdateState()
+        {
+            CheckSwitchStates();
+            PlayerMovement.Instance.HandleMovement(Context);
+        }
+    
+        public override void InitializeSubState()
+        {
+            throw new System.NotImplementedException();
+        }
+    
+        public override void CheckSwitchStates()
+        {
+            if (Context.IsMovementPressed == false)
+            {
+                SwitchState(Factory.Idle());
+            }
         }
     }
 }
