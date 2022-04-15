@@ -21,7 +21,7 @@ namespace Player.Core
 
         public virtual void CheckDeath()
         {
-            if (_currentHealth <= _maxHealth)
+            if (_currentHealth <= 0)
             {
                 Destroy(gameObject);
             }
