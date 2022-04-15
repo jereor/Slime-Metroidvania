@@ -1,5 +1,6 @@
 using Enemies.States.Data;
 using UnityEngine;
+using Utility;
 
 namespace Enemies.States
 {
@@ -53,8 +54,7 @@ namespace Enemies.States
 
             foreach (Collider2D collider in detectedObjects)
             {
-                // TODO: Convert magic string to constant
-                collider.transform.SendMessage("Damage");
+                collider.transform.SendMessage(EventConstants.DAMAGE);
             }
         }
 
