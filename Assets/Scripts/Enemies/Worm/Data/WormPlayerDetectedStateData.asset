@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f33dae60767afee4fb02cbb9e2a6d7c1, type: 3}
   m_Name: WormPlayerDetectedStateData
   m_EditorClassIdentifier: 
-  _longRangeActionTime: 1.5
+  _longRangeActionTime: 1

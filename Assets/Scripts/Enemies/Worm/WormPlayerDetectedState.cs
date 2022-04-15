@@ -30,7 +30,7 @@ namespace Enemies.Worm
             {
                 StateMachine.ChangeState(_worm.MeleeAttackState);
             }
-            else if (CanPerformLongRangeAction)
+            else if (CanPerformLongRangeAction || IsAnimationFinished)
             {
                 StateMachine.ChangeState(_worm.ChargeState);
             }

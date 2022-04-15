@@ -11,6 +11,7 @@ namespace Enemies.States
         protected bool IsPlayerInMaxAggroRange;
         protected bool CanPerformLongRangeAction;
         protected bool CanPerformCloseRangeAction;
+        protected bool IsAnimationFinished;
         
         protected PlayerDetectedState(Entity entity, FiniteStateMachine stateMachine, string animatorBoolName, D_PlayerDetectedState stateData) : base(entity, stateMachine, animatorBoolName)
         {
@@ -21,6 +22,8 @@ namespace Enemies.States
         {
             base.Enter();
             
+            Entity.AnimationToStateMachine.PlayerDetectedState = this;
+            IsAnimationFinished = false;
             Entity.SetVelocity(0f);
         }
 
@@ -52,6 +55,11 @@ namespace Enemies.States
             IsPlayerInMaxAggroRange = Entity.CheckPlayerInMaxAggroRange();
 
             CanPerformCloseRangeAction = Entity.CheckPlayerInCloseRangeAction();
+        }
+
+        public void FinishDetection()
+        {
+            IsAnimationFinished = true;
         }
     }
 }

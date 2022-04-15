@@ -47,7 +47,7 @@ namespace Enemies.States
 
         public virtual void TriggerAttack()
         {
-               
+            
         }
 
         public virtual void FinishAttack()
