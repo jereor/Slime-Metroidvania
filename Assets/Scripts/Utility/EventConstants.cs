@@ -1,6 +1,6 @@
 namespace Utility
 {
-    public class EventConstants
+    public static class EventConstants
     {
         public const string DAMAGE = "Damage";
     }
