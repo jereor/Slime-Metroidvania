@@ -27,7 +27,12 @@ namespace Enemies.Worm
         {
             base.LogicUpdate();
 
-            if (IsAnimationFinished)
+            if (!IsAnimationFinished)
+            {
+                return;
+            }
+            
+            if (IsPlayerInMinAggroRange)
             {
                 StateMachine.ChangeState(_worm.PlayerDetectedState);
             }
