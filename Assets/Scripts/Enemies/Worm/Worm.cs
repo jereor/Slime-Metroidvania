@@ -29,12 +29,12 @@ namespace Enemies.Worm
         {
             base.Start();
 
-            IdleState = 
-                new WormIdleState(this, StateMachine, AnimatorConstants.IS_IDLE, 
+            IdleState =
+                new WormIdleState(this, StateMachine, AnimatorConstants.IS_IDLE,
                     _idleStateData);
 
-            MoveState = 
-                new WormMoveState(this, StateMachine, AnimatorConstants.IS_MOVING, 
+            MoveState =
+                new WormMoveState(this, StateMachine, AnimatorConstants.IS_MOVING,
                     _moveStateData);
 
             PlayerDetectedState =
@@ -42,26 +42,39 @@ namespace Enemies.Worm
                     _playerDetectedStateData);
 
             ChargeState =
-                new WormChargeState(this, StateMachine, AnimatorConstants.IS_CHARGING, 
+                new WormChargeState(this, StateMachine, AnimatorConstants.IS_CHARGING,
                     _chargeStateData);
 
-            LookForPlayerState = 
+            LookForPlayerState =
                 new WormLookForPlayerState(this, StateMachine, AnimatorConstants.IS_LOOKING_FOR_PLAYER,
-                _lookForPlayerStateData);
+                    _lookForPlayerStateData);
 
-            MeleeAttackState = 
+            MeleeAttackState =
                 new WormMeleeAttackState(this, StateMachine, AnimatorConstants.IS_MELEE_ATTACKING,
-                _meleeAttackPosition, _meleeAttackStateData);
+                    _meleeAttackPosition, _meleeAttackStateData);
 
-            StunState = new WormStunState(this, StateMachine, AnimatorConstants.IS_STUNNED, _stunStateData);
+            StunState = 
+                new WormStunState(this, StateMachine, AnimatorConstants.IS_STUNNED, 
+                    _stunStateData);
 
             StateMachine.Initialize(MoveState);
+        }
+
+        public override void Damage(AttackDetails attackDetails)
+        {
+            base.Damage(attackDetails);
+
+            if (StateMachine.CurrentState != StunState
+                && IsStunned)
+            {
+                StateMachine.ChangeState(StunState);
+            }
         }
 
         public override void OnDrawGizmos()
         {
             base.OnDrawGizmos();
-            
+
             Gizmos.DrawWireSphere(_meleeAttackPosition.position, _meleeAttackStateData._attackRadius);
         }
     }
