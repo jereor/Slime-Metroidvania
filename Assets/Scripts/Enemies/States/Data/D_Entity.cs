@@ -6,6 +6,8 @@ namespace Enemies.States.Data
     [CreateAssetMenu(fileName = "newEntityData", menuName = "Data/Entity Data/Base Data")]
     public class D_Entity : ScriptableObject
     {
+        public float _maxHealth = 30f;
+        
         public float _wallCheckDistance = 0.2f;
         public float _ledgeCheckDistance = 0.4f;
         

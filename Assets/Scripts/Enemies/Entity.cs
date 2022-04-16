@@ -21,16 +21,18 @@ namespace Enemies
         [Header("Enemy Data")]
         [SerializeField] private D_Entity _entityData;
 
+        private float _currentHealth;
+        
         private Vector2 _velocityWorkspace;
 
         public virtual void Start()
         {
+            _facingDirection = 1;
+            _currentHealth = _entityData._maxHealth;
             StateMachine = new FiniteStateMachine();
             Rb = GetComponent<Rigidbody2D>();
             Animator = GetComponentInChildren<Animator>();
             AnimationToStateMachine = GetComponentInChildren<AnimationToStateMachine>();
-
-            _facingDirection = 1;
         }
 
         public virtual void Update()
@@ -106,6 +108,11 @@ namespace Enemies
             currentTransform.localScale = localScale;
         }
 
+        public virtual void Damage(AttackDetails attackDetails)
+        {
+            _currentHealth -= attackDetails.DamageAmount;
+        }
+        
         public virtual void OnDrawGizmos()
         {
             Vector3 wallCheckerPosition = _wallChecker.position;
