@@ -24,6 +24,8 @@ namespace Enemies
         [Header("Enemy Data")]
         [SerializeField] private D_Entity _entityData;
 
+        protected bool IsStunned;
+        
         private float _currentHealth;
         private float _currentStunResistance;
         private float _lastDamageTime;
@@ -45,6 +47,11 @@ namespace Enemies
         public virtual void Update()
         {
             StateMachine.CurrentState.LogicUpdate();
+
+            if (Time.time >= _lastDamageTime + _entityData._stunRecoveryTime)
+            {
+                ResetStunResistance();
+            }
         }
 
         public virtual void FixedUpdate()
@@ -135,17 +142,29 @@ namespace Enemies
             _velocityWorkspace.Set(Rb.velocity.x + velocity/2, velocity);
             Rb.velocity = _velocityWorkspace;
         }
+
+        public virtual void ResetStunResistance()
+        {
+            IsStunned = false;
+            _currentStunResistance = _entityData._stunResistance;
+        }
         
         public virtual void Damage(AttackDetails attackDetails)
         {
             _lastDamageTime = Time.time;
             
             _currentHealth -= attackDetails.DamageAmount;
+            _currentStunResistance -= attackDetails.StunDamageAmount;
 
             DamageHop(_entityData._damageHopSpeed);
             
             bool attackFromRight = attackDetails.Position.x > transform.position.x;
             LastDamageDirection = attackFromRight ? -1 : 1;
+
+            if (_currentStunResistance <= 0)
+            {
+                IsStunned = true;
+            }
         }
         
         public virtual void OnDrawGizmos()
