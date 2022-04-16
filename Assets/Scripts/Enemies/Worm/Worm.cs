@@ -13,6 +13,7 @@ namespace Enemies.Worm
         public WormChargeState ChargeState { get; private set; }
         public WormLookForPlayerState LookForPlayerState { get; private set; }
         public WormMeleeAttackState MeleeAttackState { get; private set; }
+        public WormStunState StunState { get; private set; }
 
         [SerializeField] private D_IdleState _idleStateData;
         [SerializeField] private D_MoveState _moveStateData;
@@ -20,6 +21,7 @@ namespace Enemies.Worm
         [SerializeField] private D_ChargeState _chargeStateData;
         [SerializeField] private D_LookForPlayerState _lookForPlayerStateData;
         [SerializeField] private D_MeleeAttackState _meleeAttackStateData;
+        [SerializeField] private D_StunState _stunStateData;
 
         [SerializeField] private Transform _meleeAttackPosition;
 
@@ -50,6 +52,8 @@ namespace Enemies.Worm
             MeleeAttackState = 
                 new WormMeleeAttackState(this, StateMachine, AnimatorConstants.IS_MELEE_ATTACKING,
                 _meleeAttackPosition, _meleeAttackStateData);
+
+            StunState = new WormStunState(this, StateMachine, AnimatorConstants.IS_STUNNED, _stunStateData);
 
             StateMachine.Initialize(MoveState);
         }
