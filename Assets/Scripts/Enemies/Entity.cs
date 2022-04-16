@@ -6,10 +6,12 @@ namespace Enemies
 {
     public class Entity : MonoBehaviour
     {
-        protected FiniteStateMachine StateMachine;
         public Rigidbody2D Rb { get; private set; }
         public Animator Animator { get; private set; }
         public AnimationToStateMachine AnimationToStateMachine { get; private set; }
+        public int LastDamageDirection { get; private set; }
+        
+        protected FiniteStateMachine StateMachine;
 
         private int _facingDirection = 1;
         
@@ -22,8 +24,6 @@ namespace Enemies
         [SerializeField] private D_Entity _entityData;
 
         private float _currentHealth;
-
-        private int _lastDamageDirection;
         
         private Vector2 _velocityWorkspace;
 
@@ -55,6 +55,13 @@ namespace Enemies
             Rb.velocity = _velocityWorkspace;
         }
 
+        public virtual void SetVelocity(float velocity, Vector2 angle, int direction)
+        {
+            angle.Normalize();
+            _velocityWorkspace.Set(angle.x * velocity * direction, angle.y * velocity);
+            Rb.velocity = _velocityWorkspace;
+        }
+        
         public virtual bool CheckWall()
         {
             return Physics2D.Raycast(
@@ -123,7 +130,7 @@ namespace Enemies
             DamageHop(_entityData._damageHopSpeed);
             
             bool attackFromRight = attackDetails.Position.x > transform.position.x;
-            _lastDamageDirection = attackFromRight ? -1 : 1;
+            LastDamageDirection = attackFromRight ? -1 : 1;
         }
         
         public virtual void OnDrawGizmos()

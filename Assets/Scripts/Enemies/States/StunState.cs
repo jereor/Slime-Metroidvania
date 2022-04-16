@@ -18,6 +18,7 @@ namespace Enemies.States
             base.Enter();
 
             IsStunTimeOver = false;
+            Entity.SetVelocity(StateData._stunKnockbackSpeed, StateData._stunKnockbackAngle, Entity.LastDamageDirection);
         }
 
         public override void Exit()
