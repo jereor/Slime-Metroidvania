@@ -7,6 +7,8 @@ namespace Enemies.States.Data
     public class D_Entity : ScriptableObject
     {
         public float _maxHealth = 30f;
+
+        public float _damageHopSpeed = 10f;
         
         public float _wallCheckDistance = 0.2f;
         public float _ledgeCheckDistance = 0.4f;

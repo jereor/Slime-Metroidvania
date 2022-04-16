@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43051f46685fba043a0d34ee150d9cfa, type: 3}
   m_Name: WormBaseData
   m_EditorClassIdentifier: 
+  _maxHealth: 30
+  _damageHopSpeed: 10
   _wallCheckDistance: 0.2
   _ledgeCheckDistance: 0.4
   _minAggroDistance: 4

@@ -22,6 +22,8 @@ namespace Enemies
         [SerializeField] private D_Entity _entityData;
 
         private float _currentHealth;
+
+        private int _lastDamageDirection;
         
         private Vector2 _velocityWorkspace;
 
@@ -108,9 +110,20 @@ namespace Enemies
             currentTransform.localScale = localScale;
         }
 
+        public virtual void DamageHop(float velocity)
+        {
+            _velocityWorkspace.Set(Rb.velocity.x + velocity/2, velocity);
+            Rb.velocity = _velocityWorkspace;
+        }
+        
         public virtual void Damage(AttackDetails attackDetails)
         {
             _currentHealth -= attackDetails.DamageAmount;
+
+            DamageHop(_entityData._damageHopSpeed);
+            
+            bool attackFromRight = attackDetails.Position.x > transform.position.x;
+            _lastDamageDirection = attackFromRight ? -1 : 1;
         }
         
         public virtual void OnDrawGizmos()
