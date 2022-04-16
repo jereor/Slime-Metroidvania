@@ -46,6 +46,11 @@ namespace Enemies.States
         public override void TriggerAttack()
         {
             base.TriggerAttack();
+        }
+
+        public override void FinishAttack()
+        {
+            base.FinishAttack();
             
             Collider2D[] detectedObjects = Physics2D.OverlapCircleAll(
                 AttackPosition.position, 
@@ -56,11 +61,6 @@ namespace Enemies.States
             {
                 collider.transform.SendMessage(EventConstants.DAMAGE, StateData._attackDamage);
             }
-        }
-
-        public override void FinishAttack()
-        {
-            base.FinishAttack();
         }
     }
 }
