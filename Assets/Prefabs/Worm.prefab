@@ -24,11 +24,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1039834107}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.8, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8027880798065282584}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1828182202
 GameObject:
@@ -40,7 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1828182203}
   m_Layer: 8
-  m_Name: MeleeAttackPosition
+  m_Name: Melee Attack Position
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -54,11 +54,41 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1828182202}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.75, y: 0, z: 0}
+  m_LocalPosition: {x: 0.98, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8027880798065282584}
-  m_RootOrder: 4
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2112641538462964926
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7435431957918509443}
+  m_Layer: 8
+  m_Name: Ground Checker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7435431957918509443
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2112641538462964926}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.28, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8027880798065282584}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3248777575331397881
 GameObject:
@@ -88,7 +118,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8027880798065282584}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4306971913298826364
 GameObject:
@@ -151,8 +181,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8027880798246931887}
-  - {fileID: 4637033044323698556}
+  - {fileID: 7435431957918509443}
   - {fileID: 6137903470253505920}
+  - {fileID: 4637033044323698556}
   - {fileID: 1039834108}
   - {fileID: 1828182203}
   m_Father: {fileID: 0}
@@ -170,6 +201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 255d2013be64f1643862701ea2a9107f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _groundChecker: {fileID: 7435431957918509443}
   _wallChecker: {fileID: 6137903470253505920}
   _ledgeChecker: {fileID: 4637033044323698556}
   _playerChecker: {fileID: 1039834108}
@@ -180,6 +212,7 @@ MonoBehaviour:
   _chargeStateData: {fileID: 11400000, guid: 233c268a210ceb046a70a83b794a7f52, type: 2}
   _lookForPlayerStateData: {fileID: 11400000, guid: d62dc385785c529458324a1fb9e403dc, type: 2}
   _meleeAttackStateData: {fileID: 11400000, guid: 6d9c47cb1da062544acbcbce24280965, type: 2}
+  _stunStateData: {fileID: 11400000, guid: 06cce669b76ceeb45a2e1ebf043945ac, type: 2}
   _meleeAttackPosition: {fileID: 1828182203}
 --- !u!50 &5537378771929114168
 Rigidbody2D:
@@ -239,6 +272,7 @@ GameObject:
   - component: {fileID: 8027880798246931887}
   - component: {fileID: 8027880798246931886}
   - component: {fileID: 1378543626}
+  - component: {fileID: 8027880797374382679}
   m_Layer: 0
   m_Name: Graphics
   m_TagString: Untagged
@@ -330,3 +364,15 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8027880797374382679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8027880798246931884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc4e7b80e30798845b420b3ad8ce1da7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
