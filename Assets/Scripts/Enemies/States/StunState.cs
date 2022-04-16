@@ -9,6 +9,8 @@ namespace Enemies.States
         protected bool IsStunTimeOver;
         protected bool IsGrounded;
         protected bool IsMovementStopped;
+        protected bool CanPerformCloseRangeAction;
+        protected bool IsPlayerInMinAggroRange;
         
         protected StunState(Entity entity, FiniteStateMachine stateMachine, string animatorBoolName, D_StunState stateData) : base(entity, stateMachine, animatorBoolName)
         {
@@ -27,6 +29,8 @@ namespace Enemies.States
         public override void Exit()
         {
             base.Exit();
+            
+            Entity.ResetStunResistance();
         }
 
         public override void LogicUpdate()
@@ -57,6 +61,8 @@ namespace Enemies.States
             base.HandleChecks();
 
             IsGrounded = Entity.CheckGround();
+            CanPerformCloseRangeAction = Entity.CheckPlayerInCloseRangeAction();
+            IsPlayerInMinAggroRange = Entity.CheckPlayerInMinAggroRange();
         }
     }
 }
