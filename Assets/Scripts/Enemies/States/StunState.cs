@@ -7,6 +7,8 @@ namespace Enemies.States
         protected D_StunState StateData;
 
         protected bool IsStunTimeOver;
+        protected bool IsGrounded;
+        protected bool IsMovementStopped;
         
         protected StunState(Entity entity, FiniteStateMachine stateMachine, string animatorBoolName, D_StunState stateData) : base(entity, stateMachine, animatorBoolName)
         {
@@ -18,6 +20,7 @@ namespace Enemies.States
             base.Enter();
 
             IsStunTimeOver = false;
+            IsMovementStopped = false;
             Entity.SetVelocity(StateData._stunKnockbackSpeed, StateData._stunKnockbackAngle, Entity.LastDamageDirection);
         }
 
@@ -34,6 +37,14 @@ namespace Enemies.States
             {
                 IsStunTimeOver = true;
             }
+
+            if (IsGrounded 
+                && Time.time >= StartTime + StateData._stunKnockbackTime
+                && IsMovementStopped == false)
+            {
+                IsMovementStopped = true;
+                Entity.SetVelocity(0f);
+            }
         }
 
         public override void PhysicsUpdate()
@@ -44,6 +55,8 @@ namespace Enemies.States
         public override void HandleChecks()
         {
             base.HandleChecks();
+
+            IsGrounded = Entity.CheckGround();
         }
     }
 }

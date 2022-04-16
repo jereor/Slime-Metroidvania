@@ -12,6 +12,7 @@ namespace Enemies.States.Data
         
         public float _wallCheckDistance = 0.2f;
         public float _ledgeCheckDistance = 0.4f;
+        public float _groundCheckRadius = 0.3f;
         
         public float _minAggroDistance = 3f;
         public float _maxAggroDistance = 4f;

@@ -14,8 +14,9 @@ namespace Enemies
         protected FiniteStateMachine StateMachine;
 
         private int _facingDirection = 1;
-        
+
         [Header("Child References")] 
+        [SerializeField] private Transform _groundChecker;
         [SerializeField] private Transform _wallChecker;
         [SerializeField] private Transform _ledgeChecker;
         [SerializeField] private Transform _playerChecker;
@@ -80,6 +81,14 @@ namespace Enemies
                 _entityData._groundLayer.value);
         }
 
+        public virtual bool CheckGround()
+        {
+            return Physics2D.OverlapCircle(
+                _groundChecker.position, 
+                _entityData._groundCheckRadius,
+                _entityData._groundLayer.value);
+        }
+        
         public virtual bool CheckPlayerInMinAggroRange()
         {
             return Physics2D.Raycast(
