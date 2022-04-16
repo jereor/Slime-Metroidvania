@@ -17,6 +17,9 @@ namespace Enemies.States.Data
         public float _minAggroDistance = 3f;
         public float _maxAggroDistance = 4f;
 
+        public float _stunResistance = 3f;
+        public float _stunRecoveryTime = 2f;
+
         public float _closeRangeActionDistance = 1f;
         
         public LayerMask _groundLayer = PhysicsConstants.GROUND_LAYER_NUMBER;

@@ -25,6 +25,8 @@ namespace Enemies
         [SerializeField] private D_Entity _entityData;
 
         private float _currentHealth;
+        private float _currentStunResistance;
+        private float _lastDamageTime;
         
         private Vector2 _velocityWorkspace;
 
@@ -32,6 +34,8 @@ namespace Enemies
         {
             _facingDirection = 1;
             _currentHealth = _entityData._maxHealth;
+            _currentStunResistance = _entityData._stunResistance;
+            
             StateMachine = new FiniteStateMachine();
             Rb = GetComponent<Rigidbody2D>();
             Animator = GetComponentInChildren<Animator>();
@@ -134,6 +138,8 @@ namespace Enemies
         
         public virtual void Damage(AttackDetails attackDetails)
         {
+            _lastDamageTime = Time.time;
+            
             _currentHealth -= attackDetails.DamageAmount;
 
             DamageHop(_entityData._damageHopSpeed);
