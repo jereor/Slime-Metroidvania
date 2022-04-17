@@ -1,8 +1,10 @@
+using System;
 using Player.Core;
 using Player.Core.Slime_Sling;
 using Player.Data;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Utility;
 
 namespace Player.State_Machine
 {
@@ -30,6 +32,7 @@ namespace Player.State_Machine
             get { return _animator; }
         }
         private PlayerControls _playerControls;
+        private AttackDetails _attackDetails;
 
         // Grounded
         public float? LastGroundedTime { get; set; }
@@ -144,7 +147,14 @@ namespace Player.State_Machine
                 Collider2D[] detectedObjects =
                     Physics2D.OverlapCircleAll(_meleeAttackHitBox.position, PlayerMeleeAttack.ATTACK_RADIUS, PlayerMeleeAttack.DamageableLayers);
 
-                Debug.Log("Melee Attack!!");
+                _attackDetails.Position = transform.position;
+                _attackDetails.DamageAmount = PlayerMeleeAttack.ATTACK_DAMAGE;
+                _attackDetails.StunDamageAmount = PlayerMeleeAttack.STUN_DAMAGE;
+
+                foreach (Collider2D hitObject in detectedObjects)
+                {
+                    hitObject.transform.parent.SendMessage(EventConstants.DAMAGE, _attackDetails);
+                }
             }
         }
 
@@ -156,6 +166,12 @@ namespace Player.State_Machine
         private void OnDisable()
         {
             _playerControls.Disable();
+        }
+
+        private void OnDrawGizmos()
+        {
+            Vector3 attackPosition = _meleeAttackHitBox.position;
+            Gizmos.DrawWireSphere(attackPosition, PlayerMeleeAttack.ATTACK_RADIUS);
         }
     }
 }
