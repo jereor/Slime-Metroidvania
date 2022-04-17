@@ -1,5 +1,5 @@
 {
-    "name": "Controls",
+    "name": "PlayerControls",
     "maps": [
         {
             "name": "Gameplay",
@@ -25,6 +25,14 @@
                     "name": "Shoot Sling",
                     "type": "Button",
                     "id": "f5bccbb2-c891-45ff-87ad-769d839cbf60",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "MeleeAttack",
+                    "type": "Button",
+                    "id": "51f386e8-0906-4750-8f62-61a77e84e92c",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -116,6 +124,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Shoot Sling",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c8768dba-1ee5-41b6-8add-c8dc863e112c",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MeleeAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

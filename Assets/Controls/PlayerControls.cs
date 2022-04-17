@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/Controls/Controls.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/Controls/PlayerControls.inputactions'
 
 using System;
 using System.Collections;
@@ -6,13 +6,13 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-public class PlayerControls : IInputActionCollection, IDisposable
+public class @PlayerControls : IInputActionCollection, IDisposable
 {
     public InputActionAsset asset { get; }
-    public PlayerControls()
+    public @PlayerControls()
     {
         asset = InputActionAsset.FromJson(@"{
-    ""name"": ""Controls"",
+    ""name"": ""PlayerControls"",
     ""maps"": [
         {
             ""name"": ""Gameplay"",
@@ -38,6 +38,14 @@ public class PlayerControls : IInputActionCollection, IDisposable
                     ""name"": ""Shoot Sling"",
                     ""type"": ""Button"",
                     ""id"": ""f5bccbb2-c891-45ff-87ad-769d839cbf60"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""MeleeAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""51f386e8-0906-4750-8f62-61a77e84e92c"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -131,6 +139,17 @@ public class PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""Shoot Sling"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c8768dba-1ee5-41b6-8add-c8dc863e112c"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MeleeAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -142,6 +161,7 @@ public class PlayerControls : IInputActionCollection, IDisposable
         m_Gameplay_Move = m_Gameplay.FindAction("Move", throwIfNotFound: true);
         m_Gameplay_Jump = m_Gameplay.FindAction("Jump", throwIfNotFound: true);
         m_Gameplay_ShootSling = m_Gameplay.FindAction("Shoot Sling", throwIfNotFound: true);
+        m_Gameplay_MeleeAttack = m_Gameplay.FindAction("MeleeAttack", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -194,13 +214,15 @@ public class PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Gameplay_Move;
     private readonly InputAction m_Gameplay_Jump;
     private readonly InputAction m_Gameplay_ShootSling;
+    private readonly InputAction m_Gameplay_MeleeAttack;
     public struct GameplayActions
     {
-        private PlayerControls m_Wrapper;
-        public GameplayActions(PlayerControls wrapper) { m_Wrapper = wrapper; }
+        private @PlayerControls m_Wrapper;
+        public GameplayActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Gameplay_Move;
         public InputAction @Jump => m_Wrapper.m_Gameplay_Jump;
         public InputAction @ShootSling => m_Wrapper.m_Gameplay_ShootSling;
+        public InputAction @MeleeAttack => m_Wrapper.m_Gameplay_MeleeAttack;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -219,6 +241,9 @@ public class PlayerControls : IInputActionCollection, IDisposable
                 @ShootSling.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnShootSling;
                 @ShootSling.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnShootSling;
                 @ShootSling.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnShootSling;
+                @MeleeAttack.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMeleeAttack;
+                @MeleeAttack.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMeleeAttack;
+                @MeleeAttack.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMeleeAttack;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -232,14 +257,18 @@ public class PlayerControls : IInputActionCollection, IDisposable
                 @ShootSling.started += instance.OnShootSling;
                 @ShootSling.performed += instance.OnShootSling;
                 @ShootSling.canceled += instance.OnShootSling;
+                @MeleeAttack.started += instance.OnMeleeAttack;
+                @MeleeAttack.performed += instance.OnMeleeAttack;
+                @MeleeAttack.canceled += instance.OnMeleeAttack;
             }
         }
     }
-    public GameplayActions Surface => new GameplayActions(this);
+    public GameplayActions @Gameplay => new GameplayActions(this);
     public interface IGameplayActions
     {
         void OnMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnShootSling(InputAction.CallbackContext context);
+        void OnMeleeAttack(InputAction.CallbackContext context);
     }
 }

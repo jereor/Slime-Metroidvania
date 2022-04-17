@@ -1,10 +1,12 @@
 using Player.Core;
 using Player.Core.Slime_Sling;
+using Player.Data;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Player.State_Machine
 {
+    // TODO: Make class smaller, separate functionality to smaller classes
     public class PlayerStateMachine : MonoBehaviour
     {
         [Header("Jump variables")]
@@ -16,6 +18,7 @@ namespace Player.State_Machine
         [SerializeField] private Transform _groundCheck;
         [SerializeField] private Animator _animator;
         [SerializeField] private LayerMask _groundLayer;
+        [SerializeField] private Transform _meleeAttackHitBox;
 
         // References
         public Rigidbody2D RigidBody
@@ -48,7 +51,7 @@ namespace Player.State_Machine
         public bool IsFacingRight { get; set; } = true;
         public bool IsMovementPressed { get; private set; }
         public float CurrentMovementInput { get; private set; }
-
+        
         // Animator hashes
         public int IsMovingHash { get; private set; }
         public int IsAirborneHash { get; private set; }
@@ -75,16 +78,18 @@ namespace Player.State_Machine
 
         private void SubscribePlayerInputs()
         {
+            //  TODO: Look into making separate methods for each input action
             _playerControls = new PlayerControls();
-            _playerControls.Surface.Move.started += OnMovementInput;
-            _playerControls.Surface.Move.canceled += OnMovementInput;
-            _playerControls.Surface.Move.performed += OnMovementInput;
-            _playerControls.Surface.Jump.started += OnJumpInput;
-            _playerControls.Surface.Jump.canceled += OnJumpInput;
-            _playerControls.Surface.ShootSling.started += OnShootSlingInput;
-            _playerControls.Surface.ShootSling.canceled += OnShootSlingInput;
+            _playerControls.Gameplay.Move.started += OnMovementInput;
+            _playerControls.Gameplay.Move.canceled += OnMovementInput;
+            _playerControls.Gameplay.Move.performed += OnMovementInput;
+            _playerControls.Gameplay.Jump.started += OnJumpInput;
+            _playerControls.Gameplay.Jump.canceled += OnJumpInput;
+            _playerControls.Gameplay.ShootSling.started += OnShootSlingInput;
+            _playerControls.Gameplay.ShootSling.canceled += OnShootSlingInput;
+            _playerControls.Gameplay.MeleeAttack.started += OnMeleeAttackInput;
         }
-
+        
         private void Update()
         {
             _currentState.UpdateStates();
@@ -132,6 +137,16 @@ namespace Player.State_Machine
             SlingShooter.Instance.StartPull();
         }
 
+        private void OnMeleeAttackInput(InputAction.CallbackContext context)
+        {
+            if (context.started)
+            {
+                Collider2D[] detectedObjects =
+                    Physics2D.OverlapCircleAll(_meleeAttackHitBox.position, PlayerMeleeAttack.ATTACK_RADIUS, PlayerMeleeAttack.DamageableLayers);
+
+                Debug.Log("Melee Attack!!");
+            }
+        }
 
         private void OnEnable()
         {
