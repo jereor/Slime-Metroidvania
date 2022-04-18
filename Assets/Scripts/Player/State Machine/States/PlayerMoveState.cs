@@ -10,8 +10,6 @@ namespace Player.State_Machine.States
             
         }
 
-        public PlayerStateFactory PlayerStateFactory { get; }
-
         protected override void EnterState()
         {
             Context.Animator.SetBool(Context.IsMovingHash, true);
