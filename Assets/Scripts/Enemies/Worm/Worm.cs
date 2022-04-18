@@ -68,7 +68,11 @@ namespace Enemies.Worm
         {
             base.Damage(attackDetails);
 
-            if (StateMachine.CurrentState != StunState
+            if (IsDead)
+            {
+                StateMachine.ChangeState(DeadState);
+            }
+            else if (StateMachine.CurrentState != StunState
                 && IsStunned)
             {
                 StateMachine.ChangeState(StunState);

@@ -22,6 +22,7 @@ MonoBehaviour:
   _stunResistance: 3
   _stunRecoveryTime: 2
   _closeRangeActionDistance: 0.4
+  _hitParticles: {fileID: 1153435723755021374, guid: af4eb45f224fdfe4d8c8e383325a70ad, type: 3}
   _groundLayer:
     serializedVersion: 2
     m_Bits: 8
