@@ -13,11 +13,14 @@ MonoBehaviour:
   m_Name: WormBaseData
   m_EditorClassIdentifier: 
   _maxHealth: 30
-  _damageHopSpeed: 10
+  _damageHopSpeed: 2
   _wallCheckDistance: 0.2
   _ledgeCheckDistance: 0.4
+  _groundCheckRadius: 0.3
   _minAggroDistance: 4
   _maxAggroDistance: 5
+  _stunResistance: 3
+  _stunRecoveryTime: 2
   _closeRangeActionDistance: 0.4
   _groundLayer:
     serializedVersion: 2

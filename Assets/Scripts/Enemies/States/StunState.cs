@@ -4,7 +4,7 @@ namespace Enemies.States
 {
     public class StunState : State
     {
-        protected D_StunState StateData;
+        protected readonly D_StunState StateData;
 
         protected bool IsStunTimeOver;
         protected bool IsGrounded;
