@@ -12,21 +12,21 @@ namespace Player.State_Machine
 
         public PlayerStateFactory PlayerStateFactory { get; }
 
-        public override void EnterState()
+        protected override void EnterState()
         {
         }
 
-        public override void ExitState()
+        protected override void ExitState()
         {
             Context.LastGroundedTime = Time.time;
         }
 
-        public override void UpdateState()
+        protected override void UpdateState()
         {
             CheckSwitchStates();
         }
 
-        public override void InitializeSubState()
+        protected override void InitializeSubState()
         {
             if (Context.IsMeleeAttacking)
             {
@@ -42,7 +42,7 @@ namespace Player.State_Machine
             }
         }
 
-        public override void CheckSwitchStates()
+        protected override void CheckSwitchStates()
         {
             if (Context.IsJumpPressed)
             {

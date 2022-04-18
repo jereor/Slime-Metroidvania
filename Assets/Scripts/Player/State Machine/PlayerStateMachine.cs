@@ -80,7 +80,6 @@ namespace Player.State_Machine
         {
             _states = new PlayerStateFactory(this);
             _currentState = _states.Grounded();
-            _currentState.EnterState();
 
             // TODO: Make magic strings const variables
             IsMovingHash = Animator.StringToHash("isMoving");

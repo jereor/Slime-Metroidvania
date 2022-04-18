@@ -10,28 +10,28 @@ namespace Player.State_Machine
 
         public PlayerStateFactory PlayerStateFactory { get; }
 
-        public override void EnterState()
+        protected override void EnterState()
         {
             Context.Animator.SetBool(Context.IsMovingHash, true);
         }
 
-        public override void ExitState()
+        protected override void ExitState()
         {
             Context.Animator.SetBool(Context.IsMovingHash, false);
         }
 
-        public override void UpdateState()
+        protected override void UpdateState()
         {
             CheckSwitchStates();
             PlayerMovement.Instance.HandleMovement(Context);
         }
-    
-        public override void InitializeSubState()
+
+        protected override void InitializeSubState()
         {
             throw new System.NotImplementedException();
         }
-    
-        public override void CheckSwitchStates()
+
+        protected override void CheckSwitchStates()
         {
             if (Context.IsMeleeAttacking)
             {

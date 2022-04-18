@@ -14,7 +14,7 @@ namespace Player.State_Machine
 
 
         // ENTER STATE
-        public override void EnterState()
+        protected override void EnterState()
         {
             Context.Animator.SetBool(Context.IsAirborneHash, true);
             JumpStart();
@@ -40,14 +40,14 @@ namespace Player.State_Machine
 
 
         // EXIT STATE
-        public override void ExitState()
+        protected override void ExitState()
         {
             Context.Animator.SetBool(Context.IsAirborneHash, false);
         }
 
 
         // UPDATE STATE
-        public override void UpdateState()
+        protected override void UpdateState()
         {
             CheckSwitchStates();
             CheckJumpEnd();
@@ -71,13 +71,13 @@ namespace Player.State_Machine
 
 
         // INITIALIZE SUB STATE
-        public override void InitializeSubState()
+        protected override void InitializeSubState()
         {
         }
     
 
         // CHECK SWITCH STATES
-        public override void CheckSwitchStates()
+        protected override void CheckSwitchStates()
         {
             if (Context.IsJumpPressed == false)
             {

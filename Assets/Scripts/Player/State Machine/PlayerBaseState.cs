@@ -2,35 +2,30 @@ namespace Player.State_Machine
 {
     public abstract class PlayerBaseState
     {
-        private bool _isRootState = false;
-        private PlayerStateMachine _context;
-        private PlayerStateFactory _factory;
+        private bool _isRootState;
         private PlayerBaseState _currentSubState;
         private PlayerBaseState _currentSuperState;
 
         protected bool IsRootState { set { _isRootState = value; } }
-        protected PlayerStateMachine Context { get { return _context; } }
-        protected PlayerStateFactory Factory { get { return _factory; } }
+        protected PlayerStateMachine Context { get; }
+        protected PlayerStateFactory Factory { get; }
 
-        public PlayerBaseState(PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory)
+        protected PlayerBaseState(PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory)
         {
-            _context = currentContext;
-            _factory = playerStateFactory;
+            Context = currentContext;
+            Factory = playerStateFactory;
         }
 
-        public abstract void EnterState();
-        public abstract void UpdateState();
-        public abstract void ExitState();
-        public abstract void CheckSwitchStates();
-        public abstract void InitializeSubState();
+        protected abstract void EnterState();
+        protected abstract void UpdateState();
+        protected abstract void ExitState();
+        protected abstract void CheckSwitchStates();
+        protected abstract void InitializeSubState();
 
         public void UpdateStates()
         {
             UpdateState();
-            if (_currentSubState != null)
-            {
-                _currentSubState.UpdateState();
-            }
+            _currentSubState?.UpdateState();
         }
 
         protected void SwitchState(PlayerBaseState newState)
@@ -41,11 +36,11 @@ namespace Player.State_Machine
 
             if (_isRootState)
             {
-                _context.CurrentState = newState;
+                Context.CurrentState = newState;
             }
-            else if (_currentSuperState != null)
+            else
             {
-                _currentSuperState.SetSubState(newState);
+                _currentSuperState?.SetSubState(newState);
             }
         }
 

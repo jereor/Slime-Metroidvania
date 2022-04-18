@@ -9,25 +9,25 @@ namespace Player.State_Machine
 
         public PlayerStateFactory PlayerStateFactory { get; }
 
-        public override void EnterState()
+        protected override void EnterState()
         {
         }
 
-        public override void ExitState()
+        protected override void ExitState()
         {
         }
 
-        public override void UpdateState()
+        protected override void UpdateState()
         {
             CheckSwitchStates();
         }
 
-        public override void InitializeSubState()
+        protected override void InitializeSubState()
         {
             throw new System.NotImplementedException();
         }
 
-        public override void CheckSwitchStates()
+        protected override void CheckSwitchStates()
         {
             if (Context.IsMeleeAttacking)
             {
