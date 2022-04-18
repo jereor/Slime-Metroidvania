@@ -17,7 +17,7 @@ namespace Player.State_Machine
             JumpStart();
         }
 
-        void JumpStart()
+        private void JumpStart()
         {
             if (Context.IsGrounded() == false)
             {
@@ -61,7 +61,8 @@ namespace Player.State_Machine
 
         private void StartFalling()
         {
-            Context.RigidBody.velocity = new Vector2(Context.RigidBody.velocity.x, Context.RigidBody.velocity.y * 0.5f);
+            Vector2 velocity = Context.RigidBody.velocity;
+            Context.RigidBody.velocity = new Vector2(velocity.x, velocity.y * 0.5f);;
             Context.JumpButtonPressedTime = null;
             Context.LastGroundedTime = null;
         }
