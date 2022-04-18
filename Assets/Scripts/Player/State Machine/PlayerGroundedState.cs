@@ -2,15 +2,13 @@ using UnityEngine;
 
 namespace Player.State_Machine
 {
-    public class PlayerGroundedState : PlayerBaseState
+    public sealed class PlayerGroundedState : PlayerBaseState
     {
         public PlayerGroundedState(PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory)
             : base (currentContext, playerStateFactory){
             IsRootState = true;
             InitializeSubState();
         }
-
-        public PlayerStateFactory PlayerStateFactory { get; }
 
         protected override void EnterState()
         {

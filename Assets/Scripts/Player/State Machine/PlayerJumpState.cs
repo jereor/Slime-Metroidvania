@@ -2,16 +2,13 @@ using UnityEngine;
 
 namespace Player.State_Machine
 {
-    public class PlayerJumpState : PlayerBaseState
+    public sealed class PlayerJumpState : PlayerBaseState
     {
         public PlayerJumpState(PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory)
             : base(currentContext, playerStateFactory) {
             IsRootState = true;
             InitializeSubState();
         }
-
-        public PlayerStateFactory PlayerStateFactory { get; }
-
 
         // ENTER STATE
         protected override void EnterState()
