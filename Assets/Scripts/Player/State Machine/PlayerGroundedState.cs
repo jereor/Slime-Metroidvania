@@ -28,7 +28,11 @@ namespace Player.State_Machine
 
         public override void InitializeSubState()
         {
-            if (Context.IsMovementPressed)
+            if (Context.IsMeleeAttacking)
+            {
+                SetSubState(Factory.MeleeAttack());
+            }
+            else if (Context.IsMovementPressed)
             {
                 SetSubState(Factory.Move());
             }

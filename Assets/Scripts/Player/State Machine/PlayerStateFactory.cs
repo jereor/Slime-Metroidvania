@@ -2,7 +2,7 @@ namespace Player.State_Machine
 {
     public class PlayerStateFactory
     {
-        PlayerStateMachine _context;
+        private readonly PlayerStateMachine _context;
 
         public PlayerStateFactory(PlayerStateMachine currentContext)
         {
@@ -13,17 +13,26 @@ namespace Player.State_Machine
         {
             return new PlayerIdleState(_context, this);
         }
-        internal PlayerBaseState Move()
+        
+        public PlayerBaseState Move()
         {
             return new PlayerMoveState(_context, this);
         }
+
+        public PlayerBaseState MeleeAttack()
+        {
+            return new PlayerMeleeAttackState(_context, this);
+        }
+        
         public PlayerBaseState Jump()
         {
             return new PlayerJumpState(_context, this);
         }
+        
         public PlayerBaseState Grounded()
         {
             return new PlayerGroundedState(_context, this);
         }
+        
     }
 }

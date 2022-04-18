@@ -1,4 +1,5 @@
 using System;
+using JetBrains.Annotations;
 using Player.Core;
 using Player.Core.Slime_Sling;
 using Player.Data;
@@ -55,15 +56,20 @@ namespace Player.State_Machine
         public bool IsMovementPressed { get; private set; }
         public float CurrentMovementInput { get; private set; }
         
+        // Combat
+        public bool IsMeleeAttacking { get; private set; }
+
         // Animator hashes
         public int IsMovingHash { get; private set; }
         public int IsAirborneHash { get; private set; }
-
+        public int IsMeleeAttackingHash { get; private set; }
+        
         // States
         public PlayerBaseState CurrentState
         {
             set { _currentState = value; }
         }
+
         private PlayerBaseState _currentState;
         private PlayerStateFactory _states;
 
@@ -73,8 +79,10 @@ namespace Player.State_Machine
             _currentState = _states.Grounded();
             _currentState.EnterState();
 
+            // TODO: Make magic strings const variables
             IsMovingHash = Animator.StringToHash("isMoving");
             IsAirborneHash = Animator.StringToHash("isAirborne");
+            IsMeleeAttackingHash = Animator.StringToHash("IsMeleeAttacking");
 
             SubscribePlayerInputs();
         }
@@ -91,6 +99,7 @@ namespace Player.State_Machine
             _playerControls.Gameplay.ShootSling.started += OnShootSlingInput;
             _playerControls.Gameplay.ShootSling.canceled += OnShootSlingInput;
             _playerControls.Gameplay.MeleeAttack.started += OnMeleeAttackInput;
+            _playerControls.Gameplay.MeleeAttack.canceled += OnMeleeAttackInput;
         }
         
         private void Update()
@@ -112,6 +121,7 @@ namespace Player.State_Machine
                    || facingLeftButNowMovingRight;
         }
 
+        // Input events
         private void OnMovementInput(InputAction.CallbackContext context)
         {
             CurrentMovementInput = context.ReadValue<float>();
@@ -144,20 +154,31 @@ namespace Player.State_Machine
         {
             if (context.started)
             {
-                Collider2D[] detectedObjects =
-                    Physics2D.OverlapCircleAll(_meleeAttackHitBox.position, PlayerMeleeAttack.ATTACK_RADIUS, PlayerMeleeAttack.DamageableLayers);
-
-                _attackDetails.Position = transform.position;
-                _attackDetails.DamageAmount = PlayerMeleeAttack.ATTACK_DAMAGE;
-                _attackDetails.StunDamageAmount = PlayerMeleeAttack.STUN_DAMAGE;
-
-                foreach (Collider2D hitObject in detectedObjects)
-                {
-                    hitObject.transform.parent.SendMessage(EventConstants.DAMAGE, _attackDetails);
-                }
+                IsMeleeAttacking = true;
             }
         }
-
+        
+        // Animation events
+        [UsedImplicitly]
+        public void FinishAttack()
+        {
+            Collider2D[] detectedObjects =
+                Physics2D.OverlapCircleAll(_meleeAttackHitBox.position, PlayerMeleeAttack.ATTACK_RADIUS,
+                    PlayerMeleeAttack.DamageableLayers);
+            
+            _attackDetails.Position = transform.position;
+            _attackDetails.DamageAmount = PlayerMeleeAttack.ATTACK_DAMAGE;
+            _attackDetails.StunDamageAmount = PlayerMeleeAttack.STUN_DAMAGE;
+            
+            foreach (Collider2D hitObject in detectedObjects)
+            {
+                hitObject.transform.SendMessage(EventConstants.DAMAGE, _attackDetails);
+            }
+            
+            IsMeleeAttacking = false;
+        }
+        
+        // Activation / Deactivation events
         private void OnEnable()
         {
             _playerControls.Enable();
@@ -168,6 +189,7 @@ namespace Player.State_Machine
             _playerControls.Disable();
         }
 
+        // Gizmos
         private void OnDrawGizmos()
         {
             Vector3 attackPosition = _meleeAttackHitBox.position;

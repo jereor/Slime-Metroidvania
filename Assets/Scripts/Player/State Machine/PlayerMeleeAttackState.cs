@@ -10,22 +10,29 @@ namespace Player.State_Machine
 
         public override void EnterState()
         {
-            throw new System.NotImplementedException();
+            Context.Animator.SetBool(Context.IsMeleeAttackingHash, true);
+        }
+        
+        public override void ExitState()
+        {
+            Context.Animator.SetBool(Context.IsMeleeAttackingHash, false);
         }
 
         public override void UpdateState()
         {
-            throw new System.NotImplementedException();
-        }
-
-        public override void ExitState()
-        {
-            throw new System.NotImplementedException();
+            CheckSwitchStates();
         }
 
         public override void CheckSwitchStates()
         {
-            throw new System.NotImplementedException();
+            if (Context.IsMeleeAttacking)
+            {
+                return;
+            }
+            
+            SwitchState(Context.IsMovementPressed 
+                ? Factory.Move() 
+                : Factory.Idle());
         }
 
         public override void InitializeSubState()

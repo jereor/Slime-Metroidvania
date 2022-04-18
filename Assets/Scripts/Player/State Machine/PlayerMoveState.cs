@@ -1,4 +1,5 @@
 using Player.Core;
+using UnityEngine;
 
 namespace Player.State_Machine
 {
@@ -32,7 +33,11 @@ namespace Player.State_Machine
     
         public override void CheckSwitchStates()
         {
-            if (Context.IsMovementPressed == false)
+            if (Context.IsMeleeAttacking)
+            {
+                SwitchState(Factory.MeleeAttack());
+            }
+            else if (Context.IsMovementPressed == false)
             {
                 SwitchState(Factory.Idle());
             }

@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Player.State_Machine
 {
     public class PlayerIdleState : PlayerBaseState
@@ -27,7 +29,11 @@ namespace Player.State_Machine
 
         public override void CheckSwitchStates()
         {
-            if (Context.IsMovementPressed)
+            if (Context.IsMeleeAttacking)
+            {
+                SwitchState(Factory.MeleeAttack());
+            }
+            else if (Context.IsMovementPressed)
             {
                 SwitchState(Factory.Move());
             }
