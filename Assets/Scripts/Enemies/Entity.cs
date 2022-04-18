@@ -1,4 +1,4 @@
-using Enemies.States.Data;
+using Enemies.Data;
 using UnityEngine;
 using Utility;
 

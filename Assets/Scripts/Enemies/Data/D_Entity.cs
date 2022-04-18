@@ -1,7 +1,7 @@
 using UnityEngine;
 using Utility;
 
-namespace Enemies.States.Data
+namespace Enemies.Data
 {
     [CreateAssetMenu(fileName = "newEntityData", menuName = "Data/Entity Data/Base Data")]
     public class D_Entity : ScriptableObject
