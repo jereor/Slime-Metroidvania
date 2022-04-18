@@ -12,6 +12,9 @@ namespace Player.State_Machine
     // TODO: Make class smaller, separate functionality to smaller classes
     public class PlayerStateMachine : MonoBehaviour
     {
+        [Header("Data")]
+        [SerializeField] private D_PlayerMeleeAttack _playerMeleeAttackData;
+        
         [Header("Jump variables")]
         [SerializeField] private float _jumpForce;
         [SerializeField] private float _coyoteTime;
@@ -162,22 +165,26 @@ namespace Player.State_Machine
         [UsedImplicitly]
         public void FinishAttack()
         {
-            Collider2D[] detectedObjects =
-                Physics2D.OverlapCircleAll(_meleeAttackHitBox.position, PlayerMeleeAttack.ATTACK_RADIUS,
-                    PlayerMeleeAttack.DamageableLayers);
-            
-            _attackDetails.Position = transform.position;
-            _attackDetails.DamageAmount = PlayerMeleeAttack.ATTACK_DAMAGE;
-            _attackDetails.StunDamageAmount = PlayerMeleeAttack.STUN_DAMAGE;
-            
-            foreach (Collider2D hitObject in detectedObjects)
-            {
-                hitObject.transform.SendMessage(EventConstants.DAMAGE, _attackDetails);
-            }
-            
+            DealDamage();
             IsMeleeAttacking = false;
         }
-        
+
+        private void DealDamage()
+        {
+            Collider2D[] detectedObjects =
+                Physics2D.OverlapCircleAll(_meleeAttackHitBox.position, _playerMeleeAttackData._attackRadius,
+                    _playerMeleeAttackData._damageableLayers);
+
+            _attackDetails.Position = transform.position;
+            _attackDetails.DamageAmount = _playerMeleeAttackData._attackDamage;
+            _attackDetails.StunDamageAmount = _playerMeleeAttackData._stunDamage;
+
+            foreach (Collider2D hitObject in detectedObjects)
+            {
+                hitObject.transform.SendMessageUpwards(EventConstants.DAMAGE, _attackDetails);
+            }
+        }
+
         // Activation / Deactivation events
         private void OnEnable()
         {
@@ -193,7 +200,7 @@ namespace Player.State_Machine
         private void OnDrawGizmos()
         {
             Vector3 attackPosition = _meleeAttackHitBox.position;
-            Gizmos.DrawWireSphere(attackPosition, PlayerMeleeAttack.ATTACK_RADIUS);
+            Gizmos.DrawWireSphere(attackPosition, _playerMeleeAttackData._attackRadius);
         }
     }
 }
