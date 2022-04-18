@@ -25,6 +25,7 @@ namespace Enemies
         [SerializeField] private D_Entity _entityData;
 
         protected bool IsStunned;
+        protected bool IsDead;
         
         private float _currentHealth;
         private float _currentStunResistance;
@@ -164,6 +165,11 @@ namespace Enemies
             if (_currentStunResistance <= 0)
             {
                 IsStunned = true;
+            }
+
+            if (_currentHealth <= 0)
+            {
+                IsDead = true;
             }
         }
         
