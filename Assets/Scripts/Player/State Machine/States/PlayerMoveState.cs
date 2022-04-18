@@ -1,12 +1,14 @@
 using Player.Core;
-using UnityEngine;
 
-namespace Player.State_Machine
+namespace Player.State_Machine.States
 {
     public class PlayerMoveState : PlayerBaseState
     {
         public PlayerMoveState(PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory)
-            : base(currentContext, playerStateFactory) { }
+            : base(currentContext, playerStateFactory)
+        {
+            
+        }
 
         public PlayerStateFactory PlayerStateFactory { get; }
 

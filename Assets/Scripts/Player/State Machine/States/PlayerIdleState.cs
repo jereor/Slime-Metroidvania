@@ -1,13 +1,12 @@
-using UnityEngine;
-
-namespace Player.State_Machine
+namespace Player.State_Machine.States
 {
     public class PlayerIdleState : PlayerBaseState
     {
         public PlayerIdleState(PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory)
-            : base(currentContext, playerStateFactory) { }
-
-        public PlayerStateFactory PlayerStateFactory { get; }
+            : base(currentContext, playerStateFactory)
+        {
+            
+        }
 
         protected override void EnterState()
         {

@@ -1,11 +1,12 @@
 using UnityEngine;
 
-namespace Player.State_Machine
+namespace Player.State_Machine.States
 {
     public sealed class PlayerJumpState : PlayerBaseState
     {
         public PlayerJumpState(PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory)
-            : base(currentContext, playerStateFactory) {
+            : base(currentContext, playerStateFactory) 
+        {
             IsRootState = true;
             InitializeSubState();
         }
