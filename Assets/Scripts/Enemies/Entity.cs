@@ -1,4 +1,5 @@
 using Enemies.Data;
+using JetBrains.Annotations;
 using UnityEngine;
 using Utility;
 
@@ -150,15 +151,18 @@ namespace Enemies
             _currentStunResistance = _entityData._stunResistance;
         }
         
+        [UsedImplicitly]
         public virtual void Damage(AttackDetails attackDetails)
         {
             _lastDamageTime = Time.time;
-            
+
             _currentHealth -= attackDetails.DamageAmount;
             _currentStunResistance -= attackDetails.StunDamageAmount;
 
             DamageHop(_entityData._damageHopSpeed);
-            
+
+            Instantiate(_entityData._hitParticles, transform.position, Quaternion.Euler(0f, 0f, Random.Range(0, 360f)));
+
             bool attackFromRight = attackDetails.Position.x > transform.position.x;
             LastDamageDirection = attackFromRight ? -1 : 1;
 
