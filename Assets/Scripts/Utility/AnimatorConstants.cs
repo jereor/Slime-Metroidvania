@@ -10,5 +10,6 @@ namespace Utility
         public const string IS_LOOKING_FOR_PLAYER = "IsLookingForPlayer";
         public const string IS_MELEE_ATTACKING = "IsMeleeAttacking";
         public const string IS_STUNNED = "IsStunned";
+        public const string IS_DEAD = "IsDead";
     }
 }

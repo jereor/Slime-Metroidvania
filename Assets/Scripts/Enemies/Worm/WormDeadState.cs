@@ -6,8 +6,8 @@ namespace Enemies.Worm
     public class WormDeadState : DeadState
     {
         private readonly Worm _worm;
-        
-        protected WormDeadState(Worm worm, FiniteStateMachine stateMachine, string animatorBoolName, D_DeadState stateData) : base(worm, stateMachine, animatorBoolName, stateData)
+
+        public WormDeadState(Worm worm, FiniteStateMachine stateMachine, string animatorBoolName, D_DeadState stateData) : base(worm, stateMachine, animatorBoolName, stateData)
         {
             _worm = worm;
         }
