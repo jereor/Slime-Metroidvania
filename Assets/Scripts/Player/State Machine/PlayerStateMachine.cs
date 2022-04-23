@@ -90,7 +90,6 @@ namespace Player.State_Machine
 
         private void SubscribePlayerInputs()
         {
-            //  TODO: Look into making separate methods for each input action
             _playerControls = new PlayerControls();
             
             _playerControls.Gameplay.Move.performed += OnMovementInput;
@@ -103,7 +102,6 @@ namespace Player.State_Machine
             _playerControls.Gameplay.ShootSling.canceled += OnShootSlingInputCancel;
             
             _playerControls.Gameplay.MeleeAttack.started += OnMeleeAttackInputStart;
-            _playerControls.Gameplay.MeleeAttack.canceled += OnMeleeAttackInputCancel;
         }
         
         private void Update()
