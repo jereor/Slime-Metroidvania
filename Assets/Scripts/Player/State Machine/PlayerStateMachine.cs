@@ -92,13 +92,16 @@ namespace Player.State_Machine
         {
             //  TODO: Look into making separate methods for each input action
             _playerControls = new PlayerControls();
-            _playerControls.Gameplay.Move.started += OnMovementInput;
-            _playerControls.Gameplay.Move.canceled += OnMovementInput;
+            
             _playerControls.Gameplay.Move.performed += OnMovementInput;
-            _playerControls.Gameplay.Jump.started += OnJumpInput;
+            _playerControls.Gameplay.Move.canceled += OnMovementInput;
+            
+            _playerControls.Gameplay.Jump.performed += OnJumpInput;
             _playerControls.Gameplay.Jump.canceled += OnJumpInput;
+            
             _playerControls.Gameplay.ShootSling.started += OnShootSlingInput;
             _playerControls.Gameplay.ShootSling.canceled += OnShootSlingInput;
+            
             _playerControls.Gameplay.MeleeAttack.started += OnMeleeAttackInput;
             _playerControls.Gameplay.MeleeAttack.canceled += OnMeleeAttackInput;
         }
