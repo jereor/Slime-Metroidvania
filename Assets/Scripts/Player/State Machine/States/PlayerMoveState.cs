@@ -28,7 +28,6 @@ namespace Player.State_Machine.States
 
         protected override void InitializeSubState()
         {
-            throw new System.NotImplementedException();
         }
 
         protected override void CheckSwitchStates()

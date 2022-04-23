@@ -81,10 +81,9 @@ namespace Player.State_Machine
             _states = new PlayerStateFactory(this);
             _currentState = _states.Grounded();
 
-            // TODO: Make magic strings const variables
-            IsMovingHash = Animator.StringToHash("isMoving");
-            IsAirborneHash = Animator.StringToHash("isAirborne");
-            IsMeleeAttackingHash = Animator.StringToHash("IsMeleeAttacking");
+            IsMovingHash = Animator.StringToHash(AnimatorConstants.IS_MOVING);
+            IsAirborneHash = Animator.StringToHash(AnimatorConstants.IS_AIRBORNE);
+            IsMeleeAttackingHash = Animator.StringToHash(AnimatorConstants.IS_MELEE_ATTACKING);
 
             SubscribePlayerInputs();
         }

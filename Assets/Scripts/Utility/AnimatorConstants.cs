@@ -11,5 +11,6 @@ namespace Utility
         public const string IS_MELEE_ATTACKING = "IsMeleeAttacking";
         public const string IS_STUNNED = "IsStunned";
         public const string IS_DEAD = "IsDead";
+        public const string IS_AIRBORNE = "IsAirborne";
     }
 }

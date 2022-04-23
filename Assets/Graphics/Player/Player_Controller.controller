@@ -9,7 +9,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: isMoving
+    m_ConditionEvent: IsMoving
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -3085698303715857686}
@@ -263,30 +263,30 @@ AnimatorController:
   m_Name: Player_Controller
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: isMoving
+  - m_Name: IsMoving
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
-  - m_Name: isAirborne
+    m_Controller: {fileID: 0}
+  - m_Name: IsAirborne
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: IsMeleeAttacking
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: Blend
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -309,7 +309,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: isAirborne
+    m_ConditionEvent: IsAirborne
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: -730372846607442105}
   m_DstState: {fileID: 0}
@@ -334,10 +334,10 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: isAirborne
+    m_ConditionEvent: IsAirborne
     m_EventTreshold: 0
   - m_ConditionMode: 1
-    m_ConditionEvent: isMoving
+    m_ConditionEvent: IsMoving
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -2036404249456298277}
@@ -387,10 +387,10 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: isAirborne
+    m_ConditionEvent: IsAirborne
     m_EventTreshold: 0
   - m_ConditionMode: 2
-    m_ConditionEvent: isMoving
+    m_ConditionEvent: IsMoving
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -3085698303715857686}
@@ -415,7 +415,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: isAirborne
+    m_ConditionEvent: IsAirborne
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: -730372846607442105}
   m_DstState: {fileID: 0}
@@ -462,7 +462,7 @@ AnimatorStateTransition:
     m_ConditionEvent: IsMeleeAttacking
     m_EventTreshold: 0
   - m_ConditionMode: 1
-    m_ConditionEvent: isMoving
+    m_ConditionEvent: IsMoving
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -2036404249456298277}
@@ -490,7 +490,7 @@ AnimatorStateTransition:
     m_ConditionEvent: IsMeleeAttacking
     m_EventTreshold: 0
   - m_ConditionMode: 2
-    m_ConditionEvent: isMoving
+    m_ConditionEvent: IsMoving
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -3085698303715857686}
@@ -515,7 +515,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: isMoving
+    m_ConditionEvent: IsMoving
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -2036404249456298277}
