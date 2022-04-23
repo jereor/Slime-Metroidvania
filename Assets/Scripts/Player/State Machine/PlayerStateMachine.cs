@@ -102,8 +102,8 @@ namespace Player.State_Machine
             _playerControls.Gameplay.ShootSling.started += OnShootSlingInputStart;
             _playerControls.Gameplay.ShootSling.canceled += OnShootSlingInputCancel;
             
-            _playerControls.Gameplay.MeleeAttack.started += OnMeleeAttackInput;
-            _playerControls.Gameplay.MeleeAttack.canceled += OnMeleeAttackInput;
+            _playerControls.Gameplay.MeleeAttack.started += OnMeleeAttackInputStart;
+            _playerControls.Gameplay.MeleeAttack.canceled += OnMeleeAttackInputCancel;
         }
         
         private void Update()
@@ -149,12 +149,9 @@ namespace Player.State_Machine
             SlingShooter.Instance.CancelPull();
         }
 
-        private void OnMeleeAttackInput(InputAction.CallbackContext context)
+        private void OnMeleeAttackInputStart(InputAction.CallbackContext context)
         {
-            if (context.started)
-            {
-                IsMeleeAttacking = true;
-            }
+            IsMeleeAttacking = true;
         }
         
         // Animation events
