@@ -99,8 +99,8 @@ namespace Player.State_Machine
             _playerControls.Gameplay.Jump.performed += OnJumpInput;
             _playerControls.Gameplay.Jump.canceled += OnJumpInput;
             
-            _playerControls.Gameplay.ShootSling.started += OnShootSlingInput;
-            _playerControls.Gameplay.ShootSling.canceled += OnShootSlingInput;
+            _playerControls.Gameplay.ShootSling.started += OnShootSlingInputStart;
+            _playerControls.Gameplay.ShootSling.canceled += OnShootSlingInputCancel;
             
             _playerControls.Gameplay.MeleeAttack.started += OnMeleeAttackInput;
             _playerControls.Gameplay.MeleeAttack.canceled += OnMeleeAttackInput;
@@ -138,20 +138,15 @@ namespace Player.State_Machine
             IsJumpPressed = context.ReadValueAsButton();
         }
 
-        private static void OnShootSlingInput(InputAction.CallbackContext context)
+        private static void OnShootSlingInputStart(InputAction.CallbackContext context)
         {
-            if (context.canceled)
-            {
-                SlingShooter.Instance.CancelPull();
-                return;
-            }
-
-            if (context.started)
-            {
-                SlingShooter.Instance.SetGrapplePoint();
-            }
-
+            SlingShooter.Instance.SetGrapplePoint();
             SlingShooter.Instance.StartPull();
+        }
+
+        private static void OnShootSlingInputCancel(InputAction.CallbackContext context)
+        {
+            SlingShooter.Instance.CancelPull();
         }
 
         private void OnMeleeAttackInput(InputAction.CallbackContext context)
