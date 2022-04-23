@@ -1,4 +1,3 @@
-using JetBrains.Annotations;
 using Player.Core;
 using Player.Core.Slime_Sling;
 using Player.Data;
@@ -10,7 +9,7 @@ using Utility;
 namespace Player.State_Machine
 {
     // TODO: Make class smaller, separate functionality to smaller classes
-    public class PlayerStateMachine : MonoBehaviour
+    public class PlayerStateMachine : MonoBehaviour, IStateMachine
     {
         [Header("Data")]
         [SerializeField] private D_PlayerMeleeAttack _playerMeleeAttackData;
@@ -27,6 +26,7 @@ namespace Player.State_Machine
         [SerializeField] private Transform _meleeAttackHitBox;
 
         // References
+        public PlayerAnimations PlayerAnimations; 
         public Rigidbody2D RigidBody
         {
             get { return _rigidbody2D; }
@@ -35,8 +35,6 @@ namespace Player.State_Machine
         {
             get { return _animator; }
         }
-        private PlayerControls _playerControls;
-        private AttackDetails _attackDetails;
 
         // Grounded
         public float? LastGroundedTime { get; set; }
@@ -62,11 +60,6 @@ namespace Player.State_Machine
         // Combat
         public bool IsMeleeAttacking { get; private set; }
 
-        // Animator hashes
-        public int IsMovingHash { get; private set; }
-        public int IsAirborneHash { get; private set; }
-        public int IsMeleeAttackingHash { get; private set; }
-        
         // States
         public PlayerBaseState CurrentState
         {
@@ -75,15 +68,15 @@ namespace Player.State_Machine
 
         private PlayerBaseState _currentState;
         private PlayerStateFactory _states;
+        private PlayerControls _playerControls;
+        private AttackDetails _attackDetails;
 
         private void Awake()
         {
             _states = new PlayerStateFactory(this);
             _currentState = _states.Grounded();
 
-            IsMovingHash = Animator.StringToHash(AnimatorConstants.IS_MOVING);
-            IsAirborneHash = Animator.StringToHash(AnimatorConstants.IS_AIRBORNE);
-            IsMeleeAttackingHash = Animator.StringToHash(AnimatorConstants.IS_MELEE_ATTACKING);
+            PlayerAnimations = new PlayerAnimations(this);
 
             SubscribePlayerInputs();
         }
@@ -122,6 +115,27 @@ namespace Player.State_Machine
             return facingRightButNowMovingLeft
                    || facingLeftButNowMovingRight;
         }
+        
+        public void FinishMeleeAttacking()
+        {
+            IsMeleeAttacking = false;
+        }
+
+        public void DealDamage()
+        {
+            Collider2D[] detectedObjects =
+                Physics2D.OverlapCircleAll(_meleeAttackHitBox.position, _playerMeleeAttackData._attackRadius,
+                    _playerMeleeAttackData._damageableLayers);
+
+            _attackDetails.Position = transform.position;
+            _attackDetails.DamageAmount = _playerMeleeAttackData._attackDamage;
+            _attackDetails.StunDamageAmount = _playerMeleeAttackData._stunDamage;
+
+            foreach (Collider2D hitObject in detectedObjects)
+            {
+                hitObject.transform.SendMessageUpwards(EventConstants.DAMAGE, _attackDetails);
+            }
+        }
 
         // Input events
         private void OnMovementInput(InputAction.CallbackContext context)
@@ -151,30 +165,6 @@ namespace Player.State_Machine
         {
             IsMeleeAttacking = true;
         }
-        
-        // Animation events
-        [UsedImplicitly]
-        public void FinishAttack()
-        {
-            DealDamage();
-            IsMeleeAttacking = false;
-        }
-
-        private void DealDamage()
-        {
-            Collider2D[] detectedObjects =
-                Physics2D.OverlapCircleAll(_meleeAttackHitBox.position, _playerMeleeAttackData._attackRadius,
-                    _playerMeleeAttackData._damageableLayers);
-
-            _attackDetails.Position = transform.position;
-            _attackDetails.DamageAmount = _playerMeleeAttackData._attackDamage;
-            _attackDetails.StunDamageAmount = _playerMeleeAttackData._stunDamage;
-
-            foreach (Collider2D hitObject in detectedObjects)
-            {
-                hitObject.transform.SendMessageUpwards(EventConstants.DAMAGE, _attackDetails);
-            }
-        }
 
         // Activation / Deactivation events
         private void OnEnable()
@@ -193,5 +183,6 @@ namespace Player.State_Machine
             Vector3 attackPosition = _meleeAttackHitBox.position;
             Gizmos.DrawWireSphere(attackPosition, _playerMeleeAttackData._attackRadius);
         }
+        
     }
 }

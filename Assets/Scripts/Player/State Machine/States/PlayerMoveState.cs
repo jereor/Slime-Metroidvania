@@ -12,12 +12,12 @@ namespace Player.State_Machine.States
 
         protected override void EnterState()
         {
-            Context.Animator.SetBool(Context.IsMovingHash, true);
+            Context.Animator.SetBool(Context.PlayerAnimations.IsMovingHash, true);
         }
 
         protected override void ExitState()
         {
-            Context.Animator.SetBool(Context.IsMovingHash, false);
+            Context.Animator.SetBool(Context.PlayerAnimations.IsMovingHash, false);
         }
 
         protected override void UpdateState()

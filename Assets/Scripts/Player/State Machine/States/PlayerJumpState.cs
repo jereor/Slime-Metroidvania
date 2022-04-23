@@ -14,7 +14,7 @@ namespace Player.State_Machine.States
         // ENTER STATE
         protected override void EnterState()
         {
-            Context.Animator.SetBool(Context.IsAirborneHash, true);
+            Context.Animator.SetBool(Context.PlayerAnimations.IsAirborneHash, true);
             JumpStart();
         }
 
@@ -40,7 +40,7 @@ namespace Player.State_Machine.States
         // EXIT STATE
         protected override void ExitState()
         {
-            Context.Animator.SetBool(Context.IsAirborneHash, false);
+            Context.Animator.SetBool(Context.PlayerAnimations.IsAirborneHash, false);
         }
 
 

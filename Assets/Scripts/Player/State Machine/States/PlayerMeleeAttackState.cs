@@ -10,12 +10,12 @@ namespace Player.State_Machine.States
 
         protected override void EnterState()
         {
-            Context.Animator.SetBool(Context.IsMeleeAttackingHash, true);
+            Context.Animator.SetBool(Context.PlayerAnimations.IsMeleeAttackingHash, true);
         }
 
         protected override void ExitState()
         {
-            Context.Animator.SetBool(Context.IsMeleeAttackingHash, false);
+            Context.Animator.SetBool(Context.PlayerAnimations.IsMeleeAttackingHash, false);
         }
 
         protected override void UpdateState()
