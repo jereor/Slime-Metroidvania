@@ -27,7 +27,7 @@ namespace Player.State_Machine.States
 
         protected override void InitializeSubState()
         {
-            if (PlayerAdapter.PlayerCombat.IsMeleeAttacking)
+            if (PlayerAdapter.IsMeleeAttacking())
             {
                 SetSubState(Factory.MeleeAttack());
             }

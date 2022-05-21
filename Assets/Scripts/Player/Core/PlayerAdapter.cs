@@ -82,5 +82,10 @@ namespace Player.Core
         {
             PlayerMovement.LastGroundedTime = Time.time;
         }
+
+        public bool IsMeleeAttacking()
+        {
+            return PlayerCombat.IsMeleeAttacking;
+        }
     }
 }
