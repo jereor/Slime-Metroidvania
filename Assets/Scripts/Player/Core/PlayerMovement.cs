@@ -5,25 +5,34 @@ namespace Player.Core
 {
     public class PlayerMovement
     {
-        public readonly float CoyoteTime;
-        public readonly float JumpForce;
-        public readonly float MoveSpeed;
-        public readonly float GroundCheckRadius;
-        
+        private readonly PlayerAdapter _playerAdapter;
+        private readonly float _coyoteTime;
+        private readonly float _jumpForce;
+        private readonly float _moveSpeed;
+        private readonly float _groundCheckRadius;
         private readonly Transform _groundCheck;
         private readonly LayerMask _groundLayer;
-        
-        private readonly PlayerAdapter _playerAdapter;
+
         private Vector2 _currentVelocity;
 
+        public float CoyoteTime
+        {
+            get { return _coyoteTime; }
+        }
+
+        public float JumpForce
+        {
+            get { return _jumpForce; }
+        }
+        
         public PlayerMovement(PlayerAdapter playerAdapter, D_PlayerMovement playerMovementData, PlayerMovementParameters playerMovementParameters)
         {
             _playerAdapter = playerAdapter;
             
-            CoyoteTime = playerMovementData._coyoteTime;
-            JumpForce = playerMovementData._jumpForce;
-            MoveSpeed = playerMovementData._moveSpeed;
-            GroundCheckRadius = playerMovementData._groundCheckRadius;
+            _coyoteTime = playerMovementData._coyoteTime;
+            _jumpForce = playerMovementData._jumpForce;
+            _moveSpeed = playerMovementData._moveSpeed;
+            _groundCheckRadius = playerMovementData._groundCheckRadius;
 
             _groundCheck = playerMovementParameters.GroundCheck;
             _groundLayer = playerMovementParameters.GroundLayer;
@@ -31,7 +40,7 @@ namespace Player.Core
         
         public bool IsGrounded()
         {
-            return Physics2D.OverlapCircle(_groundCheck.position, GroundCheckRadius, _groundLayer);
+            return Physics2D.OverlapCircle(_groundCheck.position, _groundCheckRadius, _groundLayer);
         }
 
         public void HandleMovement()
@@ -45,7 +54,7 @@ namespace Player.Core
             }
 
             _playerAdapter.RigidBody.velocity = 
-                new Vector2(x: _playerAdapter.PlayerController.CurrentMovementInput * MoveSpeed, 
+                new Vector2(x: _playerAdapter.PlayerController.CurrentMovementInput * _moveSpeed, 
                     y: _currentVelocity.y);
         }
 
