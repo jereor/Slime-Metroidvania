@@ -5,13 +5,27 @@ namespace Player.Core
 {
     public class PlayerMovement : MonoBehaviour
     {
+        // TODO: Experiment with making movement variables into a configuration class, struct or scriptable object
         [Header("Movement variables")]
-        [SerializeField] private float moveSpeed;
+        [SerializeField] private float _moveSpeed;
+        
+        [Header("Jump variables")]
+        [SerializeField] private float _jumpForce;
+        [SerializeField] private float _coyoteTime;
 
+        public static PlayerMovement Instance;
+        
         private PlayerStateMachine _context;
         private Vector2 _currentVelocity;
 
-        public static PlayerMovement Instance;
+        public float JumpForce
+        {
+            get { return _jumpForce; }
+        }
+        public float CoyoteTime
+        {
+            get { return _coyoteTime; }
+        }
 
         private void Awake()
         {
@@ -33,7 +47,7 @@ namespace Player.Core
             }
 
             _context.RigidBody.velocity = 
-                new Vector2(x: _context.CurrentMovementInput * moveSpeed, 
+                new Vector2(x: _context.CurrentMovementInput * _moveSpeed, 
                     y: _currentVelocity.y);
         }
 

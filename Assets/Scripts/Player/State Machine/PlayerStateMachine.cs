@@ -13,10 +13,6 @@ namespace Player.State_Machine
     {
         [Header("Data")]
         [SerializeField] private D_PlayerMeleeAttack _playerMeleeAttackData;
-        
-        [Header("Jump variables")]
-        [SerializeField] private float _jumpForce;
-        [SerializeField] private float _coyoteTime;
 
         [Header("References")] 
         [SerializeField] private Rigidbody2D _rigidbody2D;
@@ -41,14 +37,6 @@ namespace Player.State_Machine
         private const float GROUND_CHECK_RADIUS = 0.3f;
 
         // Jump
-        public float JumpForce
-        {
-            get { return _jumpForce; }
-        }
-        public float CoyoteTime
-        {
-            get { return _coyoteTime; }
-        }
         public bool IsJumpPressed { get; private set; }
         public float? JumpButtonPressedTime { get; set; }
 
