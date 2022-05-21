@@ -1,3 +1,5 @@
+using Player.Core;
+
 namespace Player.State_Machine.States
 {
     public abstract class PlayerBaseState
@@ -9,11 +11,13 @@ namespace Player.State_Machine.States
         protected bool IsRootState { set { _isRootState = value; } }
         protected PlayerStateMachine Context { get; }
         protected PlayerStateFactory Factory { get; }
+        protected PlayerAdapter PlayerAdapter { get; }
 
         protected PlayerBaseState(PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory)
         {
             Context = currentContext;
             Factory = playerStateFactory;
+            PlayerAdapter = currentContext.PlayerAdapter;
         }
 
         protected abstract void EnterState();

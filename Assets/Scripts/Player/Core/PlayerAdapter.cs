@@ -68,7 +68,7 @@ namespace Player.Core
             });
         }
 
-         public void FlipPlayer()
+        public void FlipPlayer()
         {
             PlayerFlipper.FlipPlayer();
         }
@@ -77,6 +77,6 @@ namespace Player.Core
         {
             PlayerMovement.HandleMovement();
         }
-        
+
     }
 }
