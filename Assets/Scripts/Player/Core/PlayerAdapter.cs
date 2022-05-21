@@ -49,7 +49,7 @@ namespace Player.Core
         {
             PlayerAnimations = new PlayerAnimations(this);
             PlayerCombat = new PlayerCombat(this, _meleeAttackHitBox, _playerMeleeAttackData);
-            PlayerFlipper = new PlayerFlipper(this);
+            PlayerFlipper = new PlayerFlipper(gameObject.transform);
             PlayerMovement = new PlayerMovement(_playerMovementData, new PlayerMovementParameters
             {
                 PlayerController = _playerController,

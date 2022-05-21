@@ -6,11 +6,11 @@ namespace Player.Core
 {
     public class PlayerFlipper
     {
-        private readonly PlayerAdapter _playerAdapter;
-
-        public PlayerFlipper(PlayerAdapter playerAdapter)
+        private Transform _playerTransform;
+        
+        public PlayerFlipper(Transform playerTransform)
         {
-            _playerAdapter = playerAdapter;
+            _playerTransform = playerTransform;
         }
 
         public bool IsFacingRight { get; private set; } = true;
@@ -24,7 +24,7 @@ namespace Player.Core
         private void FlipSprite()
         {
             IsFacingRight = !IsFacingRight;
-            Transform currentTransform = _playerAdapter.transform;
+            Transform currentTransform = _playerTransform;
             Vector3 localScale = currentTransform.localScale;
             
             localScale.x *= -1f;
