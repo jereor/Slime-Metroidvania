@@ -117,5 +117,10 @@ namespace Player.Core
         {
             return PlayerMovement.LastGroundedTime;
         }
+
+        public float? GetJumpButtonPressedTime()
+        {
+            return PlayerController.JumpButtonPressedTime;
+        }
     }
 }
