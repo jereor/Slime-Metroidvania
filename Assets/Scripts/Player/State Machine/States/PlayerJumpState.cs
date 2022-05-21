@@ -32,7 +32,7 @@ namespace Player.State_Machine.States
 
             if (isCoyoteTime && isJumpBuffered)
             {
-                PlayerAdapter.RigidBody.velocity = new Vector2(Context.PlayerAdapter.RigidBody.velocity.x, Context.PlayerAdapter.PlayerMovement.JumpForce);
+                PlayerAdapter.RigidBody.velocity = new Vector2(PlayerAdapter.RigidBody.velocity.x, PlayerAdapter.PlayerMovement.JumpForce);
             }
         }
 
@@ -40,7 +40,7 @@ namespace Player.State_Machine.States
         // EXIT STATE
         protected override void ExitState()
         {
-            Context.PlayerAdapter.Animator.SetBool(Context.PlayerAdapter.PlayerAnimations.IsAirborneHash, false);
+            PlayerAdapter.SetAnimatorBool(PlayerAdapter.PlayerAnimations.IsAirborneHash, false);
         }
 
 
@@ -53,8 +53,8 @@ namespace Player.State_Machine.States
 
         private void CheckJumpEnd()
         {
-            if (Context.PlayerAdapter.RigidBody.velocity.y > 0f
-                && Context.PlayerAdapter.PlayerController.IsJumpPressed == false)
+            if (PlayerAdapter.RigidBody.velocity.y > 0f
+                && PlayerAdapter.IsJumpPressed() == false)
             {
                 StartFalling();
             }
@@ -62,10 +62,9 @@ namespace Player.State_Machine.States
 
         private void StartFalling()
         {
-            Vector2 velocity = Context.PlayerAdapter.RigidBody.velocity;
-            Context.PlayerAdapter.RigidBody.velocity = new Vector2(velocity.x, velocity.y * 0.5f);;
-            Context.PlayerAdapter.PlayerController.JumpButtonPressedTime = null;
-            Context.PlayerAdapter.PlayerMovement.LastGroundedTime = null;
+            Vector2 velocity = PlayerAdapter.RigidBody.velocity;
+            PlayerAdapter.RigidBody.velocity = new Vector2(velocity.x, velocity.y * 0.5f);;
+            PlayerAdapter.ResetJumpVariables();
         }
 
 
@@ -78,7 +77,7 @@ namespace Player.State_Machine.States
         // CHECK SWITCH STATES
         protected override void CheckSwitchStates()
         {
-            if (Context.PlayerAdapter.PlayerController.IsJumpPressed == false)
+            if (PlayerAdapter.IsJumpPressed() == false)
             {
                 SwitchState(Factory.Grounded());
             }

@@ -87,6 +87,12 @@ namespace Player.Core
         {
             _playerController.JumpButtonPressedTime = Time.time;
         }
+        
+        public void ResetJumpVariables()
+        {
+            PlayerMovement.LastGroundedTime = null;
+            PlayerController.JumpButtonPressedTime = null;
+        }
 
         public bool IsMeleeAttacking()
         {
@@ -122,5 +128,6 @@ namespace Player.Core
         {
             return PlayerController.JumpButtonPressedTime;
         }
+        
     }
 }
