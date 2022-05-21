@@ -1,8 +1,8 @@
-using Player.Core.Slime_Sling;
-using Player.State_Machine;
+using Player.Core.Modules.Slime_Sling;
+using Player.Core.Parameters;
 using UnityEngine;
 
-namespace Player.Core
+namespace Player.Core.Modules
 {
     public class PlayerFlipper
     {

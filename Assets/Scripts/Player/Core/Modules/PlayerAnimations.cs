@@ -1,8 +1,9 @@
 using JetBrains.Annotations;
+using Player.Core.Parameters;
 using UnityEngine;
 using Utility;
 
-namespace Player.Core
+namespace Player.Core.Modules
 {
     public class PlayerAnimations
     {

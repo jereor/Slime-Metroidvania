@@ -1,7 +1,8 @@
+using Player.Core.Parameters;
 using Player.Data;
 using UnityEngine;
 
-namespace Player.Core
+namespace Player.Core.Modules
 {
     public class PlayerMovement
     {

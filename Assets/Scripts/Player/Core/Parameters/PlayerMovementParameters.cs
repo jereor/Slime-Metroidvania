@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Player.Core
+namespace Player.Core.Parameters
 {
     public struct PlayerMovementParameters
     {

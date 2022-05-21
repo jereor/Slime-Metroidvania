@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Utility;
 
-namespace Player.Core.Slime_Sling
+namespace Player.Core.Modules.Slime_Sling
 {
     public class SlingShooter : MonoBehaviour
     {

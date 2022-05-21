@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 
-namespace Player.Core
+namespace Utility
 {
     public class Health : MonoBehaviour
     {

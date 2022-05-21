@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Player.Core.Slime_Sling
+namespace Player.Core.Modules.Slime_Sling
 {
     public class SlimeSling : MonoBehaviour
     {

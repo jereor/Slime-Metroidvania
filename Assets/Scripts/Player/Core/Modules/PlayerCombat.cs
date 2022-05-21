@@ -1,8 +1,9 @@
+using Player.Core.Parameters;
 using Player.Data;
 using UnityEngine;
 using Utility;
 
-namespace Player.Core
+namespace Player.Core.Modules
 {
     public class PlayerCombat
     {
