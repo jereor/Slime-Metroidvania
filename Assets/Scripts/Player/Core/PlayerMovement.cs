@@ -10,8 +10,8 @@ namespace Player.Core
         public readonly float MoveSpeed;
         public readonly float GroundCheckRadius;
         
-        private Transform _groundCheck;
-        private LayerMask _groundLayer;
+        private readonly Transform _groundCheck;
+        private readonly LayerMask _groundLayer;
         
         private readonly PlayerAdapter _playerAdapter;
         private Vector2 _currentVelocity;
