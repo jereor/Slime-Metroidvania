@@ -54,10 +54,4 @@ namespace Player.Core
             _playerAdapter.RigidBody.velocity = new Vector2(x: 0, y: _currentVelocity.y);
         }
     }
-
-    public struct PlayerMovementParameters
-    {
-        public Transform GroundCheck;
-        public LayerMask GroundLayer;
-    }
 }
