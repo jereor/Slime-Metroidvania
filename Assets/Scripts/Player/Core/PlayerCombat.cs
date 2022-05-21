@@ -6,16 +6,16 @@ namespace Player.Core
 {
     public class PlayerCombat
     {
-        private readonly PlayerAdapter _playerAdapter;
+        private readonly Transform _playerTransform;
         private readonly Transform _meleeAttackHitBox;
         private readonly D_PlayerMeleeAttack _playerMeleeAttackData;
         
         public bool IsMeleeAttacking { get; set; }
         
-        public PlayerCombat(PlayerAdapter playerAdapter, Transform meleeAttackHitBox, D_PlayerMeleeAttack playerMeleeAttackData)
+        public PlayerCombat(D_PlayerMeleeAttack playerMeleeAttackData, PlayerCombatParameters playerCombatParameters)
         {
-            _playerAdapter = playerAdapter;
-            _meleeAttackHitBox = meleeAttackHitBox;
+            _playerTransform = playerCombatParameters.PlayerTransform;
+            _meleeAttackHitBox = playerCombatParameters.MeleeAttackHitBox;
             _playerMeleeAttackData = playerMeleeAttackData;
         }
 
@@ -26,7 +26,7 @@ namespace Player.Core
                     _playerMeleeAttackData._damageableLayers);
 
             AttackDetails attackDetails;
-            attackDetails.Position = _playerAdapter.transform.position;
+            attackDetails.Position = _playerTransform.position;
             attackDetails.DamageAmount = _playerMeleeAttackData._attackDamage;
             attackDetails.StunDamageAmount = _playerMeleeAttackData._stunDamage;
 

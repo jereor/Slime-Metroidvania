@@ -47,7 +47,12 @@ namespace Player.Core
 
         private void Awake()
         {
-            PlayerCombat = new PlayerCombat(this, _meleeAttackHitBox, _playerMeleeAttackData);
+            Transform playerTransform = gameObject.transform;
+            PlayerCombat = new PlayerCombat(_playerMeleeAttackData, new PlayerCombatParameters
+            {
+                PlayerTransform = playerTransform,
+                MeleeAttackHitBox = _meleeAttackHitBox
+            });
             
             PlayerAnimations = new PlayerAnimations(new PlayerAnimationsParameters
             {
@@ -56,7 +61,7 @@ namespace Player.Core
             
             PlayerFlipper = new PlayerFlipper(new PlayerFlipperParameters
             {
-                PlayerTransform = gameObject.transform
+                PlayerTransform = playerTransform
             });
             
             PlayerMovement = new PlayerMovement(_playerMovementData, new PlayerMovementParameters
