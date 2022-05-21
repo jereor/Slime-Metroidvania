@@ -84,9 +84,4 @@ namespace Player.Core
         }
         
     }
-
-    public struct PlayerFlipperParameters
-    {
-        public Transform PlayerTransform;
-    }
 }
