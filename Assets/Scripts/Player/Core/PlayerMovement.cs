@@ -6,6 +6,7 @@ namespace Player.Core
     public class PlayerMovement
     {
         private readonly PlayerAdapter _playerAdapter;
+        private readonly Rigidbody2D _rigidBody;
         private readonly float _coyoteTime;
         private readonly float _jumpForce;
         private readonly float _moveSpeed;
@@ -36,6 +37,7 @@ namespace Player.Core
 
             _groundCheck = playerMovementParameters.GroundCheck;
             _groundLayer = playerMovementParameters.GroundLayer;
+            _rigidBody = playerMovementParameters.Rigidbody;
         }
         
         public bool IsGrounded()
@@ -45,7 +47,7 @@ namespace Player.Core
 
         public void HandleMovement()
         {
-            _currentVelocity = _playerAdapter.RigidBody.velocity;
+            _currentVelocity = _rigidBody.velocity;
 
             if (_playerAdapter.PlayerController.IsMovementPressed == false)
             {
@@ -53,14 +55,14 @@ namespace Player.Core
                 return;
             }
 
-            _playerAdapter.RigidBody.velocity = 
+            _rigidBody.velocity = 
                 new Vector2(x: _playerAdapter.PlayerController.CurrentMovementInput * _moveSpeed, 
                     y: _currentVelocity.y);
         }
 
         private void StopMovement()
         {
-            _playerAdapter.RigidBody.velocity = new Vector2(x: 0, y: _currentVelocity.y);
+            _rigidBody.velocity = new Vector2(x: 0, y: _currentVelocity.y);
         }
     }
 }

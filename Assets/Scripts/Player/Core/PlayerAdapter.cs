@@ -52,6 +52,7 @@ namespace Player.Core
             PlayerFlipper = new PlayerFlipper(this);
             PlayerMovement = new PlayerMovement(this, _playerMovementData, new PlayerMovementParameters
             {
+                Rigidbody = _rigidbody2D,
                 GroundCheck = _groundCheck,
                 GroundLayer = _groundLayer
             });
