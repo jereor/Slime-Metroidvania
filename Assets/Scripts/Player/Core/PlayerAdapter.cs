@@ -11,7 +11,6 @@ namespace Player.Core
     public class PlayerAdapter : MonoBehaviour
     {
         // TODO: Move context data out of PlayerAdapter into PlayerStateMachine
-        [SerializeField] private PlayerStateMachine _context;
         [SerializeField] private PlayerController _playerController;
         [SerializeField] private Rigidbody2D _rigidbody2D;
         [SerializeField] private Animator _animator;
@@ -40,20 +39,10 @@ namespace Player.Core
         {
             get { return _rigidbody2D; }
         }
-        
-        public Transform GroundCheck
-        {
-            get { return _groundCheck; }
-        }
 
         public Animator Animator
         {
             get { return _animator; }
-        }
-        
-        public bool IsGrounded()
-        {
-            return Physics2D.OverlapCircle(_groundCheck.position, GROUND_CHECK_RADIUS, _groundLayer);
         }
 
         private void Awake()
@@ -61,7 +50,11 @@ namespace Player.Core
             PlayerAnimations = new PlayerAnimations(this);
             PlayerCombat = new PlayerCombat(this, _meleeAttackHitBox, _playerMeleeAttackData);
             PlayerFlipper = new PlayerFlipper(this);
-            PlayerMovement = new PlayerMovement(this, _playerMovementData);
+            PlayerMovement = new PlayerMovement(this, _playerMovementData, new PlayerMovementParameters
+            {
+                GroundCheck = _groundCheck,
+                GroundLayer = _groundLayer
+            });
         }
 
         public void DealDamage()

@@ -4440,7 +4440,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66e09ec48cdb477cba8d8544687851a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _context: {fileID: 1912269946}
   _playerController: {fileID: 1912269944}
   _rigidbody2D: {fileID: 1912269939}
   _animator: {fileID: 1912269941}
