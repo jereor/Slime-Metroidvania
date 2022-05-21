@@ -92,5 +92,10 @@ namespace Player.Core
         {
             return PlayerController.IsMovementPressed;
         }
+
+        public bool IsJumpPressed()
+        {
+            return PlayerController.IsJumpPressed;
+        }
     }
 }

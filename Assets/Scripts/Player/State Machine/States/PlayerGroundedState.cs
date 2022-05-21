@@ -43,7 +43,7 @@ namespace Player.State_Machine.States
 
         protected override void CheckSwitchStates()
         {
-            if (PlayerAdapter.PlayerController.IsJumpPressed)
+            if (PlayerAdapter.IsJumpPressed())
             {
                 SwitchState(Factory.Jump());
             }
