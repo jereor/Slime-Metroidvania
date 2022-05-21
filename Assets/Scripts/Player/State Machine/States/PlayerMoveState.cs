@@ -10,18 +10,18 @@ namespace Player.State_Machine.States
 
         protected override void EnterState()
         {
-            Context.PlayerAdapter.Animator.SetBool(Context.PlayerAdapter.PlayerAnimations.IsMovingHash, true);
+            PlayerAdapter.SetAnimatorBool(PlayerAdapter.PlayerAnimations.IsMovingHash, true);
         }
 
         protected override void ExitState()
         {
-            Context.PlayerAdapter.Animator.SetBool(Context.PlayerAdapter.PlayerAnimations.IsMovingHash, false);
+            PlayerAdapter.SetAnimatorBool(PlayerAdapter.PlayerAnimations.IsMovingHash, false);
         }
 
         protected override void UpdateState()
         {
             CheckSwitchStates();
-            Context.PlayerAdapter.HandleMovement();
+            PlayerAdapter.HandleMovement();
         }
 
         protected override void InitializeSubState()
@@ -30,11 +30,11 @@ namespace Player.State_Machine.States
 
         protected override void CheckSwitchStates()
         {
-            if (Context.PlayerAdapter.PlayerCombat.IsMeleeAttacking)
+            if (PlayerAdapter.IsMeleeAttacking())
             {
                 SwitchState(Factory.MeleeAttack());
             }
-            else if (Context.PlayerAdapter.PlayerController.IsMovementPressed == false)
+            else if (PlayerAdapter.IsMovementPressed() == false)
             {
                 SwitchState(Factory.Idle());
             }
