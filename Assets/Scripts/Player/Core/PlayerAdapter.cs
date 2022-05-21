@@ -82,6 +82,11 @@ namespace Player.Core
         {
             PlayerMovement.LastGroundedTime = Time.time;
         }
+        
+        public void ResetJumpButtonPressedTime()
+        {
+            _playerController.JumpButtonPressedTime = Time.time;
+        }
 
         public bool IsMeleeAttacking()
         {
@@ -107,5 +112,6 @@ namespace Player.Core
         {
             return PlayerMovement.IsGrounded();
         }
+        
     }
 }

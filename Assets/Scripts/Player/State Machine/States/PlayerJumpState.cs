@@ -25,7 +25,7 @@ namespace Player.State_Machine.States
                 return;
             }
 
-            Context.PlayerAdapter.PlayerController.JumpButtonPressedTime = Time.time;
+            PlayerAdapter.ResetJumpButtonPressedTime();
 
             bool isCoyoteTime = Time.time - Context.PlayerAdapter.PlayerMovement.LastGroundedTime <= Context.PlayerAdapter.PlayerMovement.CoyoteTime;
             bool isJumpBuffered = Time.time - Context.PlayerAdapter.PlayerController.JumpButtonPressedTime <= Context.PlayerAdapter.PlayerMovement.CoyoteTime;
