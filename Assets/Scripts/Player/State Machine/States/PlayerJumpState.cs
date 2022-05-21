@@ -20,7 +20,7 @@ namespace Player.State_Machine.States
 
         private void JumpStart()
         {
-            if (PlayerAdapter.PlayerMovement.IsGrounded() == false)
+            if (PlayerAdapter.IsGrounded() == false)
             {
                 return;
             }

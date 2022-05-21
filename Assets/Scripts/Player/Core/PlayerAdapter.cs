@@ -102,6 +102,10 @@ namespace Player.Core
         {
             Animator.SetBool(isAirborneHash, value);
         }
-        
+
+        public bool IsGrounded()
+        {
+            return PlayerMovement.IsGrounded();
+        }
     }
 }
