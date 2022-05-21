@@ -27,12 +27,12 @@ namespace Player.State_Machine.States
 
             PlayerAdapter.ResetJumpButtonPressedTime();
 
-            bool isCoyoteTime = Time.time - Context.PlayerAdapter.PlayerMovement.LastGroundedTime <= Context.PlayerAdapter.PlayerMovement.CoyoteTime;
-            bool isJumpBuffered = Time.time - Context.PlayerAdapter.PlayerController.JumpButtonPressedTime <= Context.PlayerAdapter.PlayerMovement.CoyoteTime;
+            bool isCoyoteTime = Time.time - PlayerAdapter.GetLastGroundedTime() <= Context.PlayerAdapter.PlayerMovement.CoyoteTime;
+            bool isJumpBuffered = Time.time - PlayerAdapter.PlayerController.JumpButtonPressedTime <= Context.PlayerAdapter.PlayerMovement.CoyoteTime;
 
             if (isCoyoteTime && isJumpBuffered)
             {
-                Context.PlayerAdapter.RigidBody.velocity = new Vector2(Context.PlayerAdapter.RigidBody.velocity.x, Context.PlayerAdapter.PlayerMovement.JumpForce);
+                PlayerAdapter.RigidBody.velocity = new Vector2(Context.PlayerAdapter.RigidBody.velocity.x, Context.PlayerAdapter.PlayerMovement.JumpForce);
             }
         }
 

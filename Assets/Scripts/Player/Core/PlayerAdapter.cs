@@ -112,6 +112,10 @@ namespace Player.Core
         {
             return PlayerMovement.IsGrounded();
         }
-        
+
+        public float? GetLastGroundedTime()
+        {
+            return PlayerMovement.LastGroundedTime;
+        }
     }
 }
