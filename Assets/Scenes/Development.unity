@@ -4223,10 +4223,10 @@ GameObject:
   - component: {fileID: 1912269945}
   - component: {fileID: 1912269941}
   - component: {fileID: 1912269946}
-  - component: {fileID: 1912269940}
-  - component: {fileID: 1912269942}
   - component: {fileID: 1912269943}
   - component: {fileID: 1912269944}
+  - component: {fileID: 1912269947}
+  - component: {fileID: 1912269948}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -4349,21 +4349,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &1912269940
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1912269935}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5c4930e1bcbf674d825dbc8c4f009b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 4
-  _jumpForce: 10
-  _coyoteTime: 0.2
 --- !u!95 &1912269941
 Animator:
   serializedVersion: 3
@@ -4383,18 +4368,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1912269942
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1912269935}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 198f8a279b464e9428061887cd04a0d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1912269943
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4421,6 +4394,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59a22026ac0354c4d966be32ccb40346, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerAdapter: {fileID: 1912269947}
 --- !u!231 &1912269945
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -4453,14 +4427,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77f1e5954bc667948bf4190e60cbf30a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerMeleeAttackData: {fileID: 11400000, guid: 83cd33cd25137684ebbe23471b1643f2, type: 2}
+  _playerAdapter: {fileID: 1912269947}
+--- !u!114 &1912269947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1912269935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66e09ec48cdb477cba8d8544687851a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _context: {fileID: 1912269946}
+  _playerController: {fileID: 1912269944}
   _rigidbody2D: {fileID: 1912269939}
-  _groundCheck: {fileID: 674560699}
   _animator: {fileID: 1912269941}
+  _groundCheck: {fileID: 674560699}
   _groundLayer:
     serializedVersion: 2
     m_Bits: 8
   _meleeAttackHitBox: {fileID: 958144501}
+  _playerMeleeAttackData: {fileID: 11400000, guid: 83cd33cd25137684ebbe23471b1643f2, type: 2}
+  _playerMovementData: {fileID: 11400000, guid: ac6e684c5eed6934aa7fcafd595af147, type: 2}
+--- !u!114 &1912269948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1912269935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59a22026ac0354c4d966be32ccb40346, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerAdapter: {fileID: 1912269947}
 --- !u!1 &1965139007
 GameObject:
   m_ObjectHideFlags: 0

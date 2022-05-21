@@ -1,59 +1,44 @@
+using Player.Data;
 using Player.State_Machine;
 using UnityEngine;
 
 namespace Player.Core
 {
-    public class PlayerMovement : MonoBehaviour
+    public class PlayerMovement
     {
-        // TODO: Experiment with making movement variables into a configuration class, struct or scriptable object
-        [Header("Movement variables")]
-        [SerializeField] private float _moveSpeed;
+        public float CoyoteTime = 0.2f;
+        public float JumpForce = 8;
+        public float MoveSpeed = 8;
         
-        [Header("Jump variables")]
-        [SerializeField] private float _jumpForce;
-        [SerializeField] private float _coyoteTime;
-
-        public static PlayerMovement Instance;
-        
-        private PlayerStateMachine _context;
+        private readonly PlayerAdapter _playerAdapter;
         private Vector2 _currentVelocity;
 
-        public float JumpForce
+        public PlayerMovement(PlayerAdapter playerAdapter, D_PlayerMovement playerMovementData)
         {
-            get { return _jumpForce; }
-        }
-        public float CoyoteTime
-        {
-            get { return _coyoteTime; }
-        }
-
-        private void Awake()
-        {
-            if (Instance == null)
-            {
-                Instance = this;
-            }
+            _playerAdapter = playerAdapter;
+            CoyoteTime = playerMovementData.CoyoteTime;
+            JumpForce = playerMovementData.JumpForce;
+            MoveSpeed = playerMovementData.MoveSpeed;
         }
 
-        public void HandleMovement(PlayerStateMachine currentContext)
+        public void HandleMovement()
         {
-            _context = currentContext;
-            _currentVelocity = _context.RigidBody.velocity;
+            _currentVelocity = _playerAdapter.RigidBody.velocity;
 
-            if (_context.IsMovementPressed == false)
+            if (_playerAdapter.PlayerController.IsMovementPressed == false)
             {
                 StopMovement();
                 return;
             }
 
-            _context.RigidBody.velocity = 
-                new Vector2(x: _context.CurrentMovementInput * _moveSpeed, 
+            _playerAdapter.RigidBody.velocity = 
+                new Vector2(x: _playerAdapter.PlayerController.CurrentMovementInput * MoveSpeed, 
                     y: _currentVelocity.y);
         }
 
         private void StopMovement()
         {
-            _context.RigidBody.velocity = new Vector2(x: 0, y: _currentVelocity.y);
+            _playerAdapter.RigidBody.velocity = new Vector2(x: 0, y: _currentVelocity.y);
         }
     }
 }

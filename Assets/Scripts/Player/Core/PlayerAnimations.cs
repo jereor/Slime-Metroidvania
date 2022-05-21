@@ -1,5 +1,4 @@
 using JetBrains.Annotations;
-using Player.State_Machine;
 using UnityEngine;
 using Utility;
 
@@ -7,13 +6,11 @@ namespace Player.Core
 {
     public class PlayerAnimations
     {
-        private readonly IStateMachine _context;
-        private Animator _animator;
+        private readonly PlayerAdapter _playerAdapter;
 
-        public PlayerAnimations(IStateMachine context)
+        public PlayerAnimations(PlayerAdapter playerAdapter)
         {
-            _context = context;
-            _animator = context.Animator;
+            _playerAdapter = playerAdapter;
 
             InitializeHashes();
         }
@@ -34,8 +31,8 @@ namespace Player.Core
         [UsedImplicitly]
         public void FinishAttack()
         {
-            _context.DealDamage();
-            _context.FinishMeleeAttacking();
+            _playerAdapter.DealDamage();
+            _playerAdapter.FinishMeleeAttacking();
         }
     }
 }

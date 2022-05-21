@@ -1,4 +1,3 @@
-using Player.Core;
 using UnityEngine;
 
 namespace Player.State_Machine.States
@@ -15,25 +14,25 @@ namespace Player.State_Machine.States
         // ENTER STATE
         protected override void EnterState()
         {
-            Context.Animator.SetBool(Context.PlayerAnimations.IsAirborneHash, true);
+            Context.PlayerAdapter.Animator.SetBool(Context.PlayerAdapter.PlayerAnimations.IsAirborneHash, true);
             JumpStart();
         }
 
         private void JumpStart()
         {
-            if (Context.IsGrounded() == false)
+            if (Context.PlayerAdapter.IsGrounded() == false)
             {
                 return;
             }
 
-            Context.JumpButtonPressedTime = Time.time;
+            Context.PlayerAdapter.PlayerController.JumpButtonPressedTime = Time.time;
 
-            bool isCoyoteTime = Time.time - Context.LastGroundedTime <= PlayerMovement.Instance.CoyoteTime;
-            bool isJumpBuffered = Time.time - Context.JumpButtonPressedTime <= PlayerMovement.Instance.CoyoteTime;
+            bool isCoyoteTime = Time.time - Context.PlayerAdapter.LastGroundedTime <= Context.PlayerAdapter.PlayerMovement.CoyoteTime;
+            bool isJumpBuffered = Time.time - Context.PlayerAdapter.PlayerController.JumpButtonPressedTime <= Context.PlayerAdapter.PlayerMovement.CoyoteTime;
 
             if (isCoyoteTime && isJumpBuffered)
             {
-                Context.RigidBody.velocity = new Vector2(Context.RigidBody.velocity.x, PlayerMovement.Instance.JumpForce);
+                Context.PlayerAdapter.RigidBody.velocity = new Vector2(Context.PlayerAdapter.RigidBody.velocity.x, Context.PlayerAdapter.PlayerMovement.JumpForce);
             }
         }
 
@@ -41,7 +40,7 @@ namespace Player.State_Machine.States
         // EXIT STATE
         protected override void ExitState()
         {
-            Context.Animator.SetBool(Context.PlayerAnimations.IsAirborneHash, false);
+            Context.PlayerAdapter.Animator.SetBool(Context.PlayerAdapter.PlayerAnimations.IsAirborneHash, false);
         }
 
 
@@ -54,8 +53,8 @@ namespace Player.State_Machine.States
 
         private void CheckJumpEnd()
         {
-            if (Context.RigidBody.velocity.y > 0f
-                && Context.IsJumpPressed == false)
+            if (Context.PlayerAdapter.RigidBody.velocity.y > 0f
+                && Context.PlayerAdapter.PlayerController.IsJumpPressed == false)
             {
                 StartFalling();
             }
@@ -63,10 +62,10 @@ namespace Player.State_Machine.States
 
         private void StartFalling()
         {
-            Vector2 velocity = Context.RigidBody.velocity;
-            Context.RigidBody.velocity = new Vector2(velocity.x, velocity.y * 0.5f);;
-            Context.JumpButtonPressedTime = null;
-            Context.LastGroundedTime = null;
+            Vector2 velocity = Context.PlayerAdapter.RigidBody.velocity;
+            Context.PlayerAdapter.RigidBody.velocity = new Vector2(velocity.x, velocity.y * 0.5f);;
+            Context.PlayerAdapter.PlayerController.JumpButtonPressedTime = null;
+            Context.PlayerAdapter.LastGroundedTime = null;
         }
 
 
@@ -79,7 +78,7 @@ namespace Player.State_Machine.States
         // CHECK SWITCH STATES
         protected override void CheckSwitchStates()
         {
-            if (Context.IsJumpPressed == false)
+            if (Context.PlayerAdapter.PlayerController.IsJumpPressed == false)
             {
                 SwitchState(Factory.Grounded());
             }

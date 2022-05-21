@@ -27,11 +27,11 @@ namespace Player.State_Machine.States
 
         protected override void CheckSwitchStates()
         {
-            if (Context.IsMeleeAttacking)
+            if (Context.PlayerAdapter.PlayerCombat.IsMeleeAttacking)
             {
                 SwitchState(Factory.MeleeAttack());
             }
-            else if (Context.IsMovementPressed)
+            else if (Context.PlayerAdapter.PlayerController.IsMovementPressed)
             {
                 SwitchState(Factory.Move());
             }

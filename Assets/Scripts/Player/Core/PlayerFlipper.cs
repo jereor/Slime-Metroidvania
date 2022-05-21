@@ -4,37 +4,27 @@ using UnityEngine;
 
 namespace Player.Core
 {
-    public class PlayerFlipper : MonoBehaviour
+    public class PlayerFlipper
     {
-        private PlayerStateMachine _context;
+        private readonly PlayerAdapter _playerAdapter;
 
-        public static PlayerFlipper Instance;
-
-        private void Awake()
+        public PlayerFlipper(PlayerAdapter playerAdapter)
         {
-            if (Instance == null)
-            {
-                Instance = this;
-            }
+            _playerAdapter = playerAdapter;
         }
 
-        public void HandleDirectionChange(PlayerStateMachine currentContext)
-        {
-            _context = currentContext;
+        public bool IsFacingRight { get; private set; } = true;
 
-            if (_context.HasMoveDirectionChanged() == false)
-            {
-                return;
-            }
-            
+        public void FlipPlayer()
+        {
             FlipSprite();
             FlipSlingShooter();
         }
 
         private void FlipSprite()
         {
-            _context.IsFacingRight = !_context.IsFacingRight;
-            Transform currentTransform = transform;
+            IsFacingRight = !IsFacingRight;
+            Transform currentTransform = _playerAdapter.transform;
             Vector3 localScale = currentTransform.localScale;
             
             localScale.x *= -1f;
