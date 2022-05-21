@@ -50,8 +50,9 @@ namespace Player.Core
             PlayerAnimations = new PlayerAnimations(this);
             PlayerCombat = new PlayerCombat(this, _meleeAttackHitBox, _playerMeleeAttackData);
             PlayerFlipper = new PlayerFlipper(this);
-            PlayerMovement = new PlayerMovement(this, _playerMovementData, new PlayerMovementParameters
+            PlayerMovement = new PlayerMovement(_playerMovementData, new PlayerMovementParameters
             {
+                PlayerController = _playerController,
                 Rigidbody = _rigidbody2D,
                 GroundCheck = _groundCheck,
                 GroundLayer = _groundLayer
