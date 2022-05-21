@@ -14,13 +14,13 @@ namespace Player.State_Machine.States
         // ENTER STATE
         protected override void EnterState()
         {
-            Context.PlayerAdapter.Animator.SetBool(Context.PlayerAdapter.PlayerAnimations.IsAirborneHash, true);
+            PlayerAdapter.SetAnimatorBool(PlayerAdapter.PlayerAnimations.IsAirborneHash, true);
             JumpStart();
         }
 
         private void JumpStart()
         {
-            if (Context.PlayerAdapter.PlayerMovement.IsGrounded() == false)
+            if (PlayerAdapter.PlayerMovement.IsGrounded() == false)
             {
                 return;
             }

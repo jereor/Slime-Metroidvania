@@ -97,5 +97,11 @@ namespace Player.Core
         {
             return PlayerController.IsJumpPressed;
         }
+
+        public void SetAnimatorBool(int isAirborneHash, bool value)
+        {
+            Animator.SetBool(isAirborneHash, value);
+        }
+        
     }
 }
