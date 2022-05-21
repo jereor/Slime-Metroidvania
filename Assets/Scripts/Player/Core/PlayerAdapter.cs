@@ -10,7 +10,6 @@ namespace Player.Core
     [RequireComponent(typeof(Animator))]
     public class PlayerAdapter : MonoBehaviour
     {
-        // TODO: Move context data out of PlayerAdapter into PlayerStateMachine
         [SerializeField] private PlayerController _playerController;
         [SerializeField] private Rigidbody2D _rigidbody2D;
         [SerializeField] private Animator _animator;
@@ -20,10 +19,6 @@ namespace Player.Core
         [SerializeField] private D_PlayerMeleeAttack _playerMeleeAttackData;
         [SerializeField] private D_PlayerMovement _playerMovementData;
         
-        // Grounded
-        public float? LastGroundedTime { get; set; }
-        private const float GROUND_CHECK_RADIUS = 0.3f;
-
         // References
         public PlayerAnimations PlayerAnimations { get; private set; }
         public PlayerCombat PlayerCombat { get; private set; }

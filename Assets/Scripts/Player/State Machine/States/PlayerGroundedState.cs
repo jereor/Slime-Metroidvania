@@ -17,7 +17,7 @@ namespace Player.State_Machine.States
 
         protected override void ExitState()
         {
-            Context.PlayerAdapter.LastGroundedTime = Time.time;
+            Context.PlayerAdapter.PlayerMovement.LastGroundedTime = Time.time;
         }
 
         protected override void UpdateState()

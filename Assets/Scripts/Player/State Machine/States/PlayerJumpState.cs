@@ -27,7 +27,7 @@ namespace Player.State_Machine.States
 
             Context.PlayerAdapter.PlayerController.JumpButtonPressedTime = Time.time;
 
-            bool isCoyoteTime = Time.time - Context.PlayerAdapter.LastGroundedTime <= Context.PlayerAdapter.PlayerMovement.CoyoteTime;
+            bool isCoyoteTime = Time.time - Context.PlayerAdapter.PlayerMovement.LastGroundedTime <= Context.PlayerAdapter.PlayerMovement.CoyoteTime;
             bool isJumpBuffered = Time.time - Context.PlayerAdapter.PlayerController.JumpButtonPressedTime <= Context.PlayerAdapter.PlayerMovement.CoyoteTime;
 
             if (isCoyoteTime && isJumpBuffered)
@@ -65,7 +65,7 @@ namespace Player.State_Machine.States
             Vector2 velocity = Context.PlayerAdapter.RigidBody.velocity;
             Context.PlayerAdapter.RigidBody.velocity = new Vector2(velocity.x, velocity.y * 0.5f);;
             Context.PlayerAdapter.PlayerController.JumpButtonPressedTime = null;
-            Context.PlayerAdapter.LastGroundedTime = null;
+            Context.PlayerAdapter.PlayerMovement.LastGroundedTime = null;
         }
 
 

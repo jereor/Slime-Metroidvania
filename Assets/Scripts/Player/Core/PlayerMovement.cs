@@ -28,7 +28,9 @@ namespace Player.Core
         {
             get { return _jumpForce; }
         }
-        
+
+        public float? LastGroundedTime { get; set; }
+
         public PlayerMovement(D_PlayerMovement playerMovementData, PlayerMovementParameters playerMovementParameters)
         {
             _coyoteTime = playerMovementData._coyoteTime;
