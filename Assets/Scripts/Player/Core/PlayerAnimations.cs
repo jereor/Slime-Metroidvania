@@ -6,11 +6,11 @@ namespace Player.Core
 {
     public class PlayerAnimations
     {
-        private readonly PlayerAdapter _playerAdapter;
+        private readonly PlayerCombat _playerCombat;
 
-        public PlayerAnimations(PlayerAdapter playerAdapter)
+        public PlayerAnimations(PlayerAnimationsParameters playerAnimationsParameters)
         {
-            _playerAdapter = playerAdapter;
+            _playerCombat = playerAnimationsParameters.PlayerCombat;
 
             InitializeHashes();
         }
@@ -31,8 +31,8 @@ namespace Player.Core
         [UsedImplicitly]
         public void FinishAttack()
         {
-            _playerAdapter.DealDamage();
-            _playerAdapter.FinishMeleeAttacking();
+            _playerCombat.DealDamage();
+            _playerCombat.FinishMeleeAttacking();
         }
     }
 }

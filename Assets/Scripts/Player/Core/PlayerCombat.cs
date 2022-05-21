@@ -42,5 +42,10 @@ namespace Player.Core
             Vector3 attackPosition = _meleeAttackHitBox.position;
             Gizmos.DrawWireSphere(attackPosition, _playerMeleeAttackData._attackRadius);
         }
+
+        public void FinishMeleeAttacking()
+        {
+            IsMeleeAttacking = false;
+        }
     }
 }

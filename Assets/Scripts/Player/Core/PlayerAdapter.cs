@@ -47,8 +47,11 @@ namespace Player.Core
 
         private void Awake()
         {
-            PlayerAnimations = new PlayerAnimations(this);
             PlayerCombat = new PlayerCombat(this, _meleeAttackHitBox, _playerMeleeAttackData);
+            PlayerAnimations = new PlayerAnimations(new PlayerAnimationsParameters
+            {
+                PlayerCombat = this.PlayerCombat
+            });
             PlayerFlipper = new PlayerFlipper(gameObject.transform);
             PlayerMovement = new PlayerMovement(_playerMovementData, new PlayerMovementParameters
             {
@@ -59,17 +62,7 @@ namespace Player.Core
             });
         }
 
-        public void DealDamage()
-        {
-            PlayerCombat.DealDamage();
-        }
-
-        public void FinishMeleeAttacking()
-        {
-            PlayerCombat.IsMeleeAttacking = false;
-        }
-
-        public void FlipPlayer()
+         public void FlipPlayer()
         {
             PlayerFlipper.FlipPlayer();
         }
