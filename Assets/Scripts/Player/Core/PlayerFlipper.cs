@@ -8,9 +8,9 @@ namespace Player.Core
     {
         private readonly Transform _playerTransform;
         
-        public PlayerFlipper(Transform playerTransform)
+        public PlayerFlipper(PlayerFlipperParameters playerFlipperParameters)
         {
-            _playerTransform = playerTransform;
+            _playerTransform = playerFlipperParameters.PlayerTransform;
         }
 
         public bool IsFacingRight { get; private set; } = true;
