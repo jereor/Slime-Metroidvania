@@ -5,12 +5,15 @@ namespace Player.Core
 {
     public class PlayerMovement
     {
-        private readonly PlayerController _playerController;
-        private readonly Rigidbody2D _rigidBody;
+        // Data
         private readonly float _coyoteTime;
         private readonly float _jumpForce;
         private readonly float _moveSpeed;
         private readonly float _groundCheckRadius;
+        
+        // Dependencies
+        private readonly PlayerController _playerController;
+        private readonly Rigidbody2D _rigidBody;
         private readonly Transform _groundCheck;
         private readonly LayerMask _groundLayer;
 
