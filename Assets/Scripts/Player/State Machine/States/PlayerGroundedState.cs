@@ -31,7 +31,7 @@ namespace Player.State_Machine.States
             {
                 SetSubState(Factory.MeleeAttack());
             }
-            else if (PlayerAdapter.PlayerController.IsMovementPressed)
+            else if (PlayerAdapter.IsMovementPressed())
             {
                 SetSubState(Factory.Move());
             }

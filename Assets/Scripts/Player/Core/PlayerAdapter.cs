@@ -87,5 +87,10 @@ namespace Player.Core
         {
             return PlayerCombat.IsMeleeAttacking;
         }
+
+        public bool IsMovementPressed()
+        {
+            return PlayerController.IsMovementPressed;
+        }
     }
 }
