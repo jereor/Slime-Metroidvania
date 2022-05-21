@@ -78,5 +78,9 @@ namespace Player.Core
             PlayerMovement.HandleMovement();
         }
 
+        public void ResetLastGroundedTime()
+        {
+            PlayerMovement.LastGroundedTime = Time.time;
+        }
     }
 }

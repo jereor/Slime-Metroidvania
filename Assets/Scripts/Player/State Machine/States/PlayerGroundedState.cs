@@ -17,7 +17,7 @@ namespace Player.State_Machine.States
 
         protected override void ExitState()
         {
-            Context.PlayerAdapter.PlayerMovement.LastGroundedTime = Time.time;
+            PlayerAdapter.ResetLastGroundedTime();
         }
 
         protected override void UpdateState()
@@ -27,11 +27,11 @@ namespace Player.State_Machine.States
 
         protected override void InitializeSubState()
         {
-            if (Context.PlayerAdapter.PlayerCombat.IsMeleeAttacking)
+            if (PlayerAdapter.PlayerCombat.IsMeleeAttacking)
             {
                 SetSubState(Factory.MeleeAttack());
             }
-            else if (Context.PlayerAdapter.PlayerController.IsMovementPressed)
+            else if (PlayerAdapter.PlayerController.IsMovementPressed)
             {
                 SetSubState(Factory.Move());
             }
@@ -43,7 +43,7 @@ namespace Player.State_Machine.States
 
         protected override void CheckSwitchStates()
         {
-            if (Context.PlayerAdapter.PlayerController.IsJumpPressed)
+            if (PlayerAdapter.PlayerController.IsJumpPressed)
             {
                 SwitchState(Factory.Jump());
             }
