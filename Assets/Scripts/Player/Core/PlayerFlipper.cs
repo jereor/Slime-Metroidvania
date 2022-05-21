@@ -6,7 +6,7 @@ namespace Player.Core
 {
     public class PlayerFlipper
     {
-        private Transform _playerTransform;
+        private readonly Transform _playerTransform;
         
         public PlayerFlipper(Transform playerTransform)
         {
