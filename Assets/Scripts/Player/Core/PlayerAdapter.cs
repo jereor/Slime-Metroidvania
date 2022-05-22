@@ -1,3 +1,4 @@
+using System;
 using JetBrains.Annotations;
 using Player.Core.Modules;
 using Player.Core.Modules.Slime_Sling;
@@ -19,12 +20,15 @@ namespace Player.Core
         [SerializeField] private D_PlayerMeleeAttack _playerMeleeAttackData;
         [SerializeField] private D_PlayerMovement _playerMovementData;
 
-        // References
+        public ILoggerAdapter Logger { get; private set; } = new UnityLogger();
+        
+        // Modules
         public PlayerAnimations PlayerAnimations { get; private set; }
         public PlayerCombat PlayerCombat { get; private set; }
         public PlayerFlipper PlayerFlipper { get; private set; }
         public PlayerMovement PlayerMovement { get; private set; }
 
+        // Field accessors
         public PlayerController PlayerController
         {
             get { return _playerController; }
@@ -104,6 +108,7 @@ namespace Player.Core
         {
             if (PlayerCombat == null)
             {
+                Logger.LogWarning($"{nameof(PlayerCombat)} module has null reference. Cannot access it's properties so returning.");
                 return false;
             }
 
@@ -114,6 +119,7 @@ namespace Player.Core
         {
             if (PlayerController == null)
             {
+                Logger.LogWarning($"{nameof(PlayerController)} module has null reference. Cannot access it's properties so returning.");
                 return false;
             }
 
@@ -124,6 +130,7 @@ namespace Player.Core
         {
             if (PlayerController == null)
             {
+                Logger.LogWarning($"{nameof(PlayerController)} module has null reference. Cannot access it's properties so returning.");
                 return false;
             }
 
@@ -139,6 +146,7 @@ namespace Player.Core
         {
             if (PlayerMovement == null)
             {
+                Logger.LogWarning($"{nameof(PlayerMovement)} module has null reference. Cannot access it's properties so returning.");
                 return false;
             }
 
@@ -149,6 +157,7 @@ namespace Player.Core
         {
             if (PlayerMovement == null)
             {
+                Logger.LogWarning($"{nameof(PlayerMovement)} module has null reference. Cannot access it's properties so returning.");
                 return null;
             }
 
@@ -159,6 +168,7 @@ namespace Player.Core
         {
             if (PlayerController == null)
             {
+                Logger.LogWarning($"{nameof(PlayerController)} module has null reference. Cannot access it's properties so returning.");
                 return null;
             }
 
@@ -170,5 +180,6 @@ namespace Player.Core
         {
             PlayerAnimations.FinishAttack();
         }
+        
     }
 }
