@@ -4456,14 +4456,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66e09ec48cdb477cba8d8544687851a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerController: {fileID: 1912269944}
-  _slingShooter: {fileID: 1681231654}
   _rigidbody2D: {fileID: 1912269939}
   _animator: {fileID: 1912269941}
   _groundCheck: {fileID: 674560699}
   _groundLayer:
     serializedVersion: 2
     m_Bits: 8
+  _playerController: {fileID: 1912269944}
+  _slingShooter: {fileID: 1681231654}
   _meleeAttackHitBox: {fileID: 958144501}
   _playerMeleeAttackData: {fileID: 11400000, guid: 83cd33cd25137684ebbe23471b1643f2, type: 2}
   _playerMovementData: {fileID: 11400000, guid: ac6e684c5eed6934aa7fcafd595af147, type: 2}

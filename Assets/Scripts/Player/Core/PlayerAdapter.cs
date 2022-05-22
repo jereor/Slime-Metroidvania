@@ -4,25 +4,20 @@ using Player.Core.Parameters;
 using Player.Data;
 using Player.State_Machine;
 using UnityEngine;
+using Utility;
 
 namespace Player.Core
 {
     [RequireComponent(typeof(PlayerStateMachine))]
     [RequireComponent(typeof(PlayerController))]
-    [RequireComponent(typeof(Rigidbody2D))]
-    [RequireComponent(typeof(Animator))]
-    public class PlayerAdapter : MonoBehaviour
+    public class PlayerAdapter : EntityAdapter
     {
         [SerializeField] private PlayerController _playerController;
         [SerializeField] private SlingShooter _slingShooter;
-        [SerializeField] private Rigidbody2D _rigidbody2D;
-        [SerializeField] private Animator _animator;
-        [SerializeField] private Transform _groundCheck;
-        [SerializeField] private LayerMask _groundLayer;
         [SerializeField] private Transform _meleeAttackHitBox;
         [SerializeField] private D_PlayerMeleeAttack _playerMeleeAttackData;
         [SerializeField] private D_PlayerMovement _playerMovementData;
-        
+
         // References
         public PlayerAnimations PlayerAnimations { get; private set; }
         public PlayerCombat PlayerCombat { get; private set; }
@@ -37,16 +32,6 @@ namespace Player.Core
         public SlingShooter SlingShooter
         {
             get { return _slingShooter; }
-        }
-        
-        public Rigidbody2D RigidBody
-        {
-            get { return _rigidbody2D; }
-        }
-
-        public Animator Animator
-        {
-            get { return _animator; }
         }
 
         public Transform MeleeAttackHitBox
@@ -67,18 +52,18 @@ namespace Player.Core
                 PlayerTransform = playerTransform,
                 MeleeAttackHitBox = _meleeAttackHitBox
             });
-            
+
             PlayerAnimations = new PlayerAnimations(new PlayerAnimationsParameters
             {
                 PlayerCombat = this.PlayerCombat
             });
-            
+
             PlayerFlipper = new PlayerFlipper(new PlayerFlipperParameters
             {
                 PlayerTransform = playerTransform,
                 SlingShooterTransform = _slingShooter.gameObject.transform
             });
-            
+
             PlayerMovement = new PlayerMovement(_playerMovementData, new PlayerMovementParameters
             {
                 PlayerController = _playerController,
@@ -102,12 +87,12 @@ namespace Player.Core
         {
             PlayerMovement.LastGroundedTime = Time.time;
         }
-        
+
         public void ResetJumpButtonPressedTime()
         {
             _playerController.JumpButtonPressedTime = Time.time;
         }
-        
+
         public void ResetJumpVariables()
         {
             PlayerMovement.LastGroundedTime = null;
@@ -120,7 +105,7 @@ namespace Player.Core
             {
                 return false;
             }
-                
+
             return PlayerCombat.IsMeleeAttacking;
         }
 
@@ -130,7 +115,7 @@ namespace Player.Core
             {
                 return false;
             }
-            
+
             return PlayerController.IsMovementPressed;
         }
 
@@ -140,7 +125,7 @@ namespace Player.Core
             {
                 return false;
             }
-            
+
             return PlayerController.IsJumpPressed;
         }
 
@@ -155,7 +140,7 @@ namespace Player.Core
             {
                 return false;
             }
-            
+
             return PlayerMovement.IsGrounded();
         }
 
@@ -165,7 +150,7 @@ namespace Player.Core
             {
                 return null;
             }
-            
+
             return PlayerMovement.LastGroundedTime;
         }
 
@@ -175,9 +160,8 @@ namespace Player.Core
             {
                 return null;
             }
-            
+
             return PlayerController.JumpButtonPressedTime;
         }
-        
     }
 }
