@@ -11,14 +11,14 @@ namespace Player.Core.Modules
         private readonly Transform _meleeAttackHitBox;
         private readonly D_PlayerMeleeAttack _playerMeleeAttackData;
         
-        public bool IsMeleeAttacking { get; set; }
-        
         public PlayerCombat(D_PlayerMeleeAttack playerMeleeAttackData, PlayerCombatParameters playerCombatParameters)
         {
             _playerTransform = playerCombatParameters.PlayerTransform;
             _meleeAttackHitBox = playerCombatParameters.MeleeAttackHitBox;
             _playerMeleeAttackData = playerMeleeAttackData;
         }
+        
+        public bool IsMeleeAttacking { get; set; }
 
         public void DealDamage()
         {
