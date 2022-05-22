@@ -36,13 +36,6 @@ namespace Player.Core.Modules
                 hitObject.transform.SendMessageUpwards(EventConstants.DAMAGE, attackDetails);
             }
         }
-        
-        // Gizmos
-        private void OnDrawGizmos()
-        {
-            Vector3 attackPosition = _meleeAttackHitBox.position;
-            Gizmos.DrawWireSphere(attackPosition, _playerMeleeAttackData._attackRadius);
-        }
 
         public void FinishMeleeAttacking()
         {

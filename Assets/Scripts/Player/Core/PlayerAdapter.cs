@@ -49,6 +49,16 @@ namespace Player.Core
             get { return _animator; }
         }
 
+        public Transform MeleeAttackHitBox
+        {
+            get { return _meleeAttackHitBox; }
+        }
+
+        public D_PlayerMeleeAttack PlayerMeleeAttackData
+        {
+            get { return _playerMeleeAttackData; }
+        }
+
         private void Awake()
         {
             Transform playerTransform = gameObject.transform;
