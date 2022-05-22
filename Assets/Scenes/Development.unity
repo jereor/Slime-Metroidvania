@@ -1193,6 +1193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70b82290bcb9c9646af5fd52390b29f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _slingShooter: {fileID: 1681231654}
   _lineRenderer: {fileID: 518264693}
   _lineVertexCount: 40
   _straightenLineSpeed: 10
@@ -3948,6 +3949,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8fd1aa7d82e7794f8435c829f936e22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _slimeSling: {fileID: 518264694}
   _camera: {fileID: 519420031}
   _player: {fileID: 1912269936}
   _slingShooter: {fileID: 1681231653}
@@ -4441,6 +4443,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerController: {fileID: 1912269944}
+  _slingShooter: {fileID: 1681231654}
   _rigidbody2D: {fileID: 1912269939}
   _animator: {fileID: 1912269941}
   _groundCheck: {fileID: 674560699}

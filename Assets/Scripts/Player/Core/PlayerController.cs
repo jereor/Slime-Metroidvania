@@ -67,15 +67,15 @@ namespace Player.Core
             IsJumpPressed = context.ReadValueAsButton();
         }
 
-        private static void OnShootSlingInputStart(InputAction.CallbackContext context)
+        private void OnShootSlingInputStart(InputAction.CallbackContext context)
         {
-            SlingShooter.Instance.SetGrapplePoint();
-            SlingShooter.Instance.StartPull();
+            _playerAdapter.SlingShooter.SetGrapplePoint();
+            _playerAdapter.SlingShooter.StartPull();
         }
 
-        private static void OnShootSlingInputCancel(InputAction.CallbackContext context)
+        private void OnShootSlingInputCancel(InputAction.CallbackContext context)
         {
-            SlingShooter.Instance.CancelPull();
+            _playerAdapter.SlingShooter.CancelPull();
         }
 
         private void OnMeleeAttackInputStart(InputAction.CallbackContext context)

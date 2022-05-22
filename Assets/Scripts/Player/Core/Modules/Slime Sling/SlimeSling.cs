@@ -5,26 +5,28 @@ namespace Player.Core.Modules.Slime_Sling
 {
     public class SlimeSling : MonoBehaviour
     {
-        public static SlimeSling Instance;
+        [Header("Sling Shooter")] 
+        [SerializeField] private SlingShooter _slingShooter;
         
-        [NonSerialized] public bool IsGrappling = true;
-
-        [Header("General References:")]
+        [Header("General References")]
         [SerializeField] private LineRenderer _lineRenderer;
 
-        [Header("General Settings:")]
+        [Header("General Settings")]
         [SerializeField] private int _lineVertexCount = 40;
         [SerializeField, Range(0, 20)] private float _straightenLineSpeed = 5;
 
-        [Header("Rope Animation Settings:")]
+        [Header("Rope Animation Settings")]
         [SerializeField] private AnimationCurve _ropeAnimationCurve;
         [SerializeField, Range(0.01f, 4)] private float _startWaveSize = 2;
         private float _waveSize;
 
-        [Header("Rope Progression:")]
+        [Header("Rope Progression")]
         [SerializeField] private AnimationCurve _ropeProgressionCurve;
         [SerializeField, Range(1, 50)] private float _ropeProgressionSpeed = 1;
 
+        // TODO: Turn into property
+        [NonSerialized] public bool IsGrappling = true;
+        
         private float _timer;
         private bool _isStraightLine = true;
         private const double TOLERANCE = 0.1;
@@ -36,7 +38,7 @@ namespace Player.Core.Modules.Slime_Sling
             _waveSize = _startWaveSize;
             _isStraightLine = false;
 
-            if (SlingShooter.Instance != null)
+            if (_slingShooter != null)
             {
                 LinePointsToFirePoint();
             }
@@ -48,7 +50,7 @@ namespace Player.Core.Modules.Slime_Sling
         {
             for (int i = 0; i < _lineVertexCount; i++)
             {
-                _lineRenderer.SetPosition(i, SlingShooter.Instance.OriginPoint.position);
+                _lineRenderer.SetPosition(i, _slingShooter.OriginPoint.position);
             }
         }
 
@@ -56,14 +58,6 @@ namespace Player.Core.Modules.Slime_Sling
         {
             _lineRenderer.enabled = false;
             IsGrappling = false;
-        }
-
-        private void Awake()
-        {
-            if (Instance == null)
-            {
-                Instance = this;
-            }
         }
 
         private void Update()
@@ -88,7 +82,7 @@ namespace Player.Core.Modules.Slime_Sling
         {
             if (!IsGrappling)
             {
-                SlingShooter.Instance.Grapple();
+                _slingShooter.Grapple();
                 IsGrappling = true;
             }
 
@@ -107,7 +101,7 @@ namespace Player.Core.Modules.Slime_Sling
         private void HandleRopeShootAnimation()
         {
             bool ropeHasReachedGrapplePoint =
-                Math.Abs(_lineRenderer.GetPosition(_lineVertexCount - 1).x - SlingShooter.Instance.GrapplePoint.x) < TOLERANCE;
+                Math.Abs(_lineRenderer.GetPosition(_lineVertexCount - 1).x - _slingShooter.GrapplePoint.x) < TOLERANCE;
             if (ropeHasReachedGrapplePoint)
             {
                 _isStraightLine = true;
@@ -135,11 +129,11 @@ namespace Player.Core.Modules.Slime_Sling
                 float distanceFromFirePoint = i / (_lineVertexCount - 1f);
                 float vertexHeightInCurve = _ropeAnimationCurve.Evaluate(distanceFromFirePoint);
 
-                Vector2 perpendicularDirection = Vector2.Perpendicular(SlingShooter.Instance.GrappleDistanceVector).normalized;
-                Vector3 originPointPosition = SlingShooter.Instance.OriginPoint.position;
+                Vector2 perpendicularDirection = Vector2.Perpendicular(_slingShooter.GrappleDistanceVector).normalized;
+                Vector3 originPointPosition = _slingShooter.OriginPoint.position;
 
                 Vector2 offset = perpendicularDirection * (vertexHeightInCurve * _waveSize);
-                Vector2 targetPosition = Vector2.Lerp(originPointPosition, SlingShooter.Instance.GrapplePoint,
+                Vector2 targetPosition = Vector2.Lerp(originPointPosition, _slingShooter.GrapplePoint,
                     distanceFromFirePoint) + offset;
 
                 Vector2 currentPosition = Vector2.Lerp(originPointPosition, targetPosition,
@@ -150,8 +144,8 @@ namespace Player.Core.Modules.Slime_Sling
 
         private void DrawRopeNoWaves()
         {
-            _lineRenderer.SetPosition(0, SlingShooter.Instance.OriginPoint.position);
-            _lineRenderer.SetPosition(1, SlingShooter.Instance.GrapplePoint);
+            _lineRenderer.SetPosition(0, _slingShooter.OriginPoint.position);
+            _lineRenderer.SetPosition(1, _slingShooter.GrapplePoint);
         }
     }
 }

@@ -1,4 +1,3 @@
-using Player.Core.Modules.Slime_Sling;
 using Player.Core.Parameters;
 using UnityEngine;
 
@@ -7,10 +6,12 @@ namespace Player.Core.Modules
     public class PlayerFlipper
     {
         private readonly Transform _playerTransform;
-        
+        private readonly Transform _slingShooterTransform;
+
         public PlayerFlipper(PlayerFlipperParameters playerFlipperParameters)
         {
             _playerTransform = playerFlipperParameters.PlayerTransform;
+            _slingShooterTransform = playerFlipperParameters.SlingShooterTransform;
         }
 
         public bool IsFacingRight { get; private set; } = true;
@@ -31,13 +32,12 @@ namespace Player.Core.Modules
             currentTransform.localScale = localScale;
         }
 
-        private static void FlipSlingShooter()
+        private void FlipSlingShooter()
         {
-            Transform slingShooterTransform = SlingShooter.Instance.transform;
-            Vector3 slingShooterLocalScale = slingShooterTransform.localScale;
+            Vector3 slingShooterLocalScale = _slingShooterTransform.localScale;
             
             slingShooterLocalScale.x *= -1f;
-            slingShooterTransform.localScale = slingShooterLocalScale;
+            _slingShooterTransform.localScale = slingShooterLocalScale;
         }
     }
 }

@@ -7,30 +7,23 @@ namespace Player.Core.Modules.Slime_Sling
 {
     public class SlingShooter : MonoBehaviour
     {
-        public static SlingShooter Instance;
-
-        public Transform OriginPoint
-        {
-            get { return _originPoint; }
-        }
-
-        [NonSerialized] public Vector2 GrapplePoint;
-        [NonSerialized] public Vector2 GrappleDistanceVector;
-
-        [Header("Main Camera:")] 
+        [Header("Slime Sling")] 
+        [SerializeField] private SlimeSling _slimeSling;
+        
+        [Header("Main Camera")] 
         [SerializeField] private UnityEngine.Camera _camera;
 
-        [Header("Transform Ref:")] 
+        [Header("Transform Ref")] 
         [SerializeField] private Transform _player;
 
         [SerializeField] private Transform _slingShooter;
         [SerializeField] private Transform _originPoint;
 
-        [Header("Physics Ref:")] 
+        [Header("Physics Ref")] 
         [SerializeField] private SpringJoint2D _springJoint;
         [SerializeField] private Rigidbody2D _rigidbody;
 
-        [Header("Launching:")] 
+        [Header("Launching")] 
         [SerializeField] private bool _isLaunchedToPoint = true;
         [SerializeField] private float _launchSpeed = 1;
 
@@ -39,19 +32,19 @@ namespace Player.Core.Modules.Slime_Sling
         [SerializeField] private float _targetDistance = 3;
         [SerializeField] private float _targetFrequency = 1;
 
-        private bool _pulling;
-
-        private void Awake()
+        [NonSerialized] public Vector2 GrapplePoint;
+        [NonSerialized] public Vector2 GrappleDistanceVector;
+        
+        public Transform OriginPoint
         {
-            if (Instance == null)
-            {
-                Instance = this;
-            }
+            get { return _originPoint; }
         }
+
+        private bool _pulling;
 
         private void Start()
         {
-            SlimeSling.Instance.enabled = false;
+            _slimeSling.enabled = false;
             _springJoint.enabled = false;
         }
 
@@ -70,7 +63,7 @@ namespace Player.Core.Modules.Slime_Sling
         {
             // ReSharper disable once InvertIf
             if (_isLaunchedToPoint
-                && SlimeSling.Instance.IsGrappling)
+                && _slimeSling.IsGrappling)
             {
                 PullPlayer();
             }
@@ -85,7 +78,7 @@ namespace Player.Core.Modules.Slime_Sling
 
         private void HandleSlingRotation()
         {
-            if (SlimeSling.Instance.enabled)
+            if (_slimeSling.enabled)
             {
                 RotateShooterTo(GrapplePoint);
             }
@@ -111,7 +104,7 @@ namespace Player.Core.Modules.Slime_Sling
         
         internal void CancelPull()
         {
-            SlimeSling.Instance.enabled = false;
+            _slimeSling.enabled = false;
             _springJoint.enabled = false;
             _rigidbody.gravityScale = PhysicsConstants.DEFAULT_GRAVITY_SCALE;
         }
@@ -135,7 +128,7 @@ namespace Player.Core.Modules.Slime_Sling
 
             GrapplePoint = hit.point;
             GrappleDistanceVector = GrapplePoint - (Vector2) slingShooterPosition;
-            SlimeSling.Instance.enabled = true;
+            _slimeSling.enabled = true;
         }
 
         internal void Grapple()
