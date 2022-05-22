@@ -24,12 +24,11 @@ namespace Player.Core.Modules.Slime_Sling
         [SerializeField] private AnimationCurve _ropeProgressionCurve;
         [SerializeField, Range(1, 50)] private float _ropeProgressionSpeed = 1;
 
-        // TODO: Turn into property
-        [NonSerialized] public bool IsGrappling = true;
-        
         private float _timer;
         private bool _isStraightLine = true;
         private const double TOLERANCE = 0.1;
+
+        public bool IsGrappling { get; private set; } = true;
 
         private void OnEnable()
         {
