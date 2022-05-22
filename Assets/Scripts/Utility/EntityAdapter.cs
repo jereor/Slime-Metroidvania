@@ -11,7 +11,7 @@ namespace Utility
         [SerializeField] protected Transform _groundCheck;
         [SerializeField] protected LayerMask _groundLayer;
 
-        public ILoggerAdapter Logger { get; private set; }
+        public abstract ILoggerAdapter Logger { get; }
 
         public Rigidbody2D RigidBody
         {

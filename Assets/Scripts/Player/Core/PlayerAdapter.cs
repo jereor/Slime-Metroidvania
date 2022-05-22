@@ -1,4 +1,3 @@
-using System;
 using JetBrains.Annotations;
 using Player.Core.Modules;
 using Player.Core.Modules.Slime_Sling;
@@ -20,7 +19,7 @@ namespace Player.Core
         [SerializeField] private D_PlayerMeleeAttack _playerMeleeAttackData;
         [SerializeField] private D_PlayerMovement _playerMovementData;
 
-        public ILoggerAdapter Logger { get; private set; } = new UnityLogger();
+        public override ILoggerAdapter Logger { get; } = new UnityLogger();
         
         // Modules
         public PlayerAnimations PlayerAnimations { get; private set; }
