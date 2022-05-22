@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using Player.Core.Modules;
 using Player.Core.Modules.Slime_Sling;
 using Player.Core.Parameters;
@@ -162,6 +163,12 @@ namespace Player.Core
             }
 
             return PlayerController.JumpButtonPressedTime;
+        }
+
+        [UsedImplicitly]
+        public void FinishAttack()
+        {
+            PlayerAnimations.FinishAttack();
         }
     }
 }

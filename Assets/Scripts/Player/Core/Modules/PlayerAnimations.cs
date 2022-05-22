@@ -29,7 +29,6 @@ namespace Player.Core.Modules
         }
         
         // Animation events
-        [UsedImplicitly]
         public void FinishAttack()
         {
             _playerCombat.DealDamage();
