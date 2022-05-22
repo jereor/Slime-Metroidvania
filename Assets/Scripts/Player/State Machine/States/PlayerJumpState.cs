@@ -47,8 +47,8 @@ namespace Player.State_Machine.States
         // UPDATE STATE
         protected override void UpdateState()
         {
-            CheckSwitchStates();
             CheckJumpEnd();
+            CheckSwitchStates();
         }
 
         private void CheckJumpEnd()
@@ -79,6 +79,7 @@ namespace Player.State_Machine.States
         {
             if (PlayerAdapter.IsJumpPressed() == false)
             {
+                Logger.LogVerbose("Jump -> Grounded");
                 SwitchState(Factory.Grounded());
             }
         }

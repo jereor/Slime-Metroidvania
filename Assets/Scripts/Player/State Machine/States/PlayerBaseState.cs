@@ -1,4 +1,5 @@
 using Player.Core;
+using Utility;
 
 namespace Player.State_Machine.States
 {
@@ -12,12 +13,14 @@ namespace Player.State_Machine.States
         protected PlayerStateMachine Context { get; }
         protected PlayerStateFactory Factory { get; }
         protected PlayerAdapter PlayerAdapter { get; }
+        protected ILoggerAdapter Logger { get; }
 
         protected PlayerBaseState(PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory)
         {
             Context = currentContext;
             Factory = playerStateFactory;
             PlayerAdapter = currentContext.PlayerAdapter;
+            Logger = PlayerAdapter.Logger;
         }
 
         protected abstract void EnterState();

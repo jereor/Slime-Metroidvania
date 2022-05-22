@@ -33,10 +33,12 @@ namespace Player.State_Machine.States
             }
             else if (PlayerAdapter.IsMovementPressed())
             {
+                Logger.LogVerbose("Grounded Substate: Move");
                 SetSubState(Factory.Move());
             }
             else
             {
+                Logger.LogVerbose("Grounded Substate: Idle");
                 SetSubState(Factory.Idle());
             }
         }
@@ -45,6 +47,7 @@ namespace Player.State_Machine.States
         {
             if (PlayerAdapter.IsJumpPressed())
             {
+                Logger.LogVerbose("Grounded -> Jump");
                 SwitchState(Factory.Jump());
             }
         }

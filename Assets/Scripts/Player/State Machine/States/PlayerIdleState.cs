@@ -29,10 +29,12 @@ namespace Player.State_Machine.States
         {
             if (PlayerAdapter.IsMeleeAttacking())
             {
+                Logger.LogVerbose("Idle -> Melee");
                 SwitchState(Factory.MeleeAttack());
             }
             else if (PlayerAdapter.IsMovementPressed())
             {
+                Logger.LogVerbose("Idle -> Move");
                 SwitchState(Factory.Move());
             }
         }
