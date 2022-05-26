@@ -41,7 +41,6 @@ namespace Player.State_Machine.States
         // EXIT STATE
         protected override void ExitState()
         {
-            Debug.Log("Exit jump.");
             PlayerAdapter.SetAnimatorBool(PlayerAdapter.PlayerAnimations.IsAirborneHash, false);
         }
 
