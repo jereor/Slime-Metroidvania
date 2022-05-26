@@ -31,6 +31,8 @@ namespace Player.Core.Modules
         }
 
         public float? LastGroundedTime { get; set; }
+        public bool IsAirborne { get; set; }
+        public bool IsFalling { get; set; }
 
         public PlayerMovement(D_PlayerMovement playerMovementData, PlayerMovementParameters playerMovementParameters)
         {

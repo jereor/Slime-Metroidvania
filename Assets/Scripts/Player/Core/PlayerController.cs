@@ -1,4 +1,3 @@
-using Player.Core.Modules.Slime_Sling;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -39,7 +38,7 @@ namespace Player.Core
             _playerControls.Gameplay.MeleeAttack.started += OnMeleeAttackInputStart;
         }
     
-        public bool HasMoveDirectionChanged()
+        private bool HasMoveDirectionChanged()
         {
             bool isFacingRight = _playerAdapter.PlayerFlipper.IsFacingRight;
             bool facingRightButNowMovingLeft = isFacingRight && CurrentMovementInput < 0f;
@@ -92,6 +91,5 @@ namespace Player.Core
         {
             _playerControls.Disable();
         }
-    
     }
 }

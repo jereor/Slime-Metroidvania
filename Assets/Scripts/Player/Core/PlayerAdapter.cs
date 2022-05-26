@@ -179,6 +179,16 @@ namespace Player.Core
         {
             PlayerAnimations.FinishAttack();
         }
-        
+
+        public bool IsFalling()
+        {
+            if (PlayerMovement == null)
+            {
+                Logger.LogWarning($"{nameof(PlayerMovement)} module has null reference. Cannot access it's properties so returning.");
+                return false;
+            }
+            
+            return PlayerMovement.IsFalling;
+        }
     }
 }

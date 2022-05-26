@@ -32,6 +32,7 @@ namespace Player.State_Machine.States
 
             if (isCoyoteTime && isJumpBuffered)
             {
+                PlayerAdapter.PlayerMovement.IsAirborne = true;
                 PlayerAdapter.RigidBody.velocity = new Vector2(PlayerAdapter.RigidBody.velocity.x, PlayerAdapter.PlayerMovement.JumpForce);
             }
         }
@@ -40,6 +41,7 @@ namespace Player.State_Machine.States
         // EXIT STATE
         protected override void ExitState()
         {
+            Debug.Log("Exit jump.");
             PlayerAdapter.SetAnimatorBool(PlayerAdapter.PlayerAnimations.IsAirborneHash, false);
         }
 
@@ -62,6 +64,8 @@ namespace Player.State_Machine.States
 
         private void StartFalling()
         {
+            PlayerAdapter.PlayerMovement.IsFalling = true;
+            
             Vector2 velocity = PlayerAdapter.RigidBody.velocity;
             PlayerAdapter.RigidBody.velocity = new Vector2(velocity.x, velocity.y * 0.5f);;
             PlayerAdapter.ResetJumpVariables();
@@ -89,7 +93,7 @@ namespace Player.State_Machine.States
         // CHECK SWITCH STATES
         protected override void CheckSwitchStates()
         {
-            if (PlayerAdapter.IsJumpPressed() == false)
+            if (PlayerAdapter.IsGrounded() && PlayerAdapter.IsFalling())
             {
                 Logger.LogVerbose("Jump -> Grounded");
                 SwitchState(Factory.Grounded());
