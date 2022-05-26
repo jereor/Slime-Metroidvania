@@ -91,5 +91,10 @@ namespace Player.Core
         {
             _playerControls.Disable();
         }
+
+        public void SetJumpButtonPressedTime()
+        {
+            JumpButtonPressedTime = Time.time;
+        }
     }
 }

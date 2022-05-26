@@ -1,3 +1,4 @@
+using System;
 using JetBrains.Annotations;
 using Player.Core.Modules;
 using Player.Core.Modules.Slime_Sling;
@@ -77,6 +78,11 @@ namespace Player.Core
             });
         }
 
+        private void Update()
+        {
+            PlayerMovement.Update();
+        }
+
         public void FlipPlayer()
         {
             PlayerFlipper.FlipPlayer();
@@ -90,17 +96,6 @@ namespace Player.Core
         public void ResetLastGroundedTime()
         {
             PlayerMovement.LastGroundedTime = Time.time;
-        }
-
-        public void ResetJumpButtonPressedTime()
-        {
-            _playerController.JumpButtonPressedTime = Time.time;
-        }
-
-        public void ResetJumpVariables()
-        {
-            PlayerMovement.LastGroundedTime = null;
-            PlayerController.JumpButtonPressedTime = null;
         }
 
         public bool IsMeleeAttacking()
@@ -150,28 +145,6 @@ namespace Player.Core
             }
 
             return PlayerMovement.IsGrounded();
-        }
-
-        public float? GetLastGroundedTime()
-        {
-            if (PlayerMovement == null)
-            {
-                Logger.LogWarning($"{nameof(PlayerMovement)} module has null reference. Cannot access it's properties so returning.");
-                return null;
-            }
-
-            return PlayerMovement.LastGroundedTime;
-        }
-
-        public float? GetJumpButtonPressedTime()
-        {
-            if (PlayerController == null)
-            {
-                Logger.LogWarning($"{nameof(PlayerController)} module has null reference. Cannot access it's properties so returning.");
-                return null;
-            }
-
-            return PlayerController.JumpButtonPressedTime;
         }
 
         [UsedImplicitly]

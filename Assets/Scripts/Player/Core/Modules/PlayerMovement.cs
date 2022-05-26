@@ -20,18 +20,7 @@ namespace Player.Core.Modules
 
         private Vector2 _currentVelocity;
 
-        public float CoyoteTime
-        {
-            get { return _coyoteTime; }
-        }
-
-        public float JumpForce
-        {
-            get { return _jumpForce; }
-        }
-
         public float? LastGroundedTime { get; set; }
-        public bool IsAirborne { get; set; }
         public bool IsFalling { get; set; }
 
         public PlayerMovement(D_PlayerMovement playerMovementData, PlayerMovementParameters playerMovementParameters)
@@ -70,6 +59,55 @@ namespace Player.Core.Modules
         private void StopMovement()
         {
             _rigidBody.velocity = new Vector2(x: 0, y: _currentVelocity.y);
+        }
+        
+        public void JumpStart()
+        {
+            if (IsGrounded() == false)
+            {
+                return;
+            }
+
+            _playerController.SetJumpButtonPressedTime();
+
+            bool isCoyoteTime = Time.time - LastGroundedTime <= _coyoteTime;
+            bool isJumpBuffered = Time.time - _playerController.JumpButtonPressedTime <= _coyoteTime;
+
+            if (isCoyoteTime && isJumpBuffered)
+            {
+                IsFalling = false;
+                _rigidBody.velocity = new Vector2(_rigidBody.velocity.x, _jumpForce);
+            }
+        }
+        
+        public void Update()
+        {
+            CheckJumpEnd();
+            Debug.Log("Jump Update");
+        }
+
+        private void CheckJumpEnd()
+        {
+            if (_rigidBody.velocity.y > 0f
+                && _playerController.IsJumpPressed == false)
+            {
+                StartFalling();
+            }
+        }
+
+        private void StartFalling()
+        {
+            IsFalling = true;
+            
+            Vector2 velocity = _rigidBody.velocity;
+            _rigidBody.velocity = new Vector2(velocity.x, velocity.y * 0.5f);;
+            ResetJumpVariables();
+        }
+        
+        public void ResetJumpVariables()
+        {
+            LastGroundedTime = null;
+            _playerController.JumpButtonPressedTime = null;
         }
     }
 }
