@@ -19,6 +19,7 @@ namespace Player.Core.Modules
         private readonly LayerMask _groundLayer;
 
         private Vector2 _currentVelocity;
+        private bool _isJumping;
 
         public float? LastGroundedTime { get; set; }
         public bool IsFalling { get; set; }
@@ -68,7 +69,7 @@ namespace Player.Core.Modules
                 return;
             }
 
-            _playerController.SetJumpButtonPressedTime();
+            _isJumping = true;
 
             bool isCoyoteTime = Time.time - LastGroundedTime <= _coyoteTime;
             bool isJumpBuffered = Time.time - _playerController.JumpButtonPressedTime <= _coyoteTime;
@@ -79,11 +80,20 @@ namespace Player.Core.Modules
                 _rigidBody.velocity = new Vector2(_rigidBody.velocity.x, _jumpForce);
             }
         }
+
+        public void JumpEnd()
+        {
+            _isJumping = false;
+        }
         
         public void Update()
         {
+            if (_isJumping == false)
+            {
+                return;
+            }
+            
             CheckJumpEnd();
-            Debug.Log("Jump Update");
         }
 
         private void CheckJumpEnd()
@@ -91,6 +101,12 @@ namespace Player.Core.Modules
             if (_rigidBody.velocity.y > 0f
                 && _playerController.IsJumpPressed == false)
             {
+                Debug.Log("Released");
+                StartFalling();
+            }
+            if (_rigidBody.velocity.y < 0f && IsGrounded())
+            {
+                Debug.Log("Hit ground");
                 StartFalling();
             }
         }
@@ -103,8 +119,8 @@ namespace Player.Core.Modules
             _rigidBody.velocity = new Vector2(velocity.x, velocity.y * 0.5f);;
             ResetJumpVariables();
         }
-        
-        public void ResetJumpVariables()
+
+        private void ResetJumpVariables()
         {
             LastGroundedTime = null;
             _playerController.JumpButtonPressedTime = null;

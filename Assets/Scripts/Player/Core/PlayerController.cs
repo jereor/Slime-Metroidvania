@@ -28,7 +28,8 @@ namespace Player.Core
             
             _playerControls.Gameplay.Move.performed += OnMovementInput;
             _playerControls.Gameplay.Move.canceled += OnMovementInput;
-            
+
+            _playerControls.Gameplay.Jump.started += OnJumpInputStart;
             _playerControls.Gameplay.Jump.performed += OnJumpInput;
             _playerControls.Gameplay.Jump.canceled += OnJumpInput;
             
@@ -59,6 +60,11 @@ namespace Player.Core
             {
                 _playerAdapter.FlipPlayer();
             }
+        }
+        
+        private void OnJumpInputStart(InputAction.CallbackContext context)
+        {
+            JumpButtonPressedTime = Time.time;
         }
     
         private void OnJumpInput(InputAction.CallbackContext context)
@@ -91,10 +97,6 @@ namespace Player.Core
         {
             _playerControls.Disable();
         }
-
-        public void SetJumpButtonPressedTime()
-        {
-            JumpButtonPressedTime = Time.time;
-        }
+        
     }
 }

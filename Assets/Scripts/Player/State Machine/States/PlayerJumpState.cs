@@ -21,6 +21,7 @@ namespace Player.State_Machine.States
         protected override void ExitState()
         {
             PlayerAdapter.SetAnimatorBool(PlayerAdapter.PlayerAnimations.IsAirborneHash, false);
+            PlayerAdapter.PlayerMovement.JumpEnd();
         }
 
 
