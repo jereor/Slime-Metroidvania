@@ -94,11 +94,6 @@ namespace Player.Core
             PlayerMovement.HandleMovement();
         }
 
-        public void ResetLastGroundedTime()
-        {
-            PlayerMovement.LastGroundedTime = Time.time;
-        }
-
         public bool IsMeleeAttacking()
         {
             if (PlayerCombat == null)
@@ -121,43 +116,10 @@ namespace Player.Core
             return PlayerController.IsMovementPressed;
         }
 
-        public bool IsJumpPressed()
-        {
-            if (PlayerController == null)
-            {
-                Logger.LogWarning($"{nameof(PlayerController)} module has null reference. Cannot access it's properties so returning.");
-                return false;
-            }
-
-            return PlayerController.IsJumpPressed;
-        }
-
-        public bool IsGrounded()
-        {
-            if (PlayerMovement == null)
-            {
-                Logger.LogWarning($"{nameof(PlayerMovement)} module has null reference. Cannot access it's properties so returning.");
-                return false;
-            }
-
-            return PlayerMovement.IsGrounded();
-        }
-
         [UsedImplicitly]
         public void FinishAttack()
         {
             PlayerAnimations.FinishAttack();
-        }
-
-        public bool IsFalling()
-        {
-            if (PlayerMovement == null)
-            {
-                Logger.LogWarning($"{nameof(PlayerMovement)} module has null reference. Cannot access it's properties so returning.");
-                return false;
-            }
-            
-            return PlayerMovement.IsFalling;
         }
     }
 }
