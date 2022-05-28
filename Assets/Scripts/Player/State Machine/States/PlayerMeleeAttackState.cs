@@ -1,11 +1,15 @@
+using Player.Core.Modules;
+
 namespace Player.State_Machine.States
 {
     public class PlayerMeleeAttackState : PlayerBaseState
     {
-        public PlayerMeleeAttackState(PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory) 
+        private readonly PlayerCombat _playerCombat;
+
+        public PlayerMeleeAttackState(PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory)
             : base(currentContext, playerStateFactory)
         {
-            
+            _playerCombat = currentContext.PlayerAdapter.PlayerCombat;
         }
 
         protected override void EnterState()
@@ -25,15 +29,15 @@ namespace Player.State_Machine.States
 
         protected override void CheckSwitchStates()
         {
-            if (PlayerAdapter.IsMeleeAttacking())
+            if (_playerCombat.IsMeleeAttacking)
             {
                 return;
             }
-            
+
             Logger.LogVerbose("Melee -> Move/Idle");
-            
-            SwitchState(PlayerAdapter.IsMovementPressed()
-                ? Factory.Move() 
+
+            SwitchState(PlayerController.IsMovementPressed
+                ? Factory.Move()
                 : Factory.Idle());
         }
 
