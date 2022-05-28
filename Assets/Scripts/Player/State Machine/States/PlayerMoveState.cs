@@ -10,12 +10,12 @@ namespace Player.State_Machine.States
 
         protected override void EnterState()
         {
-            PlayerAdapter.SetAnimatorBool(PlayerAdapter.PlayerAnimations.IsMovingHash, true);
+            PlayerAnimations.SetAnimatorBool(PlayerAnimations.IsMovingHash, true);
         }
 
         protected override void ExitState()
         {
-            PlayerAdapter.SetAnimatorBool(PlayerAdapter.PlayerAnimations.IsMovingHash, false);
+            PlayerAnimations.SetAnimatorBool(PlayerAnimations.IsMovingHash, false);
         }
 
         protected override void UpdateState()

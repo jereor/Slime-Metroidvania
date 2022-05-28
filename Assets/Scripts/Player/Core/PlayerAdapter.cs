@@ -60,6 +60,7 @@ namespace Player.Core
 
             PlayerAnimations = new PlayerAnimations(new PlayerAnimationsParameters
             {
+                Animator = _animator,
                 PlayerCombat = this.PlayerCombat
             });
 
@@ -129,11 +130,6 @@ namespace Player.Core
             }
 
             return PlayerController.IsJumpPressed;
-        }
-
-        public void SetAnimatorBool(int isAirborneHash, bool value)
-        {
-            Animator.SetBool(isAirborneHash, value);
         }
 
         public bool IsGrounded()

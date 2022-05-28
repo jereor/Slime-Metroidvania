@@ -1,10 +1,18 @@
+using Player.Core.Modules;
+
 namespace Player.State_Machine.States
 {
     public sealed class PlayerJumpState : PlayerBaseState
     {
+        private readonly PlayerMovement _playerMovement;
+        private readonly PlayerCombat _playerCombat;
+        
         public PlayerJumpState(PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory)
-            : base(currentContext, playerStateFactory) 
+            : base(currentContext, playerStateFactory)
         {
+            _playerMovement = currentContext.PlayerAdapter.PlayerMovement;
+            _playerCombat = currentContext.PlayerAdapter.PlayerCombat;
+            
             IsRootState = true;
             InitializeSubState();
         }
@@ -12,16 +20,16 @@ namespace Player.State_Machine.States
         // ENTER STATE
         protected override void EnterState()
         {
-            PlayerAdapter.SetAnimatorBool(PlayerAdapter.PlayerAnimations.IsAirborneHash, true);
-            PlayerAdapter.PlayerMovement.JumpStart();
+            PlayerAnimations.SetAnimatorBool(PlayerAnimations.IsAirborneHash, true);
+            _playerMovement.JumpStart();
         }
 
 
         // EXIT STATE
         protected override void ExitState()
         {
-            PlayerAdapter.SetAnimatorBool(PlayerAdapter.PlayerAnimations.IsAirborneHash, false);
-            PlayerAdapter.PlayerMovement.JumpEnd();
+            PlayerAnimations.SetAnimatorBool(PlayerAnimations.IsAirborneHash, false);
+            _playerMovement.JumpEnd();
         }
 
 
@@ -35,11 +43,11 @@ namespace Player.State_Machine.States
         // INITIALIZE SUB STATE
         protected override void InitializeSubState()
         {
-            if (PlayerAdapter.IsMeleeAttacking())
+            if (_playerCombat.IsMeleeAttacking)
             {
                 SetSubState(Factory.MeleeAttack());
             }
-            else if (PlayerAdapter.IsMovementPressed())
+            else if (PlayerController.IsMovementPressed)
             {
                 SetSubState(Factory.Move());
             }
@@ -53,7 +61,7 @@ namespace Player.State_Machine.States
         // CHECK SWITCH STATES
         protected override void CheckSwitchStates()
         {
-            if (PlayerAdapter.IsGrounded() && PlayerAdapter.IsFalling())
+            if (_playerMovement.IsGrounded() && _playerMovement.IsFalling)
             {
                 Logger.LogVerbose("Jump -> Grounded");
                 SwitchState(Factory.Grounded());

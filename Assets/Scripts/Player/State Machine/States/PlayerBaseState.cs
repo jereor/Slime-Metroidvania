@@ -1,4 +1,5 @@
 using Player.Core;
+using Player.Core.Modules;
 using Utility;
 
 namespace Player.State_Machine.States
@@ -13,6 +14,8 @@ namespace Player.State_Machine.States
         protected PlayerStateMachine Context { get; }
         protected PlayerStateFactory Factory { get; }
         protected PlayerAdapter PlayerAdapter { get; }
+        protected PlayerAnimations PlayerAnimations { get; }
+        protected PlayerController PlayerController { get; }
         protected ILoggerAdapter Logger { get; }
 
         protected PlayerBaseState(PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory)
@@ -20,6 +23,8 @@ namespace Player.State_Machine.States
             Context = currentContext;
             Factory = playerStateFactory;
             PlayerAdapter = currentContext.PlayerAdapter;
+            PlayerAnimations = PlayerAdapter.PlayerAnimations;
+            PlayerController = PlayerAdapter.PlayerController;
             Logger = PlayerAdapter.Logger;
         }
 
