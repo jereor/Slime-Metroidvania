@@ -1,12 +1,19 @@
+using Player.Core.Modules;
 using UnityEngine;
 
 namespace Player.State_Machine.States
 {
     public sealed class PlayerGroundedState : PlayerBaseState
     {
+        private readonly PlayerMovement _playerMovement;
+        private readonly PlayerCombat _playerCombat;
+        
         public PlayerGroundedState(PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory)
             : base (currentContext, playerStateFactory)
         {
+            _playerMovement = currentContext.PlayerAdapter.PlayerMovement;
+            _playerCombat = currentContext.PlayerAdapter.PlayerCombat;
+            
             IsRootState = true;
             InitializeSubState();
         }
@@ -17,7 +24,7 @@ namespace Player.State_Machine.States
 
         protected override void ExitState()
         {
-            PlayerAdapter.ResetLastGroundedTime();
+            _playerMovement.SetLastGroundedTime();
         }
 
         protected override void UpdateState()
@@ -27,11 +34,11 @@ namespace Player.State_Machine.States
 
         protected override void InitializeSubState()
         {
-            if (PlayerAdapter.IsMeleeAttacking())
+            if (_playerCombat.IsMeleeAttacking)
             {
                 SetSubState(Factory.MeleeAttack());
             }
-            else if (PlayerAdapter.IsMovementPressed())
+            else if (PlayerController.IsMovementPressed)
             {
                 Logger.LogVerbose("Grounded Substate: Move");
                 SetSubState(Factory.Move());
@@ -45,8 +52,7 @@ namespace Player.State_Machine.States
 
         protected override void CheckSwitchStates()
         {
-            bool isJumpBuffered = Time.time - PlayerAdapter.PlayerController.JumpButtonPressedTime <=
-                                  PlayerAdapter.PlayerMovement.CoyoteTime;
+            bool isJumpBuffered = Time.time - PlayerController.JumpButtonPressedTime <= _playerMovement.CoyoteTime;
             if (isJumpBuffered)
             {
                 Logger.LogVerbose("Grounded -> Jump");

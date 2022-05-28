@@ -135,5 +135,10 @@ namespace Player.Core.Modules
             LastGroundedTime = null;
             _playerController.JumpButtonPressedTime = null;
         }
+
+        public void SetLastGroundedTime()
+        {
+            LastGroundedTime = Time.time;
+        }
     }
 }
