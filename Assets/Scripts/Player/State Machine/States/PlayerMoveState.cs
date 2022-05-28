@@ -1,11 +1,17 @@
+using Player.Core.Modules;
+
 namespace Player.State_Machine.States
 {
     public class PlayerMoveState : PlayerBaseState
     {
+        private readonly PlayerMovement _playerMovement;
+        private readonly PlayerCombat _playerCombat;
+        
         public PlayerMoveState(PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory)
             : base(currentContext, playerStateFactory)
         {
-            
+            _playerMovement = PlayerAdapter.PlayerMovement;
+            _playerCombat = PlayerAdapter.PlayerCombat;
         }
 
         protected override void EnterState()
@@ -21,7 +27,7 @@ namespace Player.State_Machine.States
         protected override void UpdateState()
         {
             CheckSwitchStates();
-            PlayerAdapter.HandleMovement();
+            _playerMovement.HandleMovement();
         }
 
         protected override void InitializeSubState()
@@ -30,12 +36,12 @@ namespace Player.State_Machine.States
 
         protected override void CheckSwitchStates()
         {
-            if (PlayerAdapter.IsMeleeAttacking())
+            if (_playerCombat.IsMeleeAttacking)
             {
                 Logger.LogVerbose("Move -> Melee");
                 SwitchState(Factory.MeleeAttack());
             }
-            else if (PlayerAdapter.IsMovementPressed() == false)
+            else if (PlayerController.IsMovementPressed == false)
             {
                 Logger.LogVerbose("Move -> Idle");
                 SwitchState(Factory.Idle());
