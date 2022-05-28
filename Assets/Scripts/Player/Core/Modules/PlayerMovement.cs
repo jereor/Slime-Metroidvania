@@ -24,6 +24,14 @@ namespace Player.Core.Modules
         public float? LastGroundedTime { get; set; }
         public bool IsFalling { get; set; }
 
+        public float CoyoteTime
+        {
+            get
+            {
+                return _coyoteTime;
+            }
+        }
+        
         public PlayerMovement(D_PlayerMovement playerMovementData, PlayerMovementParameters playerMovementParameters)
         {
             _coyoteTime = playerMovementData._coyoteTime;

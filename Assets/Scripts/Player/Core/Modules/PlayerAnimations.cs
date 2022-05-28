@@ -1,4 +1,3 @@
-using JetBrains.Annotations;
 using Player.Core.Parameters;
 using UnityEngine;
 using Utility;

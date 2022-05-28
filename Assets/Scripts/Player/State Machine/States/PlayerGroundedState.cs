@@ -45,7 +45,9 @@ namespace Player.State_Machine.States
 
         protected override void CheckSwitchStates()
         {
-            if (PlayerAdapter.IsJumpPressed())
+            bool isJumpBuffered = Time.time - PlayerAdapter.PlayerController.JumpButtonPressedTime <=
+                                  PlayerAdapter.PlayerMovement.CoyoteTime;
+            if (isJumpBuffered)
             {
                 Logger.LogVerbose("Grounded -> Jump");
                 SwitchState(Factory.Jump());
