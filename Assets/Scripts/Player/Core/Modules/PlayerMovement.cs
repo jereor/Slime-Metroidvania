@@ -106,16 +106,18 @@ namespace Player.Core.Modules
 
         private void CheckJumpEnd()
         {
-            if (_rigidBody.velocity.y > 0f
-                && _playerController.IsJumpPressed == false)
+            bool jumpingButJumpReleased = _rigidBody.velocity.y > 0f
+                     && _playerController.IsJumpPressed == false;
+            if (jumpingButJumpReleased)
             {
-                Debug.Log("Released");
                 StartFalling();
             }
-            if (_rigidBody.velocity.y < 0f && IsGrounded())
+
+            bool fallingAndHitGround = _rigidBody.velocity.y < 0f && IsGrounded();
+            if (fallingAndHitGround)
             {
-                Debug.Log("Hit ground");
-                StartFalling();
+                IsFalling = true;
+                ResetJumpVariables();
             }
         }
 
