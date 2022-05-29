@@ -12,17 +12,17 @@ namespace Player.State_Machine.States
         protected bool IsRootState { set { _isRootState = value; } }
         protected PlayerStateMachine Context { get; }
         protected PlayerStateFactory Factory { get; }
-        protected Core Core { get; }
         protected Core_Components.Player Player { get; }
+        protected Core Core { get; }
         protected ILoggerAdapter Logger { get; }
 
-        protected PlayerBaseState(PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory)
+        protected PlayerBaseState(Core_Components.Player player, PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory)
         {
             Context = currentContext;
             Factory = playerStateFactory;
-            Player = currentContext.Player;
-            Core = Player.Core;
-            Logger = Player.Logger;
+            Player = player;
+            Core = player.Core;
+            Logger = player.Logger;
         }
 
         protected abstract void EnterState();

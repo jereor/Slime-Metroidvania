@@ -1,34 +1,24 @@
 using Player.State_Machine.States;
-using UnityEngine;
 
 namespace Player.State_Machine
 {
-    public class PlayerStateMachine : MonoBehaviour
+    public class PlayerStateMachine
     {
-        [Header("References")] [SerializeField]
-        private Core_Components.Player _player;
-
-        private PlayerBaseState _currentState;
-        private PlayerStateFactory _states;
-
-        public PlayerBaseState CurrentState
-        {
-            set { _currentState = value; }
-        }
-
         public Core_Components.Player Player { get; private set; }
+        public PlayerStateFactory States { get; private set; }
+        public PlayerBaseState CurrentState { get; set; }
 
-        private void Awake()
+        public void Initialize(Core_Components.Player player)
         {
-            Player = _player;
-
-            _states = new PlayerStateFactory(this);
-            _currentState = _states.Grounded();
+            Player = player;
+            States = new PlayerStateFactory(player, this);
+            CurrentState = States.Grounded();
         }
 
-        private void Update()
+        // TODO: Split update into logic and physics updates
+        public void UpdateStates()
         {
-            _currentState.UpdateStates();
+            CurrentState.UpdateStates();
         }
     }
 }

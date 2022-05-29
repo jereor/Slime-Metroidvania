@@ -7,18 +7,11 @@ using Utility.Logger;
 
 namespace Player.Core_Components
 {
-    [RequireComponent(typeof(PlayerStateMachine))]
-    [RequireComponent(typeof(PlayerController))]
     public class Player : MonoBehaviour
     {
         [SerializeField] private Core _core;
         [SerializeField] private Transform _meleeAttackHitBox;
         [SerializeField] private D_PlayerMeleeAttack _playerMeleeAttackData;
-
-        public ILoggerAdapter Logger
-        {
-            get { return _core.Logger ?? new UnityLogger(); }
-        }
 
         // Field accessors
         public Core Core
@@ -36,5 +29,26 @@ namespace Player.Core_Components
             get { return _playerMeleeAttackData; }
         }
         
+        public PlayerStateMachine StateMachine { get; private set; }
+        
+        public ILoggerAdapter Logger
+        {
+            get { return _core.Logger ?? new UnityLogger(); }
+        }
+
+        private void Awake()
+        {
+            StateMachine = new PlayerStateMachine();
+        }
+
+        private void Start()
+        {
+            StateMachine.Initialize(this);
+        }
+
+        private void Update()
+        {
+            StateMachine.UpdateStates();
+        }
     }
 }
