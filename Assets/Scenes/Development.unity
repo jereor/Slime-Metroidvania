@@ -4591,8 +4591,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   _core: {fileID: 1912269942}
-  _playerController: {fileID: 1912269944}
-  _slingShooter: {fileID: 1681231654}
   _meleeAttackHitBox: {fileID: 958144501}
   _playerMeleeAttackData: {fileID: 11400000, guid: 83cd33cd25137684ebbe23471b1643f2, type: 2}
 --- !u!114 &1912269949

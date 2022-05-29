@@ -11,7 +11,7 @@ namespace Utility.Component_System
             Core = transform.GetComponent<Core>();
 
             if (Core == null)
-            {
+            { 
                 Debug.LogError("There is no Core on this game object.");
             }
             

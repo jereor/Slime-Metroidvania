@@ -50,8 +50,6 @@ namespace Player.State_Machine.States
                 return;
             }
 
-            Logger.LogVerbose("Melee -> Move/Idle");
-
             SwitchState(PlayerController.IsMovementPressed
                 ? Factory.Move()
                 : Factory.Idle());

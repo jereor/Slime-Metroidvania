@@ -81,7 +81,6 @@ namespace Player.State_Machine.States
         {
             if (PlayerMovement.IsGrounded() && PlayerMovement.IsFalling)
             {
-                Logger.LogVerbose("Jump -> Grounded");
                 SwitchState(Factory.Grounded());
             }
         }

@@ -54,12 +54,10 @@ namespace Player.State_Machine.States
             }
             else if (PlayerController.IsMovementPressed)
             {
-                Logger.LogVerbose("Grounded Substate: Move");
                 SetSubState(Factory.Move());
             }
             else
             {
-                Logger.LogVerbose("Grounded Substate: Idle");
                 SetSubState(Factory.Idle());
             }
         }
@@ -69,7 +67,6 @@ namespace Player.State_Machine.States
             bool isJumpBuffered = Time.time - PlayerController.JumpButtonPressedTime <= PlayerMovement.CoyoteTime;
             if (isJumpBuffered)
             {
-                Logger.LogVerbose("Grounded -> Jump");
                 SwitchState(Factory.Jump());
             }
         }

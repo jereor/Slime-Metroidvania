@@ -43,12 +43,10 @@ namespace Player.State_Machine.States
         {
             if (PlayerCombat.IsMeleeAttacking)
             {
-                Logger.LogVerbose("Idle -> Melee");
                 SwitchState(Factory.MeleeAttack());
             }
             else if (PlayerController.IsMovementPressed)
             {
-                Logger.LogVerbose("Idle -> Move");
                 SwitchState(Factory.Move());
             }
         }
