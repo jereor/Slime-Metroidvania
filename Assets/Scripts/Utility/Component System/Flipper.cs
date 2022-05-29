@@ -1,6 +1,4 @@
-using Utility.Component_System;
-
-namespace Player.Core_Components
+namespace Utility.Component_System
 {
     public class Flipper : CoreComponent
     {

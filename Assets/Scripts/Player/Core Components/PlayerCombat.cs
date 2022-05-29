@@ -1,6 +1,7 @@
 using Player.Data;
 using UnityEngine;
 using Utility;
+using Utility.Component_System;
 using Utility.Constants;
 
 namespace Player.Core_Components
