@@ -1,6 +1,5 @@
-using Player.Core;
-using Player.Core.Modules;
-using Utility;
+using Utility.Component_System;
+using Utility.Logger;
 
 namespace Player.State_Machine.States
 {
@@ -13,19 +12,17 @@ namespace Player.State_Machine.States
         protected bool IsRootState { set { _isRootState = value; } }
         protected PlayerStateMachine Context { get; }
         protected PlayerStateFactory Factory { get; }
-        protected PlayerAdapter PlayerAdapter { get; }
-        protected PlayerAnimations PlayerAnimations { get; }
-        protected PlayerController PlayerController { get; }
+        protected Core Core { get; }
+        protected Core_Components.Player Player { get; }
         protected ILoggerAdapter Logger { get; }
 
         protected PlayerBaseState(PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory)
         {
             Context = currentContext;
             Factory = playerStateFactory;
-            PlayerAdapter = currentContext.PlayerAdapter;
-            PlayerAnimations = PlayerAdapter.PlayerAnimations;
-            PlayerController = PlayerAdapter.PlayerController;
-            Logger = PlayerAdapter.Logger;
+            Player = currentContext.Player;
+            Core = Player.Core;
+            Logger = Player.Logger;
         }
 
         protected abstract void EnterState();

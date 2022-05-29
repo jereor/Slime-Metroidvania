@@ -1,15 +1,31 @@
-using Player.Core.Modules;
+using Player.Core_Components;
 
 namespace Player.State_Machine.States
 {
     public class PlayerMeleeAttackState : PlayerBaseState
     {
-        private readonly PlayerCombat _playerCombat;
+        private PlayerAnimations _playerAnimations;
+        private PlayerController _playerController;
+        private PlayerCombat _playerCombat;
 
+        private PlayerAnimations PlayerAnimations
+        {
+            get { return _playerAnimations ??= Core.GetCoreComponent<PlayerAnimations>(); }
+        }
+        
+        private PlayerController PlayerController
+        {
+            get { return _playerController ??= Core.GetCoreComponent<PlayerController>(); }
+        }
+        
+        private PlayerCombat PlayerCombat
+        {
+            get { return _playerCombat ??= Core.GetCoreComponent<PlayerCombat>(); }
+        }
+        
         public PlayerMeleeAttackState(PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory)
             : base(currentContext, playerStateFactory)
         {
-            _playerCombat = currentContext.PlayerAdapter.PlayerCombat;
         }
 
         protected override void EnterState()
@@ -29,7 +45,7 @@ namespace Player.State_Machine.States
 
         protected override void CheckSwitchStates()
         {
-            if (_playerCombat.IsMeleeAttacking)
+            if (PlayerCombat.IsMeleeAttacking)
             {
                 return;
             }

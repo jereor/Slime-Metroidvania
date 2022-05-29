@@ -1,6 +1,7 @@
 using Enemies.States.Data;
 using UnityEngine;
 using Utility;
+using Utility.Constants;
 
 namespace Enemies.States
 {

@@ -1,19 +1,37 @@
-using Player.Core.Modules;
+using Player.Core_Components;
 
 namespace Player.State_Machine.States
 {
     public sealed class PlayerJumpState : PlayerBaseState
     {
-        private readonly PlayerMovement _playerMovement;
-        private readonly PlayerCombat _playerCombat;
+        private PlayerController _playerController;
+        private PlayerAnimations _playerAnimations;
+        private PlayerMovement _playerMovement;
+        private PlayerCombat _playerCombat;
+
+        private PlayerController PlayerController
+        {
+            get { return _playerController ??= Core.GetCoreComponent<PlayerController>(); }
+        }
+        
+        private PlayerAnimations PlayerAnimations
+        {
+            get { return _playerAnimations ??= Core.GetCoreComponent<PlayerAnimations>(); }
+        }
+
+        private PlayerMovement PlayerMovement
+        {
+            get { return _playerMovement ??= Core.GetCoreComponent<PlayerMovement>(); }
+        }
+        
+        private PlayerCombat PlayerCombat
+        {
+            get { return _playerCombat ??= Core.GetCoreComponent<PlayerCombat>(); }
+        }
         
         public PlayerJumpState(PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory)
             : base(currentContext, playerStateFactory)
-        {
-            _playerMovement = currentContext.PlayerAdapter.PlayerMovement;
-            _playerCombat = currentContext.PlayerAdapter.PlayerCombat;
-            
-            IsRootState = true;
+        {IsRootState = true;
             InitializeSubState();
         }
 
@@ -21,7 +39,7 @@ namespace Player.State_Machine.States
         protected override void EnterState()
         {
             PlayerAnimations.SetAnimatorBool(PlayerAnimations.IsAirborneHash, true);
-            _playerMovement.JumpStart();
+            PlayerMovement.JumpStart();
         }
 
 
@@ -29,7 +47,7 @@ namespace Player.State_Machine.States
         protected override void ExitState()
         {
             PlayerAnimations.SetAnimatorBool(PlayerAnimations.IsAirborneHash, false);
-            _playerMovement.JumpEnd();
+            PlayerMovement.JumpEnd();
         }
 
 
@@ -43,7 +61,7 @@ namespace Player.State_Machine.States
         // INITIALIZE SUB STATE
         protected override void InitializeSubState()
         {
-            if (_playerCombat.IsMeleeAttacking)
+            if (PlayerCombat.IsMeleeAttacking)
             {
                 SetSubState(Factory.MeleeAttack());
             }
@@ -61,7 +79,7 @@ namespace Player.State_Machine.States
         // CHECK SWITCH STATES
         protected override void CheckSwitchStates()
         {
-            if (_playerMovement.IsGrounded() && _playerMovement.IsFalling)
+            if (PlayerMovement.IsGrounded() && PlayerMovement.IsFalling)
             {
                 Logger.LogVerbose("Jump -> Grounded");
                 SwitchState(Factory.Grounded());

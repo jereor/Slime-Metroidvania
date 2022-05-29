@@ -1,19 +1,32 @@
-using Player.Core.Modules;
+using Player.Core_Components;
 using UnityEngine;
 
 namespace Player.State_Machine.States
 {
     public sealed class PlayerGroundedState : PlayerBaseState
     {
-        private readonly PlayerMovement _playerMovement;
-        private readonly PlayerCombat _playerCombat;
+        private PlayerController _playerController;
+        private PlayerMovement _playerMovement;
+        private PlayerCombat _playerCombat;
+
+        private PlayerController PlayerController
+        {
+            get { return _playerController ??= Core.GetCoreComponent<PlayerController>(); }
+        }
+        
+        private PlayerMovement PlayerMovement
+        {
+            get { return _playerMovement ??= Core.GetCoreComponent<PlayerMovement>(); }
+        }
+
+        private PlayerCombat PlayerCombat
+        {
+            get { return _playerCombat ??= Core.GetCoreComponent<PlayerCombat>(); }
+        }
         
         public PlayerGroundedState(PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory)
             : base (currentContext, playerStateFactory)
         {
-            _playerMovement = currentContext.PlayerAdapter.PlayerMovement;
-            _playerCombat = currentContext.PlayerAdapter.PlayerCombat;
-            
             IsRootState = true;
             InitializeSubState();
         }
@@ -24,7 +37,7 @@ namespace Player.State_Machine.States
 
         protected override void ExitState()
         {
-            _playerMovement.SetLastGroundedTime();
+            PlayerMovement.SetLastGroundedTime();
         }
 
         protected override void UpdateState()
@@ -32,9 +45,10 @@ namespace Player.State_Machine.States
             CheckSwitchStates();
         }
 
+        // TODO: Consider letting each state update and handle bools directly?
         protected override void InitializeSubState()
         {
-            if (_playerCombat.IsMeleeAttacking)
+            if (PlayerCombat.IsMeleeAttacking)
             {
                 SetSubState(Factory.MeleeAttack());
             }
@@ -52,7 +66,7 @@ namespace Player.State_Machine.States
 
         protected override void CheckSwitchStates()
         {
-            bool isJumpBuffered = Time.time - PlayerController.JumpButtonPressedTime <= _playerMovement.CoyoteTime;
+            bool isJumpBuffered = Time.time - PlayerController.JumpButtonPressedTime <= PlayerMovement.CoyoteTime;
             if (isJumpBuffered)
             {
                 Logger.LogVerbose("Grounded -> Jump");

@@ -1,15 +1,25 @@
-using Player.Core.Modules;
+using Player.Core_Components;
 
 namespace Player.State_Machine.States
 {
     public class PlayerIdleState : PlayerBaseState
     {
-        private readonly PlayerCombat _playerCombat;
+        private PlayerController _playerController;
+        private PlayerCombat _playerCombat;
+
+        private PlayerController PlayerController
+        {
+            get { return _playerController ??= Core.GetCoreComponent<PlayerController>(); }
+        }
+        
+        private PlayerCombat PlayerCombat
+        {
+            get { return _playerCombat ??= Core.GetCoreComponent<PlayerCombat>(); }
+        }
         
         public PlayerIdleState(PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory)
             : base(currentContext, playerStateFactory)
         {
-            _playerCombat = currentContext.PlayerAdapter.PlayerCombat;
         }
 
         protected override void EnterState()
@@ -31,7 +41,7 @@ namespace Player.State_Machine.States
 
         protected override void CheckSwitchStates()
         {
-            if (_playerCombat.IsMeleeAttacking)
+            if (PlayerCombat.IsMeleeAttacking)
             {
                 Logger.LogVerbose("Idle -> Melee");
                 SwitchState(Factory.MeleeAttack());

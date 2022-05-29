@@ -4334,12 +4334,16 @@ GameObject:
   - component: {fileID: 1912269939}
   - component: {fileID: 1912269945}
   - component: {fileID: 1912269941}
+  - component: {fileID: 1912269942}
   - component: {fileID: 1912269946}
   - component: {fileID: 1912269943}
   - component: {fileID: 1912269944}
   - component: {fileID: 1912269947}
-  - component: {fileID: 1912269948}
   - component: {fileID: 1912269940}
+  - component: {fileID: 1912269950}
+  - component: {fileID: 1912269949}
+  - component: {fileID: 1912269952}
+  - component: {fileID: 1912269951}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -4474,7 +4478,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b24b0a2d95e46799a348ef53be49236, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerAdapter: {fileID: 1912269947}
+  _player: {fileID: 1912269947}
 --- !u!95 &1912269941
 Animator:
   serializedVersion: 3
@@ -4494,6 +4498,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1912269942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1912269935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b81fa438bfa48fa8a1beec24996dd4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1912269943
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4520,7 +4536,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59a22026ac0354c4d966be32ccb40346, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerAdapter: {fileID: 1912269947}
+  _playerFlipper: {fileID: 1912269952}
+  _slingShooter: {fileID: 1681231654}
+  _playerCombat: {fileID: 1912269949}
 --- !u!231 &1912269945
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -4553,7 +4571,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77f1e5954bc667948bf4190e60cbf30a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerAdapter: {fileID: 1912269947}
+  _player: {fileID: 1912269947}
 --- !u!114 &1912269947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4572,12 +4590,12 @@ MonoBehaviour:
   _groundLayer:
     serializedVersion: 2
     m_Bits: 8
+  _core: {fileID: 1912269942}
   _playerController: {fileID: 1912269944}
   _slingShooter: {fileID: 1681231654}
   _meleeAttackHitBox: {fileID: 958144501}
   _playerMeleeAttackData: {fileID: 11400000, guid: 83cd33cd25137684ebbe23471b1643f2, type: 2}
-  _playerMovementData: {fileID: 11400000, guid: ac6e684c5eed6934aa7fcafd595af147, type: 2}
---- !u!114 &1912269948
+--- !u!114 &1912269949
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4586,10 +4604,62 @@ MonoBehaviour:
   m_GameObject: {fileID: 1912269935}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59a22026ac0354c4d966be32ccb40346, type: 3}
+  m_Script: {fileID: 11500000, guid: 3a8648e1a2ab40699cd473d25efefb81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerAdapter: {fileID: 1912269947}
+  _playerTransform: {fileID: 1912269936}
+  _meleeAttackHitBox: {fileID: 958144501}
+  _playerMeleeAttackData: {fileID: 11400000, guid: 83cd33cd25137684ebbe23471b1643f2, type: 2}
+--- !u!114 &1912269950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1912269935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5c4930e1bcbf674d825dbc8c4f009b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _coyoteTime: 0.2
+  _jumpForce: 8
+  _moveSpeed: 8
+  _groundCheckRadius: 0.2
+  _playerController: {fileID: 1912269944}
+  _rigidBody: {fileID: 1912269939}
+  _groundCheck: {fileID: 674560699}
+  _groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
+--- !u!114 &1912269951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1912269935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbedb328bedd4a1498db9a3c61f67e91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerCombat: {fileID: 1912269949}
+  _animator: {fileID: 1912269941}
+--- !u!114 &1912269952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1912269935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 198f8a279b464e9428061887cd04a0d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerTransform: {fileID: 1912269936}
+  _slingShooterTransform: {fileID: 1681231653}
 --- !u!1 &1965139007
 GameObject:
   m_ObjectHideFlags: 0

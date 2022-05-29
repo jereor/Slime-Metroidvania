@@ -1,4 +1,3 @@
-using Player.Core;
 using Player.State_Machine.States;
 using UnityEngine;
 
@@ -7,7 +6,7 @@ namespace Player.State_Machine
     public class PlayerStateMachine : MonoBehaviour
     {
         [Header("References")] [SerializeField]
-        private PlayerAdapter _playerAdapter;
+        private Core_Components.Player _player;
 
         private PlayerBaseState _currentState;
         private PlayerStateFactory _states;
@@ -17,11 +16,11 @@ namespace Player.State_Machine
             set { _currentState = value; }
         }
 
-        public PlayerAdapter PlayerAdapter { get; private set; }
+        public Core_Components.Player Player { get; private set; }
 
         private void Awake()
         {
-            PlayerAdapter = _playerAdapter;
+            Player = _player;
 
             _states = new PlayerStateFactory(this);
             _currentState = _states.Grounded();

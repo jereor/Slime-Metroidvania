@@ -2,6 +2,7 @@ using Enemies.States;
 using Enemies.States.Data;
 using UnityEngine;
 using Utility;
+using Utility.Constants;
 
 namespace Enemies.Worm
 {

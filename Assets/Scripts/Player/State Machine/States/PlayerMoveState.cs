@@ -1,24 +1,38 @@
-using Player.Core.Modules;
+using Player.Core_Components;
 
 namespace Player.State_Machine.States
 {
     public class PlayerMoveState : PlayerBaseState
     {
-        private readonly PlayerMovement _playerMovement;
-        private readonly PlayerCombat _playerCombat;
+        private PlayerController _playerController;
+        private PlayerAnimations _playerAnimations;
+        private PlayerCombat _playerCombat;
+        
+        private PlayerController PlayerController
+        {
+            get { return _playerController ??= Core.GetCoreComponent<PlayerController>(); }
+        }
+        
+        private PlayerAnimations PlayerAnimations
+        {
+            get { return _playerAnimations ??= Core.GetCoreComponent<PlayerAnimations>(); }
+        }
+        
+        private PlayerCombat PlayerCombat
+        {
+            get { return _playerCombat ??= Core.GetCoreComponent<PlayerCombat>(); }
+        }
         
         public PlayerMoveState(PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory)
             : base(currentContext, playerStateFactory)
         {
-            _playerMovement = PlayerAdapter.PlayerMovement;
-            _playerCombat = PlayerAdapter.PlayerCombat;
         }
 
         protected override void EnterState()
         {
             PlayerAnimations.SetAnimatorBool(PlayerAnimations.IsMovingHash, true);
         }
-
+ 
         protected override void ExitState()
         {
             PlayerAnimations.SetAnimatorBool(PlayerAnimations.IsMovingHash, false);
@@ -27,7 +41,6 @@ namespace Player.State_Machine.States
         protected override void UpdateState()
         {
             CheckSwitchStates();
-            _playerMovement.HandleMovement();
         }
 
         protected override void InitializeSubState()
@@ -36,7 +49,7 @@ namespace Player.State_Machine.States
 
         protected override void CheckSwitchStates()
         {
-            if (_playerCombat.IsMeleeAttacking)
+            if (PlayerCombat.IsMeleeAttacking)
             {
                 Logger.LogVerbose("Move -> Melee");
                 SwitchState(Factory.MeleeAttack());
