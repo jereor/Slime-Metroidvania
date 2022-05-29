@@ -15,6 +15,7 @@ namespace Utility.Component_System
                 Debug.LogError("There is no Core on this game object.");
             }
             
+            Core.Logger.Log($"Adding {this} to Core.");
             Core.AddComponent(this);
         }
 

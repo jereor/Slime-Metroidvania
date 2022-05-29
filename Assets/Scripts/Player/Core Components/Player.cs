@@ -1,3 +1,4 @@
+using System;
 using Player.Data;
 using Player.State_Machine;
 using UnityEngine;
@@ -8,13 +9,16 @@ namespace Player.Core_Components
 {
     [RequireComponent(typeof(PlayerStateMachine))]
     [RequireComponent(typeof(PlayerController))]
-    public class Player : EntityAdapter
+    public class Player : MonoBehaviour
     {
         [SerializeField] private Core _core;
         [SerializeField] private Transform _meleeAttackHitBox;
         [SerializeField] private D_PlayerMeleeAttack _playerMeleeAttackData;
 
-        public override ILoggerAdapter Logger { get; } = new UnityLogger();
+        public ILoggerAdapter Logger
+        {
+            get { return _core.Logger ?? new UnityLogger(); }
+        }
 
         // Field accessors
         public Core Core
