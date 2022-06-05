@@ -20,11 +20,13 @@ namespace Player.Core_Components
                 Physics2D.OverlapCircleAll(_meleeAttackHitBox.position, _playerMeleeAttackData._attackRadius,
                     _playerMeleeAttackData._damageableLayers);
 
-            AttackDetails attackDetails;
-            attackDetails.Position = _playerTransform.position;
-            attackDetails.DamageAmount = _playerMeleeAttackData._attackDamage;
-            attackDetails.StunDamageAmount = _playerMeleeAttackData._stunDamage;
-
+            AttackDetails attackDetails = new AttackDetails
+            {
+                Position = _playerTransform.position,
+                DamageAmount = _playerMeleeAttackData._attackDamage,
+                StunDamageAmount = _playerMeleeAttackData._stunDamage
+            };
+            
             foreach (Collider2D hitObject in detectedObjects)
             {
                 hitObject.transform.SendMessageUpwards(EventConstants.DAMAGE, attackDetails);
