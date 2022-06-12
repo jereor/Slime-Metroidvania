@@ -4,10 +4,10 @@ namespace Player.State_Machine
 {
     public class PlayerStateFactory
     {
-        private readonly Core_Components.Player _player;
+        private readonly PlayerBase _player;
         private readonly PlayerStateMachine _context;
 
-        public PlayerStateFactory(Core_Components.Player player, PlayerStateMachine currentContext)
+        public PlayerStateFactory(PlayerBase player, PlayerStateMachine currentContext)
         {
             _player = player;
             _context = currentContext;

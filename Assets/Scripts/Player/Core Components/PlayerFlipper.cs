@@ -5,25 +5,13 @@ namespace Player.Core_Components
 {
     public class PlayerFlipper : Flipper
     {
-        [SerializeField] private Transform _playerTransform;
         [SerializeField] private Transform _slingShooterTransform;
 
-        public bool IsFacingRight { get; private set; } = true;
-
-        public void FlipPlayer()
+        public override void FlipPlayer()
         {
-            FlipSprite();
-            FlipSlingShooter();
-        }
-
-        private void FlipSprite()
-        {
-            IsFacingRight = !IsFacingRight;
-            Transform currentTransform = _playerTransform;
-            Vector3 localScale = currentTransform.localScale;
+            base.FlipPlayer();
             
-            localScale.x *= -1f;
-            currentTransform.localScale = localScale;
+            FlipSlingShooter();
         }
 
         private void FlipSlingShooter()

@@ -24,7 +24,7 @@ namespace Player.State_Machine.States
             get { return _playerCombat ??= Core.GetCoreComponent<PlayerCombat>(); }
         }
         
-        public PlayerGroundedState(Core_Components.Player player, PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory)
+        public PlayerGroundedState(PlayerBase player, PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory)
             : base (player, currentContext, playerStateFactory)
         {
             IsRootState = true;

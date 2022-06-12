@@ -17,7 +17,7 @@ namespace Player.State_Machine.States
             get { return _playerCombat ??= Core.GetCoreComponent<PlayerCombat>(); }
         }
         
-        public PlayerIdleState(Core_Components.Player player, PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory)
+        public PlayerIdleState(PlayerBase player, PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory)
             : base(player, currentContext, playerStateFactory)
         {
         }

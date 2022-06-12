@@ -4,9 +4,9 @@ using UnityEngine;
 using Utility.Component_System;
 using Utility.Logger;
 
-namespace Player.Core_Components
+namespace Player
 {
-    public class Player : MonoBehaviour
+    public class PlayerBase : MonoBehaviour
     {
         [SerializeField] private Core _core;
         [SerializeField] private Transform _meleeAttackHitBox;

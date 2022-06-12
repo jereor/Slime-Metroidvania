@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using Utility.Constants;
+using UnityEngine.InputSystem;
 
 namespace Player.Core_Components
 {

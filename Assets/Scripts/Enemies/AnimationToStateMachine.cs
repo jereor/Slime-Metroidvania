@@ -1,7 +1,7 @@
 using Enemies.States;
 using UnityEngine;
 
-namespace Utility
+namespace Enemies
 {
     public class AnimationToStateMachine : MonoBehaviour
     {

@@ -23,7 +23,7 @@ namespace Player.State_Machine.States
             get { return _playerCombat ??= Core.GetCoreComponent<PlayerCombat>(); }
         }
         
-        public PlayerMeleeAttackState(Core_Components.Player player, PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory)
+        public PlayerMeleeAttackState(PlayerBase player, PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory)
             : base(player, currentContext, playerStateFactory)
         {
         }

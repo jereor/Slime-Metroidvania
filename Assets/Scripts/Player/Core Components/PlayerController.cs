@@ -1,12 +1,10 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Utility.Component_System;
 
 namespace Player.Core_Components
 {
     public class PlayerController : Controller
     {
-        [SerializeField] private PlayerFlipper _playerFlipper;
         [SerializeField] private SlingShooter _slingShooter;
         [SerializeField] private PlayerCombat _playerCombat;
     
@@ -14,8 +12,7 @@ namespace Player.Core_Components
     
         // Movement
         public bool IsMovementPressed { get; private set; }
-        public float CurrentMovementInput { get; private set; }
-    
+
         // Jump
         public bool IsJumpPressed { get; private set; }
         public float? JumpButtonPressedTime { get; set; }
@@ -43,18 +40,7 @@ namespace Player.Core_Components
             
             _playerControls.Gameplay.MeleeAttack.started += OnMeleeAttackInputStart;
         }
-    
-        private bool HasMoveDirectionChanged()
-        {
-            bool isFacingRight = _playerFlipper.IsFacingRight;
-            bool facingRightButNowMovingLeft = isFacingRight && CurrentMovementInput < 0f;
-            bool facingLeftButNowMovingRight = !isFacingRight && CurrentMovementInput > 0f;
 
-            return facingRightButNowMovingLeft
-                   || facingLeftButNowMovingRight;
-        }
-    
-    
         // Input events
         private void OnMovementInput(InputAction.CallbackContext context)
         {
@@ -63,7 +49,7 @@ namespace Player.Core_Components
 
             if (HasMoveDirectionChanged())
             {
-                _playerFlipper.FlipPlayer();
+                _flipper.FlipPlayer();
             }
         }
         
@@ -102,11 +88,6 @@ namespace Player.Core_Components
         {
             _playerControls.Disable();
         }
-        
-    }
-
-    public class Controller : CoreComponent
-    {
         
     }
 }

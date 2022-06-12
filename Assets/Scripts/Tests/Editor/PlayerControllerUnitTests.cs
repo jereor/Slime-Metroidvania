@@ -19,7 +19,7 @@ namespace Tests.Editor
         [Test]
         public void CharacterMovesRightWhenControllerIsGivenInputAxisRight()
         {
-            throw new NotImplementedException();
+            
         }
         
         [Test]

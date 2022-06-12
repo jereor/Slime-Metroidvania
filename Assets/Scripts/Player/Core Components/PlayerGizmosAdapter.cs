@@ -5,7 +5,7 @@ namespace Player.Core_Components
 {
     public class PlayerGizmosAdapter : GizmosAdapter
     {
-        [SerializeField] private Player _player;
+        [SerializeField] private PlayerBase _playerBase;
         
         public override void OnDrawGizmos()
         {
@@ -14,8 +14,8 @@ namespace Player.Core_Components
 
         private void DrawPlayerCombatGizmos()
         {
-            Vector3 attackPosition = _player.MeleeAttackHitBox.position;
-            Gizmos.DrawWireSphere(attackPosition, _player.PlayerMeleeAttackData._attackRadius);
+            Vector3 attackPosition = _playerBase.MeleeAttackHitBox.position;
+            Gizmos.DrawWireSphere(attackPosition, _playerBase.PlayerMeleeAttackData._attackRadius);
         }
     }
 }

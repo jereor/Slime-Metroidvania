@@ -4,11 +4,11 @@ namespace Player.State_Machine
 {
     public class PlayerStateMachine
     {
-        public Core_Components.Player Player { get; private set; }
+        public PlayerBase Player { get; private set; }
         public PlayerStateFactory States { get; private set; }
         public PlayerBaseState CurrentState { get; set; }
 
-        public void Initialize(Core_Components.Player player)
+        public void Initialize(PlayerBase player)
         {
             Player = player;
             States = new PlayerStateFactory(player, this);

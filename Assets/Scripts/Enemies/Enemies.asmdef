@@ -1,0 +1,16 @@
+{
+    "name": "Enemies",
+    "rootNamespace": "",
+    "references": [
+        "GUID:992818b9e43bc824a993d7961fe8b695"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
