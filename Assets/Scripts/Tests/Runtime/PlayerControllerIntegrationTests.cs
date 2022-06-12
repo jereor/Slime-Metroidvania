@@ -1,13 +1,12 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using NUnit.Framework;
 using Player.Core_Components;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-namespace Tests.Editor
+namespace Tests.Runtime
 {
     public class PlayerControllerIntegrationTests
     {
