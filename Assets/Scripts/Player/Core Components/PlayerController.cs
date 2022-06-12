@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Utility.Component_System;
 
 namespace Player.Core_Components
 {
@@ -9,7 +10,7 @@ namespace Player.Core_Components
         [SerializeField] private PlayerCombat _playerCombat;
     
         private PlayerControls _playerControls;
-    
+
         // Movement
         public bool IsMovementPressed { get; private set; }
 
@@ -42,7 +43,7 @@ namespace Player.Core_Components
         }
 
         // Input events
-        private void OnMovementInput(InputAction.CallbackContext context)
+        public void OnMovementInput(InputAction.CallbackContext context)
         {
             CurrentMovementInput = context.ReadValue<float>();
             IsMovementPressed = CurrentMovementInput != 0;

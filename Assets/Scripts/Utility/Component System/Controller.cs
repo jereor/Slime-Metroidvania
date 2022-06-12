@@ -1,13 +1,12 @@
 using UnityEngine;
-using Utility.Component_System;
 
-namespace Player.Core_Components
+namespace Utility.Component_System
 {
     public class Controller : CoreComponent
     {
         [SerializeField] protected Flipper _flipper;
         
-        public float CurrentMovementInput { get; protected set; }
+        public float CurrentMovementInput { get; set; }
         
         protected bool HasMoveDirectionChanged()
         {

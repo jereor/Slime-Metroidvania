@@ -17,9 +17,9 @@ namespace Player.Core_Components
         [SerializeField] private Transform _groundCheck;
         [SerializeField] private LayerMask _groundLayer;
 
-        private Vector2 _currentVelocity;
         private bool _isJumping;
 
+        public Vector2 CurrentVelocity { get; set; }
         public float? LastGroundedTime { get; set; }
         public bool IsFalling { get; set; }
 
@@ -52,11 +52,11 @@ namespace Player.Core_Components
                 return;
             }
             
-            _currentVelocity = _rigidBody.velocity;
+            CurrentVelocity = _rigidBody.velocity;
 
             _rigidBody.velocity = 
                 new Vector2(x: _playerController.CurrentMovementInput * _moveSpeed, 
-                    y: _currentVelocity.y);
+                    y: CurrentVelocity.y);
         }
 
         private void HandleJumping()
@@ -69,7 +69,7 @@ namespace Player.Core_Components
 
         private void StopMovement()
         {
-            _rigidBody.velocity = new Vector2(x: 0, y: _currentVelocity.y);
+            _rigidBody.velocity = new Vector2(x: 0, y: CurrentVelocity.y);
         }
         
         public void JumpStart()
