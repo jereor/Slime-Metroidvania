@@ -4,6 +4,7 @@ using NUnit.Framework;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 using Object = UnityEngine.Object;
 
@@ -25,12 +26,13 @@ namespace Tests.Runtime
             _keyboard = InputSystem.AddDevice<Keyboard>();
             
             _playerPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Player.prefab");
+            SceneManager.LoadScene("Scenes/TestSandbox");
         }
 
         [UnityTest]
         public IEnumerator CharacterMovesRightWhenControllerIsGivenInputAxisRight()
         {
-            Vector3 playerStartingPos = new Vector3(2f, 1f, -1f);
+            Vector3 playerStartingPos = new Vector3(0f, 0f, -1f);
             Quaternion playerDir = Quaternion.identity;
             GameObject player = Object.Instantiate(_playerPrefab, playerStartingPos, playerDir);
 
@@ -46,7 +48,7 @@ namespace Tests.Runtime
         [UnityTest]
         public IEnumerator CharacterMovesLeftWhenControllerIsGivenInputAxisLeft()
         {
-            Vector3 playerStartingPos = new Vector3(2f, 1f, -1f);
+            Vector3 playerStartingPos = new Vector3(0f, 0f, -1f);
             Quaternion playerDir = Quaternion.identity;
             GameObject player = Object.Instantiate(_playerPrefab, playerStartingPos, playerDir);
 
@@ -62,7 +64,18 @@ namespace Tests.Runtime
         [UnityTest]
         public IEnumerator CharacterJumpsWhenControllerIsGivenInputJump()
         {
-            throw new NotImplementedException();
+            Vector3 playerStartingPos = new Vector3(0f, 0f, -1f);
+            Quaternion playerDir = Quaternion.identity;
+            GameObject player = Object.Instantiate(_playerPrefab, playerStartingPos, playerDir);
+            yield return new WaitForSeconds(1f);
+
+            Press(_keyboard.spaceKey);
+            yield return new WaitForSeconds(0.5f);
+            Release(_keyboard.spaceKey);
+            Vector3 playerEndPos = player.gameObject.transform.position;
+
+            float distanceJumped = Mathf.Abs(playerEndPos.x - playerStartingPos.x);
+            Assert.Greater(distanceJumped, 0);
         }
         
         [UnityTest]
