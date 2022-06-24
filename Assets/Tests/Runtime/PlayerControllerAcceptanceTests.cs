@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using NUnit.Framework;
-using Player.Core_Components;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -10,7 +9,7 @@ using Object = UnityEngine.Object;
 
 namespace Tests.Runtime
 {
-    public class PlayerControllerIntegrationTests : InputTestFixture
+    public class PlayerControllerAcceptanceTests : InputTestFixture
     {
         private Mouse _mouse;
         private Keyboard _keyboard;
