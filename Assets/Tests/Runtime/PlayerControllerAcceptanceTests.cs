@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using NUnit.Framework;
+using Player;
+using Player.State_Machine.States;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -81,7 +83,16 @@ namespace Tests.Runtime
         [UnityTest]
         public IEnumerator CharacterAttacksWhenControllerIsGivenInputMeleeAttack()
         {
-            throw new NotImplementedException();
+            Vector3 playerStartingPos = new Vector3(0f, 0f, -1f);
+            Quaternion playerDir = Quaternion.identity;
+            GameObject player = Object.Instantiate(_playerPrefab, playerStartingPos, playerDir);
+
+            PressAndRelease(_mouse.rightButton);
+            yield return new WaitForSeconds(0.2f);
+            Type actualState = player.GetComponent<PlayerBase>().StateMachine.CurrentSubState.GetType();
+
+            Type expectedState = typeof(PlayerMeleeAttackState);
+            Assert.AreSame(expectedState, actualState);
         }
     }
 }

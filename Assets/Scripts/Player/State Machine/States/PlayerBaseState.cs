@@ -9,6 +9,13 @@ namespace Player.State_Machine.States
         private PlayerBaseState _currentSubState;
         private PlayerBaseState _currentSuperState;
 
+        public PlayerBaseState CurrentSubState
+        {
+            get
+            {
+                return _currentSubState;
+            }
+        }
         protected bool IsRootState { set { _isRootState = value; } }
         protected PlayerStateMachine Context { get; }
         protected PlayerStateFactory Factory { get; }
@@ -45,7 +52,7 @@ namespace Player.State_Machine.States
 
             if (_isRootState)
             {
-                Context.CurrentState = newState;
+                Context.CurrentBaseState = newState;
             }
             else
             {
