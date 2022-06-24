@@ -4,11 +4,12 @@ using NUnit.Framework;
 using Player.Core_Components;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.TestTools;
 
 namespace Tests.Runtime
 {
-    public class PlayerControllerIntegrationTests
+    public class PlayerControllerIntegrationTests : InputTestFixture
     {
         private GameObject _player;
         private PlayerController _playerController;
@@ -26,10 +27,9 @@ namespace Tests.Runtime
         public IEnumerator CharacterMovesRightWhenControllerIsGivenInputAxisRight()
         {
             _playerController.CurrentMovementInput = 1f;
-            _playerMovement.LogicUpdate();
-            
             yield return null;
-            
+            _playerMovement.LogicUpdate();
+            yield return null;
             Assert.Greater(_playerMovement.CurrentVelocity.x, 0f);
         }
         

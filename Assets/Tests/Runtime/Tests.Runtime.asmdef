@@ -1,5 +1,5 @@
 {
-    "name": "Runtime",
+    "name": "Tests.Runtime",
     "rootNamespace": "",
     "references": [
         "UnityEngine.TestRunner",
@@ -11,15 +11,13 @@
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
-    "allowUnsafeCode": true,
+    "allowUnsafeCode": false,
     "overrideReferences": true,
     "precompiledReferences": [
         "nunit.framework.dll"
     ],
-    "autoReferenced": false,
-    "defineConstraints": [
-        "UNITY_INCLUDE_TESTS"
-    ],
+    "autoReferenced": true,
+    "defineConstraints": [],
     "versionDefines": [],
     "noEngineReferences": false
 }
