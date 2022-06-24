@@ -6,31 +6,42 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.TestTools;
+using Object = UnityEngine.Object;
 
 namespace Tests.Runtime
 {
     public class PlayerControllerIntegrationTests : InputTestFixture
     {
-        private GameObject _player;
-        private PlayerController _playerController;
-        private PlayerMovement _playerMovement;
+        private Mouse _mouse;
+        private Keyboard _keyboard;
+        
+        private GameObject _playerPrefab;
 
         [SetUp]
-        public void Setup()
+        public override void Setup()
         {
-            _player = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Player.prefab");
-            _playerController = _player.GetComponent<PlayerController>();
-            _playerMovement = _player.GetComponent<PlayerMovement>();
+            base.Setup();
+
+            _mouse = InputSystem.AddDevice<Mouse>();
+            _keyboard = InputSystem.AddDevice<Keyboard>();
+            
+            _playerPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Player.prefab");
         }
 
         [UnityTest]
         public IEnumerator CharacterMovesRightWhenControllerIsGivenInputAxisRight()
         {
-            _playerController.CurrentMovementInput = 1f;
-            yield return null;
-            _playerMovement.LogicUpdate();
-            yield return null;
-            Assert.Greater(_playerMovement.CurrentVelocity.x, 0f);
+            Vector3 playerStartingPos = new Vector3(2f, 1f, -1f);
+            Quaternion playerDir = Quaternion.identity;
+            GameObject player = Object.Instantiate(_playerPrefab, playerStartingPos, playerDir);
+
+            Press(_keyboard.dKey);
+            yield return new WaitForSeconds(1f);
+            Release(_keyboard.dKey);
+            Vector3 playerEndPos = player.gameObject.transform.position;
+
+            float distanceMoved = playerEndPos.x - playerStartingPos.x;
+            Assert.Greater(distanceMoved, 0);
         }
         
         [UnityTest]
