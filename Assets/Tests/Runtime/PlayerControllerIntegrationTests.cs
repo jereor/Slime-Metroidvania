@@ -40,14 +40,24 @@ namespace Tests.Runtime
             Release(_keyboard.dKey);
             Vector3 playerEndPos = player.gameObject.transform.position;
 
-            float distanceMoved = playerEndPos.x - playerStartingPos.x;
+            float distanceMoved = Mathf.Abs(playerEndPos.x - playerStartingPos.x);
             Assert.Greater(distanceMoved, 0);
         }
         
         [UnityTest]
         public IEnumerator CharacterMovesLeftWhenControllerIsGivenInputAxisLeft()
         {
-            throw new NotImplementedException();
+            Vector3 playerStartingPos = new Vector3(2f, 1f, -1f);
+            Quaternion playerDir = Quaternion.identity;
+            GameObject player = Object.Instantiate(_playerPrefab, playerStartingPos, playerDir);
+
+            Press(_keyboard.aKey);
+            yield return new WaitForSeconds(1f);
+            Release(_keyboard.aKey);
+            Vector3 playerEndPos = player.gameObject.transform.position;
+
+            float distanceMoved = Mathf.Abs(playerEndPos.x - playerStartingPos.x);
+            Assert.Greater(distanceMoved, 0);
         }
         
         [UnityTest]
