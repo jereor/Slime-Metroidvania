@@ -97,19 +97,25 @@ namespace Player.Core_Components
         }
 
         // --------- INTERFACE -----------
-        internal void StartPull()
+        internal void ShootSling()
+        {
+            SetGrapplePoint();
+            StartPull();
+        }
+        
+        private void StartPull()
         {
             _pulling = true;
         }
         
-        internal void CancelPull()
+        internal void CancelSling()
         {
             _slimeSling.enabled = false;
             _springJoint.enabled = false;
             _rigidbody.gravityScale = PhysicsConstants.DEFAULT_GRAVITY_SCALE;
         }
 
-        internal void SetGrapplePoint()
+        private void SetGrapplePoint()
         {
             Vector3 mousePos = _camera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
             Vector3 slingShooterPosition = _slingShooter.position;
@@ -157,5 +163,6 @@ namespace Player.Core_Components
                 _rigidbody.velocity = Vector2.zero;
             }
         }
+        
     }
 }

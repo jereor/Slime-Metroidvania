@@ -64,20 +64,17 @@ namespace Player.Core_Components
 
         private void OnShootSlingInputStart(InputAction.CallbackContext context)
         {
-            // TODO: Move these to state machine and use bools instead
-            _slingShooter.SetGrapplePoint();
-            _slingShooter.StartPull();
+            _slingShooter.ShootSling();
         }
 
         private void OnShootSlingInputCancel(InputAction.CallbackContext context)
         {
-            // TODO: Move these to state machine and use bools instead
-            _slingShooter.CancelPull();
+            _slingShooter.CancelSling();
         }
 
         private void OnMeleeAttackInputStart(InputAction.CallbackContext context)
         {
-            _playerCombat.Initialize();
+            _playerCombat.MeleeAttack();
         }
 
         private void OnEnable()
