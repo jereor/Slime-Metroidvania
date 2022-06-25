@@ -46,7 +46,7 @@ namespace Player.Core_Components
 
         private void HandleMovement()
         {
-            if (_playerController.IsMovementPressed == false)
+            if (_playerController.IsMovementInputPressed == false)
             {
                 StopMovement();
                 return;
@@ -82,7 +82,7 @@ namespace Player.Core_Components
             _isJumping = true;
 
             bool isCoyoteTime = Time.time - LastGroundedTime <= _coyoteTime;
-            bool isJumpBuffered = Time.time - _playerController.JumpButtonPressedTime <= _coyoteTime;
+            bool isJumpBuffered = Time.time - _playerController.JumpInputPressedTime <= _coyoteTime;
 
             if (isCoyoteTime && isJumpBuffered)
             {
@@ -99,7 +99,7 @@ namespace Player.Core_Components
         private void CheckJumpEnd()
         {
             bool jumpingButJumpReleased = _rigidBody.velocity.y > 0f
-                     && _playerController.IsJumpPressed == false;
+                     && _playerController.IsJumpInputPressed == false;
             if (jumpingButJumpReleased)
             {
                 StartFalling();
@@ -125,7 +125,7 @@ namespace Player.Core_Components
         private void ResetJumpVariables()
         {
             LastGroundedTime = null;
-            _playerController.JumpButtonPressedTime = null;
+            _playerController.JumpInputPressedTime = null;
         }
 
         public void SetLastGroundedTime()

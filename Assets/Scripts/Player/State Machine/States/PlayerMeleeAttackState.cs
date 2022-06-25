@@ -50,7 +50,7 @@ namespace Player.State_Machine.States
                 return;
             }
 
-            SwitchState(PlayerController.IsMovementPressed
+            SwitchState(PlayerController.IsMovementInputPressed
                 ? Factory.Move()
                 : Factory.Idle());
         }

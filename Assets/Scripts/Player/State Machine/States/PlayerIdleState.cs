@@ -45,7 +45,7 @@ namespace Player.State_Machine.States
             {
                 SwitchState(Factory.MeleeAttack());
             }
-            else if (PlayerController.IsMovementPressed)
+            else if (PlayerController.IsMovementInputPressed)
             {
                 SwitchState(Factory.Move());
             }

@@ -12,11 +12,9 @@ namespace Player.Core_Components
         private PlayerControls _playerControls;
 
         // Movement
-        public bool IsMovementPressed { get; private set; }
-
-        // Jump
-        public bool IsJumpPressed { get; private set; }
-        public float? JumpButtonPressedTime { get; set; }
+        public bool IsMovementInputPressed { get; private set; }
+        public bool IsJumpInputPressed { get; private set; }
+        public float? JumpInputPressedTime { get; set; } // TODO: Convert 'set' to private
 
         protected override void Awake()
         {
@@ -46,7 +44,7 @@ namespace Player.Core_Components
         public void OnMovementInput(InputAction.CallbackContext context)
         {
             CurrentMovementInput = context.ReadValue<float>();
-            IsMovementPressed = CurrentMovementInput != 0;
+            IsMovementInputPressed = CurrentMovementInput != 0;
 
             if (HasMoveDirectionChanged())
             {
@@ -56,28 +54,30 @@ namespace Player.Core_Components
         
         private void OnJumpInputStart(InputAction.CallbackContext context)
         {
-            JumpButtonPressedTime = Time.time;
+            JumpInputPressedTime = Time.time;
         }
     
         private void OnJumpInput(InputAction.CallbackContext context)
         {
-            IsJumpPressed = context.ReadValueAsButton();
+            IsJumpInputPressed = context.ReadValueAsButton();
         }
 
         private void OnShootSlingInputStart(InputAction.CallbackContext context)
         {
+            // TODO: Move these to state machine and use bools instead
             _slingShooter.SetGrapplePoint();
             _slingShooter.StartPull();
         }
 
         private void OnShootSlingInputCancel(InputAction.CallbackContext context)
         {
+            // TODO: Move these to state machine and use bools instead
             _slingShooter.CancelPull();
         }
 
         private void OnMeleeAttackInputStart(InputAction.CallbackContext context)
         {
-            _playerCombat.IsMeleeAttacking = true;
+            _playerCombat.Initialize();
         }
 
         private void OnEnable()

@@ -14,6 +14,11 @@ namespace Player.Core_Components
         
         public bool IsMeleeAttacking { get; set; }
 
+        public void Initialize()
+        {
+            IsMeleeAttacking = true;
+        }
+        
         public void DealDamage()
         {
             Collider2D[] detectedObjects =

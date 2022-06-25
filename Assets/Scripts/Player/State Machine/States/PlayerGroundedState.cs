@@ -52,7 +52,7 @@ namespace Player.State_Machine.States
             {
                 SetSubState(Factory.MeleeAttack());
             }
-            else if (PlayerController.IsMovementPressed)
+            else if (PlayerController.IsMovementInputPressed)
             {
                 SetSubState(Factory.Move());
             }
@@ -64,7 +64,7 @@ namespace Player.State_Machine.States
 
         protected override void CheckSwitchStates()
         {
-            bool isJumpBuffered = Time.time - PlayerController.JumpButtonPressedTime <= PlayerMovement.CoyoteTime;
+            bool isJumpBuffered = Time.time - PlayerController.JumpInputPressedTime <= PlayerMovement.CoyoteTime;
             if (isJumpBuffered)
             {
                 SwitchState(Factory.Jump());
