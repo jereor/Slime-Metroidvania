@@ -12,7 +12,7 @@ namespace Player.Core_Components
         [SerializeField] private Transform _meleeAttackHitBox;
         [SerializeField] private D_PlayerMeleeAttack _playerMeleeAttackData;
         
-        public bool IsMeleeAttacking { get; set; }
+        public bool IsMeleeAttacking { get; private set; }
 
         public void MeleeAttack()
         {
