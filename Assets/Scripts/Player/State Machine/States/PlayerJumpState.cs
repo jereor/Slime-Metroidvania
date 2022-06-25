@@ -1,4 +1,5 @@
 using Player.Core_Components;
+using UnityEngine;
 
 namespace Player.State_Machine.States
 {
@@ -31,7 +32,8 @@ namespace Player.State_Machine.States
         
         public PlayerJumpState(PlayerBase player, PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory)
             : base(player, currentContext, playerStateFactory)
-        {IsRootState = true;
+        {
+            IsRootState = true;
             InitializeSubState();
         }
 
@@ -61,7 +63,7 @@ namespace Player.State_Machine.States
         // INITIALIZE SUB STATE
         protected override void InitializeSubState()
         {
-            if (_playerCombat.IsMeleeAttacking)
+            if (PlayerCombat.IsMeleeAttacking)
             {
                 SetSubState(Factory.MeleeAttack());
             }
