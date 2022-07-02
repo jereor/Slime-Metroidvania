@@ -1,4 +1,4 @@
-using Utility.Component_System;
+using GameFramework.ComponentSystem;
 
 namespace Player.Core_Components
 {

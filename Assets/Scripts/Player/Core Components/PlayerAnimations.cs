@@ -1,7 +1,7 @@
+using GameFramework.ComponentSystem;
+using GameFramework.Constants;
 using JetBrains.Annotations;
 using UnityEngine;
-using Utility.Component_System;
-using Utility.Constants;
 
 namespace Player.Core_Components
 {

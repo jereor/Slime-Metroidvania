@@ -1,6 +1,6 @@
 using System;
+using GameFramework.Constants;
 using UnityEngine;
-using Utility.Constants;
 using UnityEngine.InputSystem;
 
 namespace Player.Core_Components

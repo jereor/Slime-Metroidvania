@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Utility.Logger
+namespace GameFramework.Loggers
 {
     public sealed class UnityLogger : ILoggerAdapter
     {

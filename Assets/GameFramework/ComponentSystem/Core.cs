@@ -1,14 +1,14 @@
 using System.Collections.Generic;
 using System.Linq;
+using GameFramework.Loggers;
 using UnityEngine;
-using Utility.Logger;
 
-namespace Utility.Component_System
+namespace GameFramework.ComponentSystem
 {
     public sealed class Core : MonoBehaviour
     {
         private readonly List<CoreComponent> _coreComponents = new List<CoreComponent>();
-
+        
         public UnityLogger Logger { get; } = new UnityLogger();
 
         private void Update()

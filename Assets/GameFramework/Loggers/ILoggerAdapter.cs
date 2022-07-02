@@ -1,4 +1,4 @@
-namespace Utility.Logger
+namespace GameFramework.Loggers
 {
     public interface ILoggerAdapter
     {

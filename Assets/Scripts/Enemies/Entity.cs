@@ -1,7 +1,7 @@
 using Enemies.Data;
+using GameFramework;
 using JetBrains.Annotations;
 using UnityEngine;
-using Utility;
 
 namespace Enemies
 {

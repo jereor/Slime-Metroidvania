@@ -1,5 +1,5 @@
+using GameFramework.Constants;
 using UnityEngine;
-using Utility.Constants;
 
 namespace Player.Data
 {

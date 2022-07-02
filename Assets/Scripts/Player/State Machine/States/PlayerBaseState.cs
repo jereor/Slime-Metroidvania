@@ -1,5 +1,5 @@
-using Utility.Component_System;
-using Utility.Logger;
+using GameFramework.ComponentSystem;
+using GameFramework.Loggers;
 
 namespace Player.State_Machine.States
 {

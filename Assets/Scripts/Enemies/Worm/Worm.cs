@@ -1,8 +1,8 @@
 using Enemies.States;
 using Enemies.States.Data;
+using GameFramework;
+using GameFramework.Constants;
 using UnityEngine;
-using Utility;
-using Utility.Constants;
 
 namespace Enemies.Worm
 {

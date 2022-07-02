@@ -1,5 +1,5 @@
+using GameFramework.ComponentSystem;
 using UnityEngine;
-using Utility.Component_System;
 
 namespace Player.Core_Components
 {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Utility.Component_System
+namespace GameFramework.ComponentSystem
 {
     public abstract class Movement : CoreComponent
     {

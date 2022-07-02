@@ -1,6 +1,6 @@
 using Vector3 = UnityEngine.Vector3;
 
-namespace Utility
+namespace GameFramework
 {
     public struct AttackDetails
     {

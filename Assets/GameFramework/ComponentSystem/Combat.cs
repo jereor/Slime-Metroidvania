@@ -1,4 +1,4 @@
-namespace Utility.Component_System
+namespace GameFramework.ComponentSystem
 {
     public class Combat : CoreComponent
     {

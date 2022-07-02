@@ -1,4 +1,4 @@
-namespace Utility.Constants
+namespace GameFramework.Constants
 {
     public static class AnimatorConstants
     {

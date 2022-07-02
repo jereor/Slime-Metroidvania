@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Camera
+namespace GameFramework.CameraSystem
 {
     public class Parallax : MonoBehaviour
     {
