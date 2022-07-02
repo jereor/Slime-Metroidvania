@@ -53,7 +53,7 @@ namespace Player.State_Machine.States
             {
                 SwitchState(Factory.MeleeAttack());
             }
-            else if (PlayerCombat.IsMeleeAttacking == false)
+            else if (PlayerController.IsMovementInputPressed == false)
             {
                 SwitchState(Factory.Idle());
             }

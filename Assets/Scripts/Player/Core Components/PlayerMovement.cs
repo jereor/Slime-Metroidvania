@@ -8,18 +8,15 @@ namespace Player.Core_Components
         [Header("Data")]
         [SerializeField] private float _coyoteTime;
         [SerializeField] private float _jumpForce;
-        [SerializeField] private float _moveSpeed;
         [SerializeField] private float _groundCheckRadius;
         
         [Header("Dependencies")]
         [SerializeField] private PlayerController _playerController;
-        [SerializeField] private Rigidbody2D _rigidBody;
         [SerializeField] private Transform _groundCheck;
         [SerializeField] private LayerMask _groundLayer;
 
         private bool _isJumping;
-
-        public Vector2 CurrentVelocity { get; set; }
+        
         public float? LastGroundedTime { get; set; }
         public bool IsFalling { get; set; }
 
@@ -51,8 +48,6 @@ namespace Player.Core_Components
                 StopMovement();
                 return;
             }
-            
-            CurrentVelocity = _rigidBody.velocity;
 
             _rigidBody.velocity = 
                 new Vector2(x: _playerController.CurrentMovementInput * _moveSpeed, 
@@ -79,15 +74,15 @@ namespace Player.Core_Components
                 return;
             }
 
-            _isJumping = true;
-
             bool isCoyoteTime = Time.time - LastGroundedTime <= _coyoteTime;
             bool isJumpBuffered = Time.time - _playerController.JumpInputPressedTime <= _coyoteTime;
 
             if (isCoyoteTime && isJumpBuffered)
             {
+                _isJumping = true;
                 IsFalling = false;
-                _rigidBody.velocity = new Vector2(_rigidBody.velocity.x, _jumpForce);
+                
+                _rigidBody.velocity = new Vector2(CurrentVelocity.x, _jumpForce);
             }
         }
 
@@ -98,14 +93,17 @@ namespace Player.Core_Components
 
         private void CheckJumpEnd()
         {
-            bool jumpingButJumpReleased = _rigidBody.velocity.y > 0f
-                     && _playerController.IsJumpInputPressed == false;
+            bool jumpingButJumpReleased = CurrentVelocity.y > 0f
+                                          && _playerController.IsJumpInputPressed == false 
+                                          && IsFalling == false;
             if (jumpingButJumpReleased)
             {
+                IsFalling = true;
                 StartFalling();
+                ResetJumpVariables();
             }
-
-            bool fallingAndHitGround = _rigidBody.velocity.y < 0f && IsGrounded();
+            
+            bool fallingAndHitGround = CurrentVelocity.y < 0f && IsGrounded();
             if (fallingAndHitGround)
             {
                 IsFalling = true;
@@ -115,11 +113,7 @@ namespace Player.Core_Components
 
         private void StartFalling()
         {
-            IsFalling = true;
-            
-            Vector2 velocity = _rigidBody.velocity;
-            _rigidBody.velocity = new Vector2(velocity.x, velocity.y * 0.5f);;
-            ResetJumpVariables();
+            _rigidBody.velocity = new Vector2(CurrentVelocity.x, CurrentVelocity.y * 0.5f);;
         }
 
         private void ResetJumpVariables()

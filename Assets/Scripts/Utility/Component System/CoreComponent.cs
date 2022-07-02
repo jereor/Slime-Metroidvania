@@ -21,7 +21,6 @@ namespace Utility.Component_System
 
         public virtual void LogicUpdate()
         {
-            
         }
     }
 }
