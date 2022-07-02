@@ -76,7 +76,7 @@ namespace Tests.Runtime
             Release(_keyboard.spaceKey);
             Vector3 playerEndPos = player.gameObject.transform.position;
 
-            float distanceJumped = Mathf.Abs(playerEndPos.x - playerStartingPos.x);
+            float distanceJumped = Mathf.Abs(playerEndPos.y - playerStartingPos.y);
             Assert.Greater(distanceJumped, 0);
         }
         
