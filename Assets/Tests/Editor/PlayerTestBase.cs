@@ -11,15 +11,23 @@ namespace Tests.Editor
 {
     public class PlayerTestBase
     {
+        protected GameObject _testGameObject;
+        protected PlayerStateMachine _playerStateMachine;
+        protected Rigidbody2D _rigidbody;
+        protected PlayerFlipper _flipperComponent;
+        protected VirtualPlayerController _controllerComponent;
+        protected PlayerHealth _healthComponent;
+        protected Core _coreComponent;
+        protected PlayerBase _playerComponent;
+        protected PlayerGizmosAdapter _gizmosAdapter;
+        protected PlayerMovement _movementComponent;
+        
         private const float MAX_HEALTH = 100;
 
         private static readonly Vector3 GroundCheckPosition = new Vector3(0f, -0.6f, 0);
         private static readonly Vector3 MeleeAttackHitBoxPosition = new Vector3(1.05f, 0, 0);
         private readonly D_PlayerMeleeAttack _playerMeleeAttackData = ScriptableObject.CreateInstance<D_PlayerMeleeAttack>();
 
-        private GameObject _testGameObject;
-        private PlayerStateMachine _playerStateMachine;
-        
         // TODO: Add SlingShooter
         [SetUp]
         public void SetUp()
@@ -31,8 +39,10 @@ namespace Tests.Editor
             _testGameObject.AddComponent<SpriteRenderer>();
             _testGameObject.AddComponent<Animator>();
             _testGameObject.AddComponent<BoxCollider2D>();
-            Rigidbody2D rb = _testGameObject.AddComponent<Rigidbody2D>();
             _testGameObject.AddComponent<SpringJoint2D>();
+            
+            // Add RigidBody component
+            _rigidbody = _testGameObject.AddComponent<Rigidbody2D>();
             
             // Instantiate child MeleeAttackHitBox transform
             Transform meleeAttackHitBox = Object.Instantiate(new GameObject("MeleeAttackHitBox"),
@@ -49,33 +59,33 @@ namespace Tests.Editor
             _playerMeleeAttackData._damageableLayers = PhysicsConstants.ENEMY_LAYER_NUMBER;
             
             // Add PlayerFlipper component
-            PlayerFlipper flipperComponent = _testGameObject.AddComponent<PlayerFlipper>();
-            flipperComponent.Initialize(_testGameObject.transform);
+            _flipperComponent = _testGameObject.AddComponent<PlayerFlipper>();
+            _flipperComponent.Initialize(_testGameObject.transform);
 
             // Add VirtualController component
-            VirtualPlayerController controllerComponent = _testGameObject.AddComponent<VirtualPlayerController>();
-            controllerComponent.Initialize(flipperComponent);
+            _controllerComponent = _testGameObject.AddComponent<VirtualPlayerController>();
+            _controllerComponent.Initialize(_flipperComponent);
             
             // Add PlayerHealth component
-            PlayerHealth healthComponent = _testGameObject.AddComponent<PlayerHealth>();
-            healthComponent.Initialize(MAX_HEALTH, MAX_HEALTH);
+            _healthComponent = _testGameObject.AddComponent<PlayerHealth>();
+            _healthComponent.Initialize(MAX_HEALTH, MAX_HEALTH);
             
             // Add Core component
-            Core coreComponent = _testGameObject.AddComponent<Core>();
+            _coreComponent = _testGameObject.AddComponent<Core>();
 
             // Add PlayerBase component
-            PlayerBase playerComponent = _testGameObject.AddComponent<PlayerBase>();
-            playerComponent.Initialize(coreComponent, meleeAttackHitBox, _playerMeleeAttackData);
+            _playerComponent = _testGameObject.AddComponent<PlayerBase>();
+            _playerComponent.Initialize(_coreComponent, meleeAttackHitBox, _playerMeleeAttackData);
             
             // Add GizmosAdapter component
-            PlayerGizmosAdapter gizmosAdapter = _testGameObject.AddComponent<PlayerGizmosAdapter>();
-            gizmosAdapter.Initialize(playerComponent);
+            _gizmosAdapter = _testGameObject.AddComponent<PlayerGizmosAdapter>();
+            _gizmosAdapter.Initialize(_playerComponent);
             
             // Add PlayerMovement component
-            PlayerMovement movementComponent = _testGameObject.AddComponent<PlayerMovement>();
-            movementComponent.Initialize(8f, rb, 0.2f, 8f, 0.2f, controllerComponent, groundCheck, PhysicsConstants.GROUND_LAYER_NUMBER);
+            _movementComponent = _testGameObject.AddComponent<PlayerMovement>();
+            _movementComponent.Initialize(8f, _rigidbody, 0.2f, 8f, 0.2f, _controllerComponent, groundCheck, PhysicsConstants.GROUND_LAYER_NUMBER);
             
-            _playerStateMachine.Initialize(playerComponent);
+            _playerStateMachine.Initialize(_playerComponent);
         }
         
     }

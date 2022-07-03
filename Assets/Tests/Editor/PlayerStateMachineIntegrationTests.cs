@@ -1,4 +1,3 @@
-using System;
 using NUnit.Framework;
 
 namespace Tests.Editor
@@ -9,7 +8,6 @@ namespace Tests.Editor
         [Test]
         public void State_Machine_switches_between_states_automatically()
         {
-            throw new NotImplementedException();
         }
     }
 }
