@@ -1,0 +1,9 @@
+{
+  "name": "Tests",
+  "references": [
+    "GUID:343deaaf83e0cee4ca978e7df0b80d21",
+    "GUID:2bafac87e7f4b9b418d9448d219b01ab",
+    "GUID:5587c87b34eeba24ab30bd4d197625b8",
+    "GUID:2c39773d38cb464cb8a0d26719640a6a"
+  ]
+}

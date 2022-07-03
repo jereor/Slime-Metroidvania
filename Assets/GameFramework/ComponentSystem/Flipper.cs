@@ -8,7 +8,7 @@ namespace GameFramework.ComponentSystem
         
         public bool IsFacingRight { get; private set; } = true;
         
-        public virtual void FlipPlayer()
+        public virtual void Flip()
         {
             FlipSprite();
         }
@@ -21,6 +21,11 @@ namespace GameFramework.ComponentSystem
             
             localScale.x *= -1f;
             currentTransform.localScale = localScale;
+        }
+
+        public void Initialize(Transform objectTransform)
+        {
+            _transform = objectTransform;
         }
     }
 }

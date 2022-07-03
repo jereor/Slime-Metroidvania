@@ -48,7 +48,7 @@ namespace Player.Core_Components
 
             if (HasMoveDirectionChanged())
             {
-                _flipper.FlipPlayer();
+                _flipper.Flip();
             }
         }
         

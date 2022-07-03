@@ -7,6 +7,12 @@ namespace GameFramework.ComponentSystem
         [SerializeField] private float _currentHealth;
         [SerializeField] private float _maxHealth;
 
+        public void Initialize(float currentHealth, float maxHealth)
+        {
+            _currentHealth = currentHealth;
+            _maxHealth = maxHealth;
+        }
+        
         public virtual void Start()
         {
             _currentHealth = _maxHealth;

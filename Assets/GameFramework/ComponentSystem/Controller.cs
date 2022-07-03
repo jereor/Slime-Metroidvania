@@ -17,5 +17,10 @@ namespace GameFramework.ComponentSystem
             return facingRightButNowMovingLeft
                    || facingLeftButNowMovingRight;
         }
+
+        public void Initialize(Flipper flipper)
+        {
+            _flipper = flipper;
+        }
     }
 }

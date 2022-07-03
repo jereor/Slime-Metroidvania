@@ -27,6 +27,19 @@ namespace Player.Core_Components
                 return _coyoteTime;
             }
         }
+        
+        // TODO: Move moveSpeed and rigidBody initialization to the base Movement component
+        public void Initialize(float moveSpeed, Rigidbody2D rigidBody, float coyoteTime, float jumpForce, float groundCheckRadius, PlayerController playerController, Transform groundCheck, LayerMask groundLayer)
+        {
+            _moveSpeed = moveSpeed;
+            _rigidBody = rigidBody;
+            _coyoteTime = coyoteTime;
+            _jumpForce = jumpForce;
+            _groundCheckRadius = groundCheckRadius;
+            _playerController = playerController;
+            _groundCheck = groundCheck;
+            _groundLayer = groundLayer;
+        }
 
         public bool IsGrounded()
         {
@@ -126,5 +139,6 @@ namespace Player.Core_Components
         {
             LastGroundedTime = Time.time;
         }
+        
     }
 }

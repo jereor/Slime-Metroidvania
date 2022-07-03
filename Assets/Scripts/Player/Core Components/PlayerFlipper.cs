@@ -7,9 +7,9 @@ namespace Player.Core_Components
     {
         [SerializeField] private Transform _slingShooterTransform;
 
-        public override void FlipPlayer()
+        public override void Flip()
         {
-            base.FlipPlayer();
+            base.Flip();
             
             FlipSlingShooter();
         }
