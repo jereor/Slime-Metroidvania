@@ -7,7 +7,7 @@ using Player.Data;
 using Player.State_Machine;
 using UnityEngine;
 
-namespace Tests.Editor
+namespace Tests.Runtime
 {
     public class PlayerTestBase
     {
@@ -21,6 +21,7 @@ namespace Tests.Editor
         protected PlayerBase _playerComponent;
         protected PlayerGizmosAdapter _gizmosAdapter;
         protected PlayerMovement _movementComponent;
+        protected PlayerCombat _combatComponent;
         
         private const float MAX_HEALTH = 100;
 
@@ -28,7 +29,7 @@ namespace Tests.Editor
         private static readonly Vector3 MeleeAttackHitBoxPosition = new Vector3(1.05f, 0, 0);
         private readonly D_PlayerMeleeAttack _playerMeleeAttackData = ScriptableObject.CreateInstance<D_PlayerMeleeAttack>();
 
-        // TODO: Add SlingShooter
+        // TODO: Add SlingShooter and SpringJoint2D
         [SetUp]
         public void SetUp()
         {
@@ -36,13 +37,12 @@ namespace Tests.Editor
 
             // Create testGameObject
             _testGameObject = Object.Instantiate(new GameObject("TestGameObject"));
+
+            // Add RigidBody component and other essentials
+            _rigidbody = _testGameObject.AddComponent<Rigidbody2D>();
             _testGameObject.AddComponent<SpriteRenderer>();
             _testGameObject.AddComponent<Animator>();
             _testGameObject.AddComponent<BoxCollider2D>();
-            _testGameObject.AddComponent<SpringJoint2D>();
-            
-            // Add RigidBody component
-            _rigidbody = _testGameObject.AddComponent<Rigidbody2D>();
             
             // Instantiate child MeleeAttackHitBox transform
             Transform meleeAttackHitBox = Object.Instantiate(new GameObject("MeleeAttackHitBox"),
@@ -58,6 +58,9 @@ namespace Tests.Editor
             _playerMeleeAttackData._stunDamage = 1;
             _playerMeleeAttackData._damageableLayers = PhysicsConstants.ENEMY_LAYER_NUMBER;
             
+            // Add Core component
+            _coreComponent = _testGameObject.AddComponent<Core>();
+            
             // Add PlayerFlipper component
             _flipperComponent = _testGameObject.AddComponent<PlayerFlipper>();
             _flipperComponent.Initialize(_testGameObject.transform);
@@ -69,14 +72,7 @@ namespace Tests.Editor
             // Add PlayerHealth component
             _healthComponent = _testGameObject.AddComponent<PlayerHealth>();
             _healthComponent.Initialize(MAX_HEALTH, MAX_HEALTH);
-            
-            // Add Core component
-            _coreComponent = _testGameObject.AddComponent<Core>();
 
-            // Add PlayerBase component
-            _playerComponent = _testGameObject.AddComponent<PlayerBase>();
-            _playerComponent.Initialize(_coreComponent, meleeAttackHitBox, _playerMeleeAttackData);
-            
             // Add GizmosAdapter component
             _gizmosAdapter = _testGameObject.AddComponent<PlayerGizmosAdapter>();
             _gizmosAdapter.Initialize(_playerComponent);
@@ -85,6 +81,15 @@ namespace Tests.Editor
             _movementComponent = _testGameObject.AddComponent<PlayerMovement>();
             _movementComponent.Initialize(8f, _rigidbody, 0.2f, 8f, 0.2f, _controllerComponent, groundCheck, PhysicsConstants.GROUND_LAYER_NUMBER);
             
+            // Add PlayerCombat component
+            _combatComponent = _testGameObject.AddComponent<PlayerCombat>();
+            _combatComponent.Initialize(_testGameObject.transform, meleeAttackHitBox, _playerMeleeAttackData);
+            
+            // Add PlayerBase component
+            _playerComponent = _testGameObject.AddComponent<PlayerBase>();
+            _playerComponent.Initialize(_coreComponent, meleeAttackHitBox, _playerMeleeAttackData);
+            
+            // Initialize PlayerStateMachine
             _playerStateMachine.Initialize(_playerComponent);
         }
         

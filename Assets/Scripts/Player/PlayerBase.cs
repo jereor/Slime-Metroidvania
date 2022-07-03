@@ -9,6 +9,8 @@ namespace Player
     public class PlayerBase : MonoBehaviour
     {
         [SerializeField] private Core _core;
+        
+        // TODO: Remove these duplicated fields (found in PlayerCombat already)
         [SerializeField] private Transform _meleeAttackHitBox;
         [SerializeField] private D_PlayerMeleeAttack _playerMeleeAttackData;
 

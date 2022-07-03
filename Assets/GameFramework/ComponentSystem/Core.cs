@@ -42,7 +42,7 @@ namespace GameFramework.ComponentSystem
 
             if (component == null)
             {
-                Logger.LogWarning($"{typeof(T)} not found on {transform.name}");
+                Logger.LogError($"{typeof(T)} not found on {transform.name}");
             }
 
             return component;
