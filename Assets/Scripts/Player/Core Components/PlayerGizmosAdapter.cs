@@ -17,10 +17,6 @@ namespace Player.Core_Components
             Vector3 attackPosition = _playerBase.MeleeAttackHitBox.position;
             Gizmos.DrawWireSphere(attackPosition, _playerBase.PlayerMeleeAttackData._attackRadius);
         }
-
-        public void Initialize(PlayerBase player)
-        {
-            _playerBase = player;
-        }
+        
     }
 }

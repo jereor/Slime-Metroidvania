@@ -42,12 +42,6 @@ namespace Player.Core_Components
         {
             IsMeleeAttacking = false;
         }
-
-        public void Initialize(Transform playerTransform, Transform meleeAttackHitBox, D_PlayerMeleeAttack playerMeleeAttackData)
-        {
-            _playerTransform = playerTransform;
-            _meleeAttackHitBox = meleeAttackHitBox;
-            _playerMeleeAttackData = playerMeleeAttackData;
-        }
+        
     }
 }

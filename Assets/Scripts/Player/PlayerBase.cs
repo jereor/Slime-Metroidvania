@@ -37,13 +37,6 @@ namespace Player
             get { return _core.Logger ?? new UnityLogger(); }
         }
 
-        public void Initialize(Core core, Transform meleeAttackHitBox, D_PlayerMeleeAttack playerMeleeAttackData)
-        {
-            _core = core;
-            _meleeAttackHitBox = meleeAttackHitBox;
-            _playerMeleeAttackData = playerMeleeAttackData;
-        }
-
         private void Awake()
         {
             StateMachine = new PlayerStateMachine();
