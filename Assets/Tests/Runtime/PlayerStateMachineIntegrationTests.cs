@@ -43,7 +43,23 @@ namespace Tests.Runtime
             
             Assert.That(playerStateMachine.CurrentBaseState, Is.InstanceOf<PlayerGroundedState>());
         }
-        
+
+        [UnityTest]
+        public IEnumerator State_Machine_switches_from_GroundedState_to_JumpState_when_jump_input_is_given()
+        {
+            Vector3 playerStartingPos = new Vector3(0f, 0f, -1f);
+            Quaternion playerDir = Quaternion.identity;
+            GameObject player = Object.Instantiate(_playerPrefab, playerStartingPos, playerDir);
+            PlayerStateMachine playerStateMachine = player.GetComponent<PlayerBase>().StateMachine;
+            yield return null;
+            
+            Assert.That(playerStateMachine.CurrentBaseState, Is.InstanceOf<PlayerGroundedState>());
+            Press(_keyboard.spaceKey);
+            yield return null;
+            
+            Assert.That(playerStateMachine.CurrentBaseState, Is.InstanceOf<PlayerJumpState>());
+        }
+
         // TODO: Rework JumpState to work without needing to jump first
         // NOTE: JumpState will probably need to cut it into additional sub states like Jumping, Falling, Landing
         // and JumpState needs to be renamed into AirborneState
