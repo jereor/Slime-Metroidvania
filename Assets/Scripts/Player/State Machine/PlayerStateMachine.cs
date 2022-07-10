@@ -16,11 +16,11 @@ namespace Player.State_Machine
             }
         }
 
-        public void Initialize(PlayerBase player)
+        public void Initialize(PlayerBase player, PlayerStateFactory stateFactory, PlayerBaseState defaultState)
         {
             Player = player;
-            States = new PlayerStateFactory(player, this);
-            CurrentBaseState = States.Grounded();
+            States = stateFactory;
+            CurrentBaseState = defaultState;
         }
 
         // TODO: Split update into logic and physics updates

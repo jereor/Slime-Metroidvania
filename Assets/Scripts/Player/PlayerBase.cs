@@ -51,7 +51,8 @@ namespace Player
 
         private void Start()
         {
-            StateMachine.Initialize(this);
+            PlayerStateFactory stateFactory = new PlayerStateFactory(this, StateMachine);
+            StateMachine.Initialize(this, stateFactory, stateFactory.Grounded());
         }
 
         private void Update()
