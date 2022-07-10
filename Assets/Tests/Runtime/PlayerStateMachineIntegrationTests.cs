@@ -38,8 +38,8 @@ namespace Tests.Runtime
             Quaternion playerDir = Quaternion.identity;
             GameObject player = Object.Instantiate(_playerPrefab, playerStartingPos, playerDir);
             PlayerStateMachine playerStateMachine = player.GetComponent<PlayerBase>().StateMachine;
-            
-            yield return new WaitForSeconds(1f);
+
+            yield return null;
             
             Assert.That(playerStateMachine.CurrentBaseState, Is.InstanceOf<PlayerGroundedState>());
         }
@@ -55,7 +55,7 @@ namespace Tests.Runtime
             
             Assert.That(playerStateMachine.CurrentBaseState, Is.InstanceOf<PlayerGroundedState>());
             Press(_keyboard.spaceKey);
-            yield return null;
+            yield return new WaitForSeconds(0.3f);
             
             Assert.That(playerStateMachine.CurrentBaseState, Is.InstanceOf<PlayerJumpState>());
         }
@@ -63,7 +63,7 @@ namespace Tests.Runtime
         // TODO: Rework JumpState to work without needing to jump first
         // NOTE: JumpState will probably need to cut it into additional sub states like Jumping, Falling, Landing
         // and JumpState needs to be renamed into AirborneState
-        [UnityTest]
+        [UnityTest, Ignore("JumpState needs reworking")]
         public IEnumerator State_Machine_switches_from_JumpState_to_GroundedState_when_touching_ground()
         {
             throw new NotImplementedException();
@@ -86,9 +86,11 @@ namespace Tests.Runtime
             Quaternion playerDir = Quaternion.identity;
             GameObject player = Object.Instantiate(_playerPrefab, playerStartingPos, playerDir);
             PlayerStateMachine playerStateMachine = player.GetComponent<PlayerBase>().StateMachine;
+            yield return null;
             
+            Assert.That(playerStateMachine.CurrentSubState, Is.InstanceOf<PlayerIdleState>());
             Press(_keyboard.dKey);
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.3f);
             
             Assert.That(playerStateMachine.CurrentSubState, Is.InstanceOf<PlayerMoveState>());
         }
@@ -103,7 +105,7 @@ namespace Tests.Runtime
             yield return null;
             
             Press(_keyboard.dKey);
-            yield return null;
+            yield return new WaitForSeconds(0.3f);
             Assert.That(playerStateMachine.CurrentSubState, Is.InstanceOf<PlayerMoveState>());
             Release(_keyboard.dKey);
             yield return null;
