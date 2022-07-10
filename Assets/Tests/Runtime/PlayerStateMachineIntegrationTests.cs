@@ -112,6 +112,22 @@ namespace Tests.Runtime
             
             Assert.That(playerStateMachine.CurrentSubState, Is.InstanceOf<PlayerIdleState>());
         }
-        
+
+        [UnityTest]
+        public IEnumerator State_Machine_switches_from_IdleState_to_MeleeAttackState_when_melee_attack_input_is_given()
+        {
+            Vector3 playerStartingPos = new Vector3(0f, 0f, -1f);
+            Quaternion playerDir = Quaternion.identity;
+            GameObject player = Object.Instantiate(_playerPrefab, playerStartingPos, playerDir);
+            PlayerStateMachine playerStateMachine = player.GetComponent<PlayerBase>().StateMachine;
+            yield return null;
+            
+            Assert.That(playerStateMachine.CurrentSubState, Is.InstanceOf<PlayerIdleState>());
+            Press(_mouse.rightButton);
+            yield return new WaitForSeconds(0.2f);
+            
+            Assert.That(playerStateMachine.CurrentSubState, Is.InstanceOf<PlayerMeleeAttackState>());
+        }
+
     }
 }
