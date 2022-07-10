@@ -93,5 +93,23 @@ namespace Tests.Runtime
             Assert.That(playerStateMachine.CurrentSubState, Is.InstanceOf<PlayerMoveState>());
         }
         
+        [UnityTest]
+        public IEnumerator State_Machine_switches_from_MoveState_to_IdleState_when_movement_input_stops()
+        {
+            Vector3 playerStartingPos = new Vector3(0f, 0f, -1f);
+            Quaternion playerDir = Quaternion.identity;
+            GameObject player = Object.Instantiate(_playerPrefab, playerStartingPos, playerDir);
+            PlayerStateMachine playerStateMachine = player.GetComponent<PlayerBase>().StateMachine;
+            yield return null;
+            
+            Press(_keyboard.dKey);
+            yield return null;
+            Assert.That(playerStateMachine.CurrentSubState, Is.InstanceOf<PlayerMoveState>());
+            Release(_keyboard.dKey);
+            yield return null;
+            
+            Assert.That(playerStateMachine.CurrentSubState, Is.InstanceOf<PlayerIdleState>());
+        }
+        
     }
 }
