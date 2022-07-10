@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using NUnit.Framework;
 using Player;
@@ -8,6 +9,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
+using Object = UnityEngine.Object;
 
 namespace Tests.Runtime
 {
@@ -42,8 +44,27 @@ namespace Tests.Runtime
             Assert.That(playerStateMachine.CurrentBaseState, Is.InstanceOf<PlayerGroundedState>());
         }
         
+        // TODO: Rework JumpState to work without needing to jump first
+        // NOTE: JumpState will probably need to cut it into additional sub states like Jumping, Falling, Landing
+        // and JumpState needs to be renamed into AirborneState
         [UnityTest]
-        public IEnumerator State_Machine_switches_from_idle_to_movement_when_movement_input_is_given()
+        public IEnumerator State_Machine_switches_from_JumpState_to_GroundedState_when_touching_ground()
+        {
+            throw new NotImplementedException();
+            Vector3 playerStartingPos = new Vector3(0f, 3f, -1f);
+            Quaternion playerDir = Quaternion.identity;
+            GameObject player = Object.Instantiate(_playerPrefab, playerStartingPos, playerDir);
+            PlayerStateMachine playerStateMachine = player.GetComponent<PlayerBase>().StateMachine;
+            yield return new WaitForSeconds(0.1f);
+            
+            Assert.That(playerStateMachine.CurrentBaseState, Is.InstanceOf<PlayerJumpState>());
+            yield return new WaitForSeconds(1f);
+            
+            Assert.That(playerStateMachine.CurrentBaseState, Is.InstanceOf<PlayerGroundedState>());
+        }
+        
+        [UnityTest]
+        public IEnumerator State_Machine_switches_from_IdleState_to_MoveState_when_movement_input_is_given()
         {
             Vector3 playerStartingPos = new Vector3(0f, 0f, -1f);
             Quaternion playerDir = Quaternion.identity;

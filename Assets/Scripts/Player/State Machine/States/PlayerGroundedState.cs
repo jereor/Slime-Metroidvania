@@ -65,10 +65,12 @@ namespace Player.State_Machine.States
         protected override void CheckSwitchStates()
         {
             bool isJumpBuffered = Time.time - PlayerController.JumpInputPressedTime <= PlayerMovement.CoyoteTime;
-            if (isJumpBuffered)
+            if (_playerMovement.IsGrounded() == false
+                || isJumpBuffered)
             {
                 SwitchState(Factory.Jump());
             }
         }
+        
     }
 }
