@@ -30,14 +30,19 @@ namespace Tests.Runtime
             _playerPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Player.prefab");
             SceneManager.LoadScene("Scenes/TestSandbox");
         }
-
-        [UnityTest]
-        public IEnumerator State_Machine_starts_in_given_default_base_state()
+        
+        private GameObject InstantiatePlayer()
         {
             Vector3 playerStartingPos = new Vector3(0f, 0f, -1f);
             Quaternion playerDir = Quaternion.identity;
             GameObject player = Object.Instantiate(_playerPrefab, playerStartingPos, playerDir);
-            PlayerStateMachine playerStateMachine = player.GetComponent<PlayerBase>().StateMachine;
+            return player;
+        }
+
+        [UnityTest]
+        public IEnumerator State_Machine_starts_in_given_default_base_state()
+        {
+            PlayerStateMachine playerStateMachine = InstantiatePlayer().GetComponent<PlayerBase>().StateMachine;
 
             // Default state is given in PlayerBase script, where the PlayerStateMachine is initialized on Start()
             yield return null;
@@ -48,10 +53,7 @@ namespace Tests.Runtime
         [UnityTest]
         public IEnumerator State_Machine_switches_from_GroundedState_to_JumpState_when_jump_input_is_given()
         {
-            Vector3 playerStartingPos = new Vector3(0f, 0f, -1f);
-            Quaternion playerDir = Quaternion.identity;
-            GameObject player = Object.Instantiate(_playerPrefab, playerStartingPos, playerDir);
-            PlayerStateMachine playerStateMachine = player.GetComponent<PlayerBase>().StateMachine;
+            PlayerStateMachine playerStateMachine = InstantiatePlayer().GetComponent<PlayerBase>().StateMachine;
             yield return null;
             
             Assert.That(playerStateMachine.CurrentBaseState, Is.InstanceOf<PlayerGroundedState>());
@@ -68,25 +70,12 @@ namespace Tests.Runtime
         public IEnumerator State_Machine_switches_from_JumpState_to_GroundedState_when_touching_ground()
         {
             throw new NotImplementedException();
-            Vector3 playerStartingPos = new Vector3(0f, 3f, -1f);
-            Quaternion playerDir = Quaternion.identity;
-            GameObject player = Object.Instantiate(_playerPrefab, playerStartingPos, playerDir);
-            PlayerStateMachine playerStateMachine = player.GetComponent<PlayerBase>().StateMachine;
-            yield return new WaitForSeconds(0.1f);
-            
-            Assert.That(playerStateMachine.CurrentBaseState, Is.InstanceOf<PlayerJumpState>());
-            yield return new WaitForSeconds(1f);
-            
-            Assert.That(playerStateMachine.CurrentBaseState, Is.InstanceOf<PlayerGroundedState>());
         }
         
         [UnityTest]
         public IEnumerator State_Machine_switches_from_IdleState_to_MoveState_when_movement_input_is_given_while_in_GroundedState()
         {
-            Vector3 playerStartingPos = new Vector3(0f, 0f, -1f);
-            Quaternion playerDir = Quaternion.identity;
-            GameObject player = Object.Instantiate(_playerPrefab, playerStartingPos, playerDir);
-            PlayerStateMachine playerStateMachine = player.GetComponent<PlayerBase>().StateMachine;
+            PlayerStateMachine playerStateMachine = InstantiatePlayer().GetComponent<PlayerBase>().StateMachine;
             yield return null;
             
             Assert.That(playerStateMachine.CurrentBaseState, Is.InstanceOf<PlayerGroundedState>());
@@ -100,10 +89,7 @@ namespace Tests.Runtime
         [UnityTest]
         public IEnumerator State_Machine_switches_from_IdleState_to_MoveState_when_movement_input_is_given_while_in_JumpState()
         {
-            Vector3 playerStartingPos = new Vector3(0f, 0f, -1f);
-            Quaternion playerDir = Quaternion.identity;
-            GameObject player = Object.Instantiate(_playerPrefab, playerStartingPos, playerDir);
-            PlayerStateMachine playerStateMachine = player.GetComponent<PlayerBase>().StateMachine;
+            PlayerStateMachine playerStateMachine = InstantiatePlayer().GetComponent<PlayerBase>().StateMachine;
             yield return null;
 
             Press(_keyboard.spaceKey);
@@ -120,10 +106,7 @@ namespace Tests.Runtime
         [UnityTest]
         public IEnumerator State_Machine_switches_from_IdleState_to_MeleeAttackState_when_melee_attack_input_is_given_while_in_GroundedState()
         {
-            Vector3 playerStartingPos = new Vector3(0f, 0f, -1f);
-            Quaternion playerDir = Quaternion.identity;
-            GameObject player = Object.Instantiate(_playerPrefab, playerStartingPos, playerDir);
-            PlayerStateMachine playerStateMachine = player.GetComponent<PlayerBase>().StateMachine;
+            PlayerStateMachine playerStateMachine = InstantiatePlayer().GetComponent<PlayerBase>().StateMachine;
             yield return null;
 
             Assert.That(playerStateMachine.CurrentBaseState, Is.InstanceOf<PlayerGroundedState>());
@@ -137,10 +120,7 @@ namespace Tests.Runtime
         [UnityTest]
         public IEnumerator State_Machine_switches_from_IdleState_to_MeleeAttackState_when_melee_attack_input_is_given_while_in_JumpState()
         {
-            Vector3 playerStartingPos = new Vector3(0f, 0f, -1f);
-            Quaternion playerDir = Quaternion.identity;
-            GameObject player = Object.Instantiate(_playerPrefab, playerStartingPos, playerDir);
-            PlayerStateMachine playerStateMachine = player.GetComponent<PlayerBase>().StateMachine;
+            PlayerStateMachine playerStateMachine = InstantiatePlayer().GetComponent<PlayerBase>().StateMachine;
             yield return null;
 
             Press(_keyboard.spaceKey);
@@ -156,10 +136,7 @@ namespace Tests.Runtime
         [UnityTest]
         public IEnumerator State_Machine_switches_from_MoveState_to_IdleState_when_movement_input_stops_while_in_GroundedState()
         {
-            Vector3 playerStartingPos = new Vector3(0f, 0f, -1f);
-            Quaternion playerDir = Quaternion.identity;
-            GameObject player = Object.Instantiate(_playerPrefab, playerStartingPos, playerDir);
-            PlayerStateMachine playerStateMachine = player.GetComponent<PlayerBase>().StateMachine;
+            PlayerStateMachine playerStateMachine = InstantiatePlayer().GetComponent<PlayerBase>().StateMachine;
             yield return null;
             
             Press(_keyboard.dKey);
@@ -175,10 +152,7 @@ namespace Tests.Runtime
         [UnityTest]
         public IEnumerator State_Machine_switches_from_MoveState_to_IdleState_when_movement_input_stops_while_in_JumpState()
         {
-            Vector3 playerStartingPos = new Vector3(0f, 0f, -1f);
-            Quaternion playerDir = Quaternion.identity;
-            GameObject player = Object.Instantiate(_playerPrefab, playerStartingPos, playerDir);
-            PlayerStateMachine playerStateMachine = player.GetComponent<PlayerBase>().StateMachine;
+            PlayerStateMachine playerStateMachine = InstantiatePlayer().GetComponent<PlayerBase>().StateMachine;
             yield return null;
             
             Press(_keyboard.spaceKey);
@@ -196,10 +170,7 @@ namespace Tests.Runtime
         [UnityTest]
         public IEnumerator State_Machine_switches_from_MoveState_to_MeleeAttackState_when_melee_attack_input_is_given_while_in_GroundedState()
         {
-            Vector3 playerStartingPos = new Vector3(0f, 0f, -1f);
-            Quaternion playerDir = Quaternion.identity;
-            GameObject player = Object.Instantiate(_playerPrefab, playerStartingPos, playerDir);
-            PlayerStateMachine playerStateMachine = player.GetComponent<PlayerBase>().StateMachine;
+            PlayerStateMachine playerStateMachine = InstantiatePlayer().GetComponent<PlayerBase>().StateMachine;
             yield return null;
             
             Press(_keyboard.dKey);
@@ -215,10 +186,7 @@ namespace Tests.Runtime
         [UnityTest]
         public IEnumerator State_Machine_switches_from_MoveState_to_MeleeAttackState_when_melee_attack_input_is_given_while_in_JumpState()
         {
-            Vector3 playerStartingPos = new Vector3(0f, 0f, -1f);
-            Quaternion playerDir = Quaternion.identity;
-            GameObject player = Object.Instantiate(_playerPrefab, playerStartingPos, playerDir);
-            PlayerStateMachine playerStateMachine = player.GetComponent<PlayerBase>().StateMachine;
+            PlayerStateMachine playerStateMachine = InstantiatePlayer().GetComponent<PlayerBase>().StateMachine;
             yield return null;
             
             Press(_keyboard.spaceKey);
@@ -232,6 +200,6 @@ namespace Tests.Runtime
             
             Assert.That(playerStateMachine.CurrentSubState, Is.InstanceOf<PlayerMeleeAttackState>());
         }
-
+        
     }
 }
