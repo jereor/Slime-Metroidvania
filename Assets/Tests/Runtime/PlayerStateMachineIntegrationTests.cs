@@ -39,8 +39,9 @@ namespace Tests.Runtime
             GameObject player = Object.Instantiate(_playerPrefab, playerStartingPos, playerDir);
             PlayerStateMachine playerStateMachine = player.GetComponent<PlayerBase>().StateMachine;
 
+            // Default state is given in PlayerBase script, where the PlayerStateMachine is initialized on Start()
             yield return null;
-            
+
             Assert.That(playerStateMachine.CurrentBaseState, Is.InstanceOf<PlayerGroundedState>());
         }
 
