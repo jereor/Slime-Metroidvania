@@ -89,6 +89,7 @@ namespace Tests.Runtime
             PlayerStateMachine playerStateMachine = player.GetComponent<PlayerBase>().StateMachine;
             yield return null;
             
+            Assert.That(playerStateMachine.CurrentBaseState, Is.InstanceOf<PlayerGroundedState>());
             Assert.That(playerStateMachine.CurrentSubState, Is.InstanceOf<PlayerIdleState>());
             Press(_keyboard.dKey);
             yield return new WaitForSeconds(0.3f);
@@ -113,6 +114,7 @@ namespace Tests.Runtime
             
             Press(_keyboard.dKey);
             yield return new WaitForSeconds(0.3f);
+            Assert.That(playerStateMachine.CurrentBaseState, Is.InstanceOf<PlayerGroundedState>());
             Assert.That(playerStateMachine.CurrentSubState, Is.InstanceOf<PlayerMoveState>());
             Release(_keyboard.dKey);
             yield return null;
@@ -135,6 +137,7 @@ namespace Tests.Runtime
             PlayerStateMachine playerStateMachine = player.GetComponent<PlayerBase>().StateMachine;
             yield return null;
             
+            Assert.That(playerStateMachine.CurrentBaseState, Is.InstanceOf<PlayerGroundedState>());
             Assert.That(playerStateMachine.CurrentSubState, Is.InstanceOf<PlayerIdleState>());
             Press(_mouse.rightButton);
             yield return new WaitForSeconds(0.2f);
@@ -159,6 +162,7 @@ namespace Tests.Runtime
             
             Press(_keyboard.dKey);
             yield return new WaitForSeconds(0.2f);
+            Assert.That(playerStateMachine.CurrentBaseState, Is.InstanceOf<PlayerGroundedState>());
             Assert.That(playerStateMachine.CurrentSubState, Is.InstanceOf<PlayerMoveState>());
             Press(_mouse.rightButton);
             yield return new WaitForSeconds(0.2f);
