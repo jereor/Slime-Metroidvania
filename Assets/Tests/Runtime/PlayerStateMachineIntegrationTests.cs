@@ -147,6 +147,30 @@ namespace Tests.Runtime
         {
             throw new NotImplementedException();
         }
+        
+        [UnityTest]
+        public IEnumerator State_Machine_switches_from_MoveState_to_MeleeAttackState_when_melee_attack_input_is_given_while_in_GroundedState()
+        {
+            Vector3 playerStartingPos = new Vector3(0f, 0f, -1f);
+            Quaternion playerDir = Quaternion.identity;
+            GameObject player = Object.Instantiate(_playerPrefab, playerStartingPos, playerDir);
+            PlayerStateMachine playerStateMachine = player.GetComponent<PlayerBase>().StateMachine;
+            yield return null;
+            
+            Press(_keyboard.dKey);
+            yield return new WaitForSeconds(0.2f);
+            Assert.That(playerStateMachine.CurrentSubState, Is.InstanceOf<PlayerMoveState>());
+            Press(_mouse.rightButton);
+            yield return new WaitForSeconds(0.2f);
+            
+            Assert.That(playerStateMachine.CurrentSubState, Is.InstanceOf<PlayerMeleeAttackState>());
+        }
+        
+        [UnityTest]
+        public IEnumerator State_Machine_switches_from_Move_to_MeleeAttackState_when_melee_attack_input_is_given_while_in_JumpState()
+        {
+            throw new NotImplementedException();
+        }
 
     }
 }
