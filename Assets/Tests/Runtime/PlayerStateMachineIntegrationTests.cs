@@ -81,7 +81,7 @@ namespace Tests.Runtime
         }
         
         [UnityTest]
-        public IEnumerator State_Machine_switches_from_IdleState_to_MoveState_when_movement_input_is_given()
+        public IEnumerator State_Machine_switches_from_IdleState_to_MoveState_when_movement_input_is_given_while_in_GroundedState()
         {
             Vector3 playerStartingPos = new Vector3(0f, 0f, -1f);
             Quaternion playerDir = Quaternion.identity;
@@ -95,9 +95,15 @@ namespace Tests.Runtime
             
             Assert.That(playerStateMachine.CurrentSubState, Is.InstanceOf<PlayerMoveState>());
         }
-        
+
         [UnityTest]
-        public IEnumerator State_Machine_switches_from_MoveState_to_IdleState_when_movement_input_stops()
+        public IEnumerator State_Machine_switches_from_IdleState_to_MoveState_when_movement_input_is_given_while_in_JumpState()
+        {
+            throw new NotImplementedException();
+        }
+
+        [UnityTest]
+        public IEnumerator State_Machine_switches_from_MoveState_to_IdleState_when_movement_input_stops_while_in_GroundedState()
         {
             Vector3 playerStartingPos = new Vector3(0f, 0f, -1f);
             Quaternion playerDir = Quaternion.identity;
@@ -113,9 +119,15 @@ namespace Tests.Runtime
             
             Assert.That(playerStateMachine.CurrentSubState, Is.InstanceOf<PlayerIdleState>());
         }
+        
+        [UnityTest]
+        public IEnumerator State_Machine_switches_from_MoveState_to_IdleState_when_movement_input_stops_while_in_JumpState()
+        {
+            throw new NotImplementedException();
+        }
 
         [UnityTest]
-        public IEnumerator State_Machine_switches_from_IdleState_to_MeleeAttackState_when_melee_attack_input_is_given()
+        public IEnumerator State_Machine_switches_from_IdleState_to_MeleeAttackState_when_melee_attack_input_is_given_while_in_GroundedState()
         {
             Vector3 playerStartingPos = new Vector3(0f, 0f, -1f);
             Quaternion playerDir = Quaternion.identity;
@@ -128,6 +140,12 @@ namespace Tests.Runtime
             yield return new WaitForSeconds(0.2f);
             
             Assert.That(playerStateMachine.CurrentSubState, Is.InstanceOf<PlayerMeleeAttackState>());
+        }
+        
+        [UnityTest]
+        public IEnumerator State_Machine_switches_from_IdleState_to_MeleeAttackState_when_melee_attack_input_is_given_while_in_JumpState()
+        {
+            throw new NotImplementedException();
         }
 
     }
