@@ -100,7 +100,20 @@ namespace Tests.Runtime
         [UnityTest]
         public IEnumerator State_Machine_switches_from_IdleState_to_MoveState_when_movement_input_is_given_while_in_JumpState()
         {
-            throw new NotImplementedException();
+            Vector3 playerStartingPos = new Vector3(0f, 0f, -1f);
+            Quaternion playerDir = Quaternion.identity;
+            GameObject player = Object.Instantiate(_playerPrefab, playerStartingPos, playerDir);
+            PlayerStateMachine playerStateMachine = player.GetComponent<PlayerBase>().StateMachine;
+            yield return null;
+
+            Press(_keyboard.spaceKey);
+            yield return new WaitForSeconds(0.1f);
+            Assert.That(playerStateMachine.CurrentBaseState, Is.InstanceOf<PlayerJumpState>());
+            Assert.That(playerStateMachine.CurrentSubState, Is.InstanceOf<PlayerIdleState>());
+            Press(_keyboard.dKey);
+            yield return new WaitForSeconds(0.3f);
+            
+            Assert.That(playerStateMachine.CurrentSubState, Is.InstanceOf<PlayerMoveState>());
         }
 
         [UnityTest]
