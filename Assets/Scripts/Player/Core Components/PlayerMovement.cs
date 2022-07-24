@@ -15,10 +15,10 @@ namespace Player.Core_Components
         [SerializeField] private Transform _groundCheck;
         [SerializeField] private LayerMask _groundLayer;
 
-        private bool _isJumping;
-        
         public float? LastGroundedTime { get; set; }
-        public bool IsFalling { get; set; }
+        public bool IsFalling { get; private set; }
+        public bool IsJumping { get; private set; }
+        public bool IsAtJumpPeak { get; private set; }
 
         public float CoyoteTime
         {
@@ -56,7 +56,7 @@ namespace Player.Core_Components
 
         private void HandleJumping()
         {
-            if (_isJumping)
+            if (IsJumping)
             {
                 CheckJumpEnd();
             }
@@ -79,7 +79,7 @@ namespace Player.Core_Components
 
             if (isCoyoteTime && isJumpBuffered)
             {
-                _isJumping = true;
+                IsJumping = true;
                 IsFalling = false;
                 
                 _rigidBody.velocity = new Vector2(CurrentVelocity.x, _jumpForce);
@@ -88,17 +88,23 @@ namespace Player.Core_Components
 
         public void JumpEnd()
         {
-            _isJumping = false;
+            IsJumping = false;
         }
 
         private void CheckJumpEnd()
         {
+            if (CurrentVelocity.y < 0f && IsAtJumpPeak == false && IsFalling == false)
+            {
+                IsAtJumpPeak = true;
+                StartFalling();
+                ResetJumpVariables();
+            }
+            
             bool jumpingButJumpReleased = CurrentVelocity.y > 0f
                                           && _playerController.IsJumpInputPressed == false 
                                           && IsFalling == false;
             if (jumpingButJumpReleased)
             {
-                IsFalling = true;
                 StartFalling();
                 ResetJumpVariables();
             }
@@ -113,6 +119,12 @@ namespace Player.Core_Components
 
         private void StartFalling()
         {
+            if (IsFalling)
+            {
+                return;
+            }
+
+            IsFalling = true;
             _rigidBody.velocity = new Vector2(CurrentVelocity.x, CurrentVelocity.y * 0.5f);;
         }
 
@@ -120,6 +132,7 @@ namespace Player.Core_Components
         {
             LastGroundedTime = null;
             _playerController.JumpInputPressedTime = null;
+            IsAtJumpPeak = false;
         }
 
         public void SetLastGroundedTime()

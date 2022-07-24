@@ -37,7 +37,6 @@ namespace Player.State_Machine.States
 
         protected override void ExitState()
         {
-            PlayerMovement.SetLastGroundedTime();
         }
 
         protected override void UpdateState()
@@ -68,7 +67,8 @@ namespace Player.State_Machine.States
             if (_playerMovement.IsGrounded() == false
                 || isJumpBuffered)
             {
-                SwitchState(Factory.Jump());
+                PlayerMovement.SetLastGroundedTime();
+                SwitchState(Factory.Airborne());
             }
         }
         

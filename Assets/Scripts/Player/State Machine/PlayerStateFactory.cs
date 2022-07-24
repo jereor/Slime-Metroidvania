@@ -28,9 +28,24 @@ namespace Player.State_Machine
             return new PlayerMeleeAttackState(_player, _context, this);
         }
 
+        public PlayerBaseState Airborne()
+        {
+            return new PlayerAirborneState(_player, _context, this);
+        }
+        
         public PlayerBaseState Jump()
         {
             return new PlayerJumpState(_player, _context, this);
+        }
+        
+        public PlayerBaseState JumpPeak()
+        {
+            return new PlayerJumpPeakState(_player, _context, this);
+        }
+        
+        public PlayerBaseState Fall()
+        {
+            return new PlayerFallState(_player, _context, this);
         }
 
         public PlayerBaseState Grounded()

@@ -67,7 +67,9 @@ namespace Player.State_Machine.States
     
         protected void SetSubState(PlayerBaseState newSubState)
         {
+            _currentSubState?.ExitState();
             _currentSubState = newSubState;
+            _currentSubState.EnterState();
             newSubState.SetSuperState(this);
         }
     }

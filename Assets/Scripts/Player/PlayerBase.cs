@@ -1,3 +1,4 @@
+using System;
 using GameFramework.ComponentSystem;
 using GameFramework.Loggers;
 using Player.Data;

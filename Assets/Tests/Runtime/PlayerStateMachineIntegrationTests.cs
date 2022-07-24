@@ -60,7 +60,7 @@ namespace Tests.Runtime
             Press(_keyboard.spaceKey);
             yield return new WaitForSeconds(0.3f);
             
-            Assert.That(playerStateMachine.CurrentBaseState, Is.InstanceOf<PlayerJumpState>());
+            Assert.That(playerStateMachine.CurrentBaseState, Is.InstanceOf<PlayerAirborneState>());
         }
 
         // TODO: Rework JumpState to work without needing to jump first
@@ -94,7 +94,7 @@ namespace Tests.Runtime
 
             Press(_keyboard.spaceKey);
             yield return new WaitForSeconds(0.1f);
-            Assert.That(playerStateMachine.CurrentBaseState, Is.InstanceOf<PlayerJumpState>());
+            Assert.That(playerStateMachine.CurrentBaseState, Is.InstanceOf<PlayerAirborneState>());
             Assert.That(playerStateMachine.CurrentSubState, Is.InstanceOf<PlayerIdleState>());
             yield return null;
             Press(_keyboard.dKey);
@@ -125,7 +125,7 @@ namespace Tests.Runtime
 
             Press(_keyboard.spaceKey);
             yield return new WaitForSeconds(0.1f);
-            Assert.That(playerStateMachine.CurrentBaseState, Is.InstanceOf<PlayerJumpState>());
+            Assert.That(playerStateMachine.CurrentBaseState, Is.InstanceOf<PlayerAirborneState>());
             Assert.That(playerStateMachine.CurrentSubState, Is.InstanceOf<PlayerIdleState>());
             Press(_mouse.rightButton);
             yield return new WaitForSeconds(0.2f);
@@ -157,7 +157,7 @@ namespace Tests.Runtime
             
             Press(_keyboard.spaceKey);
             yield return new WaitForSeconds(0.2f);
-            Assert.That(playerStateMachine.CurrentBaseState, Is.InstanceOf<PlayerJumpState>());
+            Assert.That(playerStateMachine.CurrentBaseState, Is.InstanceOf<PlayerAirborneState>());
             Press(_keyboard.dKey);
             yield return new WaitForSeconds(0.3f);
             Assert.That(playerStateMachine.CurrentSubState, Is.InstanceOf<PlayerMoveState>());
@@ -191,7 +191,7 @@ namespace Tests.Runtime
             
             Press(_keyboard.spaceKey);
             yield return new WaitForSeconds(0.2f);
-            Assert.That(playerStateMachine.CurrentBaseState, Is.InstanceOf<PlayerJumpState>());
+            Assert.That(playerStateMachine.CurrentBaseState, Is.InstanceOf<PlayerAirborneState>());
             Press(_keyboard.dKey);
             yield return new WaitForSeconds(0.2f);
             Assert.That(playerStateMachine.CurrentSubState, Is.InstanceOf<PlayerMoveState>());

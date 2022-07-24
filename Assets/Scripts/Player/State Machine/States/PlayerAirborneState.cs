@@ -2,21 +2,15 @@ using Player.Core_Components;
 
 namespace Player.State_Machine.States
 {
-    public sealed class PlayerJumpState : PlayerBaseState
+    public sealed class PlayerAirborneState : PlayerBaseState
     {
         private PlayerController _playerController;
-        private PlayerAnimations _playerAnimations;
         private PlayerMovement _playerMovement;
         private PlayerCombat _playerCombat;
 
         private PlayerController PlayerController
         {
             get { return _playerController ??= Core.GetCoreComponent<PlayerController>(); }
-        }
-        
-        private PlayerAnimations PlayerAnimations
-        {
-            get { return _playerAnimations ??= Core.GetCoreComponent<PlayerAnimations>(); }
         }
 
         private PlayerMovement PlayerMovement
@@ -29,7 +23,7 @@ namespace Player.State_Machine.States
             get { return _playerCombat ??= Core.GetCoreComponent<PlayerCombat>(); }
         }
         
-        public PlayerJumpState(PlayerBase player, PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory)
+        public PlayerAirborneState(PlayerBase player, PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory)
             : base(player, currentContext, playerStateFactory)
         {
             IsRootState = true;
@@ -39,16 +33,12 @@ namespace Player.State_Machine.States
         // ENTER STATE
         protected override void EnterState()
         {
-            PlayerAnimations.SetAnimatorBool(PlayerAnimations.IsAirborneHash, true);
-            PlayerMovement.JumpStart();
         }
 
 
         // EXIT STATE
         protected override void ExitState()
         {
-            PlayerAnimations.SetAnimatorBool(PlayerAnimations.IsAirborneHash, false);
-            PlayerMovement.JumpEnd();
         }
 
 
@@ -62,7 +52,15 @@ namespace Player.State_Machine.States
         // INITIALIZE SUB STATE
         protected override void InitializeSubState()
         {
-            if (PlayerCombat.IsMeleeAttacking)
+            if (PlayerController.IsJumpInputPressed)
+            {
+                SetSubState(Factory.Jump());
+            }
+            else if (PlayerMovement.IsFalling)
+            {
+                SetSubState(Factory.Fall());
+            }
+            else if (PlayerCombat.IsMeleeAttacking)
             {
                 SetSubState(Factory.MeleeAttack());
             }
