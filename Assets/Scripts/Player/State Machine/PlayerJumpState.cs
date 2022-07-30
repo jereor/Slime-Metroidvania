@@ -7,6 +7,7 @@ namespace Player.State_Machine.States
     {
         private PlayerAnimations _playerAnimations;
         private PlayerMovement _playerMovement;
+        private PlayerCombat _playerCombat;
         
         private PlayerAnimations PlayerAnimations
         {
@@ -16,6 +17,11 @@ namespace Player.State_Machine.States
         private PlayerMovement PlayerMovement
         {
             get { return _playerMovement ??= Core.GetCoreComponent<PlayerMovement>(); }
+        }
+        
+        private PlayerCombat PlayerCombat
+        {
+            get { return _playerCombat ??= Core.GetCoreComponent<PlayerCombat>(); }
         }
         
         public PlayerJumpState(PlayerBase player, PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory)
@@ -38,7 +44,6 @@ namespace Player.State_Machine.States
         protected override void ExitState()
         {
             PlayerAnimations.SetAnimatorBool(PlayerAnimations.IsJumpingHash, false);
-            PlayerMovement.JumpEnd();
         }
 
         protected override void CheckSwitchStates()
@@ -50,6 +55,10 @@ namespace Player.State_Machine.States
             else if (PlayerMovement.IsFalling)
             {
                 SwitchState(Factory.Fall());
+            }
+            else if (PlayerCombat.IsMeleeAttacking)
+            {
+                SwitchState(Factory.MeleeAttack());
             }
         }
 

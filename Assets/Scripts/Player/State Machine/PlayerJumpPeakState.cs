@@ -6,6 +6,7 @@ namespace Player.State_Machine.States
     {
         private PlayerAnimations _playerAnimations;
         private PlayerMovement _playerMovement;
+        private PlayerCombat _playerCombat;
         
         private PlayerAnimations PlayerAnimations
         {
@@ -15,6 +16,11 @@ namespace Player.State_Machine.States
         private PlayerMovement PlayerMovement
         {
             get { return _playerMovement ??= Core.GetCoreComponent<PlayerMovement>(); }
+        }
+        
+        private PlayerCombat PlayerCombat
+        {
+            get { return _playerCombat ??= Core.GetCoreComponent<PlayerCombat>(); }
         }
         
         public PlayerJumpPeakState(PlayerBase player, PlayerStateMachine currentContext, PlayerStateFactory playerStateFactory)
@@ -42,6 +48,10 @@ namespace Player.State_Machine.States
             if (PlayerMovement.IsFalling)
             {
                 SwitchState(Factory.Fall());
+            }
+            else if (PlayerCombat.IsMeleeAttacking)
+            {
+                SwitchState(Factory.MeleeAttack());
             }
         }
 

@@ -39,6 +39,7 @@ namespace Player.Core_Components
             
             HandleMovement();
             HandleJumping();
+            HandleFalling();
         }
 
         private void HandleMovement()
@@ -56,9 +57,30 @@ namespace Player.Core_Components
 
         private void HandleJumping()
         {
+            if (CurrentVelocity.y > 0f)
+            {
+                IsJumping = true;
+            }
+            else
+            {
+                IsJumping = false;
+            }
+            
             if (IsJumping)
             {
                 CheckJumpEnd();
+            }
+        }
+        
+        private void HandleFalling()
+        {
+            if (CurrentVelocity.y < 0f)
+            {
+                IsFalling = true;
+            }
+            else
+            {
+                IsFalling = false;
             }
         }
 
@@ -79,16 +101,8 @@ namespace Player.Core_Components
 
             if (isCoyoteTime && isJumpBuffered)
             {
-                IsJumping = true;
-                IsFalling = false;
-                
                 _rigidBody.velocity = new Vector2(CurrentVelocity.x, _jumpForce);
             }
-        }
-
-        public void JumpEnd()
-        {
-            IsJumping = false;
         }
 
         private void CheckJumpEnd()
@@ -112,20 +126,13 @@ namespace Player.Core_Components
             bool fallingAndHitGround = CurrentVelocity.y < 0f && IsGrounded();
             if (fallingAndHitGround)
             {
-                IsFalling = true;
                 ResetJumpVariables();
             }
         }
 
         private void StartFalling()
         {
-            if (IsFalling)
-            {
-                return;
-            }
-
-            IsFalling = true;
-            _rigidBody.velocity = new Vector2(CurrentVelocity.x, CurrentVelocity.y * 0.5f);;
+            _rigidBody.velocity = new Vector2(CurrentVelocity.x, CurrentVelocity.y * 0.5f);
         }
 
         private void ResetJumpVariables()
