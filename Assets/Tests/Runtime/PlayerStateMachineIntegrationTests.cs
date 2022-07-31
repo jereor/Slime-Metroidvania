@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using NUnit.Framework;
 using Player;
@@ -19,6 +18,8 @@ namespace Tests.Runtime
         protected Keyboard _keyboard;
         protected GameObject _playerPrefab;
         
+        private const string PLAYER_PREFAB_PATH = "Assets/Prefabs/Player.prefab";
+        private const string PLATFORM_PREFAB_PATH = "Assets/Prefabs/Platform.prefab";
         private static readonly Vector3 DefaultStartingPosition = new Vector3(0f, 0f, -1f);
         
         [SetUp]
@@ -29,7 +30,7 @@ namespace Tests.Runtime
             _mouse = InputSystem.AddDevice<Mouse>();
             _keyboard = InputSystem.AddDevice<Keyboard>();
 
-            _playerPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Player.prefab");
+            _playerPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(PLAYER_PREFAB_PATH);
             SceneManager.LoadScene("Scenes/TestSandbox");
         }
 
@@ -42,7 +43,7 @@ namespace Tests.Runtime
         }
 
         // --- BASE STATES ---
-        #region BaseStateTransitions
+        #region Base State Transitions
         
         [UnityTest]
         public IEnumerator State_Machine_starts_in_given_default_base_state()
@@ -83,7 +84,7 @@ namespace Tests.Runtime
         #endregion
 
         // --- GROUNDED TRANSITIONS ---
-        #region GroundedTransitions
+        #region Grounded Transitions
         
         [UnityTest]
         public IEnumerator State_Machine_switches_from_IdleState_to_MoveState_when_movement_input_is_given_while_in_GroundedState()
@@ -127,6 +128,22 @@ namespace Tests.Runtime
             Assert.That(playerStateMachine.CurrentSubState, Is.InstanceOf<PlayerMeleeAttackState>());
         }
 
+        [UnityTest]
+        public IEnumerator State_Machine_switches_from_IdleState_to_FallState_when_player_starts_falling_while_in_GroundedState()
+        {
+            Vector3 startingPosition = new Vector3(0f, 5f, -1f);
+            Vector3 platformPosition = new Vector3(0f, 4f, -1f);
+            PlayerStateMachine playerStateMachine = InstantiatePlayer(startingPosition).GetComponent<PlayerBase>().StateMachine;
+            GameObject platform = Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>(PLATFORM_PREFAB_PATH), platformPosition, Quaternion.identity);
+            yield return new WaitForSeconds(0.4f);
+
+            Assert.That(playerStateMachine.CurrentBaseState, Is.InstanceOf<PlayerGroundedState>());
+            Assert.That(playerStateMachine.CurrentSubState, Is.InstanceOf<PlayerIdleState>());
+            Object.Destroy(platform);
+            yield return new WaitForSeconds(0.2f);
+
+            Assert.That(playerStateMachine.CurrentSubState, Is.InstanceOf<PlayerFallState>());
+        }
 
         [UnityTest]
         public IEnumerator State_Machine_switches_from_MoveState_to_IdleState_when_movement_input_stops_while_in_GroundedState()
@@ -163,7 +180,7 @@ namespace Tests.Runtime
         #endregion
 
         // --- AIRBORNE TRANSITIONS ---
-        #region AirborneTransitions
+        #region Airborne Transitions
         
         [UnityTest]
         public IEnumerator State_Machine_switches_from_JumpState_to_MeleeAttackState_when_melee_attack_input_is_given_while_in_AirborneState()
