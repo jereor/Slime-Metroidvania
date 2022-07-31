@@ -41,6 +41,9 @@ namespace Tests.Runtime
             return player;
         }
 
+        // --- BASE STATES ---
+        #region BaseStateTransitions
+        
         [UnityTest]
         public IEnumerator State_Machine_starts_in_given_default_base_state()
         {
@@ -77,7 +80,11 @@ namespace Tests.Runtime
 
             Assert.That(playerStateMachine.CurrentBaseState, Is.InstanceOf<PlayerGroundedState>());
         }
+        #endregion
 
+        // --- GROUNDED TRANSITIONS ---
+        #region GroundedTransitions
+        
         [UnityTest]
         public IEnumerator State_Machine_switches_from_IdleState_to_MoveState_when_movement_input_is_given_while_in_GroundedState()
         {
@@ -153,7 +160,11 @@ namespace Tests.Runtime
 
             Assert.That(playerStateMachine.CurrentSubState, Is.InstanceOf<PlayerMeleeAttackState>());
         }
+        #endregion
 
+        // --- AIRBORNE TRANSITIONS ---
+        #region AirborneTransitions
+        
         [UnityTest]
         public IEnumerator State_Machine_switches_from_JumpState_to_MeleeAttackState_when_melee_attack_input_is_given_while_in_AirborneState()
         {
@@ -185,6 +196,7 @@ namespace Tests.Runtime
             Assert.That(playerStateMachine.CurrentSubState, Is.InstanceOf<PlayerMeleeAttackState>());
         }
 
-
+        #endregion
+        
     }
 }
