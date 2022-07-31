@@ -177,6 +177,23 @@ namespace Tests.Runtime
 
             Assert.That(playerStateMachine.CurrentSubState, Is.InstanceOf<PlayerMeleeAttackState>());
         }
+
+        [UnityTest]
+        public IEnumerator State_Machine_switches_from_MoveState_to_JumpState_when_jump_input_is_given_while_in_GroundedState()
+        {
+            PlayerStateMachine playerStateMachine = InstantiatePlayer(DefaultStartingPosition).GetComponent<PlayerBase>().StateMachine;
+            yield return null;
+
+            Press(_keyboard.dKey);
+            yield return new WaitForSeconds(0.2f);
+            Assert.That(playerStateMachine.CurrentBaseState, Is.InstanceOf<PlayerGroundedState>());
+            Assert.That(playerStateMachine.CurrentSubState, Is.InstanceOf<PlayerMoveState>());
+            Press(_keyboard.spaceKey);
+            yield return new WaitForSeconds(0.2f);
+
+            Assert.That(playerStateMachine.CurrentSubState, Is.InstanceOf<PlayerJumpState>());
+        }
+            
         #endregion
 
         // --- AIRBORNE TRANSITIONS ---
