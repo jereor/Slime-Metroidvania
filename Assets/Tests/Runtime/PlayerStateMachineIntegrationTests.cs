@@ -193,7 +193,26 @@ namespace Tests.Runtime
 
             Assert.That(playerStateMachine.CurrentSubState, Is.InstanceOf<PlayerJumpState>());
         }
-            
+
+        [UnityTest]
+        public IEnumerator State_Machine_switches_from_MoveState_to_FallState_when_player_starts_falling_while_in_GroundedState()
+        {
+            Vector3 startingPosition = new Vector3(0f, 5f, -1f);
+            Vector3 platformPosition = new Vector3(0f, 4f, -1f);
+            PlayerStateMachine playerStateMachine = InstantiatePlayer(startingPosition).GetComponent<PlayerBase>().StateMachine;
+            GameObject platform = Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>(PLATFORM_PREFAB_PATH), platformPosition, Quaternion.identity);
+            yield return null;
+
+            Press(_keyboard.dKey);
+            yield return new WaitForSeconds(0.1f);
+            Assert.That(playerStateMachine.CurrentBaseState, Is.InstanceOf<PlayerGroundedState>());
+            Assert.That(playerStateMachine.CurrentSubState, Is.InstanceOf<PlayerMoveState>());
+            Object.Destroy(platform);
+            yield return new WaitForSeconds(0.3f);
+
+            Assert.That(playerStateMachine.CurrentSubState, Is.InstanceOf<PlayerFallState>());
+        }
+        
         #endregion
 
         // --- AIRBORNE TRANSITIONS ---
