@@ -5,11 +5,17 @@ namespace Player.State_Machine.States
     public class PlayerIdleState : PlayerBaseState
     {
         private PlayerController _playerController;
+        private PlayerMovement _playerMovement;
         private PlayerCombat _playerCombat;
 
         private PlayerController PlayerController
         {
             get { return _playerController ??= Core.GetCoreComponent<PlayerController>(); }
+        }
+        
+        private PlayerMovement PlayerMovement
+        {
+            get { return _playerMovement ??= Core.GetCoreComponent<PlayerMovement>(); }
         }
         
         private PlayerCombat PlayerCombat
@@ -48,6 +54,14 @@ namespace Player.State_Machine.States
             else if (PlayerController.IsMovementInputPressed)
             {
                 SwitchState(Factory.Move());
+            }
+            else if (PlayerMovement.IsJumping)
+            {
+                SwitchState(Factory.Jump());
+            }
+            else if (PlayerMovement.IsFalling)
+            {
+                SwitchState(Factory.Fall());
             }
         }
     }

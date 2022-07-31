@@ -39,6 +39,7 @@ namespace Player.Core_Components
             
             HandleMovement();
             HandleJumping();
+            HandleJumpPeak();
             HandleFalling();
         }
 
@@ -71,10 +72,23 @@ namespace Player.Core_Components
                 CheckJumpEnd();
             }
         }
+
+        private void HandleJumpPeak()
+        {
+            if (CurrentVelocity.y < 0f && IsAtJumpPeak == false && IsFalling == false)
+            {
+                IsAtJumpPeak = true;
+                StartFalling();
+            }
+            else
+            {
+                IsAtJumpPeak = false;
+            }
+        }
         
         private void HandleFalling()
         {
-            if (CurrentVelocity.y < 0f)
+            if (CurrentVelocity.y < 0f && IsAtJumpPeak == false)
             {
                 IsFalling = true;
             }
@@ -107,13 +121,6 @@ namespace Player.Core_Components
 
         private void CheckJumpEnd()
         {
-            if (CurrentVelocity.y < 0f && IsAtJumpPeak == false && IsFalling == false)
-            {
-                IsAtJumpPeak = true;
-                StartFalling();
-                ResetJumpVariables();
-            }
-            
             bool jumpingButJumpReleased = CurrentVelocity.y > 0f
                                           && _playerController.IsJumpInputPressed == false 
                                           && IsFalling == false;

@@ -152,11 +152,11 @@ namespace Tests.Runtime
             yield return null;
 
             Press(_keyboard.dKey);
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(0.4f);
             Assert.That(playerStateMachine.CurrentBaseState, Is.InstanceOf<PlayerGroundedState>());
             Assert.That(playerStateMachine.CurrentSubState, Is.InstanceOf<PlayerMoveState>());
             Release(_keyboard.dKey);
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(0.2f);
 
             Assert.That(playerStateMachine.CurrentSubState, Is.InstanceOf<PlayerIdleState>());
         }
@@ -169,7 +169,7 @@ namespace Tests.Runtime
             yield return null;
 
             Press(_keyboard.dKey);
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.4f);
             Assert.That(playerStateMachine.CurrentBaseState, Is.InstanceOf<PlayerGroundedState>());
             Assert.That(playerStateMachine.CurrentSubState, Is.InstanceOf<PlayerMoveState>());
             Press(_mouse.rightButton);
@@ -185,7 +185,7 @@ namespace Tests.Runtime
             yield return null;
 
             Press(_keyboard.dKey);
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.4f);
             Assert.That(playerStateMachine.CurrentBaseState, Is.InstanceOf<PlayerGroundedState>());
             Assert.That(playerStateMachine.CurrentSubState, Is.InstanceOf<PlayerMoveState>());
             Press(_keyboard.spaceKey);
@@ -217,6 +217,21 @@ namespace Tests.Runtime
 
         // --- AIRBORNE TRANSITIONS ---
         #region Airborne Transitions
+
+        [UnityTest]
+        public IEnumerator State_Machine_switches_from_JumpState_to_JumpPeakState_when_jump_hits_its_peak_while_in_AirborneState()
+        {
+            PlayerStateMachine playerStateMachine = InstantiatePlayer(DefaultStartingPosition).GetComponent<PlayerBase>().StateMachine;
+            yield return null;
+
+            Press(_keyboard.spaceKey);
+            yield return new WaitForSeconds(0.1f);
+            Assert.That(playerStateMachine.CurrentBaseState, Is.InstanceOf<PlayerAirborneState>());
+            Assert.That(playerStateMachine.CurrentSubState, Is.InstanceOf<PlayerJumpState>());
+            yield return new WaitWhile(() => playerStateMachine.CurrentSubState.GetType() == typeof(PlayerJumpState));
+            
+            Assert.That(playerStateMachine.CurrentSubState, Is.InstanceOf<PlayerJumpPeakState>());
+        }
         
         [UnityTest]
         public IEnumerator State_Machine_switches_from_JumpState_to_MeleeAttackState_when_melee_attack_input_is_given_while_in_AirborneState()
@@ -225,7 +240,7 @@ namespace Tests.Runtime
             yield return null;
 
             Press(_keyboard.spaceKey);
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.2f);
             Assert.That(playerStateMachine.CurrentBaseState, Is.InstanceOf<PlayerAirborneState>());
             Assert.That(playerStateMachine.CurrentSubState, Is.InstanceOf<PlayerJumpState>());
             Press(_mouse.rightButton);
@@ -237,9 +252,9 @@ namespace Tests.Runtime
         [UnityTest]
         public IEnumerator State_Machine_switches_from_FallState_to_MeleeAttackState_when_melee_attack_input_is_given_while_in_AirborneState()
         {
-            Vector3 startingPosition = new Vector3(0f, 2f, -1f);
+            Vector3 startingPosition = new Vector3(0f, 5f, -1f);
             PlayerStateMachine playerStateMachine = InstantiatePlayer(startingPosition).GetComponent<PlayerBase>().StateMachine;
-            yield return null;
+            yield return new WaitForSeconds(0.1f);
 
             Assert.That(playerStateMachine.CurrentBaseState, Is.InstanceOf<PlayerAirborneState>());
             Assert.That(playerStateMachine.CurrentSubState, Is.InstanceOf<PlayerFallState>());

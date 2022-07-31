@@ -6,6 +6,7 @@ namespace Player.State_Machine.States
     {
         private PlayerController _playerController;
         private PlayerAnimations _playerAnimations;
+        private PlayerMovement _playerMovement;
         private PlayerCombat _playerCombat;
         
         private PlayerController PlayerController
@@ -16,6 +17,11 @@ namespace Player.State_Machine.States
         private PlayerAnimations PlayerAnimations
         {
             get { return _playerAnimations ??= Core.GetCoreComponent<PlayerAnimations>(); }
+        }
+        
+        private PlayerMovement PlayerMovement
+        {
+            get { return _playerMovement ??= Core.GetCoreComponent<PlayerMovement>(); }
         }
         
         private PlayerCombat PlayerCombat
@@ -56,6 +62,14 @@ namespace Player.State_Machine.States
             else if (PlayerController.IsMovementInputPressed == false)
             {
                 SwitchState(Factory.Idle());
+            }
+            else if (PlayerMovement.IsJumping)
+            {
+                SwitchState(Factory.Jump());
+            }
+            else if (PlayerMovement.IsFalling)
+            {
+                SwitchState(Factory.Fall());
             }
         }
     }

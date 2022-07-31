@@ -51,7 +51,11 @@ namespace Player.State_Machine.States
 
         protected override void CheckSwitchStates()
         {
-            if (PlayerMovement.IsGrounded())
+            if (PlayerCombat.IsMeleeAttacking)
+            {
+                SwitchState(Factory.MeleeAttack());
+            }
+            else if (PlayerMovement.IsGrounded())
             {
                 if (PlayerController.IsMovementInputPressed)
                 {
@@ -61,10 +65,6 @@ namespace Player.State_Machine.States
                 {
                     SwitchState(Factory.Idle());   
                 }
-            }
-            else if (PlayerCombat.IsMeleeAttacking)
-            {
-                SwitchState(Factory.MeleeAttack());
             }
         }
 
