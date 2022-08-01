@@ -264,6 +264,21 @@ namespace Tests.Runtime
         }
         
         [UnityTest]
+        public IEnumerator State_Machine_switches_from_FallState_to_MoveState_when_player_touches_ground_while_in_AirborneState()
+        {
+            Vector3 startingPosition = new Vector3(0f, 5f, -1f);
+            PlayerStateMachine playerStateMachine = InstantiatePlayer(startingPosition).GetComponent<PlayerBase>().StateMachine;
+            yield return new WaitForSeconds(0.1f);
+
+            Press(_keyboard.dKey);
+            Assert.That(playerStateMachine.CurrentBaseState, Is.InstanceOf<PlayerAirborneState>());
+            Assert.That(playerStateMachine.CurrentSubState, Is.InstanceOf<PlayerFallState>());
+            yield return new WaitForSeconds(1f);
+
+            Assert.That(playerStateMachine.CurrentSubState, Is.InstanceOf<PlayerMoveState>());
+        }
+        
+        [UnityTest]
         public IEnumerator State_Machine_switches_from_FallState_to_MeleeAttackState_when_melee_attack_input_is_given_while_in_AirborneState()
         {
             Vector3 startingPosition = new Vector3(0f, 5f, -1f);
