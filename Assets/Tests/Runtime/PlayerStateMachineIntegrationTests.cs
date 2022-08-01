@@ -272,12 +272,29 @@ namespace Tests.Runtime
 
             Press(_keyboard.spaceKey);
             yield return new WaitForSeconds(0.1f);
-            Assert.That(playerStateMachine.CurrentBaseState, Is.InstanceOf<PlayerAirborneState>());
-            Assert.That(playerStateMachine.CurrentSubState, Is.InstanceOf<PlayerJumpState>());
             yield return new WaitWhile(() => playerStateMachine.CurrentSubState.GetType() == typeof(PlayerJumpState));
+            Assert.That(playerStateMachine.CurrentBaseState, Is.InstanceOf<PlayerAirborneState>());
+            Assert.That(playerStateMachine.CurrentSubState, Is.InstanceOf<PlayerJumpPeakState>());
             yield return new WaitWhile(() => playerStateMachine.CurrentSubState.GetType() == typeof(PlayerJumpPeakState));
             
             Assert.That(playerStateMachine.CurrentSubState, Is.InstanceOf<PlayerFallState>());
+        }
+        
+        [UnityTest]
+        public IEnumerator State_Machine_switches_from_JumpPeakState_to_MeleeAttackState_when_melee_attack_input_is_given_while_in_AirborneState()
+        {
+            PlayerStateMachine playerStateMachine = InstantiatePlayer(DefaultStartingPosition).GetComponent<PlayerBase>().StateMachine;
+            yield return null;
+
+            Press(_keyboard.spaceKey);
+            yield return new WaitForSeconds(0.1f);
+            yield return new WaitWhile(() => playerStateMachine.CurrentSubState.GetType() == typeof(PlayerJumpState));
+            Assert.That(playerStateMachine.CurrentBaseState, Is.InstanceOf<PlayerAirborneState>());
+            Assert.That(playerStateMachine.CurrentSubState, Is.InstanceOf<PlayerJumpPeakState>());
+            Press(_mouse.rightButton);
+            yield return new WaitForSeconds(0.2f);
+
+            Assert.That(playerStateMachine.CurrentSubState, Is.InstanceOf<PlayerMeleeAttackState>());
         }
         
         #endregion
