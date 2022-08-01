@@ -264,6 +264,22 @@ namespace Tests.Runtime
             Assert.That(playerStateMachine.CurrentSubState, Is.InstanceOf<PlayerMeleeAttackState>());
         }
 
+        [UnityTest]
+        public IEnumerator State_Machine_switches_from_JumpPeakState_to_FallState_when_player_starts_falling_while_in_AirborneState()
+        {
+            PlayerStateMachine playerStateMachine = InstantiatePlayer(DefaultStartingPosition).GetComponent<PlayerBase>().StateMachine;
+            yield return null;
+
+            Press(_keyboard.spaceKey);
+            yield return new WaitForSeconds(0.1f);
+            Assert.That(playerStateMachine.CurrentBaseState, Is.InstanceOf<PlayerAirborneState>());
+            Assert.That(playerStateMachine.CurrentSubState, Is.InstanceOf<PlayerJumpState>());
+            yield return new WaitWhile(() => playerStateMachine.CurrentSubState.GetType() == typeof(PlayerJumpState));
+            yield return new WaitWhile(() => playerStateMachine.CurrentSubState.GetType() == typeof(PlayerJumpPeakState));
+            
+            Assert.That(playerStateMachine.CurrentSubState, Is.InstanceOf<PlayerFallState>());
+        }
+        
         #endregion
         
     }
