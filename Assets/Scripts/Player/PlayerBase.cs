@@ -10,25 +10,11 @@ namespace Player
     public class PlayerBase : MonoBehaviour
     {
         [SerializeField] private Core _core;
-        
-        // TODO: Remove these duplicated fields (found in PlayerCombat already)
-        [SerializeField] private Transform _meleeAttackHitBox;
-        [SerializeField] private D_PlayerMeleeAttack _playerMeleeAttackData;
 
         // Field accessors
         public Core Core
         {
             get { return _core; }
-        }
-
-        public Transform MeleeAttackHitBox
-        {
-            get { return _meleeAttackHitBox; }
-        }
-
-        public D_PlayerMeleeAttack PlayerMeleeAttackData
-        {
-            get { return _playerMeleeAttackData; }
         }
         
         public PlayerStateMachine StateMachine { get; private set; }

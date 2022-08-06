@@ -7,6 +7,13 @@ namespace Player.Core_Components
     {
         [SerializeField] private PlayerBase _playerBase;
         
+        private PlayerCombat _playerCombat;
+        
+        private PlayerCombat PlayerCombat
+        {
+            get { return _playerCombat ??= _playerBase.Core.GetCoreComponent<PlayerCombat>(); }
+        }
+        
         public override void OnDrawGizmos()
         {
             DrawPlayerCombatGizmos();
@@ -14,8 +21,8 @@ namespace Player.Core_Components
 
         private void DrawPlayerCombatGizmos()
         {
-            Vector3 attackPosition = _playerBase.MeleeAttackHitBox.position;
-            Gizmos.DrawWireSphere(attackPosition, _playerBase.PlayerMeleeAttackData._attackRadius);
+            Vector3 attackPosition = PlayerCombat.MeleeAttackHitBox.position;
+            Gizmos.DrawWireSphere(attackPosition, PlayerCombat.MeleeAttackData._attackRadius);
         }
         
     }

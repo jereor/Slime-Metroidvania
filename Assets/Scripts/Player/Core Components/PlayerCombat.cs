@@ -14,6 +14,22 @@ namespace Player.Core_Components
         
         public bool IsMeleeAttacking { get; private set; }
 
+        public Transform MeleeAttackHitBox
+        {
+            get
+            {
+                return _meleeAttackHitBox;
+            }
+        }
+        
+        public D_PlayerMeleeAttack MeleeAttackData
+        {
+            get
+            {
+                return _playerMeleeAttackData;
+            }
+        }
+
         public void MeleeAttack()
         {
             IsMeleeAttacking = true;
