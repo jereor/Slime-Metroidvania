@@ -213,6 +213,7 @@ MonoBehaviour:
   _lookForPlayerStateData: {fileID: 11400000, guid: d62dc385785c529458324a1fb9e403dc, type: 2}
   _meleeAttackStateData: {fileID: 11400000, guid: 6d9c47cb1da062544acbcbce24280965, type: 2}
   _stunStateData: {fileID: 11400000, guid: 06cce669b76ceeb45a2e1ebf043945ac, type: 2}
+  _deadStateData: {fileID: 11400000, guid: 3efbe40c79c336a4d9370211c8f53956, type: 2}
   _meleeAttackPosition: {fileID: 1828182203}
 --- !u!50 &5537378771929114168
 Rigidbody2D:
