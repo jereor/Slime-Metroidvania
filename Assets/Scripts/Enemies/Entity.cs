@@ -161,8 +161,6 @@ namespace Enemies
 
             DamageHop(_entityData._damageHopSpeed);
 
-            Instantiate(_entityData._hitParticles, transform.position, Quaternion.Euler(0f, 0f, Random.Range(0, 360f)));
-
             bool attackFromRight = attackDetails.Position.x > transform.position.x;
             LastDamageDirection = attackFromRight ? -1 : 1;
 

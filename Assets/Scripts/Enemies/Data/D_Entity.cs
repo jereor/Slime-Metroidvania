@@ -21,8 +21,6 @@ namespace Enemies.Data
         public float _stunRecoveryTime = 2f;
 
         public float _closeRangeActionDistance = 1f;
-
-        public GameObject _hitParticles;
         
         public LayerMask _groundLayer = PhysicsConstants.GROUND_LAYER_NUMBER;
         public LayerMask _playerLayer = PhysicsConstants.PLAYER_LAYER_NUMBER;

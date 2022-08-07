@@ -14,6 +14,7 @@ namespace Enemies.Worm
         public WormChargeState ChargeState { get; private set; }
         public WormLookForPlayerState LookForPlayerState { get; private set; }
         public WormMeleeAttackState MeleeAttackState { get; private set; }
+        public WormDamageState DamageState { get; private set; }
         public WormStunState StunState { get; private set; }
         public WormDeadState DeadState { get; private set; }
 
@@ -56,6 +57,8 @@ namespace Enemies.Worm
                 new WormMeleeAttackState(this, StateMachine, AnimatorConstants.IS_MELEE_ATTACKING,
                     _meleeAttackPosition, _meleeAttackStateData);
 
+            DamageState = new WormDamageState(this, StateMachine, AnimatorConstants.IS_DAMAGED);
+            
             StunState = 
                 new WormStunState(this, StateMachine, AnimatorConstants.IS_STUNNED, 
                     _stunStateData);
@@ -68,7 +71,9 @@ namespace Enemies.Worm
         public override void Damage(AttackDetails attackDetails)
         {
             base.Damage(attackDetails);
-
+            
+            StateMachine.ChangeState(DamageState);
+            
             if (IsDead)
             {
                 StateMachine.ChangeState(DeadState);

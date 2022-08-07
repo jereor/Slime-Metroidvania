@@ -215,6 +215,7 @@ MonoBehaviour:
   _stunStateData: {fileID: 11400000, guid: 06cce669b76ceeb45a2e1ebf043945ac, type: 2}
   _deadStateData: {fileID: 11400000, guid: 3efbe40c79c336a4d9370211c8f53956, type: 2}
   _meleeAttackPosition: {fileID: 1828182203}
+  _bloodAnimation: {fileID: 0}
 --- !u!50 &5537378771929114168
 Rigidbody2D:
   serializedVersion: 4

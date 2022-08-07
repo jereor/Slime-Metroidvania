@@ -31,7 +31,6 @@ namespace Player.State_Machine.States
 
         protected override void EnterState()
         {
-            Debug.Log(this);
             PlayerAnimations.SetAnimatorBool(PlayerAnimations.IsJumpingHash, true);
             PlayerMovement.JumpStart();
         }

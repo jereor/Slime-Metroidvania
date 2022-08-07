@@ -4731,10 +4731,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1903578458}
     m_Modifications:
-    - target: {fileID: 5368510681977149582, guid: e32cd7f6c4e981c488cae4ad71c35c56, type: 3}
-      propertyPath: _deadStateData
+    - target: {fileID: 1509255886, guid: e32cd7f6c4e981c488cae4ad71c35c56, type: 3}
+      propertyPath: m_Animation
       value: 
-      objectReference: {fileID: 11400000, guid: 3efbe40c79c336a4d9370211c8f53956, type: 2}
+      objectReference: {fileID: 0}
+    - target: {fileID: 1509255886, guid: e32cd7f6c4e981c488cae4ad71c35c56, type: 3}
+      propertyPath: m_PlayAutomatically
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1509255886, guid: e32cd7f6c4e981c488cae4ad71c35c56, type: 3}
+      propertyPath: m_Animations.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1509255886, guid: e32cd7f6c4e981c488cae4ad71c35c56, type: 3}
+      propertyPath: m_Animations.Array.data[0]
+      value: 
+      objectReference: {fileID: 7400000, guid: 4e5c1a8456939ab49af5eed6d306c08b, type: 2}
+    - target: {fileID: 1509255887, guid: e32cd7f6c4e981c488cae4ad71c35c56, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1509255887, guid: e32cd7f6c4e981c488cae4ad71c35c56, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5368510681977149582, guid: e32cd7f6c4e981c488cae4ad71c35c56, type: 3}
+      propertyPath: _bloodAnimation
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8027880798065282584, guid: e32cd7f6c4e981c488cae4ad71c35c56, type: 3}
       propertyPath: m_RootOrder
       value: 1
