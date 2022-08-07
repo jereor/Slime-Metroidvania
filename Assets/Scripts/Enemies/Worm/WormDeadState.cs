@@ -1,5 +1,6 @@
 using Enemies.States;
 using Enemies.States.Data;
+using UnityEngine;
 
 namespace Enemies.Worm
 {
@@ -15,6 +16,12 @@ namespace Enemies.Worm
         public override void Enter()
         {
             base.Enter();
+
+            Vector3 entityPosition = _worm.transform.position;
+            Object.Instantiate(StateData._deathBloodParticles, entityPosition,
+                StateData._deathBloodParticles.transform.rotation);
+            Object.Instantiate(StateData._deathChunkParticles, entityPosition,
+                StateData._deathChunkParticles.transform.rotation);
         }
 
         public override void Exit()

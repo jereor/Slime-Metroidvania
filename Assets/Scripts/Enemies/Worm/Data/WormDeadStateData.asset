@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95963a5970ce6a24b8f43b2ec5015049, type: 3}
   m_Name: WormDeadStateData
   m_EditorClassIdentifier: 
-  _deathChunkParticles: {fileID: 1153435723755021374, guid: dcbf547fdff95c0419c1726e8d37f835, type: 3}
-  _deathBloodParticles: {fileID: 1153435723755021374, guid: 70100473b1ff54340b72a7eba00205cb, type: 3}
+  _deathChunkParticles: {fileID: 5096148057906189823, guid: dcbf547fdff95c0419c1726e8d37f835, type: 3}
+  _deathBloodParticles: {fileID: 5096148057906189823, guid: 70100473b1ff54340b72a7eba00205cb, type: 3}
