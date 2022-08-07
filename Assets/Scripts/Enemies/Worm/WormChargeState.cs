@@ -35,17 +35,6 @@ namespace Enemies.Worm
             {
                 StateMachine.ChangeState(_worm.LookForPlayerState);
             }
-            else if (IsChargeTimeOver)
-            {
-                if (IsPlayerInMinAggroRange)
-                {
-                    StateMachine.ChangeState(_worm.PlayerDetectedState);
-                }
-                else
-                {
-                    StateMachine.ChangeState(_worm.LookForPlayerState);
-                }
-            }
         }
 
         public override void PhysicsUpdate()

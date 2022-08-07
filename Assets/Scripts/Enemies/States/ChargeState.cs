@@ -10,7 +10,6 @@ namespace Enemies.States
         protected bool IsPlayerInMinAggroRange;
         protected bool IsDetectingLedge;
         protected bool IsDetectingWall;
-        protected bool IsChargeTimeOver;
         protected bool CanPerformCloseRangeAction;
         
         protected ChargeState(Entity entity, FiniteStateMachine stateMachine, string animatorBoolName, D_ChargeState stateData) : base(entity, stateMachine, animatorBoolName)
@@ -22,7 +21,6 @@ namespace Enemies.States
         {
             base.Enter();
 
-            IsChargeTimeOver = false;
             Entity.SetVelocity(StateData._chargeSpeed);
         }
 
@@ -34,11 +32,6 @@ namespace Enemies.States
         public override void LogicUpdate()
         {
             base.LogicUpdate();
-
-            if (Time.time >= StartTime + StateData._chargeTime)
-            {
-                IsChargeTimeOver = true;
-            }
         }
 
         public override void PhysicsUpdate()
