@@ -8,12 +8,15 @@ namespace Player.Core_Components
     {
         [Header("Player Health references")]
         [SerializeField] private PlayerMovement _playerMovement;
+
+        [SerializeField] private PlayerCamera _playerCamera;
         
         public override void Damage(AttackDetails attackDetails)
         {
             base.Damage(attackDetails);
 
             _playerMovement.DamageKnockback(LastDamageDirection);
+            _playerCamera.CameraShake(2, .2f);
         }
     }
 }
