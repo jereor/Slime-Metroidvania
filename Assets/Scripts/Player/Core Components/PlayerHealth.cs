@@ -8,8 +8,8 @@ namespace Player.Core_Components
     {
         [Header("Player Health references")]
         [SerializeField] private PlayerMovement _playerMovement;
-
         [SerializeField] private PlayerCamera _playerCamera;
+        [SerializeField] private GameObject _bloodParticles;
         
         public override void Damage(AttackDetails attackDetails)
         {
@@ -17,6 +17,7 @@ namespace Player.Core_Components
 
             _playerMovement.DamageKnockback(LastDamageDirection);
             _playerCamera.CameraShake(2, .2f);
+            Instantiate(_bloodParticles, transform.position, Quaternion.identity);
         }
     }
 }

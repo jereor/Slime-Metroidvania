@@ -1022,7 +1022,7 @@ MonoBehaviour:
   m_Follow: {fileID: 1912269936}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 6
+    OrthographicSize: 6.5
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -1153,7 +1153,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 6
+  orthographic size: 6.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1177,7 +1177,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.0000048, y: 0.99999976, z: -10}
+  m_LocalPosition: {x: 1.0000019, y: 1.4999998, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1591353737}
@@ -4712,6 +4712,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 501372998}
     - target: {fileID: 2098669480446400971, guid: d25a3b3e805dd8147918d86bf521de20, type: 3}
+      propertyPath: _bloodParticles
+      value: 
+      objectReference: {fileID: 1153435723755021374, guid: eac5f9992714a0546bf3afdcafd006ce, type: 3}
+    - target: {fileID: 2098669480446400971, guid: d25a3b3e805dd8147918d86bf521de20, type: 3}
       propertyPath: _playerMovement
       value: 
       objectReference: {fileID: 1281162898}
@@ -4758,6 +4762,18 @@ PrefabInstance:
     - target: {fileID: 2098669480446400972, guid: d25a3b3e805dd8147918d86bf521de20, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2098669480446400974, guid: d25a3b3e805dd8147918d86bf521de20, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2098669480446400974, guid: d25a3b3e805dd8147918d86bf521de20, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2098669480446400974, guid: d25a3b3e805dd8147918d86bf521de20, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2098669480446400979, guid: d25a3b3e805dd8147918d86bf521de20, type: 3}
       propertyPath: m_Name
