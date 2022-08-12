@@ -9,16 +9,20 @@ namespace Player.Core_Components
         [SerializeField] private float _coyoteTime;
         [SerializeField] private float _jumpForce;
         [SerializeField] private float _groundCheckRadius;
+        [SerializeField] private float _knockbackSpeed;
         
         [Header("Dependencies")]
         [SerializeField] private PlayerController _playerController;
         [SerializeField] private Transform _groundCheck;
         [SerializeField] private LayerMask _groundLayer;
+        
+        private Vector2 _velocityWorkspace;
 
         public float? LastGroundedTime { get; set; }
         public bool IsFalling { get; private set; }
         public bool IsJumping { get; private set; }
         public bool IsAtJumpPeak { get; private set; }
+        public bool IsKnockedBack { get; private set; }
 
         public float CoyoteTime
         {
@@ -36,18 +40,34 @@ namespace Player.Core_Components
         public override void LogicUpdate()
         {
             base.LogicUpdate();
-            
-            HandleMovement();
-            HandleJumping();
-            HandleJumpPeak();
-            HandleFalling();
+
+            if (IsGrounded())
+            {
+                HandleMovement();
+                HandleJumping();
+            }
+
+            if (IsFalling)
+            {
+                HandleFalling();
+            }
+
+            if (IsKnockedBack)
+            {
+                CheckKnockbackEnd();   
+            }
         }
 
         private void HandleMovement()
         {
+            if (IsKnockedBack)
+            {
+                return;
+            }
+            
             if (_playerController.IsMovementInputPressed == false)
             {
-                StopMovement();
+                _rigidBody.velocity = new Vector2(x: 0, y: CurrentVelocity.y);
                 return;
             }
 
@@ -58,6 +78,11 @@ namespace Player.Core_Components
 
         private void HandleJumping()
         {
+            if (IsKnockedBack)
+            {
+                return;
+            }
+            
             if (CurrentVelocity.y > 0f)
             {
                 IsJumping = true;
@@ -70,6 +95,7 @@ namespace Player.Core_Components
             if (IsJumping)
             {
                 CheckJumpEnd();
+                HandleJumpPeak();
             }
         }
 
@@ -88,6 +114,11 @@ namespace Player.Core_Components
         
         private void HandleFalling()
         {
+            if (IsKnockedBack)
+            {
+                return;
+            }
+            
             if (CurrentVelocity.y < 0f && IsAtJumpPeak == false)
             {
                 IsFalling = true;
@@ -98,14 +129,23 @@ namespace Player.Core_Components
             }
         }
 
-        private void StopMovement()
+        private void CheckKnockbackEnd()
         {
-            _rigidBody.velocity = new Vector2(x: 0, y: CurrentVelocity.y);
+            bool fallingAndHitGround = CurrentVelocity.y < 0f && IsGrounded();
+            if (fallingAndHitGround)
+            {
+                IsKnockedBack = false;
+            }
         }
-        
+
         public void JumpStart()
         {
             if (IsGrounded() == false)
+            {
+                return;
+            }
+            
+            if (IsKnockedBack)
             {
                 return;
             }
@@ -121,6 +161,11 @@ namespace Player.Core_Components
 
         private void CheckJumpEnd()
         {
+            if (IsJumping == false)
+            {
+                return;
+            }
+            
             bool jumpingButJumpReleased = CurrentVelocity.y > 0f
                                           && _playerController.IsJumpInputPressed == false 
                                           && IsFalling == false;
@@ -152,6 +197,13 @@ namespace Player.Core_Components
         public void SetLastGroundedTime()
         {
             LastGroundedTime = Time.time;
+        }
+        
+        public virtual void DamageKnockback(int knockbackDirection)
+        {
+            _velocityWorkspace.Set(CurrentVelocity.x + _knockbackSpeed / 2 * knockbackDirection, _knockbackSpeed);
+            _rigidBody.velocity = _velocityWorkspace;
+            IsKnockedBack = true;
         }
         
     }

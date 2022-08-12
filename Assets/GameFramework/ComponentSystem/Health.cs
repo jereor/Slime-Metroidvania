@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace GameFramework.ComponentSystem
@@ -7,21 +8,21 @@ namespace GameFramework.ComponentSystem
         [SerializeField] private float _currentHealth;
         [SerializeField] private float _maxHealth;
 
-        public void Initialize(float currentHealth, float maxHealth)
-        {
-            _currentHealth = currentHealth;
-            _maxHealth = maxHealth;
-        }
-        
+        protected int LastDamageDirection { get; private set; }
+
         public virtual void Start()
         {
             _currentHealth = _maxHealth;
         }
 
-        public virtual void Damage(float damageAmount)
+        [UsedImplicitly]
+        public virtual void Damage(AttackDetails attackDetails)
         {
-            _currentHealth -= damageAmount;
+            _currentHealth -= attackDetails.DamageAmount;
             CheckDeath();
+            
+            bool attackFromRight = attackDetails.Position.x > transform.position.x;
+            LastDamageDirection = attackFromRight ? -1 : 1;
         }
 
         public virtual void CheckDeath()

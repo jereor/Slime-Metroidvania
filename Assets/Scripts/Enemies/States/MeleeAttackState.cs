@@ -60,7 +60,7 @@ namespace Enemies.States
 
             foreach (Collider2D collider in detectedObjects)
             {
-                collider.transform.SendMessage(EventConstants.DAMAGE, StateData._attackDamage);
+                collider.transform.SendMessage(EventConstants.DAMAGE, AttackDetails);
             }
         }
     }
