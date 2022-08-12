@@ -52,7 +52,11 @@ namespace Player.State_Machine.States
         // INITIALIZE SUB STATE
         protected override void InitializeSubState()
         {
-            if (PlayerController.IsJumpInputPressed)
+            if (PlayerMovement.IsKnockedBack)
+            {
+                SetSubState(Factory.KnockedBack());
+            }
+            else if (PlayerController.IsJumpInputPressed)
             {
                 SetSubState(Factory.Jump());
             }
@@ -63,14 +67,6 @@ namespace Player.State_Machine.States
             else if (PlayerCombat.IsMeleeAttacking)
             {
                 SetSubState(Factory.MeleeAttack());
-            }
-            else if (PlayerController.IsMovementInputPressed)
-            {
-                SetSubState(Factory.Move());
-            }
-            else
-            {
-                SetSubState(Factory.Idle());
             }
         }
     

@@ -52,5 +52,10 @@ namespace Player.State_Machine
         {
             return new PlayerGroundedState(_player, _context, this);
         }
+
+        public PlayerBaseState KnockedBack()
+        {
+            return new PlayerKnockedBackState(_player, _context, this);
+        }
     }
 }

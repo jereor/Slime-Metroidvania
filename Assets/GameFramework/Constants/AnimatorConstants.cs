@@ -14,5 +14,6 @@ namespace GameFramework.Constants
         public const string IS_STUNNED = "IsStunned";
         public const string IS_DEAD = "IsDead";
         public const string IS_DAMAGED = "IsDamaged";
+        public const string IS_KNOCKED_BACK = "IsKnockedBack";
     }
 }

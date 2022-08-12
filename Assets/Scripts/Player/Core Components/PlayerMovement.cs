@@ -47,15 +47,12 @@ namespace Player.Core_Components
                 HandleJumping();
             }
 
-            if (IsFalling)
-            {
-                HandleFalling();
-            }
-
             if (IsKnockedBack)
             {
                 CheckKnockbackEnd();   
             }
+            
+            CheckForFalling();
         }
 
         private void HandleMovement()
@@ -112,7 +109,7 @@ namespace Player.Core_Components
             }
         }
         
-        private void HandleFalling()
+        private void CheckForFalling()
         {
             if (IsKnockedBack)
             {
@@ -201,9 +198,9 @@ namespace Player.Core_Components
         
         public virtual void DamageKnockback(int knockbackDirection)
         {
+            IsKnockedBack = true;
             _velocityWorkspace.Set(CurrentVelocity.x + _knockbackSpeed / 2 * knockbackDirection, _knockbackSpeed);
             _rigidBody.velocity = _velocityWorkspace;
-            IsKnockedBack = true;
         }
         
     }
