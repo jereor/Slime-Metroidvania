@@ -21,6 +21,11 @@ namespace Player.Core_Components
 
         private void DrawPlayerCombatGizmos()
         {
+            if (!Application.isPlaying)
+            {
+                return;
+            }
+            
             Vector3 attackPosition = PlayerCombat.MeleeAttackHitBox.position;
             Gizmos.DrawWireSphere(attackPosition, PlayerCombat.MeleeAttackData._attackRadius);
         }
