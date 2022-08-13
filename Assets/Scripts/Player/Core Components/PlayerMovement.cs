@@ -40,31 +40,38 @@ namespace Player.Core_Components
                 1<<PhysicsConstants.GROUND_LAYER_NUMBER);
         }
 
+        private bool IsFallingAndHitGround()
+        {
+            return CurrentVelocity.y < 0f 
+                   && IsGrounded();
+        }
+        
+        public void SetLastGroundedTime()
+        {
+            LastGroundedTime = Time.time;
+        }
+
         public override void LogicUpdate()
         {
             base.LogicUpdate();
 
+            if (IsKnockedBack)
+            {
+                CheckForKnockbackEnd();
+                return;
+            }
+            
             if (IsGrounded())
             {
                 HandleMovement();
-                HandleJumping();
             }
 
-            if (IsKnockedBack)
-            {
-                CheckKnockbackEnd();   
-            }
-            
-            CheckForFalling();
+            HandleJumping();
+            HandleFalling();
         }
 
         private void HandleMovement()
         {
-            if (IsKnockedBack)
-            {
-                return;
-            }
-            
             if (_playerController.IsMovementInputPressed == false)
             {
                 _rigidBody.velocity = new Vector2(x: 0, y: CurrentVelocity.y);
@@ -78,61 +85,31 @@ namespace Player.Core_Components
 
         private void HandleJumping()
         {
-            if (IsKnockedBack)
-            {
-                return;
-            }
-            
-            if (CurrentVelocity.y > 0f)
-            {
-                IsJumping = true;
-            }
-            else
-            {
-                IsJumping = false;
-            }
-            
+            IsJumping = CurrentVelocity.y > 0f;
+
             if (IsJumping)
             {
-                CheckJumpEnd();
-                HandleJumpPeak();
-            }
-        }
-
-        private void HandleJumpPeak()
-        {
-            if (CurrentVelocity.y < 0f && IsAtJumpPeak == false && IsFalling == false)
-            {
-                IsAtJumpPeak = true;
-                StartFalling();
-            }
-            else
-            {
-                IsAtJumpPeak = false;
+                CheckForJumpEnd();
             }
         }
         
-        private void CheckForFalling()
+        private void HandleFalling()
         {
-            if (IsKnockedBack)
+            IsFalling = CurrentVelocity.y < 0f 
+                        && IsAtJumpPeak == false;
+
+            if (IsFalling)
             {
-                return;
-            }
-            
-            if (CurrentVelocity.y < 0f && IsAtJumpPeak == false)
-            {
-                IsFalling = true;
-            }
-            else
-            {
-                IsFalling = false;
+                if (IsFallingAndHitGround())
+                {
+                    ResetJumpVariables();
+                }
             }
         }
 
-        private void CheckKnockbackEnd()
+        private void CheckForKnockbackEnd()
         {
-            bool fallingAndHitGround = CurrentVelocity.y < 0f && IsGrounded();
-            if (fallingAndHitGround)
+            if (IsFallingAndHitGround())
             {
                 IsKnockedBack = false;
             }
@@ -140,16 +117,6 @@ namespace Player.Core_Components
 
         public void JumpStart()
         {
-            if (IsGrounded() == false)
-            {
-                return;
-            }
-            
-            if (IsKnockedBack)
-            {
-                return;
-            }
-
             bool isCoyoteTime = Time.time - LastGroundedTime <= _coyoteTime;
             bool isJumpBuffered = Time.time - _playerController.JumpInputPressedTime <= _coyoteTime;
 
@@ -159,7 +126,7 @@ namespace Player.Core_Components
             }
         }
 
-        private void CheckJumpEnd()
+        private void CheckForJumpEnd()
         {
             bool jumpingButJumpReleased = CurrentVelocity.y > 0f
                                           && _playerController.IsJumpInputPressed == false;
@@ -169,9 +136,10 @@ namespace Player.Core_Components
                 ResetJumpVariables();
             }
             
-            bool fallingAndHitGround = CurrentVelocity.y < 0f && IsGrounded();
-            if (fallingAndHitGround)
+            IsAtJumpPeak = CurrentVelocity.y < 0f && IsAtJumpPeak == false && IsFalling == false;
+            if (IsAtJumpPeak)
             {
+                StartFalling();
                 ResetJumpVariables();
             }
         }
@@ -188,11 +156,6 @@ namespace Player.Core_Components
             IsAtJumpPeak = false;
         }
 
-        public void SetLastGroundedTime()
-        {
-            LastGroundedTime = Time.time;
-        }
-        
         public void DamageKnockback(int knockbackDirection)
         {
             IsKnockedBack = true;
