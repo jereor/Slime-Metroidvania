@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using GameFramework;
 using GameFramework.ComponentSystem;
 using GameFramework.Constants;
@@ -37,9 +39,20 @@ namespace Player.Core_Components
         
         public void DealDamage()
         {
+            Vector2 attackPosition = _meleeAttackHitBox.position;
             Collider2D[] detectedObjects =
-                Physics2D.OverlapCircleAll(_meleeAttackHitBox.position, _playerMeleeAttackData._attackRadius,
+                Physics2D.OverlapCircleAll(attackPosition, _playerMeleeAttackData._attackRadius,
                     _playerMeleeAttackData._damageableLayers);
+
+            Collider2D wallObject =
+                Physics2D.OverlapCircle(attackPosition, _playerMeleeAttackData._attackRadius,
+                    1<<PhysicsConstants.GROUND_LAYER_NUMBER);
+
+            bool wallWasHit = wallObject != null;
+            if (wallWasHit)
+            {
+                return;
+            }
 
             AttackDetails attackDetails = new AttackDetails
             {
