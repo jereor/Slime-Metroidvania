@@ -15,6 +15,7 @@ MonoBehaviour:
   _maxHealth: 30
   _damageHopSpeed: 2
   _wallCheckDistance: 0.2
+  _longWallCheckDistance: 4
   _ledgeCheckDistance: 0.4
   _groundCheckRadius: 0.3
   _minAggroDistance: 4
@@ -22,7 +23,6 @@ MonoBehaviour:
   _stunResistance: 3
   _stunRecoveryTime: 2
   _closeRangeActionDistance: 0.4
-  _hitParticles: {fileID: 1153435723755021374, guid: af4eb45f224fdfe4d8c8e383325a70ad, type: 3}
   _groundLayer:
     serializedVersion: 2
     m_Bits: 8

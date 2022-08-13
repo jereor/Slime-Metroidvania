@@ -9,7 +9,8 @@ namespace Enemies.States
         protected bool IsDetectingWall;
         protected bool IsDetectingLedge;
         protected bool IsPlayerInMinAggroRange;
-        
+        protected bool IsDetectingWallBeforePlayer;
+
         public MoveState(Entity entity, FiniteStateMachine stateMachine, string animatorBoolName, D_MoveState stateData) 
             : base(entity, stateMachine, animatorBoolName)
         {
@@ -44,6 +45,7 @@ namespace Enemies.States
             
             IsDetectingLedge = Entity.CheckLedge();
             IsDetectingWall = Entity.CheckWall();
+            IsDetectingWallBeforePlayer = Entity.CheckLongDistanceWall();
             IsPlayerInMinAggroRange = Entity.CheckPlayerInMinAggroRange();
         }
     }

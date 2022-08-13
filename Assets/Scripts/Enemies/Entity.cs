@@ -84,6 +84,15 @@ namespace Enemies
                 _entityData._wallCheckDistance,
                 _entityData._groundLayer.value);
         }
+        
+        public virtual bool CheckLongDistanceWall()
+        {
+            return Physics2D.Raycast(
+                _wallChecker.position, 
+                transform.right * _facingDirection,
+                _entityData._longWallCheckDistance,
+                _entityData._groundLayer.value);
+        }
 
         public virtual bool CheckLedge()
         {
@@ -179,12 +188,12 @@ namespace Enemies
         {
             Vector3 wallCheckerPosition = _wallChecker.position;
             Gizmos.DrawLine(wallCheckerPosition,
-                wallCheckerPosition + (Vector3) (Vector2.right * _facingDirection * _entityData._wallCheckDistance));
-
+                wallCheckerPosition + (Vector3) (Vector2.right * _facingDirection * _entityData._longWallCheckDistance));
+            
             Vector3 ledgeCheckerPosition = _ledgeChecker.position;
             Gizmos.DrawLine(ledgeCheckerPosition,
                 ledgeCheckerPosition + (Vector3) (Vector2.down * _entityData._ledgeCheckDistance));
-
+            
             Vector3 playerCheckerPosition = _playerChecker.position;
             Vector2 checkDirection = Vector2.right * _facingDirection;
             Gizmos.DrawWireSphere(playerCheckerPosition + (Vector3)(checkDirection * _entityData._minAggroDistance), 0.2f);

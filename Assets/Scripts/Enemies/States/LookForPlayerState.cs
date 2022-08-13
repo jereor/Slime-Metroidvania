@@ -9,6 +9,7 @@ namespace Enemies.States
 
         protected bool CanTurnImmediately;
         protected bool IsPlayerInMinAggroRange;
+        protected bool IsDetectingWallBeforePlayer;
         protected bool IsAllTurnsDone;
         protected bool IsAllTurnsTimeDone;
 
@@ -85,6 +86,7 @@ namespace Enemies.States
             base.HandleChecks();
 
             IsPlayerInMinAggroRange = Entity.CheckPlayerInMinAggroRange();
+            IsDetectingWallBeforePlayer = Entity.CheckLongDistanceWall();
         }
 
         public void SetTurnsImmediately(bool canTurn)

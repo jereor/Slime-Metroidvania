@@ -89,7 +89,7 @@ namespace Enemies.Worm
         {
             base.OnDrawGizmos();
 
-            Gizmos.DrawWireSphere(_meleeAttackPosition.position, _meleeAttackStateData._attackRadius);
+            //Gizmos.DrawWireSphere(_meleeAttackPosition.position, _meleeAttackStateData._attackRadius);
         }
     }
 }

@@ -11,6 +11,7 @@ namespace Enemies.States
         
         protected bool IsIdleTimeOver;
         protected bool IsPlayerInMinAggroRange;
+        protected bool IsDetectingWallBeforePlayer;
 
         protected float IdleTime;
         
@@ -58,6 +59,7 @@ namespace Enemies.States
             base.HandleChecks();
             
             IsPlayerInMinAggroRange = Entity.CheckPlayerInMinAggroRange();
+            IsDetectingWallBeforePlayer = Entity.CheckLongDistanceWall();
         }
 
         public void SetFlipAfterIdle(bool canFlip)

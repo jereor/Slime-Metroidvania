@@ -30,7 +30,7 @@ namespace Enemies.Worm
             
             if (IsPlayerInMinAggroRange)
             {
-                StateMachine.ChangeState(_worm.PlayerDetectedState);
+                StateMachine.ChangeState(_worm.ChargeState);
             }
             else
             {

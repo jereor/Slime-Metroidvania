@@ -26,7 +26,7 @@ namespace Enemies.Worm
         {
             base.LogicUpdate();
 
-            if (IsPlayerInMinAggroRange)
+            if (IsPlayerInMinAggroRange && !IsDetectingWallBeforePlayer)
             {
                 StateMachine.ChangeState(_worm.PlayerDetectedState);
             }

@@ -11,6 +11,7 @@ namespace Enemies.Data
         public float _damageHopSpeed = 10f;
         
         public float _wallCheckDistance = 0.2f;
+        public float _longWallCheckDistance = 1f;
         public float _ledgeCheckDistance = 0.4f;
         public float _groundCheckRadius = 0.3f;
         

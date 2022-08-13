@@ -12,20 +12,40 @@ namespace Enemies.Worm
             _worm = worm;
         }
 
+        public override void Enter()
+        {
+            base.Enter();
+        }
+
+        public override void Exit()
+        {
+            base.Exit();
+        }
+
         public override void LogicUpdate()
         {
             base.LogicUpdate();
-
-            if (IsPlayerInMinAggroRange)
-            {
-                StateMachine.ChangeState(_worm.PlayerDetectedState);
-            }
-            else if (IsDetectingLedge == false 
+            
+            if (IsDetectingLedge == false 
                      || IsDetectingWall)
             {
                 _worm.IdleState.SetFlipAfterIdle(true);
                 StateMachine.ChangeState(_worm.IdleState);
             }
+            else if (IsPlayerInMinAggroRange && !IsDetectingWallBeforePlayer)
+            {
+                StateMachine.ChangeState(_worm.PlayerDetectedState);
+            }
+        }
+
+        public override void PhysicsUpdate()
+        {
+            base.PhysicsUpdate();
+        }
+
+        public override void HandleChecks()
+        {
+            base.HandleChecks();
         }
     }
 }
