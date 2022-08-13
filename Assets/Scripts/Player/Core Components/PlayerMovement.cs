@@ -1,4 +1,5 @@
 using GameFramework.ComponentSystem;
+using GameFramework.Constants;
 using UnityEngine;
 
 namespace Player.Core_Components
@@ -14,7 +15,6 @@ namespace Player.Core_Components
         [Header("Dependencies")]
         [SerializeField] private PlayerController _playerController;
         [SerializeField] private Transform _groundCheck;
-        [SerializeField] private LayerMask _groundLayer;
         
         private Vector2 _velocityWorkspace;
 
@@ -34,7 +34,10 @@ namespace Player.Core_Components
 
         public bool IsGrounded()
         {
-            return Physics2D.OverlapCircle(_groundCheck.position, _groundCheckRadius, _groundLayer);
+            return Physics2D.OverlapCircle(
+                _groundCheck.position, 
+                _groundCheckRadius, 
+                1<<PhysicsConstants.GROUND_LAYER_NUMBER);
         }
 
         public override void LogicUpdate()
@@ -158,14 +161,8 @@ namespace Player.Core_Components
 
         private void CheckJumpEnd()
         {
-            if (IsJumping == false)
-            {
-                return;
-            }
-            
             bool jumpingButJumpReleased = CurrentVelocity.y > 0f
-                                          && _playerController.IsJumpInputPressed == false 
-                                          && IsFalling == false;
+                                          && _playerController.IsJumpInputPressed == false;
             if (jumpingButJumpReleased)
             {
                 StartFalling();
@@ -196,7 +193,7 @@ namespace Player.Core_Components
             LastGroundedTime = Time.time;
         }
         
-        public virtual void DamageKnockback(int knockbackDirection)
+        public void DamageKnockback(int knockbackDirection)
         {
             IsKnockedBack = true;
             _velocityWorkspace.Set(CurrentVelocity.x + _knockbackSpeed / 2 * knockbackDirection, _knockbackSpeed);
