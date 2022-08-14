@@ -14,19 +14,19 @@ namespace Tests.Runtime
 {
     public class PlayerStateMachineIntegrationTests : InputTestFixture
     {
-        protected Mouse _mouse;
-        protected Keyboard _keyboard;
-        protected GameObject _playerPrefab;
+        private Mouse _mouse;
+        private Keyboard _keyboard;
+        private GameObject _playerPrefab;
         
         private const string PLAYER_PREFAB_PATH = "Assets/Prefabs/Player.prefab";
         private const string PLATFORM_PREFAB_PATH = "Assets/Prefabs/Platform.prefab";
         private static readonly Vector3 DefaultStartingPosition = new Vector3(0f, 0f, -1f);
-        
+
         [SetUp]
-        public void SetUp()
+        public override void Setup()
         {
             base.Setup();
-
+            
             _mouse = InputSystem.AddDevice<Mouse>();
             _keyboard = InputSystem.AddDevice<Keyboard>();
 
@@ -36,9 +36,8 @@ namespace Tests.Runtime
 
         private GameObject InstantiatePlayer(Vector3 startingPosition)
         {
-            Vector3 playerStartingPos = startingPosition;
             Quaternion playerDir = Quaternion.identity;
-            GameObject player = Object.Instantiate(_playerPrefab, playerStartingPos, playerDir);
+            GameObject player = Object.Instantiate(_playerPrefab, startingPosition, playerDir);
             return player;
         }
 
@@ -327,6 +326,14 @@ namespace Tests.Runtime
         }
         
         #endregion
-        
+
+        [TearDown]
+        public override void TearDown()
+        {
+            InputSystem.RemoveDevice(_keyboard);
+            InputSystem.RemoveDevice(_mouse);
+            
+            base.TearDown();
+        }
     }
 }
