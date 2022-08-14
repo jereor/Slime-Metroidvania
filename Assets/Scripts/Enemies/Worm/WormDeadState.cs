@@ -22,6 +22,8 @@ namespace Enemies.Worm
                 StateData._deathBloodParticles.transform.rotation);
             Object.Instantiate(StateData._deathChunkParticles, entityPosition,
                 StateData._deathChunkParticles.transform.rotation);
+            
+            Object.Destroy(_worm.gameObject);
         }
 
         public override void Exit()

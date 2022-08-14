@@ -5,7 +5,7 @@ namespace Enemies.States
 {
     public class DeadState : State
     {
-        protected D_DeadState StateData;
+        protected readonly D_DeadState StateData;
         
         protected DeadState(Entity entity, FiniteStateMachine stateMachine, string animatorBoolName, D_DeadState stateData) : base(entity, stateMachine, animatorBoolName)
         {
@@ -15,14 +15,6 @@ namespace Enemies.States
         public override void Enter()
         {
             base.Enter();
-
-            Vector3 entityPosition = Entity.transform.position;
-            Object.Instantiate(StateData._deathBloodParticles, entityPosition,
-                StateData._deathBloodParticles.transform.rotation);
-            Object.Instantiate(StateData._deathChunkParticles, entityPosition,
-                StateData._deathChunkParticles.transform.rotation);
-            
-            Entity.gameObject.SetActive(false);
         }
 
         public override void Exit()
