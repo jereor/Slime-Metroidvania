@@ -61,11 +61,7 @@ namespace Player.Core_Components
                 return;
             }
             
-            if (IsGrounded())
-            {
-                HandleMovement();
-            }
-
+            HandleMovement();
             HandleJumping();
             HandleFalling();
         }
