@@ -476,7 +476,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: da87fe5f8f4da9c45ace4d1672bb99b9, type: 3}
-  m_Color: {r: 0, g: 1, b: 0.08685279, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -528,8 +528,8 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 2
-  m_Material: {fileID: 0}
-  m_Interpolate: 2
+  m_Material: {fileID: 6200000, guid: 958188f7d0bf80d4e9ce2e1d777d3389, type: 2}
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
@@ -598,6 +598,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _currentHealth: 100
   _maxHealth: 100
+  _playerMovement: {fileID: 2098669480446400962}
+  _playerCamera: {fileID: 0}
+  _bloodParticles: {fileID: 1153435723755021374, guid: eac5f9992714a0546bf3afdcafd006ce, type: 3}
 --- !u!114 &2098669480446400964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -626,8 +629,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _core: {fileID: 2098669480446400970}
-  _meleeAttackHitBox: {fileID: 2098669479491856969}
-  _playerMeleeAttackData: {fileID: 11400000, guid: 83cd33cd25137684ebbe23471b1643f2, type: 2}
 --- !u!114 &2098669480446400968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -653,16 +654,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5c4930e1bcbf674d825dbc8c4f009b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _moveSpeed: 8
+  _rigidBody: {fileID: 2098669480446400975}
   _coyoteTime: 0.2
   _jumpForce: 8
-  _moveSpeed: 8
   _groundCheckRadius: 0.2
+  _knockbackSpeed: 5
   _playerController: {fileID: 2098669480446400964}
-  _rigidBody: {fileID: 2098669480446400975}
   _groundCheck: {fileID: 2098669479242764039}
-  _groundLayer:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!114 &2098669480446400961
 MonoBehaviour:
   m_ObjectHideFlags: 0
