@@ -3062,17 +3062,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1281162898 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2098669480446400962, guid: d25a3b3e805dd8147918d86bf521de20, type: 3}
-  m_PrefabInstance: {fileID: 2098669478568850876}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5c4930e1bcbf674d825dbc8c4f009b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1336413414
 GameObject:
   m_ObjectHideFlags: 0
@@ -4699,26 +4688,10 @@ PrefabInstance:
       propertyPath: _camera
       value: 
       objectReference: {fileID: 519420031}
-    - target: {fileID: 2098669480446400962, guid: d25a3b3e805dd8147918d86bf521de20, type: 3}
-      propertyPath: _knockbackSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2098669480446400962, guid: d25a3b3e805dd8147918d86bf521de20, type: 3}
-      propertyPath: _knockbackMultiplier
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 2098669480446400971, guid: d25a3b3e805dd8147918d86bf521de20, type: 3}
       propertyPath: _playerCamera
       value: 
       objectReference: {fileID: 501372998}
-    - target: {fileID: 2098669480446400971, guid: d25a3b3e805dd8147918d86bf521de20, type: 3}
-      propertyPath: _bloodParticles
-      value: 
-      objectReference: {fileID: 1153435723755021374, guid: eac5f9992714a0546bf3afdcafd006ce, type: 3}
-    - target: {fileID: 2098669480446400971, guid: d25a3b3e805dd8147918d86bf521de20, type: 3}
-      propertyPath: _playerMovement
-      value: 
-      objectReference: {fileID: 1281162898}
     - target: {fileID: 2098669480446400972, guid: d25a3b3e805dd8147918d86bf521de20, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -4762,26 +4735,6 @@ PrefabInstance:
     - target: {fileID: 2098669480446400972, guid: d25a3b3e805dd8147918d86bf521de20, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2098669480446400974, guid: d25a3b3e805dd8147918d86bf521de20, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2098669480446400974, guid: d25a3b3e805dd8147918d86bf521de20, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2098669480446400974, guid: d25a3b3e805dd8147918d86bf521de20, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2098669480446400975, guid: d25a3b3e805dd8147918d86bf521de20, type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 6200000, guid: 958188f7d0bf80d4e9ce2e1d777d3389, type: 2}
-    - target: {fileID: 2098669480446400975, guid: d25a3b3e805dd8147918d86bf521de20, type: 3}
-      propertyPath: m_Interpolate
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2098669480446400979, guid: d25a3b3e805dd8147918d86bf521de20, type: 3}
       propertyPath: m_Name

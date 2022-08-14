@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4025678845806119027}
   - component: {fileID: 6890491757429875679}
   - component: {fileID: 4533079549773052907}
+  - component: {fileID: 8979741034805910395}
   m_Layer: 0
   m_Name: Worm_DeathChunkParticles
   m_TagString: Untagged
@@ -4877,3 +4878,16 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &8979741034805910395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5096148057906189823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97b160282f9cf564585e7805c9fac4a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _lifetime: 3
