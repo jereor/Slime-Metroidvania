@@ -326,14 +326,6 @@ namespace Tests.Runtime
         }
         
         #endregion
-
-        [TearDown]
-        public override void TearDown()
-        {
-            InputSystem.RemoveDevice(_keyboard);
-            InputSystem.RemoveDevice(_mouse);
-            
-            base.TearDown();
-        }
+        
     }
 }
