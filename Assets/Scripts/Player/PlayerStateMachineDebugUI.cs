@@ -19,6 +19,12 @@ namespace Player
 
         private void Update()
         {
+            if (_stateMachine?.CurrentBaseState == null 
+                || _stateMachine?.CurrentSubState == null)
+            {
+                return;
+            }
+            
             string baseStateName = _stateMachine.CurrentBaseState.ToString();
             baseStateName = baseStateName.Remove(0, 28);
             string subStateName = _stateMachine.CurrentSubState.ToString();
