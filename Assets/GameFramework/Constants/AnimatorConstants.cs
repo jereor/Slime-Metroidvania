@@ -6,7 +6,6 @@ namespace GameFramework.Constants
         public const string IS_MOVING = "IsMoving";
         public const string IS_JUMPING = "IsJumping";
         public const string IS_FALLING = "IsFalling";
-        public const string IS_AT_JUMP_PEAK = "IsAtJumpPeak";
         public const string IS_PLAYER_DETECTED = "IsPlayerDetected";
         public const string IS_CHARGING = "IsCharging";
         public const string IS_LOOKING_FOR_PLAYER = "IsLookingForPlayer";

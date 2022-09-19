@@ -46,11 +46,7 @@ namespace Player.State_Machine.States
 
         protected override void CheckSwitchStates()
         {
-            if (PlayerMovement.IsAtJumpPeak)
-            {
-                SwitchState(Factory.JumpPeak());
-            }
-            else if (PlayerMovement.IsFalling)
+            if (PlayerMovement.IsFalling)
             {
                 SwitchState(Factory.Fall());
             }

@@ -15,7 +15,6 @@ namespace Player.Core_Components
         public int IsMeleeAttackingHash { get; private set; }
         public int IsFallingHash { get; private set; }
         public int IsJumpingHash { get; private set; }
-        public int IsAtJumpPeak { get; private set; }
         public int IsKnockedBackHash { get; private set; }
 
         protected override void Awake()
@@ -31,7 +30,6 @@ namespace Player.Core_Components
             IsMeleeAttackingHash = Animator.StringToHash(AnimatorConstants.IS_MELEE_ATTACKING);
             IsFallingHash = Animator.StringToHash(AnimatorConstants.IS_FALLING);
             IsJumpingHash = Animator.StringToHash(AnimatorConstants.IS_JUMPING);
-            IsAtJumpPeak = Animator.StringToHash(AnimatorConstants.IS_AT_JUMP_PEAK);
             IsKnockedBackHash = Animator.StringToHash(AnimatorConstants.IS_KNOCKED_BACK);
         }
         

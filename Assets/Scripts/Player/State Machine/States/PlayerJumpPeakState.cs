@@ -1,3 +1,4 @@
+using System;
 using Player.Core_Components;
 
 namespace Player.State_Machine.States
@@ -30,7 +31,7 @@ namespace Player.State_Machine.States
 
         protected override void EnterState()
         {
-            PlayerAnimations.SetAnimatorBool(PlayerAnimations.IsAtJumpPeak, true);
+            throw new NotImplementedException();
         }
 
         protected override void UpdateState()
@@ -40,7 +41,7 @@ namespace Player.State_Machine.States
 
         protected override void ExitState()
         {
-            PlayerAnimations.SetAnimatorBool(PlayerAnimations.IsAtJumpPeak, false);
+            throw new NotImplementedException();
         }
 
         protected override void CheckSwitchStates()
