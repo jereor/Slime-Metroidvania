@@ -22,6 +22,7 @@ namespace Player.Core_Components
         public bool IsFalling { get; private set; }
         public bool IsJumping { get; private set; }
         public bool IsAtJumpPeak { get; private set; }
+        public bool HasHitJumpPeak { get; private set; }
         public bool IsKnockedBack { get; private set; }
 
         public float CoyoteTime
@@ -76,13 +77,27 @@ namespace Player.Core_Components
         private void HandleJumping()
         {
             IsJumping = CurrentVelocity.y > 0f;
-
-            if (IsJumping)
+            IsAtJumpPeak = IsFalling && !HasHitJumpPeak;
+            
+            if (IsJumping || IsAtJumpPeak)
             {
                 CheckForJumpEnd();
             }
+
+            if (IsAtJumpPeak && !HasHitJumpPeak)
+            {
+                Invoke(nameof(ExitJumpPeak), 1f);
+            }
         }
-        
+
+        private void ExitJumpPeak()
+        {
+            StartFalling();
+            ResetJumpVariables();
+            HasHitJumpPeak = true;
+            IsAtJumpPeak = false;
+        }
+
         private void HandleFalling()
         {
             IsFalling = CurrentVelocity.y < 0f;
@@ -121,13 +136,6 @@ namespace Player.Core_Components
                 StartFalling();
                 ResetJumpVariables();
             }
-            
-            IsAtJumpPeak = CurrentVelocity.y < 0f && IsAtJumpPeak == false && IsFalling == false;
-            if (IsAtJumpPeak)
-            {
-                StartFalling();
-                ResetJumpVariables();
-            }
         }
 
         private void StartFalling()
@@ -139,7 +147,7 @@ namespace Player.Core_Components
         {
             LastGroundedTime = null;
             _playerController.JumpInputPressedTime = null;
-            IsAtJumpPeak = false;
+            HasHitJumpPeak = false;
         }
 
         public void DamageKnockback(int knockbackDirection)
