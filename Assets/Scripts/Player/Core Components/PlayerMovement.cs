@@ -39,12 +39,6 @@ namespace Player.Core_Components
                 _groundCheckRadius, 
                 1<<PhysicsConstants.GROUND_LAYER_NUMBER);
         }
-
-        private bool IsFallingAndHitGround()
-        {
-            return CurrentVelocity.y < 0f 
-                   && IsGrounded();
-        }
         
         public void SetLastGroundedTime()
         {
@@ -91,21 +85,17 @@ namespace Player.Core_Components
         
         private void HandleFalling()
         {
-            IsFalling = CurrentVelocity.y < 0f 
-                        && IsAtJumpPeak == false;
+            IsFalling = CurrentVelocity.y < 0f;
 
-            if (IsFalling)
+            if (IsFalling && !(CurrentVelocity.y < 0f))
             {
-                if (IsFallingAndHitGround())
-                {
-                    ResetJumpVariables();
-                }
+                ResetJumpVariables();
             }
         }
 
         private void CheckForKnockbackEnd()
         {
-            if (IsFallingAndHitGround())
+            if (IsFalling && IsGrounded())
             {
                 IsKnockedBack = false;
             }
